@@ -21,20 +21,20 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Get pending payouts
-    const payouts = await adminService.getPendingPayouts();
+    // Get pending mentor applications
+    const applications = await adminService.getPendingMentorApplications();
 
     return NextResponse.json({
       success: true,
-      data: payouts
+      data: applications
     });
 
   } catch (error) {
-    console.error('Error fetching pending payouts:', error);
+    console.error('Error fetching mentor applications:', error);
     return NextResponse.json(
       { 
         success: false, 
-        error: 'Failed to fetch pending payouts',
+        error: 'Failed to fetch mentor applications',
         details: error instanceof Error ? error.message : 'Unknown error'
       },
       { status: 500 }
@@ -62,48 +62,40 @@ export async function PUT(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { payoutId, decision, transactionId, notes } = body;
+    const { applicationId, decision, reviewNotes } = body;
 
-    if (!payoutId || !decision) {
+    if (!applicationId || !decision) {
       return NextResponse.json(
-        { success: false, error: 'Payout ID and decision are required' },
+        { success: false, error: 'Application ID and decision are required' },
         { status: 400 }
       );
     }
 
-    if (!['approved', 'rejected', 'processed'].includes(decision)) {
+    if (!['approved', 'rejected'].includes(decision)) {
       return NextResponse.json(
-        { success: false, error: 'Decision must be approved, rejected, or processed' },
+        { success: false, error: 'Decision must be approved or rejected' },
         { status: 400 }
       );
     }
 
-    if (decision === 'processed' && !transactionId) {
-      return NextResponse.json(
-        { success: false, error: 'Transaction ID is required for processed payouts' },
-        { status: 400 }
-      );
-    }
-
-    await adminService.processPayout(
-      payoutId,
+    await adminService.processMentorApplication(
+      applicationId,
       decision,
       authResult.user.id,
-      transactionId,
-      notes
+      reviewNotes
     );
 
     return NextResponse.json({
       success: true,
-      message: `Payout ${decision} successfully`
+      message: `Mentor application ${decision} successfully`
     });
 
   } catch (error) {
-    console.error('Error processing payout:', error);
+    console.error('Error processing mentor application:', error);
     return NextResponse.json(
       { 
         success: false, 
-        error: 'Failed to process payout',
+        error: 'Failed to process mentor application',
         details: error instanceof Error ? error.message : 'Unknown error'
       },
       { status: 500 }

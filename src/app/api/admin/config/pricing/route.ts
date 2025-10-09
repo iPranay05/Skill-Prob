@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { adminService } from '@/lib/adminService';
+import { systemConfigService } from '@/lib/systemConfigService';
 import { verifyAuth } from '@/lib/auth';
 
 export async function GET(request: NextRequest) {
@@ -21,20 +21,20 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Get pending payouts
-    const payouts = await adminService.getPendingPayouts();
+    // Get pricing configuration
+    const pricingConfig = await systemConfigService.getPricingConfig();
 
     return NextResponse.json({
       success: true,
-      data: payouts
+      data: pricingConfig
     });
 
   } catch (error) {
-    console.error('Error fetching pending payouts:', error);
+    console.error('Error fetching pricing config:', error);
     return NextResponse.json(
       { 
         success: false, 
-        error: 'Failed to fetch pending payouts',
+        error: 'Failed to fetch pricing configuration',
         details: error instanceof Error ? error.message : 'Unknown error'
       },
       { status: 500 }
@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
-    // Verify authentication and admin role
+    // Verify authentication and super admin role
     const authResult = await verifyAuth(request);
     if (!authResult.success || !authResult.user) {
       return NextResponse.json(
@@ -53,57 +53,60 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    // Check if user has admin privileges
-    if (!['admin', 'super_admin'].includes(authResult.user.role)) {
+    // Only super admins can update pricing configuration
+    if (authResult.user.role !== 'super_admin') {
       return NextResponse.json(
-        { success: false, error: 'Insufficient permissions' },
+        { success: false, error: 'Super admin access required' },
         { status: 403 }
       );
     }
 
     const body = await request.json();
-    const { payoutId, decision, transactionId, notes } = body;
 
-    if (!payoutId || !decision) {
+    // Validate pricing configuration structure
+    const validFields = [
+      'defaultCurrency', 'taxRates', 'commissionRates', 
+      'refundPolicy', 'discountLimits'
+    ];
+    
+    const invalidFields = Object.keys(body).filter(key => !validFields.includes(key));
+    if (invalidFields.length > 0) {
       return NextResponse.json(
-        { success: false, error: 'Payout ID and decision are required' },
+        { 
+          success: false, 
+          error: `Invalid fields: ${invalidFields.join(', ')}` 
+        },
         { status: 400 }
       );
     }
 
-    if (!['approved', 'rejected', 'processed'].includes(decision)) {
-      return NextResponse.json(
-        { success: false, error: 'Decision must be approved, rejected, or processed' },
-        { status: 400 }
-      );
+    // Validate commission rates sum to 100%
+    if (body.commissionRates) {
+      const { mentor, ambassador, platform } = body.commissionRates;
+      if (mentor + ambassador + platform !== 100) {
+        return NextResponse.json(
+          { 
+            success: false, 
+            error: 'Commission rates must sum to 100%' 
+          },
+          { status: 400 }
+        );
+      }
     }
 
-    if (decision === 'processed' && !transactionId) {
-      return NextResponse.json(
-        { success: false, error: 'Transaction ID is required for processed payouts' },
-        { status: 400 }
-      );
-    }
-
-    await adminService.processPayout(
-      payoutId,
-      decision,
-      authResult.user.id,
-      transactionId,
-      notes
-    );
+    await systemConfigService.updatePricingConfig(body, authResult.user.id);
 
     return NextResponse.json({
       success: true,
-      message: `Payout ${decision} successfully`
+      message: 'Pricing configuration updated successfully'
     });
 
   } catch (error) {
-    console.error('Error processing payout:', error);
+    console.error('Error updating pricing config:', error);
     return NextResponse.json(
       { 
         success: false, 
-        error: 'Failed to process payout',
+        error: 'Failed to update pricing configuration',
         details: error instanceof Error ? error.message : 'Unknown error'
       },
       { status: 500 }

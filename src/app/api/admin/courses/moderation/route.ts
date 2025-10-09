@@ -21,20 +21,20 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Get pending payouts
-    const payouts = await adminService.getPendingPayouts();
+    // Get courses pending moderation
+    const courses = await adminService.getCoursesForModeration();
 
     return NextResponse.json({
       success: true,
-      data: payouts
+      data: courses
     });
 
   } catch (error) {
-    console.error('Error fetching pending payouts:', error);
+    console.error('Error fetching courses for moderation:', error);
     return NextResponse.json(
       { 
         success: false, 
-        error: 'Failed to fetch pending payouts',
+        error: 'Failed to fetch courses for moderation',
         details: error instanceof Error ? error.message : 'Unknown error'
       },
       { status: 500 }
@@ -62,48 +62,48 @@ export async function PUT(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { payoutId, decision, transactionId, notes } = body;
+    const { courseId, decision, reviewNotes, qualityScore } = body;
 
-    if (!payoutId || !decision) {
+    if (!courseId || !decision) {
       return NextResponse.json(
-        { success: false, error: 'Payout ID and decision are required' },
+        { success: false, error: 'Course ID and decision are required' },
         { status: 400 }
       );
     }
 
-    if (!['approved', 'rejected', 'processed'].includes(decision)) {
+    if (!['published', 'rejected'].includes(decision)) {
       return NextResponse.json(
-        { success: false, error: 'Decision must be approved, rejected, or processed' },
+        { success: false, error: 'Decision must be published or rejected' },
         { status: 400 }
       );
     }
 
-    if (decision === 'processed' && !transactionId) {
+    if (qualityScore && (qualityScore < 1 || qualityScore > 10)) {
       return NextResponse.json(
-        { success: false, error: 'Transaction ID is required for processed payouts' },
+        { success: false, error: 'Quality score must be between 1 and 10' },
         { status: 400 }
       );
     }
 
-    await adminService.processPayout(
-      payoutId,
+    await adminService.moderateCourse(
+      courseId,
       decision,
       authResult.user.id,
-      transactionId,
-      notes
+      reviewNotes,
+      qualityScore
     );
 
     return NextResponse.json({
       success: true,
-      message: `Payout ${decision} successfully`
+      message: `Course ${decision} successfully`
     });
 
   } catch (error) {
-    console.error('Error processing payout:', error);
+    console.error('Error moderating course:', error);
     return NextResponse.json(
       { 
         success: false, 
-        error: 'Failed to process payout',
+        error: 'Failed to moderate course',
         details: error instanceof Error ? error.message : 'Unknown error'
       },
       { status: 500 }
