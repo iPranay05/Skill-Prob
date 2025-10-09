@@ -74,6 +74,8 @@ export default function Navigation() {
 
     if (user.role === 'mentor') {
       baseItems.push({ name: 'Mentor Dashboard', href: '/mentor/dashboard', icon: '👨‍🏫' });
+    } else if (user.role === 'ambassador') {
+      baseItems.push({ name: 'Ambassador Dashboard', href: '/ambassador/dashboard', icon: '🤝' });
     } else if (user.role === 'admin' || user.role === 'super_admin') {
       baseItems.push({ name: 'Admin Panel', href: '/admin/dashboard', icon: '⚙️' });
     }

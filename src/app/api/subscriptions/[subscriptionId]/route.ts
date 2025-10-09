@@ -1,21 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { EnrollmentService } from '../../../../lib/enrollmentService';
-import { SubscriptionStatus } from '../../../../models/Enrollment';
-import { APIError } from '../../../../lib/errors';
-import { verifyJWT } from '../../../../lib/auth';
+import { subscriptionService } from '@/lib/subscriptionService';
+import { verifyAuth } from '@/lib/auth';
+import { z } from 'zod';
 
-const enrollmentService = new EnrollmentService();
+const UpdateSubscriptionSchema = z.object({
+  action: z.enum(['cancel', 'pause', 'resume']),
+  reason: z.string().optional()
+});
 
-/**
- * PATCH /api/subscriptions/[subscriptionId] - Update subscription status
- */
-export async function PATCH(
+export async function GET(
   request: NextRequest,
   { params }: { params: { subscriptionId: string } }
 ) {
   try {
     // Verify authentication
-    const authResult = await verifyJWT(request);
+    const authResult = await verifyAuth(request);
     if (!authResult.success || !authResult.user) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
@@ -23,32 +22,95 @@ export async function PATCH(
       );
     }
 
-    const body = await request.json();
-    
-    if (!body.status) {
+    const { subscriptionId } = params;
+
+    // Get subscription details
+    const subscription = await subscriptionService.getSubscriptionDetails(subscriptionId);
+
+    if (!subscription) {
       return NextResponse.json(
-        { success: false, error: 'Status is required' },
-        { status: 400 }
+        { success: false, error: 'Subscription not found' },
+        { status: 404 }
       );
     }
 
-    const subscription = await enrollmentService.updateSubscriptionStatus(
-      params.subscriptionId,
-      body.status as SubscriptionStatus,
-      body.cancellation_reason
-    );
+    // Check if user owns this subscription
+    if (subscription.student_id !== authResult.user.id && !['admin', 'super_admin'].includes(authResult.user.role)) {
+      return NextResponse.json(
+        { success: false, error: 'Access denied' },
+        { status: 403 }
+      );
+    }
 
     return NextResponse.json({
       success: true,
       data: subscription
     });
   } catch (error) {
-    console.error('Update subscription error:', error);
-    
-    if (error instanceof APIError) {
+    console.error('Subscription details API error:', error);
+    return NextResponse.json(
+      { success: false, error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: { subscriptionId: string } }
+) {
+  try {
+    // Verify authentication
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json(
-        { success: false, error: error.message },
-        { status: error.statusCode }
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    const { subscriptionId } = params;
+
+    // Parse request body
+    const body = await request.json();
+    const validatedData = UpdateSubscriptionSchema.parse(body);
+
+    let result;
+    switch (validatedData.action) {
+      case 'cancel':
+        result = await subscriptionService.cancelSubscription(subscriptionId, validatedData.reason);
+        break;
+      case 'pause':
+        result = await subscriptionService.pauseSubscription(subscriptionId, validatedData.reason);
+        break;
+      case 'resume':
+        result = await subscriptionService.resumeSubscription(subscriptionId);
+        break;
+      default:
+        return NextResponse.json(
+          { success: false, error: 'Invalid action' },
+          { status: 400 }
+        );
+    }
+
+    if (!result.success) {
+      return NextResponse.json(
+        { success: false, error: result.error },
+        { status: 400 }
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      data: { subscriptionId: result.subscriptionId }
+    });
+  } catch (error) {
+    console.error('Subscription update API error:', error);
+    
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid request data', details: error.errors },
+        { status: 400 }
       );
     }
 

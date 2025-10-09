@@ -11,7 +11,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "db:setup": "node scripts/setup-database.js",
-    "db:test": "node scripts/test-connection.js"
+    "db:test": "node scripts/test-connection.js",
+    "create:ambassador": "node scripts/create-ambassador-login.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.901.0",
@@ -24,6 +25,7 @@
     "@types/nodemailer": "^7.0.2",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
+    "chart.js": "^4.4.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
     "dotenv": "^17.2.3",
@@ -33,11 +35,14 @@
     "multer": "^2.0.2",
     "next": "15.5.4",
     "nodemailer": "^7.0.9",
+    "razorpay": "^2.9.6",
     "react": "19.1.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "19.1.0",
     "redis": "^5.8.3",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
+    "stripe": "^19.1.0",
     "twilio": "^5.10.2",
     "zod": "^4.1.12"
   },

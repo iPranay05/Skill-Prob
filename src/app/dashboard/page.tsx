@@ -46,8 +46,15 @@ export default function DashboardPage() {
       
       if (profileResponse.ok) {
         const profileData = await profileResponse.json();
-        setUserRole(profileData.data.role);
+        const role = profileData.data.role;
+        setUserRole(role);
         setUserName(profileData.data.profile?.firstName || profileData.data.email.split('@')[0]);
+        
+        // Redirect ambassadors to their specific dashboard
+        if (role === 'ambassador') {
+          window.location.href = '/ambassador/dashboard';
+          return;
+        }
       }
 
       // For now, set some mock data
@@ -371,6 +378,22 @@ export default function DashboardPage() {
                       <p className="text-sm text-gray-600">Schedule a new live session</p>
                     </div>
                     <span className="text-purple-500 group-hover:translate-x-1 transition-transform">→</span>
+                  </Link>
+                )}
+
+                {userRole === 'student' && (
+                  <Link
+                    href="/ambassador/apply"
+                    className="group flex items-center p-4 rounded-2xl bg-gradient-to-r from-amber-50 to-yellow-50 hover:from-amber-100 hover:to-yellow-100 transition-all duration-300 border border-amber-100 hover:border-amber-200 hover:shadow-lg"
+                  >
+                    <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <span className="text-white text-xl">🤝</span>
+                    </div>
+                    <div className="ml-4 flex-1">
+                      <p className="text-lg font-bold text-gray-900 group-hover:text-amber-600 transition-colors">Become Ambassador</p>
+                      <p className="text-sm text-gray-600">Earn by referring friends</p>
+                    </div>
+                    <span className="text-amber-500 group-hover:translate-x-1 transition-transform">→</span>
                   </Link>
                 )}
               </div>

@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { AmbassadorService } from '../../../../../../lib/ambassadorService';
 import { verifyToken } from '../../../../../../lib/auth';
-import { AppError } from '../../../../../../lib/errors';
+import { APIError } from '../../../../../../lib/errors';
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { ambassadorId: string } }
+  { params }: { params: Promise<{ ambassadorId: string }> }
 ) {
   try {
     // Verify authentication and admin role
@@ -24,7 +24,7 @@ export async function POST(
       );
     }
 
-    const { ambassadorId } = params;
+    const { ambassadorId } = await params;
     const body = await request.json();
     const { notes } = body;
 
@@ -40,16 +40,16 @@ export async function POST(
       data: {
         id: ambassador.id,
         status: ambassador.status,
-        reviewedAt: ambassador.reviewed_at,
-        reviewedBy: ambassador.reviewed_by,
-        reviewNotes: ambassador.review_notes
+        reviewedAt: ambassador.reviewedAt || ambassador.reviewed_at,
+        reviewedBy: ambassador.reviewedBy || ambassador.reviewed_by,
+        reviewNotes: ambassador.reviewNotes || ambassador.review_notes
       }
     });
 
   } catch (error) {
     console.error('Ambassador approval error:', error);
     
-    if (error instanceof AppError) {
+    if (error instanceof APIError) {
       return NextResponse.json(
         { success: false, error: error.message },
         { status: error.statusCode }

@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { AmbassadorService } from '../../../../lib/ambassadorService';
 import { verifyToken } from '../../../../lib/auth';
+import { supabaseAdmin } from '../../../../lib/database';
 import { APIError } from '../../../../lib/errors';
 
 export async function POST(request: NextRequest) {
   try {
-    // For registration tracking, we need the user to be authenticated
+    // For conversion tracking, we need the user to be authenticated
     const authResult = await verifyToken(request);
     if (!authResult.success || !authResult.user) {
       return NextResponse.json(
@@ -15,12 +16,12 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { referralCode, sourceData } = body;
+    const { referralCode, sourceData = {} } = body;
 
-    // Validate referral code
-    if (!referralCode || typeof referralCode !== 'string') {
+    // Validate referral code format
+    if (!referralCode || typeof referralCode !== 'string' || !/^[A-Za-z0-9]{3,20}$/.test(referralCode)) {
       return NextResponse.json(
-        { success: false, error: 'Valid referral code is required' },
+        { success: false, error: 'Invalid referral code format' },
         { status: 400 }
       );
     }
@@ -34,25 +35,54 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Prevent self-referrals (security measure)
+    if (ambassador.userId === authResult.user.userId) {
+      return NextResponse.json(
+        { success: false, error: 'Self-referrals are not allowed' },
+        { status: 400 }
+      );
+    }
+
+    // Check if user already has a referral (prevent duplicate referrals)
+    const { data: existingReferral } = await supabaseAdmin
+      .from('referrals')
+      .select('id')
+      .eq('student_id', authResult.user.userId)
+      .single();
+
+    if (existingReferral) {
+      return NextResponse.json(
+        { success: false, error: 'User already has a referral record' },
+        { status: 409 }
+      );
+    }
+
+    // Sanitize source data
+    const sanitizedSourceData = {
+      source: 'registration',
+      userAgent: typeof sourceData.userAgent === 'string' ? sourceData.userAgent.substring(0, 500) : '',
+      referrer: typeof sourceData.referrer === 'string' ? sourceData.referrer.substring(0, 500) : '',
+      timestamp: new Date().toISOString()
+    };
+
     // Process the referral registration
     const referral = await AmbassadorService.processReferralRegistration(
       referralCode,
       authResult.user.userId,
-      sourceData
+      sanitizedSourceData
     );
 
     return NextResponse.json({
       success: true,
       data: {
         referralId: referral.id,
-        ambassadorCode: referral.referralCode,
         status: referral.status,
-        registrationDate: referral.registrationDate
+        message: 'Referral processed successfully'
       }
     });
 
   } catch (error) {
-    console.error('Referral tracking error:', error);
+    console.error('Referral conversion tracking error:', error);
     
     if (error instanceof APIError) {
       return NextResponse.json(

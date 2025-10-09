@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
 export default function RegisterPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -15,6 +16,24 @@ export default function RegisterPage() {
     confirmPassword: '',
     referralCode: ''
   });
+
+  useEffect(() => {
+    // Check for referral code from URL parameter or localStorage
+    const refFromUrl = searchParams.get('ref');
+    const refFromStorage = localStorage.getItem('referralCode');
+    
+    if (refFromUrl || refFromStorage) {
+      setFormData(prev => ({
+        ...prev,
+        referralCode: refFromUrl || refFromStorage || ''
+      }));
+      
+      // Clear from localStorage after using it
+      if (refFromStorage) {
+        localStorage.removeItem('referralCode');
+      }
+    }
+  }, [searchParams]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');

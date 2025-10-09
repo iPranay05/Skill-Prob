@@ -107,7 +107,20 @@ export class AuthService {
 }
 
 // Convenience function for API routes
-export const verifyToken = AuthService.verifyAccessToken;
+export const verifyToken = async (request: Request): Promise<{ success: boolean; user: JWTPayload | null }> => {
+  try {
+    const authHeader = request.headers.get('authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return { success: false, user: null };
+    }
+
+    const token = authHeader.substring(7);
+    const payload = await AuthService.verifyAccessToken(token);
+    return { success: true, user: payload };
+  } catch (error) {
+    return { success: false, user: null };
+  }
+};
 
 // Additional convenience functions
 export const generateToken = (payload: JWTPayload): string => {

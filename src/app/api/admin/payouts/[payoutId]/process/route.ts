@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { AmbassadorService } from '../../../../../../lib/ambassadorService';
 import { verifyToken } from '../../../../../../lib/auth';
-import { AppError } from '../../../../../../lib/errors';
+import { APIError } from '../../../../../../lib/errors';
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { payoutId: string } }
+  { params }: { params: Promise<{ payoutId: string }> }
 ) {
   try {
     // Verify authentication and admin role
@@ -24,7 +24,7 @@ export async function POST(
       );
     }
 
-    const { payoutId } = params;
+    const { payoutId } = await params;
     const body = await request.json();
     const { approved, transactionId, notes } = body;
 
@@ -74,7 +74,7 @@ export async function POST(
   } catch (error) {
     console.error('Payout processing error:', error);
     
-    if (error instanceof AppError) {
+    if (error instanceof APIError) {
       return NextResponse.json(
         { success: false, error: error.message },
         { status: error.statusCode }

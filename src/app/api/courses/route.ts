@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { CourseService } from '../../../lib/courseService';
-import { AuthMiddleware } from '../../../middleware/auth';
+import { verifyToken } from '../../../lib/auth';
 import { UserRole } from '../../../types/user';
 import { APIError } from '../../../lib/errors';
 import { CreateCourseSchema, CourseSearchQuery } from '../../../models/Course';
@@ -61,14 +61,24 @@ export async function GET(request: NextRequest) {
  */
 export async function POST(request: NextRequest) {
   try {
-    // Authenticate and authorize
-    const authResult = await AuthMiddleware.requireAuth(request, [UserRole.MENTOR]);
-    if (authResult instanceof NextResponse) {
-      return authResult;
+    // Verify authentication
+    const authResult = await verifyToken(request);
+    if (!authResult.success || !authResult.user) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      );
     }
 
-    const { user } = authResult;
-    const { userId } = user;
+    // Check if user is a mentor
+    if (authResult.user.role !== UserRole.MENTOR) {
+      return NextResponse.json(
+        { success: false, error: 'Access denied. Mentor role required.' },
+        { status: 403 }
+      );
+    }
+
+    const { userId } = authResult.user;
     const body = await request.json();
 
     // Validate request body

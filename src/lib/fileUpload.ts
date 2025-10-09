@@ -222,3 +222,9 @@ export const FILE_CONFIGS = {
 };
 
 export const fileUploadService = new FileUploadService();
+
+// Convenience function for backward compatibility
+export async function uploadToS3(file: File, key: string): Promise<UploadResult> {
+  const buffer = Buffer.from(await file.arrayBuffer());
+  return fileUploadService.uploadFile(buffer, file.name, file.type, key.split('/')[0]);
+}

@@ -18,6 +18,37 @@ import { APIError } from './errors';
 
 export class AmbassadorService {
   
+  // Fallback referral code generation
+  private static async generateReferralCodeFallback(): Promise<string> {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let attempts = 0;
+    const maxAttempts = 10;
+
+    while (attempts < maxAttempts) {
+      let code = '';
+      for (let i = 0; i < 8; i++) {
+        code += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+
+      // Check if code already exists
+      const { data: existingCode } = await supabaseAdmin
+        .from('ambassadors')
+        .select('referral_code')
+        .eq('referral_code', code)
+        .single();
+
+      if (!existingCode) {
+        return code;
+      }
+
+      attempts++;
+    }
+
+    // If we can't generate a unique code after max attempts, add timestamp
+    const timestamp = Date.now().toString(36).toUpperCase().slice(-4);
+    return `AMB${timestamp}`;
+  }
+  
   // Ambassador Management
   static async applyForAmbassador(
     userId: string, 
@@ -35,9 +66,8 @@ export class AmbassadorService {
         throw new APIError('User already has an ambassador application', 409);
       }
 
-      // Generate unique referral code
-      const { data: referralCode } = await supabaseAdmin
-        .rpc('generate_referral_code');
+      // Generate unique referral code using JavaScript method
+      const referralCode = await this.generateReferralCodeFallback();
 
       if (!referralCode) {
         throw new APIError('Failed to generate referral code', 500);
@@ -469,13 +499,10 @@ export class AmbassadorService {
     conversionRate: number = 1
   ): Promise<PayoutRequest> {
     try {
-      // Get ambassador and wallet info
+      // Get ambassador info
       const { data: ambassador, error: ambassadorError } = await supabaseAdmin
         .from('ambassadors')
-        .select(`
-          *,
-          wallets (*)
-        `)
+        .select('*')
         .eq('id', ambassadorId)
         .single();
 
@@ -483,7 +510,16 @@ export class AmbassadorService {
         throw new APIError(`Failed to fetch ambassador: ${ambassadorError.message}`, 500);
       }
 
-      const wallet = ambassador.wallets;
+      // Get wallet separately using user_id
+      const { data: wallet, error: walletError } = await supabaseAdmin
+        .from('wallets')
+        .select('*')
+        .eq('user_id', ambassador.user_id)
+        .single();
+
+      if (walletError) {
+        throw new APIError(`Failed to fetch wallet: ${walletError.message}`, 500);
+      }
       if (!wallet || wallet.balance.points < pointsToRedeem) {
         throw new APIError('Insufficient points for payout', 400);
       }
@@ -582,16 +618,7 @@ export class AmbassadorService {
     try {
       let query = supabaseAdmin
         .from('payout_requests')
-        .select(`
-          *,
-          ambassadors (
-            referral_code,
-            users (
-              email,
-              profile
-            )
-          )
-        `);
+        .select('*');
 
       if (ambassadorId) {
         query = query.eq('ambassador_id', ambassadorId);
@@ -669,13 +696,12 @@ export class AmbassadorService {
   // Analytics and Reporting
   static async getAmbassadorAnalytics(ambassadorId: string): Promise<any> {
     try {
-      // Get ambassador with referrals and wallet
+      // Get ambassador with referrals
       const { data: ambassador, error } = await supabaseAdmin
         .from('ambassadors')
         .select(`
           *,
-          referrals (*),
-          wallets (*)
+          referrals (*)
         `)
         .eq('id', ambassadorId)
         .single();
@@ -684,21 +710,27 @@ export class AmbassadorService {
         throw new APIError(`Failed to fetch ambassador analytics: ${error.message}`, 500);
       }
 
+      // Get wallet separately using user_id
+      const { data: wallet } = await supabaseAdmin
+        .from('wallets')
+        .select('*')
+        .eq('user_id', ambassador.user_id)
+        .single();
+
       const referrals = ambassador.referrals || [];
-      const wallet = ambassador.wallets;
 
       // Calculate analytics
       const totalReferrals = referrals.length;
-      const convertedReferrals = referrals.filter(r => r.status === 'converted').length;
+      const convertedReferrals = referrals.filter((r: any) => r.status === 'converted').length;
       const conversionRate = totalReferrals > 0 ? (convertedReferrals / totalReferrals) * 100 : 0;
 
-      const totalEarnings = referrals.reduce((sum, referral) => {
-        return sum + (referral.conversion_events || []).reduce((eventSum, event) => {
+      const totalEarnings = referrals.reduce((sum: number, referral: any) => {
+        return sum + (referral.conversion_events || []).reduce((eventSum: number, event: any) => {
           return eventSum + event.value;
         }, 0);
       }, 0);
 
-      const monthlyReferrals = referrals.filter(r => {
+      const monthlyReferrals = referrals.filter((r: any) => {
         const referralDate = new Date(r.registration_date);
         const oneMonthAgo = new Date();
         oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);

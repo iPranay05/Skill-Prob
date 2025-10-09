@@ -1,87 +1,67 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { CourseService } from '../../../../../lib/courseService';
-import { AuthMiddleware } from '../../../../../middleware/auth';
-import { AppError } from '../../../../../lib/errors';
+import { verifyToken } from '../../../../../lib/auth';
+import { APIError } from '../../../../../lib/errors';
+import { UserRole } from '../../../../../types/user';
+import { supabaseAdmin } from '../../../../../lib/database';
+import { CourseStatus } from '../../../../../models/Course';
 
-const courseService = new CourseService();
-
-/**
- * POST /api/courses/[courseId]/publish - Publish course (mentor only)
- */
 export async function POST(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
-    // Authenticate and authorize
-    const authResult = await authMiddleware(request, ['mentor']);
-    if (!authResult.success) {
+    // Verify authentication
+    const authResult = await verifyToken(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json(
-        { success: false, error: authResult.error },
-        { status: authResult.statusCode }
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
       );
     }
 
-    const { userId } = authResult.user!;
-    const { courseId } = params;
+    // Check if user is a mentor
+    if (authResult.user.role !== UserRole.MENTOR) {
+      return NextResponse.json(
+        { success: false, error: 'Access denied. Mentor role required.' },
+        { status: 403 }
+      );
+    }
 
-    // Publish course
-    const course = await courseService.publishCourse(courseId, userId);
+    const { courseId } = await params;
+
+    // Update course status to published
+    const { data: course, error } = await supabaseAdmin
+      .from('courses')
+      .update({
+        status: CourseStatus.PUBLISHED,
+        published_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', courseId)
+      .eq('mentor_id', authResult.user.userId) // Ensure mentor owns the course
+      .select()
+      .single();
+
+    if (error) {
+      if (error.code === 'PGRST116') {
+        return NextResponse.json(
+          { success: false, error: 'Course not found or access denied' },
+          { status: 404 }
+        );
+      }
+      throw new APIError(`Failed to publish course: ${error.message}`, 500);
+    }
 
     return NextResponse.json({
       success: true,
       data: course,
       message: 'Course published successfully'
     });
+
   } catch (error) {
-    console.error('Error publishing course:', error);
+    console.error('Course publish error:', error);
     
-    if (error instanceof AppError) {
-      return NextResponse.json(
-        { success: false, error: error.message },
-        { status: error.statusCode }
-      );
-    }
-
-    return NextResponse.json(
-      { success: false, error: 'Internal server error' },
-      { status: 500 }
-    );
-  }
-}
-
-/**
- * DELETE /api/courses/[courseId]/publish - Unpublish course (mentor only)
- */
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { courseId: string } }
-) {
-  try {
-    // Authenticate and authorize
-    const authResult = await authMiddleware(request, ['mentor']);
-    if (!authResult.success) {
-      return NextResponse.json(
-        { success: false, error: authResult.error },
-        { status: authResult.statusCode }
-      );
-    }
-
-    const { userId } = authResult.user!;
-    const { courseId } = params;
-
-    // Unpublish course
-    const course = await courseService.unpublishCourse(courseId, userId);
-
-    return NextResponse.json({
-      success: true,
-      data: course,
-      message: 'Course unpublished successfully'
-    });
-  } catch (error) {
-    console.error('Error unpublishing course:', error);
-    
-    if (error instanceof AppError) {
+    if (error instanceof APIError) {
       return NextResponse.json(
         { success: false, error: error.message },
         { status: error.statusCode }

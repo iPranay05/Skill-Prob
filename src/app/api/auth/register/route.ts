@@ -48,14 +48,30 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Validate referral code if provided
+    // Validate referral code if provided (check both user and ambassador referrals)
     let referredBy: string | undefined;
+    let ambassadorReferralCode: string | undefined;
+    
     if (referralCode) {
-      const referrer = await UserModel.findByReferralCode(referralCode);
-      if (!referrer) {
-        throw new ValidationError('Invalid referral code');
+      // First check if it's an ambassador referral code
+      try {
+        const { AmbassadorService } = await import('@/lib/ambassadorService');
+        const ambassador = await AmbassadorService.getAmbassadorByReferralCode(referralCode);
+        if (ambassador) {
+          ambassadorReferralCode = referralCode;
+        }
+      } catch (error) {
+        console.warn('Ambassador service check failed:', error);
       }
-      referredBy = referrer.id;
+      
+      // If not an ambassador code, check user referral codes
+      if (!ambassadorReferralCode) {
+        const referrer = await UserModel.findByReferralCode(referralCode);
+        if (!referrer) {
+          throw new ValidationError('Invalid referral code');
+        }
+        referredBy = referrer.id;
+      }
     }
 
     // Hash password
@@ -125,6 +141,26 @@ export async function POST(request: NextRequest) {
       await NotificationService.sendOTPSMS(phone, phoneOTP);
     }
 
+    // Process ambassador referral if applicable
+    if (ambassadorReferralCode && user.id) {
+      try {
+        const { AmbassadorService } = await import('@/lib/ambassadorService');
+        await AmbassadorService.processReferralRegistration(
+          ambassadorReferralCode,
+          user.id,
+          {
+            source: 'registration',
+            timestamp: new Date().toISOString(),
+            userAgent: request.headers.get('user-agent') || '',
+            ip: request.ip || request.headers.get('x-forwarded-for') || ''
+          }
+        );
+      } catch (error) {
+        // Log error but don't fail registration
+        console.error('Ambassador referral processing failed:', error);
+      }
+    }
+
     // Return success response (without sensitive data)
     const userResponse = {
       id: user.id,
@@ -134,7 +170,8 @@ export async function POST(request: NextRequest) {
       profile: user.profile,
       verification: user.verification,
       referralCode: user.referralCode,
-      createdAt: user.createdAt
+      createdAt: user.createdAt,
+      referralProcessed: !!ambassadorReferralCode
     };
 
     return ErrorHandler.success(

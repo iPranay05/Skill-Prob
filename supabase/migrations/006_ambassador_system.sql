@@ -2,29 +2,33 @@
 -- This migration creates the ambassador referral system with wallet and points
 
 -- Create ambassador-related types
-DO $ BEGIN
-    CREATE TYPE ambassador_status AS ENUM ('pending', 'active', 'suspended', 'rejected');
-EXCEPTION
-    WHEN duplicate_object THEN null;
-END $;
+DO $$ 
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'ambassador_status') THEN
+        CREATE TYPE ambassador_status AS ENUM ('pending', 'active', 'suspended', 'rejected');
+    END IF;
+END $$;
 
-DO $ BEGIN
-    CREATE TYPE transaction_type AS ENUM ('credit', 'debit', 'conversion', 'payout', 'referral_bonus', 'registration_bonus');
-EXCEPTION
-    WHEN duplicate_object THEN null;
-END $;
+DO $$ 
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'transaction_type') THEN
+        CREATE TYPE transaction_type AS ENUM ('credit', 'debit', 'conversion', 'payout', 'referral_bonus', 'registration_bonus');
+    END IF;
+END $$;
 
-DO $ BEGIN
-    CREATE TYPE payout_status AS ENUM ('pending', 'approved', 'rejected', 'processed');
-EXCEPTION
-    WHEN duplicate_object THEN null;
-END $;
+DO $$ 
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'payout_status') THEN
+        CREATE TYPE payout_status AS ENUM ('pending', 'approved', 'rejected', 'processed');
+    END IF;
+END $$;
 
-DO $ BEGIN
-    CREATE TYPE referral_event_type AS ENUM ('registration', 'first_purchase', 'subscription_renewal', 'course_completion');
-EXCEPTION
-    WHEN duplicate_object THEN null;
-END $;
+DO $$ 
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'referral_event_type') THEN
+        CREATE TYPE referral_event_type AS ENUM ('registration', 'first_purchase', 'subscription_renewal', 'course_completion');
+    END IF;
+END $$;
 
 -- Ambassadors table
 CREATE TABLE IF NOT EXISTS ambassadors (
@@ -218,7 +222,7 @@ CREATE TRIGGER update_point_configurations_updated_at
 
 -- Function to generate unique referral code
 CREATE OR REPLACE FUNCTION generate_referral_code()
-RETURNS VARCHAR(20) AS $
+RETURNS VARCHAR(20) AS $$
 DECLARE
     code VARCHAR(20);
     exists_check INTEGER;
@@ -238,11 +242,11 @@ BEGIN
         END IF;
     END LOOP;
 END;
-$ language 'plpgsql';
+$$ language 'plpgsql';
 
 -- Function to create wallet for user
 CREATE OR REPLACE FUNCTION create_user_wallet(user_uuid UUID, wallet_type VARCHAR(20))
-RETURNS UUID AS $
+RETURNS UUID AS $$
 DECLARE
     wallet_id UUID;
 BEGIN
@@ -252,7 +256,7 @@ BEGIN
     
     RETURN wallet_id;
 END;
-$ language 'plpgsql';
+$$ language 'plpgsql';
 
 -- Function to add wallet transaction
 CREATE OR REPLACE FUNCTION add_wallet_transaction(
@@ -264,7 +268,7 @@ CREATE OR REPLACE FUNCTION add_wallet_transaction(
     reference VARCHAR(255) DEFAULT NULL,
     trans_metadata JSONB DEFAULT '{}'
 )
-RETURNS UUID AS $
+RETURNS UUID AS $$
 DECLARE
     transaction_id UUID;
     current_balance JSONB;
@@ -307,7 +311,7 @@ BEGIN
     
     RETURN transaction_id;
 END;
-$ language 'plpgsql';
+$$ language 'plpgsql';
 
 -- Function to process referral registration
 CREATE OR REPLACE FUNCTION process_referral_registration(
@@ -315,7 +319,7 @@ CREATE OR REPLACE FUNCTION process_referral_registration(
     student_uuid UUID,
     source_metadata JSONB DEFAULT '{}'
 )
-RETURNS UUID AS $
+RETURNS UUID AS $$
 DECLARE
     ambassador_record RECORD;
     referral_id UUID;
@@ -381,7 +385,7 @@ BEGIN
     
     RETURN referral_id;
 END;
-$ language 'plpgsql';
+$$ language 'plpgsql';
 
 -- RLS Policies
 ALTER TABLE ambassadors ENABLE ROW LEVEL SECURITY;

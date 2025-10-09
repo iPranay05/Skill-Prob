@@ -205,3 +205,6 @@ export const validatePassword = (password: string): { valid: boolean; errors: st
     errors
   };
 };
+
+// Alias for backward compatibility
+export const AppError = APIError;

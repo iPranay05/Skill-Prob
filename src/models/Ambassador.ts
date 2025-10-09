@@ -103,6 +103,11 @@ export interface Referral {
   };
   createdAt?: string;
   updatedAt?: string;
+  // For queries with joins
+  users?: {
+    email: string;
+    profile: any;
+  };
 }
 
 export interface WalletBalance {
@@ -151,6 +156,14 @@ export interface PayoutRequest {
   rejectionReason?: string;
   createdAt?: string;
   updatedAt?: string;
+  // For admin queries with joins
+  ambassadors?: {
+    referralCode: string;
+    users?: {
+      email: string;
+      profile: any;
+    };
+  };
 }
 
 export interface PointConfiguration {
