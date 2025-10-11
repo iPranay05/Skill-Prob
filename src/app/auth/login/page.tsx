@@ -1,17 +1,37 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showSpecialRoles, setShowSpecialRoles] = useState(false);
+
+  useEffect(() => {
+    // Check for special access parameter or key combination
+    const specialAccess = searchParams.get('access');
+    if (specialAccess === 'admin' || specialAccess === 'mentor' || specialAccess === 'employee') {
+      setShowSpecialRoles(true);
+    }
+
+    // Listen for key combination (Ctrl + Shift + M)
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'M') {
+        setShowSpecialRoles(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [searchParams]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -75,21 +95,21 @@ export default function LoginPage() {
     <div className="min-h-screen bg-white" style={{ fontFamily: 'Arial, sans-serif' }}>
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
         {/* Left Side - Branding */}
-        <div className="hidden lg:flex lg:flex-col lg:justify-center lg:px-12" style={{ backgroundColor: '#5e17eb' }}>
+        <div className="hidden lg:flex lg:flex-col lg:justify-center lg:px-12" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
           <div className="max-w-md mx-auto text-center">
             <div className="mb-8">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center bg-white">
-                <span className="text-3xl font-bold" style={{ color: '#5e17eb' }}>SP</span>
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#f5f5f5' }}>
+                <span className="text-3xl font-bold" style={{ color: '#181c31' }}>SP</span>
               </div>
-              <h1 className="text-4xl font-bold text-white mb-4">Welcome Back!</h1>
-              <p className="text-xl text-white opacity-90">
-                Continue your learning journey with Skill Probe LMS
+              <h1 className="text-4xl font-bold mb-4" style={{ color: '#f5f5f5' }}>Welcome Back!</h1>
+              <p className="text-xl opacity-90" style={{ color: '#f5f5f5' }}>
+                Continue your learning journey with SkillProbe
               </p>
             </div>
 
-            <div className="space-y-6 text-white opacity-80">
+            <div className="space-y-6 opacity-90" style={{ color: '#f5f5f5' }}>
               <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 245, 245, 0.2)' }}>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
@@ -101,7 +121,7 @@ export default function LoginPage() {
               </div>
 
               <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 245, 245, 0.2)' }}>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                   </svg>
@@ -113,7 +133,7 @@ export default function LoginPage() {
               </div>
 
               <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 245, 245, 0.2)' }}>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6" />
                   </svg>
@@ -132,19 +152,19 @@ export default function LoginPage() {
           <div className="max-w-md mx-auto w-full">
             {/* Mobile Logo */}
             <div className="lg:hidden text-center mb-8">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#5e17eb' }}>
-                <span className="text-2xl font-bold text-white">SP</span>
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
+                <span className="text-2xl font-bold" style={{ color: '#f5f5f5' }}>SP</span>
               </div>
-              <h1 className="text-2xl font-bold text-black">Skill Probe</h1>
+              <h1 className="text-2xl font-bold" style={{ color: '#181c31' }}>SkillProbe</h1>
             </div>
 
             <div className="mb-8">
-              <h2 className="text-3xl font-bold text-black mb-2">
+              <h2 className="text-3xl font-bold mb-2" style={{ color: '#181c31' }}>
                 Sign in to your account
               </h2>
-              <p className="text-gray-600">
+              <p style={{ color: '#666' }}>
                 Don't have an account?{' '}
-                <Link href="/auth/register" className="font-semibold hover:underline" style={{ color: '#5e17eb' }}>
+                <Link href="/auth/register" className="font-semibold hover:underline" style={{ color: '#3a8ebe' }}>
                   Create one here
                 </Link>
               </p>
@@ -152,7 +172,7 @@ export default function LoginPage() {
 
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-black mb-2">
+                <label htmlFor="email" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
                   Email Address
                 </label>
                 <input
@@ -162,14 +182,14 @@ export default function LoginPage() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent text-black bg-white"
-                  style={{ focusRingColor: '#5e17eb' }}
+                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
+                  style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
                   placeholder="Enter your email"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-semibold text-black mb-2">
+                <label htmlFor="password" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
                   Password
                 </label>
                 <input
@@ -179,8 +199,8 @@ export default function LoginPage() {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent text-black bg-white"
-                  style={{ focusRingColor: '#5e17eb' }}
+                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
+                  style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
                   placeholder="Enter your password"
                 />
               </div>
@@ -191,14 +211,14 @@ export default function LoginPage() {
                     id="remember-me"
                     name="remember-me"
                     type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 focus:ring-2"
-                    style={{ accentColor: '#5e17eb' }}
+                    className="h-4 w-4 rounded focus:ring-2"
+                    style={{ accentColor: '#3a8ebe', borderColor: 'rgba(58, 142, 190, 0.3)' }}
                   />
-                  <label htmlFor="remember-me" className="ml-2 text-sm text-gray-600">
+                  <label htmlFor="remember-me" className="ml-2 text-sm" style={{ color: '#666' }}>
                     Remember me
                   </label>
                 </div>
-                <Link href="/auth/forgot-password" className="text-sm font-semibold hover:underline" style={{ color: '#5e17eb' }}>
+                <Link href="/auth/forgot-password" className="text-sm font-semibold hover:underline" style={{ color: '#3a8ebe' }}>
                   Forgot password?
                 </Link>
               </div>
@@ -212,10 +232,8 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 px-4 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ backgroundColor: '#5e17eb' }}
-                onMouseEnter={(e) => !loading && (e.currentTarget.style.backgroundColor = '#4c14c7')}
-                onMouseLeave={(e) => !loading && (e.currentTarget.style.backgroundColor = '#5e17eb')}
+                className="w-full py-3 px-4 font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', color: '#f5f5f5' }}
               >
                 {loading ? (
                   <div className="flex items-center justify-center">
@@ -227,17 +245,59 @@ export default function LoginPage() {
                 )}
               </button>
 
+              {/* Special Roles Section - Hidden by default */}
+              {showSpecialRoles && (
+                <div className="mt-6 p-4 rounded-lg border-2 border-dashed" style={{ borderColor: '#3a8ebe', backgroundColor: 'rgba(58, 142, 190, 0.05)' }}>
+                  <div className="text-center mb-4">
+                    <h3 className="text-lg font-semibold" style={{ color: '#181c31' }}>Special Access</h3>
+                    <p className="text-sm" style={{ color: '#666' }}>Login as mentor or employee</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <Link
+                      href="/auth/login?role=mentor"
+                      className="block text-center px-4 py-3 rounded-lg border-2 transition-all duration-200 hover:shadow-md"
+                      style={{ borderColor: '#3a8ebe', color: '#3a8ebe' }}
+                    >
+                      <div className="font-semibold">Mentor Login</div>
+                      <div className="text-xs opacity-75">For industry experts</div>
+                    </Link>
+                    <Link
+                      href="/auth/login?role=employee"
+                      className="block text-center px-4 py-3 rounded-lg border-2 transition-all duration-200 hover:shadow-md"
+                      style={{ borderColor: '#181c31', color: '#181c31' }}
+                    >
+                      <div className="font-semibold">Employee Login</div>
+                      <div className="text-xs opacity-75">For company staff</div>
+                    </Link>
+                  </div>
+                  <div className="text-center mt-3">
+                    <button
+                      onClick={() => setShowSpecialRoles(false)}
+                      className="text-xs underline"
+                      style={{ color: '#666' }}
+                    >
+                      Hide special access
+                    </button>
+                  </div>
+                </div>
+              )}
+
               <div className="text-center">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm" style={{ color: '#666' }}>
                   By signing in, you agree to our{' '}
-                  <Link href="/terms" className="hover:underline" style={{ color: '#5e17eb' }}>
+                  <Link href="/terms" className="hover:underline" style={{ color: '#3a8ebe' }}>
                     Terms of Service
                   </Link>{' '}
                   and{' '}
-                  <Link href="/privacy" className="hover:underline" style={{ color: '#5e17eb' }}>
+                  <Link href="/privacy" className="hover:underline" style={{ color: '#3a8ebe' }}>
                     Privacy Policy
                   </Link>
                 </p>
+                {!showSpecialRoles && (
+                  <p className="text-xs mt-2" style={{ color: '#999' }}>
+                    Press Ctrl+Shift+M for special access
+                  </p>
+                )}
               </div>
             </form>
           </div>

@@ -17,6 +17,7 @@ export default function RegisterPage() {
     confirmPassword: '',
     referralCode: ''
   });
+  const [showSpecialRoles, setShowSpecialRoles] = useState(false);
 
   useEffect(() => {
     // Check for referral code from URL parameter or localStorage
@@ -34,6 +35,22 @@ export default function RegisterPage() {
         localStorage.removeItem('referralCode');
       }
     }
+
+    // Check for special access parameter
+    const specialAccess = searchParams.get('access');
+    if (specialAccess === 'admin' || specialAccess === 'mentor' || specialAccess === 'employee') {
+      setShowSpecialRoles(true);
+    }
+
+    // Listen for key combination (Ctrl + Shift + R for Register)
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'R') {
+        setShowSpecialRoles(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [searchParams]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -97,21 +114,21 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-white" style={{ fontFamily: 'Arial, sans-serif' }}>
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
         {/* Left Side - Branding */}
-        <div className="hidden lg:flex lg:flex-col lg:justify-center lg:px-12" style={{ backgroundColor: '#5e17eb' }}>
+        <div className="hidden lg:flex lg:flex-col lg:justify-center lg:px-12" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
           <div className="max-w-md mx-auto text-center">
             <div className="mb-8">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center bg-white">
-                <span className="text-3xl font-bold" style={{ color: '#5e17eb' }}>SP</span>
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#f5f5f5' }}>
+                <span className="text-3xl font-bold" style={{ color: '#181c31' }}>SP</span>
               </div>
-              <h1 className="text-4xl font-bold text-white mb-4">Join Skill Probe!</h1>
-              <p className="text-xl text-white opacity-90">
+              <h1 className="text-4xl font-bold mb-4" style={{ color: '#f5f5f5' }}>Join SkillProbe!</h1>
+              <p className="text-xl opacity-90" style={{ color: '#f5f5f5' }}>
                 Start your learning journey with thousands of students worldwide
               </p>
             </div>
             
-            <div className="space-y-6 text-white opacity-80">
+            <div className="space-y-6 opacity-90" style={{ color: '#f5f5f5' }}>
               <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 245, 245, 0.2)' }}>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
                   </svg>
@@ -123,7 +140,7 @@ export default function RegisterPage() {
               </div>
               
               <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 245, 245, 0.2)' }}>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
@@ -135,7 +152,7 @@ export default function RegisterPage() {
               </div>
               
               <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 245, 245, 0.2)' }}>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
@@ -154,19 +171,19 @@ export default function RegisterPage() {
           <div className="max-w-md mx-auto w-full">
             {/* Mobile Logo */}
             <div className="lg:hidden text-center mb-8">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#5e17eb' }}>
-                <span className="text-2xl font-bold text-white">SP</span>
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
+                <span className="text-2xl font-bold" style={{ color: '#f5f5f5' }}>SP</span>
               </div>
-              <h1 className="text-2xl font-bold text-black">Skill Probe</h1>
+              <h1 className="text-2xl font-bold" style={{ color: '#181c31' }}>SkillProbe</h1>
             </div>
 
             <div className="mb-8">
-              <h2 className="text-3xl font-bold text-black mb-2">
+              <h2 className="text-3xl font-bold mb-2" style={{ color: '#181c31' }}>
                 Create your account
               </h2>
-              <p className="text-gray-600">
+              <p style={{ color: '#666' }}>
                 Already have an account?{' '}
-                <Link href="/auth/login" className="font-semibold hover:underline" style={{ color: '#5e17eb' }}>
+                <Link href="/auth/login" className="font-semibold hover:underline" style={{ color: '#3a8ebe' }}>
                   Sign in here
                 </Link>
               </p>
@@ -175,7 +192,7 @@ export default function RegisterPage() {
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-semibold text-black mb-2">
+                  <label htmlFor="firstName" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
                     First Name
                   </label>
                   <input
@@ -185,12 +202,13 @@ export default function RegisterPage() {
                     required
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent text-black bg-white"
+                    className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
+                    style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
                     placeholder="First name"
                   />
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-semibold text-black mb-2">
+                  <label htmlFor="lastName" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
                     Last Name
                   </label>
                   <input
@@ -200,14 +218,15 @@ export default function RegisterPage() {
                     required
                     value={formData.lastName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent text-black bg-white"
+                    className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
+                    style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
                     placeholder="Last name"
                   />
                 </div>
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-black mb-2">
+                <label htmlFor="email" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
                   Email Address
                 </label>
                 <input
@@ -217,14 +236,15 @@ export default function RegisterPage() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent text-black bg-white"
+                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
+                  style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
                   placeholder="Enter your email"
                 />
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-sm font-semibold text-black mb-2">
-                  Phone Number <span className="text-gray-500 font-normal">(Optional)</span>
+                <label htmlFor="phone" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
+                  Phone Number <span style={{ color: '#666' }} className="font-normal">(Optional)</span>
                 </label>
                 <input
                   id="phone"
@@ -232,13 +252,14 @@ export default function RegisterPage() {
                   type="tel"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent text-black bg-white"
+                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
+                  style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
                   placeholder="Enter your phone number"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-semibold text-black mb-2">
+                <label htmlFor="password" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
                   Password
                 </label>
                 <input
@@ -248,13 +269,14 @@ export default function RegisterPage() {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent text-black bg-white"
+                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
+                  style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
                   placeholder="Create a password"
                 />
               </div>
 
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-semibold text-black mb-2">
+                <label htmlFor="confirmPassword" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
                   Confirm Password
                 </label>
                 <input
@@ -264,14 +286,15 @@ export default function RegisterPage() {
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent text-black bg-white"
+                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
+                  style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
                   placeholder="Confirm your password"
                 />
               </div>
 
               <div>
-                <label htmlFor="referralCode" className="block text-sm font-semibold text-black mb-2">
-                  Referral Code <span className="text-gray-500 font-normal">(Optional)</span>
+                <label htmlFor="referralCode" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
+                  Referral Code <span style={{ color: '#666' }} className="font-normal">(Optional)</span>
                 </label>
                 <input
                   id="referralCode"
@@ -279,7 +302,8 @@ export default function RegisterPage() {
                   type="text"
                   value={formData.referralCode}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent text-black bg-white"
+                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
+                  style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
                   placeholder="Enter referral code"
                 />
               </div>
@@ -299,10 +323,8 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 px-4 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ backgroundColor: '#5e17eb' }}
-                onMouseEnter={(e) => !loading && (e.currentTarget.style.backgroundColor = '#4c14c7')}
-                onMouseLeave={(e) => !loading && (e.currentTarget.style.backgroundColor = '#5e17eb')}
+                className="w-full py-3 px-4 font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', color: '#f5f5f5' }}
               >
                 {loading ? (
                   <div className="flex items-center justify-center">
@@ -314,17 +336,59 @@ export default function RegisterPage() {
                 )}
               </button>
 
+              {/* Special Roles Section - Hidden by default */}
+              {showSpecialRoles && (
+                <div className="mt-6 p-4 rounded-lg border-2 border-dashed" style={{ borderColor: '#3a8ebe', backgroundColor: 'rgba(58, 142, 190, 0.05)' }}>
+                  <div className="text-center mb-4">
+                    <h3 className="text-lg font-semibold" style={{ color: '#181c31' }}>Special Registration</h3>
+                    <p className="text-sm" style={{ color: '#666' }}>Register as mentor or employee</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <Link
+                      href="/auth/register?role=mentor"
+                      className="block text-center px-4 py-3 rounded-lg border-2 transition-all duration-200 hover:shadow-md"
+                      style={{ borderColor: '#3a8ebe', color: '#3a8ebe' }}
+                    >
+                      <div className="font-semibold">Mentor Registration</div>
+                      <div className="text-xs opacity-75">For industry experts</div>
+                    </Link>
+                    <Link
+                      href="/auth/register?role=employee"
+                      className="block text-center px-4 py-3 rounded-lg border-2 transition-all duration-200 hover:shadow-md"
+                      style={{ borderColor: '#181c31', color: '#181c31' }}
+                    >
+                      <div className="font-semibold">Employee Registration</div>
+                      <div className="text-xs opacity-75">For company staff</div>
+                    </Link>
+                  </div>
+                  <div className="text-center mt-3">
+                    <button
+                      onClick={() => setShowSpecialRoles(false)}
+                      className="text-xs underline"
+                      style={{ color: '#666' }}
+                    >
+                      Hide special access
+                    </button>
+                  </div>
+                </div>
+              )}
+
               <div className="text-center">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm" style={{ color: '#666' }}>
                   By creating an account, you agree to our{' '}
-                  <Link href="/terms" className="hover:underline" style={{ color: '#5e17eb' }}>
+                  <Link href="/terms" className="hover:underline" style={{ color: '#3a8ebe' }}>
                     Terms of Service
                   </Link>{' '}
                   and{' '}
-                  <Link href="/privacy" className="hover:underline" style={{ color: '#5e17eb' }}>
+                  <Link href="/privacy" className="hover:underline" style={{ color: '#3a8ebe' }}>
                     Privacy Policy
                   </Link>
                 </p>
+                {!showSpecialRoles && (
+                  <p className="text-xs mt-2" style={{ color: '#999' }}>
+                    Press Ctrl+Shift+R for special access
+                  </p>
+                )}
               </div>
             </form>
           </div>
