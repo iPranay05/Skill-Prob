@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
+
 export default function RegisterPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -37,6 +38,7 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -305,7 +307,7 @@ export default function RegisterPage() {
                 {loading ? (
                   <div className="flex items-center justify-center">
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                    Creating Account...
+                    {loading ? 'Creating Account...' : 'Sending Verification Email...'}
                   </div>
                 ) : (
                   'Create Account'

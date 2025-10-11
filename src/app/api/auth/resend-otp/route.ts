@@ -58,14 +58,17 @@ export async function POST(request: NextRequest) {
     // Send OTP based on type
     if (type === 'email') {
       await NotificationService.sendOTPEmail(user.email, newOTP, user.profile.firstName);
+      return ErrorHandler.success(
+        { sent: true, type },
+        `New email OTP sent successfully`
+      );
     } else if (type === 'phone') {
       await NotificationService.sendOTPSMS(user.phone!, newOTP);
+      return ErrorHandler.success(
+        { sent: true, type },
+        `New SMS OTP sent successfully`
+      );
     }
-
-    return ErrorHandler.success(
-      { sent: true, type },
-      `New ${type === 'email' ? 'email' : 'SMS'} OTP sent successfully`
-    );
 
   } catch (error) {
     return ErrorHandler.handle(error);

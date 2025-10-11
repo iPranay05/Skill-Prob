@@ -1,10 +1,9 @@
 import { NextRequest } from 'next/server';
-import { connectToDatabase, supabaseAdmin } from '@/lib/database';
-import { NotificationService } from '@/lib/notifications';
-import { ErrorHandler, ValidationError, NotFoundError, validateRequired } from '@/lib/errors';
-import { UserModel } from '@/models/User';
-import { OTPVerificationModel } from '@/models/OTPVerification';
-import { AuthService } from '@/lib/auth';
+import { connectToDatabase } from '@/lib/database';
+import { ErrorHandler, ValidationError, NotFoundError } from '@/lib/errors';
+import { User } from '@/models/User';
+import OTPService from '@/lib/otpService';
+import { emailService } from '@/lib/emailService';
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,86 +11,74 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
     console.log('Received OTP verification data:', body);
-    const { email, emailOTP, phoneOTP } = body;
+    const { email, phone, code, type } = body;
 
     // Validate required fields
-    if (!email) {
-      throw new ValidationError('Email is required');
-    }
-    if (!emailOTP) {
-      throw new ValidationError('Email OTP is required');
+    if (!code) {
+      throw new ValidationError('OTP code is required');
     }
 
-    // Find the user by email
-    const user = await UserModel.findByEmail(email);
+    if (!type || !['email', 'phone'].includes(type)) {
+      throw new ValidationError('Valid type (email or phone) is required');
+    }
+
+    // Find user by email or phone
+    let user;
+    if (type === 'email' && email) {
+      user = await User.findByEmail(email);
+    } else if (type === 'phone' && phone) {
+      user = await User.findByPhone(phone);
+    } else {
+      throw new ValidationError(`${type === 'email' ? 'Email' : 'Phone'} is required for ${type} verification`);
+    }
+
     if (!user) {
-      throw new NotFoundError('User');
+      throw new NotFoundError('User not found');
     }
 
-    let emailVerified = false;
-    let phoneVerified = false;
+    // Verify OTP using the new service
+    const verificationResult = await OTPService.verifyOTP({
+      userId: user.id!,
+      code,
+      type,
+    });
 
-    // Verify email OTP
-    if (emailOTP) {
-      console.log(`Looking for email OTP: ${emailOTP} for user: ${user.id}`);
-
-      // Debug: Let's check what OTP records exist for this user
-      try {
-        const { data: allOtps, error: otpError } = await supabaseAdmin
-          .from('otp_verifications')
-          .select('*')
-          .eq('user_id', user.id!);
-        console.log('All OTP records for user:', allOtps);
-        console.log('OTP query error:', otpError);
-      } catch (debugError) {
-        console.log('Debug query failed:', debugError);
-      }
-
-      const emailOtpRecord = await OTPVerificationModel.findValidOTP(user.id!, 'email', emailOTP);
-      console.log('Found email OTP record:', emailOtpRecord);
-      if (!emailOtpRecord) {
-        throw new ValidationError('Invalid or expired email OTP code');
-      }
-
-      // Mark email OTP as verified
-      await OTPVerificationModel.markAsVerified(emailOtpRecord.id!);
-      await UserModel.updateVerification(user.id!, 'email', true);
-      emailVerified = true;
+    if (!verificationResult.success) {
+      throw new ValidationError(verificationResult.message);
     }
 
-    // Verify phone OTP if provided
-    if (phoneOTP && user.phone) {
-      console.log(`Looking for phone OTP: ${phoneOTP} for user: ${user.id}`);
-      const phoneOtpRecord = await OTPVerificationModel.findValidOTP(user.id!, 'phone', phoneOTP);
-      console.log('Found phone OTP record:', phoneOtpRecord);
-      if (!phoneOtpRecord) {
-        throw new ValidationError('Invalid or expired phone OTP code');
-      }
-
-      // Mark phone OTP as verified
-      await OTPVerificationModel.markAsVerified(phoneOtpRecord.id!);
-      await UserModel.updateVerification(user.id!, 'phone', true);
-      phoneVerified = true;
+    // Update user verification status
+    if (type === 'email') {
+      await User.updateVerification(user.id!, 'email', true);
+    } else if (type === 'phone') {
+      await User.updateVerification(user.id!, 'phone', true);
     }
 
     // Check if user is fully verified
-    const updatedUser = await UserModel.findById(user.id!);
+    const updatedUser = await User.findById(user.id!);
     const isFullyVerified = updatedUser!.verification.emailVerified &&
       (!updatedUser!.phone || updatedUser!.verification.phoneVerified);
 
-    // Send welcome email if fully verified
-    if (isFullyVerified) {
-      await NotificationService.sendWelcomeEmail(user.email, user.profile.firstName);
+    // Send welcome email if fully verified and this was email verification
+    if (isFullyVerified && type === 'email') {
+      const userName = updatedUser!.profile?.firstName || updatedUser!.email.split('@')[0];
+      const loginUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/auth/login`;
+      
+      await emailService.sendWelcomeEmail({
+        to_email: updatedUser!.email,
+        to_name: userName,
+        login_url: loginUrl,
+      });
     }
 
     return ErrorHandler.success(
       {
         verified: true,
-        emailVerified,
-        phoneVerified,
-        fullyVerified: isFullyVerified
+        type,
+        fullyVerified: isFullyVerified,
+        otpRecord: verificationResult.otpRecord,
       },
-      'Verification successful'
+      'OTP verified successfully'
     );
 
   } catch (error) {

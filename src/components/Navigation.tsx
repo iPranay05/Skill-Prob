@@ -66,21 +66,58 @@ export default function Navigation() {
       ];
     }
 
-    const baseItems = [
+    // Role-specific navigation
+    if (user.role === 'student') {
+      return [
+        { name: 'Dashboard', href: '/student/dashboard', icon: '📊' },
+        { name: 'Courses', href: '/courses', icon: '📚' },
+        { name: 'Live Sessions', href: '/live-sessions', icon: '🎥' },
+        { name: 'Careers', href: '/student/careers', icon: '💼' },
+      ];
+    }
+
+    if (user.role === 'mentor') {
+      return [
+        { name: 'Dashboard', href: '/mentor/dashboard', icon: '📊' },
+        { name: 'My Courses', href: '/mentor/courses', icon: '📚' },
+        { name: 'Live Sessions', href: '/live-sessions', icon: '🎥' },
+        { name: 'Create Course', href: '/mentor/courses/create', icon: '➕' },
+      ];
+    }
+
+    if (user.role === 'ambassador') {
+      return [
+        { name: 'Dashboard', href: '/ambassador/dashboard', icon: '📊' },
+        { name: 'Courses', href: '/courses', icon: '📚' },
+        { name: 'Referrals', href: '/ambassador/referrals', icon: '🤝' },
+        { name: 'Earnings', href: '/ambassador/earnings', icon: '💰' },
+      ];
+    }
+
+    if (user.role === 'employer') {
+      return [
+        { name: 'Dashboard', href: '/employer/dashboard', icon: '📊' },
+        { name: 'Job Postings', href: '/jobs', icon: '💼' },
+        { name: 'Applications', href: '/employer/applications', icon: '📄' },
+        { name: 'Post Job', href: '/jobs/create', icon: '➕' },
+      ];
+    }
+
+    if (user.role === 'admin' || user.role === 'super_admin') {
+      return [
+        { name: 'Dashboard', href: '/admin/dashboard', icon: '📊' },
+        { name: 'Users', href: '/admin/users', icon: '👥' },
+        { name: 'Courses', href: '/admin/courses', icon: '📚' },
+        { name: 'Analytics', href: '/admin/analytics', icon: '📈' },
+      ];
+    }
+
+    // Default fallback for any other roles
+    return [
       { name: 'Dashboard', href: '/dashboard', icon: '📊' },
       { name: 'Courses', href: '/courses', icon: '📚' },
       { name: 'Live Sessions', href: '/live-sessions', icon: '🎥' },
     ];
-
-    if (user.role === 'mentor') {
-      baseItems.push({ name: 'Mentor Dashboard', href: '/mentor/dashboard', icon: '👨‍🏫' });
-    } else if (user.role === 'ambassador') {
-      baseItems.push({ name: 'Ambassador Dashboard', href: '/ambassador/dashboard', icon: '🤝' });
-    } else if (user.role === 'admin' || user.role === 'super_admin') {
-      baseItems.push({ name: 'Admin Panel', href: '/admin/dashboard', icon: '⚙️' });
-    }
-
-    return baseItems;
   };
 
   if (!user) {
@@ -188,6 +225,7 @@ export default function Navigation() {
 
           {/* User Menu */}
           <div className="flex items-center space-x-4">
+            {/* Notification Bell - will be rendered by RealTimeNotifications component */}
             <div className="relative">
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}

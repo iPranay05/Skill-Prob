@@ -19,8 +19,8 @@ CREATE TABLE IF NOT EXISTS mentor_applications (
 -- Course moderations table
 CREATE TABLE IF NOT EXISTS course_moderations (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    course_id UUID NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
-    reviewed_by UUID NOT NULL REFERENCES users(id),
+    course_id UUID NOT NULL,
+    reviewed_by UUID NOT NULL,
     decision VARCHAR(20) NOT NULL CHECK (decision IN ('published', 'rejected')),
     review_notes TEXT,
     quality_score INTEGER CHECK (quality_score >= 1 AND quality_score <= 10),
@@ -31,13 +31,13 @@ CREATE TABLE IF NOT EXISTS course_moderations (
 -- Payout requests table
 CREATE TABLE IF NOT EXISTS payout_requests (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    user_id UUID NOT NULL,
     amount DECIMAL(10,2) NOT NULL CHECK (amount > 0),
     currency VARCHAR(3) DEFAULT 'INR',
     status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected', 'processed')),
     requested_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     processed_at TIMESTAMP WITH TIME ZONE,
-    processed_by UUID REFERENCES users(id),
+    processed_by UUID,
     transaction_id VARCHAR(255),
     notes TEXT,
     payout_details JSONB, -- Bank details, payment method, etc.
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS payout_requests (
 -- User sessions table for tracking login activity
 CREATE TABLE IF NOT EXISTS user_sessions (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    user_id UUID NOT NULL,
     session_token VARCHAR(255) NOT NULL,
     ip_address INET,
     user_agent TEXT,
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS system_maintenance (
     actual_start TIMESTAMP WITH TIME ZONE,
     actual_end TIMESTAMP WITH TIME ZONE,
     affected_services TEXT[], -- Array of affected service names
-    created_by UUID NOT NULL REFERENCES users(id),
+    created_by UUID NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
@@ -347,3 +347,66 @@ GRANT EXECUTE ON FUNCTION create_admin_notification(TEXT, TEXT, TEXT, JSONB, TEX
 GRANT EXECUTE ON FUNCTION mark_notification_read(UUID, UUID) TO service_role;
 GRANT EXECUTE ON FUNCTION cleanup_expired_sessions() TO service_role;
 GRANT EXECUTE ON FUNCTION get_admin_dashboard_stats() TO service_role;
+
+-- Add foreign key constraints after all tables are created
+DO $$ 
+BEGIN
+    -- Add foreign key constraints if the referenced tables exist
+    IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'users') THEN
+        -- Mentor applications foreign keys
+        IF NOT EXISTS (SELECT 1 FROM information_schema.table_constraints 
+                      WHERE constraint_name = 'mentor_applications_user_id_fkey') THEN
+            ALTER TABLE mentor_applications ADD CONSTRAINT mentor_applications_user_id_fkey 
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+        END IF;
+        
+        IF NOT EXISTS (SELECT 1 FROM information_schema.table_constraints 
+                      WHERE constraint_name = 'mentor_applications_reviewed_by_fkey') THEN
+            ALTER TABLE mentor_applications ADD CONSTRAINT mentor_applications_reviewed_by_fkey 
+                FOREIGN KEY (reviewed_by) REFERENCES users(id);
+        END IF;
+        
+        -- Course moderations foreign keys
+        IF NOT EXISTS (SELECT 1 FROM information_schema.table_constraints 
+                      WHERE constraint_name = 'course_moderations_reviewed_by_fkey') THEN
+            ALTER TABLE course_moderations ADD CONSTRAINT course_moderations_reviewed_by_fkey 
+                FOREIGN KEY (reviewed_by) REFERENCES users(id);
+        END IF;
+        
+        -- Payout requests foreign keys
+        IF NOT EXISTS (SELECT 1 FROM information_schema.table_constraints 
+                      WHERE constraint_name = 'payout_requests_user_id_fkey') THEN
+            ALTER TABLE payout_requests ADD CONSTRAINT payout_requests_user_id_fkey 
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+        END IF;
+        
+        IF NOT EXISTS (SELECT 1 FROM information_schema.table_constraints 
+                      WHERE constraint_name = 'payout_requests_processed_by_fkey') THEN
+            ALTER TABLE payout_requests ADD CONSTRAINT payout_requests_processed_by_fkey 
+                FOREIGN KEY (processed_by) REFERENCES users(id);
+        END IF;
+        
+        -- User sessions foreign keys
+        IF NOT EXISTS (SELECT 1 FROM information_schema.table_constraints 
+                      WHERE constraint_name = 'user_sessions_user_id_fkey') THEN
+            ALTER TABLE user_sessions ADD CONSTRAINT user_sessions_user_id_fkey 
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+        END IF;
+        
+        -- System maintenance foreign keys
+        IF NOT EXISTS (SELECT 1 FROM information_schema.table_constraints 
+                      WHERE constraint_name = 'system_maintenance_created_by_fkey') THEN
+            ALTER TABLE system_maintenance ADD CONSTRAINT system_maintenance_created_by_fkey 
+                FOREIGN KEY (created_by) REFERENCES users(id);
+        END IF;
+    END IF;
+    
+    -- Add courses foreign key if courses table exists
+    IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'courses') THEN
+        IF NOT EXISTS (SELECT 1 FROM information_schema.table_constraints 
+                      WHERE constraint_name = 'course_moderations_course_id_fkey') THEN
+            ALTER TABLE course_moderations ADD CONSTRAINT course_moderations_course_id_fkey 
+                FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE;
+        END IF;
+    END IF;
+END $$;

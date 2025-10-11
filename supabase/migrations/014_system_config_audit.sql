@@ -91,16 +91,25 @@ CREATE INDEX IF NOT EXISTS idx_feature_flags_enabled ON feature_flags(enabled);
 CREATE INDEX IF NOT EXISTS idx_system_metrics_name ON system_metrics(metric_name);
 CREATE INDEX IF NOT EXISTS idx_system_metrics_recorded_at ON system_metrics(recorded_at);
 
--- Triggers for updated_at
-CREATE TRIGGER update_system_configs_updated_at 
-    BEFORE UPDATE ON system_configs 
-    FOR EACH ROW 
-    EXECUTE FUNCTION update_updated_at_column();
-
-CREATE TRIGGER update_feature_flags_updated_at 
-    BEFORE UPDATE ON feature_flags 
-    FOR EACH ROW 
-    EXECUTE FUNCTION update_updated_at_column();
+-- Triggers for updated_at (with existence checks)
+DO $$ 
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM information_schema.triggers 
+                   WHERE trigger_name = 'update_system_configs_updated_at') THEN
+        CREATE TRIGGER update_system_configs_updated_at 
+            BEFORE UPDATE ON system_configs 
+            FOR EACH ROW 
+            EXECUTE FUNCTION update_updated_at_column();
+    END IF;
+    
+    IF NOT EXISTS (SELECT 1 FROM information_schema.triggers 
+                   WHERE trigger_name = 'update_feature_flags_updated_at') THEN
+        CREATE TRIGGER update_feature_flags_updated_at 
+            BEFORE UPDATE ON feature_flags 
+            FOR EACH ROW 
+            EXECUTE FUNCTION update_updated_at_column();
+    END IF;
+END $$;
 
 -- RLS Policies
 ALTER TABLE system_configs ENABLE ROW LEVEL SECURITY;

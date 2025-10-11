@@ -78,8 +78,19 @@ export class ConflictError extends APIError {
 }
 
 export class RateLimitError extends APIError {
-  constructor(message: string = 'Rate limit exceeded') {
+  public resetTime?: number;
+  public remaining?: number;
+
+  constructor(message: string = 'Rate limit exceeded', resetTime?: number, remaining?: number) {
     super(message, 429, 'RATE_LIMIT_EXCEEDED');
+    this.resetTime = resetTime;
+    this.remaining = remaining;
+  }
+}
+
+export class SecurityError extends APIError {
+  constructor(message: string = 'Security violation detected', code?: string) {
+    super(message, 403, code || 'SECURITY_ERROR');
   }
 }
 

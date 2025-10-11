@@ -672,26 +672,20 @@ export class NotificationService {
 
   // Convenience methods for common notifications (backward compatibility)
   static async sendOTPEmail(email: string, otp: string, firstName: string): Promise<boolean> {
-    // Get user ID from email
-    const { data: user } = await this.supabase
-      .from('users')
-      .select('id')
-      .eq('email', email)
-      .single();
-
-    if (!user) return false;
-
-    return this.queueNotification({
-      templateName: 'otp_verification',
-      recipientId: user.id,
-      channels: ['email'],
-      variables: {
-        firstName,
-        type: 'Email',
-        otp,
-        expiryMinutes: 10
-      }
-    });
+    try {
+      // Use server-side email service directly
+      const { serverEmailService } = await import('./serverEmailService');
+      
+      return await serverEmailService.sendOTPEmail({
+        to_email: email,
+        to_name: firstName,
+        otp_code: otp,
+        expires_in: '10 minutes',
+      });
+    } catch (error) {
+      console.error('Error sending OTP email:', error);
+      return false;
+    }
   }
 
   static async sendOTPSMS(phone: string, otp: string): Promise<boolean> {
