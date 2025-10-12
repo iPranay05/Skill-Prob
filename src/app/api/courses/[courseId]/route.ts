@@ -11,10 +11,10 @@ const courseService = new CourseService();
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
-    const { courseId } = params;
+    const { courseId  } = await params;
     
     const course = await courseService.getCourseById(courseId);
     
@@ -51,7 +51,7 @@ export async function GET(
  */
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
     // Authenticate and authorize
@@ -71,7 +71,7 @@ export async function PUT(
     }
 
     const { userId } = authResult.user;
-    const { courseId } = params;
+    const { courseId  } = await params;
     const body = await request.json();
 
     // Validate request body
@@ -114,7 +114,7 @@ export async function PUT(
  */
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
     // Authenticate and authorize
@@ -134,7 +134,7 @@ export async function DELETE(
     }
 
     const { userId } = authResult.user;
-    const { courseId } = params;
+    const { courseId  } = await params;
 
     // Delete course
     const deleted = await courseService.deleteCourse(courseId, userId);

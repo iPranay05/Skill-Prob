@@ -10,7 +10,7 @@ const UpdateSubscriptionSchema = z.object({
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { subscriptionId: string } }
+  { params }: { params: Promise<{ subscriptionId: string }> }
 ) {
   try {
     // Verify authentication
@@ -22,7 +22,7 @@ export async function GET(
       );
     }
 
-    const { subscriptionId } = params;
+    const { subscriptionId  } = await params;
 
     // Get subscription details
     const subscription = await subscriptionService.getSubscriptionDetails(subscriptionId);
@@ -57,7 +57,7 @@ export async function GET(
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { subscriptionId: string } }
+  { params }: { params: Promise<{ subscriptionId: string }> }
 ) {
   try {
     // Verify authentication
@@ -69,7 +69,7 @@ export async function PATCH(
       );
     }
 
-    const { subscriptionId } = params;
+    const { subscriptionId  } = await params;
 
     // Parse request body
     const body = await request.json();

@@ -3,9 +3,9 @@ import { JobService } from '@/lib/jobService';
 import { verifyToken } from '@/lib/auth';
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     applicationId: string;
-  };
+  }>;
 }
 
 export async function GET(request: NextRequest, { params }: RouteParams) {

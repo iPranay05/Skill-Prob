@@ -5,7 +5,7 @@ import { verifyAuth } from '@/lib/auth';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { jobId: string; applicationId: string } }
+  { params }: { params: Promise<{ jobId: string; applicationId: string }> }
 ) {
   try {
     const authResult = await verifyAuth(request);
@@ -76,7 +76,7 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { jobId: string; applicationId: string } }
+  { params }: { params: Promise<{ jobId: string; applicationId: string }> }
 ) {
   try {
     const authResult = await verifyAuth(request);

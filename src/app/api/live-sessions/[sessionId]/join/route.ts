@@ -7,7 +7,7 @@ const liveSessionService = new LiveSessionService();
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { sessionId: string } }
+  { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -22,13 +22,14 @@ export async function POST(
       return NextResponse.json({ error: 'Only students can join sessions' }, { status: 403 });
     }
 
+    const { sessionId } = await params;
     const attendance = await liveSessionService.joinSession({
-      sessionId: params.sessionId,
+      sessionId,
       studentId: decoded.userId,
     });
 
     // Get session details to return the Google Meet link
-    const session = await liveSessionService.getSessionById(params.sessionId);
+    const session = await liveSessionService.getSessionById(sessionId);
 
     return NextResponse.json({
       success: true,
@@ -62,7 +63,7 @@ export async function POST(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { sessionId: string } }
+  { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -76,7 +77,8 @@ export async function DELETE(
       return NextResponse.json({ error: 'Only students can leave sessions' }, { status: 403 });
     }
 
-    await liveSessionService.leaveSession(params.sessionId, decoded.userId);
+    const { sessionId } = await params;
+    await liveSessionService.leaveSession(sessionId, decoded.userId);
 
     return NextResponse.json({
       success: true,

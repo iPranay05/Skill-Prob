@@ -6,7 +6,7 @@ import { Course } from '@/models/Course';
 import { getCurrentUser } from '@/lib/clientAuth';
 
 interface CourseDetailPageProps {
-  // Props can be added here if needed in the future
+  params?: { courseId: string };
 }
 
 export default function CourseDetailPage({}: CourseDetailPageProps) {
@@ -185,20 +185,20 @@ export default function CourseDetailPage({}: CourseDetailPageProps) {
                   {course.category}
                 </span>
                 <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                  {course.level}
+                  {course.type}
                 </span>
                 <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">
-                  {course.duration} hours
+                  {course.content?.syllabus?.length || 0} lessons
                 </span>
               </div>
 
               <div className="flex items-center gap-4 mb-4">
                 <div className="text-2xl font-bold text-green-600">
-                  ${course.price}
+                  {course.pricing?.currency || '$'}{course.pricing?.amount || 0}
                 </div>
-                {course.originalPrice && course.originalPrice > course.price && (
-                  <div className="text-lg text-gray-500 line-through">
-                    ${course.originalPrice}
+                {course.pricing?.subscriptionType && (
+                  <div className="text-sm text-gray-600">
+                    {course.pricing.subscriptionType}
                   </div>
                 )}
               </div>
@@ -248,11 +248,11 @@ export default function CourseDetailPage({}: CourseDetailPageProps) {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Instructor:</span>
-                    <span className="font-medium">{course.mentorName || 'TBD'}</span>
+                    <span className="font-medium">{course.mentor_id || 'TBD'}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Students:</span>
-                    <span className="font-medium">{course.enrolledCount || 0}</span>
+                    <span className="font-medium">{course.enrollment?.currentEnrollment || 0}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Language:</span>
@@ -261,7 +261,7 @@ export default function CourseDetailPage({}: CourseDetailPageProps) {
                   <div className="flex justify-between">
                     <span className="text-gray-600">Last Updated:</span>
                     <span className="font-medium">
-                      {new Date(course.updatedAt).toLocaleDateString()}
+                      {new Date(course.updated_at).toLocaleDateString()}
                     </span>
                   </div>
                 </div>
@@ -274,23 +274,14 @@ export default function CourseDetailPage({}: CourseDetailPageProps) {
         <div className="bg-white rounded-lg shadow-sm p-6">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Course Content</h2>
           
-          {course.content && course.content.length > 0 ? (
+          {course.content && course.content.syllabus && course.content.syllabus.length > 0 ? (
             <div className="space-y-4">
-              {course.content.map((item: any, index: number) => (
+              {course.content.syllabus.map((item: string, index: number) => (
                 <div key={index} className="border rounded-lg p-4">
-                  <h3 className="font-semibold text-gray-900">{item.title}</h3>
-                  <p className="text-gray-600 text-sm mt-1">{item.description}</p>
-                  {item.fileUrl && (
-                    <a
-                      href={item.fileUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block"
-                    >
-                      View Content →
-                    </a>
-                  )}
+                  <h3 className="font-semibold text-gray-900">Lesson {index + 1}</h3>
+                  <p className="text-gray-600 text-sm mt-1">{item}</p>
                 </div>
+                
               ))}
             </div>
           ) : (

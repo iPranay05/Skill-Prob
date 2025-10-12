@@ -16,7 +16,7 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey);
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { courseId: string; resourceId: string } }
+  { params }: { params: Promise<{ courseId: string; resourceId: string }> }
 ) {
   try {
     // Authenticate user
@@ -27,7 +27,7 @@ export async function GET(
 
     const { user } = authResult;
     const { userId, role } = user;
-    const { courseId, resourceId } = params;
+    const { courseId, resourceId } = await params;
 
     // Validate UUIDs
     const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;

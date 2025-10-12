@@ -10,7 +10,7 @@ const RescheduleInterviewSchema = z.object({
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { applicationId: string } }
+  { params }: { params: Promise<{ applicationId: string }> }
 ) {
   try {
     const authResult = await verifyAuth(request);
@@ -46,8 +46,9 @@ export async function POST(
     // Validate input
     const validatedData = RescheduleInterviewSchema.parse(body);
 
+    const { applicationId } = await params;
     await InterviewSchedulingService.rescheduleInterview(
-      params.applicationId,
+      applicationId,
       new Date(validatedData.new_interview_date),
       validatedData.reason,
       authResult.user.id

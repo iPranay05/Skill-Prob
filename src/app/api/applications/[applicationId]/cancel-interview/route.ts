@@ -9,7 +9,7 @@ const CancelInterviewSchema = z.object({
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { applicationId: string } }
+  { params }: { params: Promise<{ applicationId: string }> }
 ) {
   try {
     const authResult = await verifyAuth(request);
@@ -45,8 +45,9 @@ export async function POST(
     // Validate input
     const validatedData = CancelInterviewSchema.parse(body);
 
+    const { applicationId } = await params;
     await InterviewSchedulingService.cancelInterview(
-      params.applicationId,
+      applicationId,
       validatedData.reason,
       authResult.user.id
     );

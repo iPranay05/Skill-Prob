@@ -6,7 +6,7 @@ import { supabaseAdmin } from '../../../../../../lib/database';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { resourceId: string } }
+  { params }: { params: Promise<{ resourceId: string }> }
 ) {
   try {
     // Verify authentication
@@ -26,7 +26,7 @@ export async function GET(
       );
     }
 
-    const { resourceId } = params;
+    const { resourceId } = await params;
 
     // Get resource details
     const { data: resource, error: resourceError } = await supabaseAdmin

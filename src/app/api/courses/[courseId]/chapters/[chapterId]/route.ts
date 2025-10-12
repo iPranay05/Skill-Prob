@@ -11,7 +11,7 @@ const courseContentService = new CourseContentService();
  */
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { courseId: string; chapterId: string } }
+  { params }: { params: Promise<{ courseId: string; chapterId: string }> }
 ) {
   try {
     // Authenticate and authorize
@@ -24,7 +24,7 @@ export async function PUT(
     }
 
     const { userId } = authResult.user!;
-    const { courseId, chapterId } = params;
+    const { courseId, chapterId  } = await params;
     const body = await request.json();
 
     // Validate request body
@@ -67,7 +67,7 @@ export async function PUT(
  */
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { courseId: string; chapterId: string } }
+  { params }: { params: Promise<{ courseId: string; chapterId: string }> }
 ) {
   try {
     // Authenticate and authorize
@@ -80,7 +80,7 @@ export async function DELETE(
     }
 
     const { userId } = authResult.user!;
-    const { courseId, chapterId } = params;
+    const { courseId, chapterId  } = await params;
 
     // Delete chapter
     await courseContentService.deleteChapter(chapterId, courseId, userId);

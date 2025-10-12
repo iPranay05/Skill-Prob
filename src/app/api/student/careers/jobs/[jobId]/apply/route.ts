@@ -4,9 +4,9 @@ import { verifyToken } from '@/lib/auth';
 import { CreateJobApplicationSchema } from '@/models/Job';
 
 interface RouteParams {
-    params: {
+    params: Promise<{
         jobId: string;
-    };
+    }>;
 }
 
 export async function POST(request: NextRequest, { params }: RouteParams) {
@@ -28,8 +28,9 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
             );
         }
 
+        const { jobId } = await params;
         // Check if job exists and is published
-        const job = await JobService.getJobPostingById(params.jobId);
+        const job = await JobService.getJobPostingById(jobId);
         if (!job || job.status !== 'published') {
             return NextResponse.json(
                 { error: 'Job not found or not available for applications' },
@@ -58,7 +59,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
 
         // Validate application data
         const applicationData = {
-            job_posting_id: params.jobId,
+            job_posting_id: jobId,
             applicant_id: user.userId,
             resume_url: body.resume_url,
             cover_letter: body.cover_letter,
@@ -77,7 +78,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
 
         // Check if user has already applied
         const existingApplications = await JobService.getApplicationsByApplicant(user.userId);
-        const hasApplied = existingApplications.some(app => app.job_posting_id === params.jobId);
+        const hasApplied = existingApplications.some(app => app.job_posting_id === jobId);
 
         if (hasApplied) {
             return NextResponse.json(

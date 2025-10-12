@@ -7,7 +7,7 @@ const liveSessionService = new LiveSessionService();
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { sessionId: string } }
+  { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -16,7 +16,8 @@ export async function GET(
     }
 
     const decoded = await verifyToken(token);
-    const session = await liveSessionService.getSessionById(params.sessionId);
+    const { sessionId } = await params;
+    const session = await liveSessionService.getSessionById(sessionId);
 
     if (!session) {
       return NextResponse.json({ error: 'Session not found' }, { status: 404 });
@@ -45,7 +46,7 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { sessionId: string } }
+  { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -59,6 +60,7 @@ export async function PUT(
     }
 
     const body = await request.json();
+    const { sessionId } = await params;
     const {
       title,
       description,
@@ -93,7 +95,7 @@ export async function PUT(
     }
 
     const session = await liveSessionService.updateLiveSession(
-      params.sessionId,
+      sessionId,
       decoded.userId,
       updateData
     );
@@ -121,7 +123,7 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { sessionId: string } }
+  { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -134,9 +136,10 @@ export async function DELETE(
       return NextResponse.json({ error: 'Only mentors can delete live sessions' }, { status: 403 });
     }
 
+    const { sessionId } = await params;
     // Update session status to cancelled instead of deleting
     await liveSessionService.updateLiveSession(
-      params.sessionId,
+      sessionId,
       decoded.userId,
       { status: 'cancelled' }
     );

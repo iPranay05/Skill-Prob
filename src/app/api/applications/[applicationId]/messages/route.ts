@@ -10,7 +10,7 @@ const SendMessageSchema = z.object({
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { applicationId: string } }
+  { params }: { params: Promise<{ applicationId: string }> }
 ) {
   try {
     const authResult = await verifyAuth(request);
@@ -27,13 +27,14 @@ export async function GET(
       );
     }
 
+    const { applicationId } = await params;
     // Get messages for this application
     // Note: This would require a messages table in the database
     // For now, we'll return a placeholder response
     const messages = [
       {
         id: '1',
-        application_id: params.applicationId,
+        application_id: applicationId,
         sender_id: authResult.user.id,
         sender_type: authResult.user.role,
         message: 'Thank you for your application. We will review it and get back to you soon.',
@@ -63,7 +64,7 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { applicationId: string } }
+  { params }: { params: Promise<{ applicationId: string }> }
 ) {
   try {
     const authResult = await verifyAuth(request);
@@ -85,11 +86,12 @@ export async function POST(
     // Validate input
     const validatedData = SendMessageSchema.parse(body);
 
+    const { applicationId } = await params;
     // In a real implementation, you would save the message to a messages table
     // For now, we'll return a success response
     const message = {
       id: Date.now().toString(),
-      application_id: params.applicationId,
+      application_id: applicationId,
       sender_id: authResult.user.id,
       sender_type: authResult.user.role,
       message: validatedData.message,
@@ -104,7 +106,7 @@ export async function POST(
         communication_count: supabaseAdmin.raw('communication_count + 1'),
         last_communication_at: new Date().toISOString()
       })
-      .eq('id', params.applicationId);
+      .eq('id', applicationId);
 
     return NextResponse.json({
       success: true,

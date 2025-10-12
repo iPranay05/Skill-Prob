@@ -5,7 +5,7 @@ import { verifyAuth } from '@/lib/auth';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { applicationId: string } }
+  { params }: { params: Promise<{ applicationId: string }> }
 ) {
   try {
     const authResult = await verifyAuth(request);
@@ -22,7 +22,8 @@ export async function GET(
       );
     }
 
-    const application = await JobService.getJobApplication(params.applicationId);
+    const { applicationId } = await params;
+    const application = await JobService.getJobApplication(applicationId);
 
     if (!application) {
       return NextResponse.json(
@@ -76,7 +77,7 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { applicationId: string } }
+  { params }: { params: Promise<{ applicationId: string }> }
 ) {
   try {
     const authResult = await verifyAuth(request);
@@ -94,7 +95,8 @@ export async function PUT(
     }
 
     // First get the application to check permissions
-    const existingApplication = await JobService.getJobApplication(params.applicationId);
+    const { applicationId } = await params;
+    const existingApplication = await JobService.getJobApplication(applicationId);
     if (!existingApplication) {
       return NextResponse.json(
         {
@@ -131,7 +133,7 @@ export async function PUT(
     const validatedData = UpdateJobApplicationSchema.parse(body);
 
     const application = await JobService.updateJobApplicationStatus(
-      params.applicationId,
+      applicationId,
       validatedData,
       authResult.user.id
     );

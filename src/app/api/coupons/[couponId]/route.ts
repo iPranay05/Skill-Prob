@@ -11,7 +11,7 @@ const couponService = new CouponService();
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { couponId: string } }
+  { params }: { params: Promise<{ couponId: string }> }
 ) {
   try {
     // Verify authentication
@@ -77,7 +77,7 @@ export async function GET(
  */
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { couponId: string } }
+  { params }: { params: Promise<{ couponId: string }> }
 ) {
   try {
     // Verify authentication
@@ -133,7 +133,7 @@ export async function PATCH(
  */
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { couponId: string } }
+  { params }: { params: Promise<{ couponId: string }> }
 ) {
   try {
     // Verify authentication

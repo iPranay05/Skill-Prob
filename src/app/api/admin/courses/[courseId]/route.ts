@@ -6,7 +6,7 @@ import { supabaseAdmin } from '../../../../../lib/database';
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
     // Verify authentication and admin role
@@ -25,7 +25,7 @@ export async function PUT(
       );
     }
 
-    const { courseId } = params;
+    const { courseId } = await params;
     const body = await request.json();
     const { action, rejectionReason } = body;
 
@@ -201,7 +201,7 @@ export async function PUT(
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
     // Verify authentication and admin role
@@ -220,7 +220,7 @@ export async function GET(
       );
     }
 
-    const { courseId } = params;
+    const { courseId } = await params;
 
     // Get course details with mentor information
     const { data: course, error } = await supabaseAdmin

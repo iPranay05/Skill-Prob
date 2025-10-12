@@ -4,7 +4,7 @@ import { verifyAuth } from '@/lib/auth';
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { userId: string } }
+  { params }: { params: Promise<{ userId: string }> }
 ) {
   try {
     // Verify authentication and admin role
@@ -24,7 +24,7 @@ export async function PUT(
       );
     }
 
-    const { userId } = params;
+    const { userId } = await params;
     const body = await request.json();
     const { isActive } = body;
 

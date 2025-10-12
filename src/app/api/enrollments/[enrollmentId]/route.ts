@@ -11,7 +11,7 @@ const enrollmentService = new EnrollmentService();
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { enrollmentId: string } }
+  { params }: { params: Promise<{ enrollmentId: string }> }
 ) {
   try {
     // Verify authentication
@@ -70,7 +70,7 @@ export async function GET(
  */
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { enrollmentId: string } }
+  { params }: { params: Promise<{ enrollmentId: string }> }
 ) {
   try {
     // Verify authentication

@@ -6,9 +6,9 @@ import { UserModel } from '@/models/User';
 import { UserRole } from '@/types/user';
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     userId: string;
-  };
+  }>;
 }
 
 // Update user role (Admin/Super Admin only)
@@ -22,7 +22,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
     }
 
     const { user: authUser } = authResult;
-    const { userId } = params;
+    const { userId } = await params;
     const body = await request.json();
 
     // Validate required fields

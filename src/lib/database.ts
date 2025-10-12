@@ -145,9 +145,9 @@ class MockRedis {
   }
 }
 
-let redisInstance: MockRedis | typeof import('ioredis').Redis | null = null;
+let redisInstance: MockRedis | import('ioredis').Redis | null = null;
 
-export const redis = new Proxy({} as MockRedis | typeof import('ioredis').Redis, {
+export const redis = new Proxy({} as MockRedis | import('ioredis').Redis, {
   get(target, prop) {
     if (!redisInstance) {
       if (isMockRedis) {
@@ -188,7 +188,13 @@ export const redis = new Proxy({} as MockRedis | typeof import('ioredis').Redis,
         }
       }
     }
-    return redisInstance[prop];
+    // Type-safe property access
+    if (redisInstance && typeof prop === 'string' && prop in redisInstance) {
+      const value = (redisInstance as any)[prop];
+      return typeof value === 'function' ? value.bind(redisInstance) : value;
+    }
+    
+    return undefined;
   }
 });
 

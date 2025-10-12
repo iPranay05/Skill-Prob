@@ -6,7 +6,7 @@ import { supabaseAdmin } from '../../../../../lib/database';
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { userId: string } }
+  { params }: { params: Promise<{ userId: string }> }
 ) {
   try {
     // Verify authentication and admin role
@@ -25,7 +25,7 @@ export async function PUT(
       );
     }
 
-    const { userId } = params;
+    const { userId } = await params;
     const body = await request.json();
     const { action } = body;
 
@@ -143,7 +143,7 @@ export async function PUT(
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { userId: string } }
+  { params }: { params: Promise<{ userId: string }> }
 ) {
   try {
     // Verify authentication and admin role
@@ -162,7 +162,7 @@ export async function GET(
       );
     }
 
-    const { userId } = params;
+    const { userId } = await params;
 
     // Get user details
     const { data: user, error } = await supabaseAdmin

@@ -3,9 +3,9 @@ import { JobService } from '@/lib/jobService';
 import { verifyToken } from '@/lib/auth';
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     jobId: string;
-  };
+  }>;
 }
 
 export async function GET(request: NextRequest, { params }: RouteParams) {
@@ -27,8 +27,9 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
       );
     }
 
+    const { jobId } = await params;
     // Get job details
-    const job = await JobService.getJobPostingById(params.jobId);
+    const job = await JobService.getJobPostingById(jobId);
 
     if (!job) {
       return NextResponse.json(

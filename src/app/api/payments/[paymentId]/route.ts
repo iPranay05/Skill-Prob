@@ -11,7 +11,7 @@ const enrollmentService = new EnrollmentService();
  */
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { paymentId: string } }
+  { params }: { params: Promise<{ paymentId: string }> }
 ) {
   try {
     // Verify authentication

@@ -5,7 +5,7 @@ import { AppError } from '@/lib/errors';
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { bookmarkId: string } }
+  { params }: { params: Promise<{ bookmarkId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
