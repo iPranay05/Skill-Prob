@@ -562,9 +562,9 @@ export default function AmbassadorDashboard() {
                               </p>
                             </div>
                             <div className="text-right">
-                              <p className="text-sm text-gray-500">Conversions: {referral.conversionEvents.length}</p>
+                              <p className="text-sm text-gray-500">Conversions: {referral.conversionEvents?.length || 0}</p>
                               <p className="text-sm font-medium">
-                                Points: {referral.conversionEvents.reduce((sum, event) => sum + event.pointsEarned, 0)}
+                                Points: {referral.conversionEvents?.reduce((sum, event) => sum + (event.pointsEarned || 0), 0) || 0}
                               </p>
                             </div>
                           </div>

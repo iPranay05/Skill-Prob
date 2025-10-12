@@ -31,10 +31,10 @@ export function useSocket() {
   };
 }
 
-export function useSocketEvent<T = any>(
+export function useSocketEvent<T = unknown>(
   event: string,
   callback: (data: T) => void,
-  deps: any[] = []
+  deps: unknown[] = []
 ) {
   const { socket } = useSocket();
 
@@ -42,20 +42,20 @@ export function useSocketEvent<T = any>(
     if (!socket) return;
 
     const wrappedCallback = (data: T) => callback(data);
-    socket.on(event as any, wrappedCallback);
+    socket.on(event, wrappedCallback);
 
     return () => {
-      socket.off(event as any, wrappedCallback);
+      socket.off(event, wrappedCallback);
     };
   }, [socket, event, ...deps]);
 }
 
 export function useLiveSession(sessionId: string) {
   const { socket, isConnected } = useSocket();
-  const [participants, setParticipants] = useState<any[]>([]);
-  const [messages, setMessages] = useState<any[]>([]);
-  const [qas, setQAs] = useState<any[]>([]);
-  const [polls, setPolls] = useState<any[]>([]);
+  const [participants, setParticipants] = useState<Array<{ id: string; name: string; role: string }>>([]);
+  const [messages, setMessages] = useState<Array<{ id: string; message: string; sender: string; timestamp: Date }>>([]);
+  const [qas, setQAs] = useState<Array<{ id: string; question: string; answer?: string; timestamp: Date }>>([]);
+  const [polls, setPolls] = useState<Array<{ id: string; question: string; options: string[]; votes: Record<string, number> }>>([]);
   const [sessionStatus, setSessionStatus] = useState<string>('scheduled');
 
   useEffect(() => {

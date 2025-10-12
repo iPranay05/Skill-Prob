@@ -1,210 +1,144 @@
+'use client';
+
 import { useState, useCallback } from 'react';
 
-interface OTPState {
-  loading: boolean;
-  error: string | null;
-  success: boolean;
-  otpId: string | null;
-  expiresIn: number;
-  canResend: boolean;
-  resendCooldown: number;
-}
-
-interface SendOTPOptions {
+interface OTPRequest {
   email?: string;
   phone?: string;
   type: 'email' | 'phone';
-  purpose?: 'registration' | 'login' | 'password_reset' | 'email_change' | 'phone_change';
+  purpose?: string;
 }
 
-interface VerifyOTPOptions {
+interface VerifyOTPRequest {
   email?: string;
   phone?: string;
   code: string;
   type: 'email' | 'phone';
 }
 
-export function useOTPVerification() {
-  const [state, setState] = useState<OTPState>({
-    loading: false,
-    error: null,
-    success: false,
-    otpId: null,
-    expiresIn: 0,
-    canResend: true,
-    resendCooldown: 0,
-  });
+interface OTPResponse {
+  success: boolean;
+  message?: string;
+  expiresIn?: number;
+  error?: string;
+}
 
-  const sendOTP = useCallback(async (options: SendOTPOptions) => {
-    setState(prev => ({ ...prev, loading: true, error: null }));
-
-    try {
-      const response = await fetch('/api/auth/send-otp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(options),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Failed to send OTP');
-      }
-
-      setState(prev => ({
-        ...prev,
-        loading: false,
-        success: true,
-        otpId: data.data.otpId,
-        expiresIn: data.data.expiresIn * 60, // Convert minutes to seconds
-        canResend: false,
-        resendCooldown: 60, // 1 minute cooldown
-      }));
-
-      // Start countdown for resend cooldown
-      const cooldownInterval = setInterval(() => {
-        setState(prev => {
-          if (prev.resendCooldown <= 1) {
-            clearInterval(cooldownInterval);
-            return { ...prev, resendCooldown: 0, canResend: true };
-          }
-          return { ...prev, resendCooldown: prev.resendCooldown - 1 };
-        });
-      }, 1000);
-
-      return { success: true, data: data.data };
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to send OTP';
-      setState(prev => ({
-        ...prev,
-        loading: false,
-        error: errorMessage,
-        success: false,
-      }));
-      return { success: false, error: errorMessage };
-    }
-  }, []);
-
-  const verifyOTP = useCallback(async (options: VerifyOTPOptions) => {
-    setState(prev => ({ ...prev, loading: true, error: null }));
-
-    try {
-      const response = await fetch('/api/auth/verify-otp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(options),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Failed to verify OTP');
-      }
-
-      setState(prev => ({
-        ...prev,
-        loading: false,
-        success: true,
-        error: null,
-      }));
-
-      return { success: true, data: data.data };
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to verify OTP';
-      setState(prev => ({
-        ...prev,
-        loading: false,
-        error: errorMessage,
-        success: false,
-      }));
-      return { success: false, error: errorMessage };
-    }
-  }, []);
-
-  const resendOTP = useCallback(async (options: SendOTPOptions) => {
-    if (!state.canResend) {
-      return { success: false, error: 'Please wait before requesting another OTP' };
-    }
-
-    setState(prev => ({ ...prev, loading: true, error: null }));
-
-    try {
-      const response = await fetch('/api/auth/send-otp', {
-        method: 'PUT', // Use PUT for resend
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(options),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Failed to resend OTP');
-      }
-
-      setState(prev => ({
-        ...prev,
-        loading: false,
-        success: true,
-        otpId: data.data.otpId,
-        expiresIn: data.data.expiresIn * 60,
-        canResend: false,
-        resendCooldown: 60,
-      }));
-
-      // Start countdown for resend cooldown
-      const cooldownInterval = setInterval(() => {
-        setState(prev => {
-          if (prev.resendCooldown <= 1) {
-            clearInterval(cooldownInterval);
-            return { ...prev, resendCooldown: 0, canResend: true };
-          }
-          return { ...prev, resendCooldown: prev.resendCooldown - 1 };
-        });
-      }, 1000);
-
-      return { success: true, data: data.data };
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to resend OTP';
-      setState(prev => ({
-        ...prev,
-        loading: false,
-        error: errorMessage,
-        success: false,
-      }));
-      return { success: false, error: errorMessage };
-    }
-  }, [state.canResend]);
-
-  const resetState = useCallback(() => {
-    setState({
-      loading: false,
-      error: null,
-      success: false,
-      otpId: null,
-      expiresIn: 0,
-      canResend: true,
-      resendCooldown: 0,
-    });
-  }, []);
+export default function useOTPVerification() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+  const [expiresIn, setExpiresIn] = useState(0);
+  const [canResend, setCanResend] = useState(true);
+  const [resendCooldown, setResendCooldown] = useState(0);
 
   const clearError = useCallback(() => {
-    setState(prev => ({ ...prev, error: null }));
+    setError(null);
+    setSuccess(false);
   }, []);
 
+  const sendOTP = useCallback(async (request: OTPRequest): Promise<OTPResponse> => {
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      const response = await fetch('/api/auth/send-otp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(request),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send OTP');
+      }
+
+      setExpiresIn(data.expiresIn || 300); // 5 minutes default
+      setCanResend(false);
+      setResendCooldown(60); // 1 minute cooldown
+
+      // Start cooldown timer
+      const cooldownTimer = setInterval(() => {
+        setResendCooldown(prev => {
+          if (prev <= 1) {
+            clearInterval(cooldownTimer);
+            setCanResend(true);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
+      return { success: true, message: data.message, expiresIn: data.expiresIn };
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to send OTP';
+      setError(errorMessage);
+      return { success: false, error: errorMessage };
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const verifyOTP = useCallback(async (request: VerifyOTPRequest): Promise<OTPResponse> => {
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      const response = await fetch('/api/auth/verify-otp-simple', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: request.email,
+          phone: request.phone,
+          emailOTP: request.type === 'email' ? request.code : undefined,
+          phoneOTP: request.type === 'phone' ? request.code : undefined,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Invalid or expired OTP code');
+      }
+
+      setSuccess(true);
+      setExpiresIn(0);
+      return { success: true, message: data.message };
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Verification failed';
+      setError(errorMessage);
+      return { success: false, error: errorMessage };
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const resendOTP = useCallback(async (request: OTPRequest): Promise<OTPResponse> => {
+    if (!canResend) {
+      const errorMessage = `Please wait ${resendCooldown} seconds before resending`;
+      setError(errorMessage);
+      return { success: false, error: errorMessage };
+    }
+
+    return sendOTP(request);
+  }, [canResend, resendCooldown, sendOTP]);
+
   return {
-    ...state,
+    loading,
+    error,
+    success,
+    expiresIn,
+    canResend,
+    resendCooldown,
     sendOTP,
     verifyOTP,
     resendOTP,
-    resetState,
     clearError,
   };
 }
-
-export default useOTPVerification;

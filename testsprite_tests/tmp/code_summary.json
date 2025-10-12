@@ -1,0 +1,122 @@
+{
+  "tech_stack": [
+    "TypeScript",
+    "Next.js 15",
+    "React 19",
+    "Supabase PostgreSQL",
+    "Redis",
+    "Node.js",
+    "Tailwind CSS",
+    "JWT Authentication",
+    "Zod Validation",
+    "Jest Testing",
+    "Socket.io",
+    "AWS S3",
+    "Stripe Payments",
+    "Razorpay Payments",
+    "Twilio SMS",
+    "Nodemailer Email",
+    "Google Meet API",
+    "EmailJS"
+  ],
+  "features": [
+    {
+      "name": "User Authentication System",
+      "description": "Complete multi-role authentication with JWT tokens, OTP verification, password reset, and session management for Students, Mentors, Ambassadors, Employers, and Admins",
+      "files": [
+        "src/lib/auth.ts",
+        "src/lib/clientAuth.ts",
+        "src/hooks/useAuth.ts",
+        "src/middleware/auth.ts",
+        "src/app/api/auth/login/route.ts",
+        "src/app/api/auth/register/route.ts",
+        "src/app/api/auth/logout/route.ts",
+        "src/app/api/auth/refresh/route.ts",
+        "src/app/api/auth/verify-otp/route.ts",
+        "src/app/auth/login/page.tsx",
+        "src/app/auth/register/page.tsx",
+        "src/components/OTPVerification.tsx"
+      ]
+    },
+    {
+      "name": "Course Management System",
+      "description": "Full-featured LMS with course creation, content management, enrollment system, pricing models, and multi-format course support",
+      "files": [
+        "src/models/Course.ts",
+        "src/lib/courseService.ts",
+        "src/lib/courseContentService.ts",
+        "src/lib/enrollmentService.ts",
+        "src/models/Enrollment.ts",
+        "src/app/api/courses/route.ts",
+        "src/app/courses/page.tsx",
+        "src/app/courses/[courseId]/page.tsx"
+      ]
+    },
+    {
+      "name": "Live Session Management",
+      "description": "Real-time live session platform with Google Meet integration, session scheduling, and participant management",
+      "files": [
+        "src/lib/liveSessionService.ts",
+        "src/lib/googleMeetService.ts",
+        "src/models/LiveSession.ts",
+        "src/app/api/live-sessions/route.ts",
+        "src/app/live-sessions/page.tsx",
+        "src/app/live-sessions/create/page.tsx",
+        "src/components/LiveSessionChat.tsx"
+      ]
+    },
+    {
+      "name": "Payment Processing",
+      "description": "Multi-gateway payment system with Stripe and Razorpay integration, subscription management, and wallet functionality",
+      "files": [
+        "src/lib/paymentService.ts",
+        "src/lib/subscriptionService.ts",
+        "src/lib/walletService.ts",
+        "src/app/api/payments/route.ts",
+        "src/components/RealTimeWallet.tsx"
+      ]
+    },
+    {
+      "name": "Ambassador Referral System",
+      "description": "Campus ambassador program with referral tracking, commission management, and payout system",
+      "files": [
+        "src/lib/ambassadorService.ts",
+        "src/models/Ambassador.ts",
+        "src/app/api/ambassadors/apply/route.ts",
+        "src/app/ambassador/dashboard/page.tsx",
+        "src/components/AmbassadorDashboard.tsx"
+      ]
+    },
+    {
+      "name": "Job Management System",
+      "description": "Job portal with job posting, application management, and career services for students",
+      "files": [
+        "src/lib/jobService.ts",
+        "src/lib/studentCareerService.ts",
+        "src/models/Job.ts",
+        "src/app/api/jobs/route.ts",
+        "src/app/jobs/page.tsx"
+      ]
+    },
+    {
+      "name": "Notification System",
+      "description": "Multi-channel notification system with email, SMS, and real-time push notifications",
+      "files": [
+        "src/lib/notifications.ts",
+        "src/lib/emailService.ts",
+        "src/app/api/notifications/route.ts",
+        "src/components/NotificationCenter.tsx"
+      ]
+    },
+    {
+      "name": "Security Framework",
+      "description": "Comprehensive security system with rate limiting, input validation, encryption, and audit logging",
+      "files": [
+        "src/lib/security/rateLimiting.ts",
+        "src/lib/security/inputValidation.ts",
+        "src/lib/security/encryption.ts",
+        "src/lib/security/middleware.ts"
+      ]
+    }
+  ]
+}

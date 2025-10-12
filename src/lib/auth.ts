@@ -56,44 +56,18 @@ export class AuthService {
     }
 
     try {
-      const payload = jwt.verify(token, jwtRefreshSecret) as JWTPayload;
-      
+      const decoded = jwt.verify(token, jwtRefreshSecret) as JWTPayload;
+
       // Check if refresh token exists in Redis
-      const storedToken = await redis.get(`${this.REFRESH_TOKEN_PREFIX}${payload.userId}`);
-      if (storedToken !== token) {
-        throw new Error('Refresh token not found or invalid');
+      const storedToken = await redis.get(`refresh_token:${decoded.userId}`);
+      if (!storedToken || storedToken !== token) {
+        throw new Error('Invalid or expired refresh token');
       }
 
-      return payload;
+      return decoded;
     } catch (error) {
       throw new Error('Invalid or expired refresh token');
     }
-  }
-
-  static async storeRefreshToken(userId: string, refreshToken: string): Promise<void> {
-    // Store refresh token in Redis with expiry
-    const expirySeconds = 7 * 24 * 60 * 60; // 7 days
-    await redis.setex(`${this.REFRESH_TOKEN_PREFIX}${userId}`, expirySeconds, refreshToken);
-  }
-
-  static async revokeRefreshToken(userId: string): Promise<void> {
-    await redis.del(`${this.REFRESH_TOKEN_PREFIX}${userId}`);
-  }
-
-  static async refreshAccessToken(refreshToken: string): Promise<AuthTokens> {
-    const payload = await this.verifyRefreshToken(refreshToken);
-    
-    // Generate new tokens
-    const newTokens = this.generateTokens({
-      userId: payload.userId,
-      email: payload.email,
-      role: payload.role
-    });
-
-    // Store new refresh token
-    await this.storeRefreshToken(payload.userId, newTokens.refreshToken);
-
-    return newTokens;
   }
 
   static generateOTP(): string {
@@ -102,12 +76,37 @@ export class AuthService {
 
   static generateReferralCode(firstName: string, lastName: string): string {
     const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-    return `${firstName.substring(0, 2)}${lastName.substring(0, 2)}${randomSuffix}`.toUpperCase();
+    return `${firstName.slice(0, 2)}${lastName.slice(0, 2)}${randomSuffix}`.toUpperCase();
+  }
+
+  static async storeRefreshToken(userId: string, refreshToken: string): Promise<void> {
+    const expirySeconds = 7 * 24 * 60 * 60; // 7 days
+    await redis.setex(`refresh_token:${userId}`, expirySeconds, refreshToken);
+  }
+
+  static async revokeRefreshToken(userId: string): Promise<void> {
+    await redis.del(`refresh_token:${userId}`);
+  }
+
+  static async refreshAccessToken(refreshToken: string): Promise<AuthTokens> {
+    const decoded = await this.verifyRefreshToken(refreshToken);
+
+    // Generate new tokens
+    const newTokens = this.generateTokens({
+      userId: decoded.userId,
+      email: decoded.email,
+      role: decoded.role
+    });
+
+    // Store new refresh token
+    await this.storeRefreshToken(decoded.userId, newTokens.refreshToken);
+
+    return newTokens;
   }
 }
 
-// Convenience function for API routes
-export const verifyToken = async (request: Request): Promise<{ success: boolean; user: JWTPayload | null }> => {
+// Helper function for API routes
+export async function verifyToken(request: Request) {
   try {
     const authHeader = request.headers.get('authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -115,18 +114,17 @@ export const verifyToken = async (request: Request): Promise<{ success: boolean;
     }
 
     const token = authHeader.substring(7);
-    const payload = await AuthService.verifyAccessToken(token);
-    return { success: true, user: payload };
+    const decoded = await AuthService.verifyAccessToken(token);
+
+    return {
+      success: true,
+      user: {
+        userId: decoded.userId,
+        email: decoded.email,
+        role: decoded.role
+      }
+    };
   } catch (error) {
     return { success: false, user: null };
   }
-};
-
-// Additional convenience functions
-export const generateToken = (payload: JWTPayload): string => {
-  const jwtSecret = process.env.JWT_SECRET;
-  if (!jwtSecret) {
-    throw new Error('JWT secret is not configured');
-  }
-  return jwt.sign(payload, jwtSecret, { expiresIn: '15m' });
-};
+}

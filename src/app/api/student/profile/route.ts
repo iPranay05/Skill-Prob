@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyToken } from '@/lib/auth';
-import { supabaseAdmin } from '@/lib/database';
+import { supabase } from '@/lib/database';
 
 export async function GET(request: NextRequest) {
   try {
@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Get user profile
-    const { data: profile, error } = await supabaseAdmin
+    const { data: profile, error } = await supabase
       .from('users')
       .select('id, email, profile')
       .eq('id', user.userId)
@@ -98,7 +98,7 @@ export async function PUT(request: NextRequest) {
     });
 
     // Update user profile
-    const { data: updatedProfile, error } = await supabaseAdmin
+    const { data: updatedProfile, error } = await supabase
       .from('users')
       .update({ 
         profile: profileUpdates,

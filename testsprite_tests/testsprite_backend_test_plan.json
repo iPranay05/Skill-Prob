@@ -1,0 +1,42 @@
+[
+  {
+    "id": "TC001",
+    "title": "user authentication system login",
+    "description": "Test the login API endpoint to verify multi-role user authentication using JWT tokens, OTP verification, and social login methods. Ensure secure session management and correct role assignment."
+  },
+  {
+    "id": "TC002",
+    "title": "course management create and enroll",
+    "description": "Test the course creation and enrollment API endpoints to verify the ability to create courses with multimedia content, schedule live sessions, set pricing, and allow students to enroll and track progress."
+  },
+  {
+    "id": "TC003",
+    "title": "live session scheduling and management",
+    "description": "Test the live session API endpoint to verify scheduling of live sessions via Google Meet, participant management, and real-time attendance tracking."
+  },
+  {
+    "id": "TC004",
+    "title": "payment processing multi gateway",
+    "description": "Test the payment processing API endpoint to verify multi-gateway payment integration with Stripe and Razorpay, including subscription management, wallet transactions, and secure payment handling."
+  },
+  {
+    "id": "TC005",
+    "title": "ambassador referral application and tracking",
+    "description": "Test the ambassador application API endpoint to verify submission, admin approval, referral code generation, referral tracking, point crediting, and payout management."
+  },
+  {
+    "id": "TC006",
+    "title": "job posting and application management",
+    "description": "Test the job management API endpoint to verify job posting by employers, application submission by students, status updates, and interview scheduling."
+  },
+  {
+    "id": "TC007",
+    "title": "notification system multi channel delivery",
+    "description": "Test the notification API endpoint to verify delivery of notifications via email, SMS, and real-time push notifications, including subscription preferences and message formatting."
+  },
+  {
+    "id": "TC008",
+    "title": "security framework rate limiting and validation",
+    "description": "Test the security middleware API endpoints to verify rate limiting, input validation, encryption, and audit logging to prevent injection attacks, cross-site scripting, and enforce role-based access control."
+  }
+]

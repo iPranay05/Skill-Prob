@@ -5,11 +5,14 @@ import { useRouter } from 'next/navigation';
 
 interface Referral {
   id: string;
-  studentName: string;
+  studentName?: string;
   studentEmail: string;
   registrationDate: string;
   status: 'pending' | 'converted' | 'expired';
-  pointsEarned: number;
+  conversionEvents?: Array<{
+    type: string;
+    pointsEarned: number;
+  }>;
   conversionValue?: number;
 }
 
@@ -23,13 +26,7 @@ interface ReferralStats {
 
 export default function AmbassadorReferralsPage() {
   const [referrals, setReferrals] = useState<Referral[]>([]);
-  const [stats, setStats] = useState<ReferralStats>({
-    totalReferrals: 0,
-    successfulConversions: 0,
-    conversionRate: 0,
-    totalPointsEarned: 0,
-    pendingReferrals: 0
-  });
+  const [stats, setStats] = useState<ReferralStats | null>(null);
   const [referralCode, setReferralCode] = useState('');
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
@@ -71,13 +68,50 @@ export default function AmbassadorReferralsPage() {
 
       if (dashboardResponse.ok) {
         const dashboardData = await dashboardResponse.json();
-        setReferralCode(dashboardData.data.referralCode);
-        setStats(dashboardData.data.stats);
-        setReferrals(dashboardData.data.recentReferrals || []);
+        setReferralCode(dashboardData.data?.ambassador?.referralCode || '');
+
+        // Map analytics data to stats format
+        const analytics = dashboardData.data?.analytics;
+        if (analytics) {
+          setStats({
+            totalReferrals: analytics.totalReferrals || 0,
+            successfulConversions: analytics.convertedReferrals || 0,
+            conversionRate: analytics.conversionRate || 0,
+            totalPointsEarned: analytics.currentPoints || 0,
+            pendingReferrals: (analytics.totalReferrals || 0) - (analytics.convertedReferrals || 0)
+          });
+        } else {
+          setStats({
+            totalReferrals: 0,
+            successfulConversions: 0,
+            conversionRate: 0,
+            totalPointsEarned: 0,
+            pendingReferrals: 0
+          });
+        }
+
+        setReferrals(dashboardData.data?.recentReferrals || []);
+      } else {
+        // Set default stats if API call fails
+        setStats({
+          totalReferrals: 0,
+          successfulConversions: 0,
+          conversionRate: 0,
+          totalPointsEarned: 0,
+          pendingReferrals: 0
+        });
       }
 
     } catch (error) {
       console.error('Error fetching referral data:', error);
+      // Set default stats on error
+      setStats({
+        totalReferrals: 0,
+        successfulConversions: 0,
+        conversionRate: 0,
+        totalPointsEarned: 0,
+        pendingReferrals: 0
+      });
     } finally {
       setLoading(false);
     }
@@ -91,7 +125,7 @@ export default function AmbassadorReferralsPage() {
   const shareReferralLink = (platform: string) => {
     const referralLink = `${window.location.origin}/r/${referralCode}`;
     const message = `Join Skill Probe LMS and start your learning journey! Use my referral code: ${referralCode}`;
-    
+
     let shareUrl = '';
     switch (platform) {
       case 'whatsapp':
@@ -107,7 +141,7 @@ export default function AmbassadorReferralsPage() {
         shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}`;
         break;
     }
-    
+
     if (shareUrl) {
       window.open(shareUrl, '_blank');
     }
@@ -152,7 +186,7 @@ export default function AmbassadorReferralsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm">Total Referrals</p>
-                <p className="text-3xl font-bold text-blue-600">{stats.totalReferrals}</p>
+                <p className="text-3xl font-bold text-blue-600">{stats?.totalReferrals || 0}</p>
               </div>
               <div className="text-4xl">👥</div>
             </div>
@@ -162,7 +196,7 @@ export default function AmbassadorReferralsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm">Conversions</p>
-                <p className="text-3xl font-bold text-green-600">{stats.successfulConversions}</p>
+                <p className="text-3xl font-bold text-green-600">{stats?.successfulConversions || 0}</p>
               </div>
               <div className="text-4xl">✅</div>
             </div>
@@ -172,7 +206,7 @@ export default function AmbassadorReferralsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm">Conversion Rate</p>
-                <p className="text-3xl font-bold text-purple-600">{stats.conversionRate}%</p>
+                <p className="text-3xl font-bold text-purple-600">{stats?.conversionRate || 0}%</p>
               </div>
               <div className="text-4xl">📈</div>
             </div>
@@ -182,7 +216,7 @@ export default function AmbassadorReferralsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm">Points Earned</p>
-                <p className="text-3xl font-bold text-yellow-600">{stats.totalPointsEarned}</p>
+                <p className="text-3xl font-bold text-yellow-600">{stats?.totalPointsEarned || 0}</p>
               </div>
               <div className="text-4xl">⭐</div>
             </div>
@@ -192,7 +226,7 @@ export default function AmbassadorReferralsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm">Pending</p>
-                <p className="text-3xl font-bold text-orange-600">{stats.pendingReferrals}</p>
+                <p className="text-3xl font-bold text-orange-600">{stats?.pendingReferrals || 0}</p>
               </div>
               <div className="text-4xl">⏳</div>
             </div>
@@ -212,11 +246,10 @@ export default function AmbassadorReferralsPage() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
-                    activeTab === tab.id
+                  className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${activeTab === tab.id
                       ? 'border-purple-600 text-purple-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700'
-                  }`}
+                    }`}
                 >
                   <span className="mr-2">{tab.icon}</span>
                   {tab.label}
@@ -308,16 +341,20 @@ export default function AmbassadorReferralsPage() {
                       <div key={referral.id} className="bg-gray-50 rounded-xl p-6">
                         <div className="flex justify-between items-start">
                           <div className="flex-1">
-                            <h3 className="font-semibold text-gray-800">{referral.studentName}</h3>
+                            <h3 className="font-semibold text-gray-800">{referral.studentName || 'Student'}</h3>
                             <p className="text-gray-600 text-sm">{referral.studentEmail}</p>
-                            <p className="text-gray-500 text-xs mt-1">Registered on {referral.registrationDate}</p>
+                            <p className="text-gray-500 text-xs mt-1">
+                              Registered on {new Date(referral.registrationDate).toLocaleDateString()}
+                            </p>
                           </div>
                           <div className="text-right">
                             <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(referral.status)}`}>
                               {referral.status.charAt(0).toUpperCase() + referral.status.slice(1)}
                             </span>
                             <p className="text-sm text-gray-600 mt-2">
-                              Points: <span className="font-semibold text-purple-600">{referral.pointsEarned}</span>
+                              Points: <span className="font-semibold text-purple-600">
+                                {referral.conversionEvents?.reduce((total: number, event: any) => total + (event.pointsEarned || 0), 0) || 0}
+                              </span>
                             </p>
                           </div>
                         </div>
@@ -343,7 +380,7 @@ export default function AmbassadorReferralsPage() {
             {activeTab === 'share' && (
               <div>
                 <h2 className="text-2xl font-bold mb-6">Share & Promote</h2>
-                
+
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-6">
                     <div className="bg-gray-50 rounded-xl p-6">
@@ -385,13 +422,14 @@ export default function AmbassadorReferralsPage() {
                       <div className="flex space-x-2">
                         <input
                           type="text"
-                          value={`${window.location.origin}/r/${referralCode}`}
+                          value={referralCode ? `${window.location.origin}/r/${referralCode}` : 'Loading...'}
                           readOnly
                           className="flex-1 px-4 py-2 border border-gray-300 rounded-xl bg-white"
                         />
                         <button
-                          onClick={() => navigator.clipboard.writeText(`${window.location.origin}/r/${referralCode}`)}
-                          className="bg-purple-600 text-white px-4 py-2 rounded-xl hover:bg-purple-700 transition-colors"
+                          onClick={() => referralCode && navigator.clipboard.writeText(`${window.location.origin}/r/${referralCode}`)}
+                          disabled={!referralCode}
+                          className="bg-purple-600 text-white px-4 py-2 rounded-xl hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           Copy
                         </button>
@@ -442,7 +480,7 @@ export default function AmbassadorReferralsPage() {
             {activeTab === 'analytics' && (
               <div>
                 <h2 className="text-2xl font-bold mb-6">Referral Analytics</h2>
-                
+
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div className="bg-gray-50 rounded-xl p-6">
                     <h3 className="text-lg font-semibold mb-4">Conversion Funnel</h3>
@@ -454,7 +492,7 @@ export default function AmbassadorReferralsPage() {
                       <div className="w-full bg-gray-200 rounded-full h-2">
                         <div className="bg-blue-600 h-2 rounded-full" style={{ width: '100%' }}></div>
                       </div>
-                      
+
                       <div className="flex justify-between items-center">
                         <span>Registrations</span>
                         <span className="font-semibold">89</span>
@@ -462,7 +500,7 @@ export default function AmbassadorReferralsPage() {
                       <div className="w-full bg-gray-200 rounded-full h-2">
                         <div className="bg-green-600 h-2 rounded-full" style={{ width: '36%' }}></div>
                       </div>
-                      
+
                       <div className="flex justify-between items-center">
                         <span>First Purchase</span>
                         <span className="font-semibold">34</span>
@@ -490,8 +528,8 @@ export default function AmbassadorReferralsPage() {
                           <div className="text-right">
                             <p className="font-semibold">{item.percentage}%</p>
                             <div className="w-20 bg-gray-200 rounded-full h-2 mt-1">
-                              <div 
-                                className="bg-purple-600 h-2 rounded-full" 
+                              <div
+                                className="bg-purple-600 h-2 rounded-full"
                                 style={{ width: `${item.percentage}%` }}
                               ></div>
                             </div>

@@ -185,7 +185,7 @@ export default function ReferralLinkSharing({ referralCode }: ReferralLinkSharin
         <div className="space-y-3">
           <div className="bg-gray-50 p-3 rounded">
             <p className="text-sm text-gray-700 mb-2">
-              "🚀 Join me on Skill Probe and unlock your potential! Use my referral link to get started: {referralLinks.short}"
+              "              &quot;🚀 Join me on Skill Probe and unlock your potential! Use my referral link to get started: {referralLinks.short}&quot;"
             </p>
             <button
               onClick={() => copyToClipboard(`🚀 Join me on Skill Probe and unlock your potential! Use my referral link to get started: ${referralLinks.short}`)}
@@ -197,7 +197,7 @@ export default function ReferralLinkSharing({ referralCode }: ReferralLinkSharin
 
           <div className="bg-gray-50 p-3 rounded">
             <p className="text-sm text-gray-700 mb-2">
-              "📚 Discover amazing courses on Skill Probe! Join using my link and start learning today: {referralLinks.short}"
+              "              &quot;📚 Discover amazing courses on Skill Probe! Join using my link and start learning today: {referralLinks.short}&quot;
             </p>
             <button
               onClick={() => copyToClipboard(`📚 Discover amazing courses on Skill Probe! Join using my link and start learning today: ${referralLinks.short}`)}

@@ -9,7 +9,7 @@ interface OTPVerificationProps {
   phone?: string;
   type: 'email' | 'phone';
   purpose?: 'registration' | 'login' | 'password_reset' | 'email_change' | 'phone_change';
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data: { success: boolean; message: string; token?: string }) => void;
   onError?: (error: string) => void;
   autoSend?: boolean;
   className?: string;
@@ -186,7 +186,7 @@ export function OTPVerification({
           Verify Your {type === 'email' ? 'Email' : 'Phone'}
         </h2>
         <p className="text-gray-600">
-          We've sent a 6-digit verification code to{' '}
+          We&apos;ve sent a 6-digit verification code to{' '}
           <span className="font-medium text-gray-900">{getContactDisplay()}</span>
         </p>
       </div>
@@ -267,7 +267,7 @@ export function OTPVerification({
 
         {/* Resend Button */}
         <div className="text-center">
-          <p className="text-sm text-gray-600 mb-2">Didn't receive the code?</p>
+          <p className="text-sm text-gray-600 mb-2">Didn&apos;t receive the code?</p>
           <ResendOTP
             email={type === 'email' ? email : ''}
             type={type}

@@ -23,33 +23,115 @@ export default function Navigation() {
 
   useEffect(() => {
     fetchUserProfile();
+    
+    // Listen for auth changes
+    const handleAuthChange = () => {
+      console.log('🔄 Auth change detected in Navigation');
+      fetchUserProfile();
+    };
+
+    window.addEventListener('authChange', handleAuthChange);
+    window.addEventListener('storage', handleAuthChange);
+
+    return () => {
+      window.removeEventListener('authChange', handleAuthChange);
+      window.removeEventListener('storage', handleAuthChange);
+    };
   }, []);
 
   const fetchUserProfile = async () => {
     try {
+      console.log('🔍 Navigation: fetchUserProfile called');
       const token = localStorage.getItem('accessToken');
-      if (!token) return;
+      console.log('🎫 Navigation: Token exists:', !!token);
+      
+      if (!token) {
+        console.log('❌ Navigation: No token found');
+        setUser(null);
+        return;
+      }
 
-      const response = await fetch('/api/users/profile', {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      // Try to get user from API first
+      try {
+        console.log('📡 Navigation: Trying API call...');
+        const response = await fetch('/api/users/profile', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
 
-      if (response.ok) {
-        const data = await response.json();
-        setUser(data.data);
+        if (response.ok) {
+          const data = await response.json();
+          console.log('✅ Navigation: API success, user:', data.data);
+          setUser(data.data);
+          return;
+        } else {
+          console.log('❌ Navigation: API failed with status:', response.status);
+        }
+      } catch (apiError) {
+        console.log('❌ Navigation: API error, falling back to localStorage:', apiError);
+      }
+
+      // Fallback to localStorage user data
+      const storedUser = localStorage.getItem('user');
+      console.log('💾 Navigation: Stored user exists:', !!storedUser);
+      
+      if (storedUser) {
+        const userData = JSON.parse(storedUser);
+        console.log('📋 Navigation: Stored user data:', userData);
+        
+        const user = {
+          id: userData.id,
+          email: userData.email,
+          role: userData.role,
+          profile: {
+            firstName: userData.name?.split(' ')[0] || 'User',
+            lastName: userData.name?.split(' ').slice(1).join(' ') || ''
+          }
+        };
+        
+        console.log('👤 Navigation: Setting user:', user);
+        setUser(user);
+      } else {
+        console.log('❌ Navigation: No stored user data');
+        setUser(null);
       }
     } catch (error) {
-      console.error('Error fetching user profile:', error);
+      console.error('❌ Navigation: Error fetching user profile:', error);
+      setUser(null);
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      // Call logout API
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        await fetch('/api/auth/logout', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+      }
+    } catch (error) {
+      console.error('Logout API error:', error);
+      // Continue with client-side logout even if API fails
+    }
+
+    // Clear client-side storage
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('user');
+    
+    // Clear user state
     setUser(null);
+    
+    // Dispatch auth change event
+    window.dispatchEvent(new Event('authChange'));
+    
+    // Redirect to login
     router.push('/auth/login');
   };
 

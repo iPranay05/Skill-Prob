@@ -72,7 +72,7 @@ export default function ReferralPage({ params }: ReferralPageProps) {
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Welcome to Skill Probe!</h1>
           <p className="text-lg text-gray-600 mb-8">
-            You've been invited to join our learning community
+            You&apos;ve been invited to join our learning community
           </p>
         </div>
         

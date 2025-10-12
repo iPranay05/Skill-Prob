@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { CourseService } from '../../../../lib/courseService';
-import { AuthMiddleware } from '../../../../middleware/auth';
+import { verifyToken } from '../../../../lib/auth';
 import { AppError } from '../../../../lib/errors';
 import { UpdateCourseSchema } from '../../../../models/Course';
 
@@ -55,15 +55,22 @@ export async function PUT(
 ) {
   try {
     // Authenticate and authorize
-    const authResult = await authMiddleware(request, ['mentor']);
-    if (!authResult.success) {
+    const authResult = await verifyToken(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json(
-        { success: false, error: authResult.error },
-        { status: authResult.statusCode }
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
       );
     }
 
-    const { userId } = authResult.user!;
+    if (authResult.user.role !== 'mentor') {
+      return NextResponse.json(
+        { success: false, error: 'Access denied. Mentor role required.' },
+        { status: 403 }
+      );
+    }
+
+    const { userId } = authResult.user;
     const { courseId } = params;
     const body = await request.json();
 
@@ -111,15 +118,22 @@ export async function DELETE(
 ) {
   try {
     // Authenticate and authorize
-    const authResult = await authMiddleware(request, ['mentor']);
-    if (!authResult.success) {
+    const authResult = await verifyToken(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json(
-        { success: false, error: authResult.error },
-        { status: authResult.statusCode }
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
       );
     }
 
-    const { userId } = authResult.user!;
+    if (authResult.user.role !== 'mentor') {
+      return NextResponse.json(
+        { success: false, error: 'Access denied. Mentor role required.' },
+        { status: 403 }
+      );
+    }
+
+    const { userId } = authResult.user;
     const { courseId } = params;
 
     // Delete course

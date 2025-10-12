@@ -7,15 +7,24 @@ const liveSessionService = new LiveSessionService();
 
 export async function POST(request: NextRequest) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    console.log('🚀 Live session create API called');
+    
+    // Verify authentication
+    const authResult = await verifyToken(request);
+    console.log('🔐 Auth result:', authResult);
+    
+    if (!authResult.success || !authResult.user) {
+      console.log('❌ Authentication failed');
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
 
-    const decoded = await verifyToken(token);
-    if (decoded.role !== 'mentor') {
+    console.log('👤 User role:', authResult.user.role);
+    if (authResult.user.role !== 'mentor') {
+      console.log('❌ User is not a mentor');
       return NextResponse.json({ error: 'Only mentors can create live sessions' }, { status: 403 });
     }
+
+    console.log('✅ Mentor verified, proceeding with session creation');
 
     const body = await request.json();
     const {
@@ -56,7 +65,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const session = await liveSessionService.createLiveSession(decoded.userId, {
+    const session = await liveSessionService.createLiveSession(authResult.user.userId, {
       courseId,
       title,
       description,
@@ -91,12 +100,12 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    // Verify authentication
+    const authResult = await verifyToken(request);
+    
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
-
-    const decoded = await verifyToken(token);
     const { searchParams } = new URL(request.url);
     const courseId = searchParams.get('courseId');
 

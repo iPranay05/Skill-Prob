@@ -62,6 +62,9 @@ export default function LoginPage() {
         localStorage.setItem('refreshToken', data.data.tokens.refreshToken);
         localStorage.setItem('user', JSON.stringify(data.data.user));
 
+        // Trigger auth change event for navbar update
+        window.dispatchEvent(new Event('authChange'));
+
         // Redirect based on user role
         const userRole = data.data.user.role;
         switch (userRole) {

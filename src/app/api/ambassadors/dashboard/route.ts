@@ -16,10 +16,22 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Check if user is an ambassador
-    if (authResult.user.role !== UserRole.AMBASSADOR) {
+    // Check if user is an ambassador (be flexible with role checking)
+    const userRole = authResult.user.role;
+    const isAmbassador = userRole === UserRole.AMBASSADOR || userRole === 'ambassador';
+    
+    if (!isAmbassador) {
+      console.log('Access denied - User role:', userRole, 'Required: ambassador');
       return NextResponse.json(
-        { success: false, error: 'Access denied. Ambassador role required.' },
+        { 
+          success: false, 
+          error: `Access denied. Ambassador role required. Current role: ${userRole}`,
+          debug: {
+            userRole: userRole,
+            requiredRole: 'ambassador',
+            userId: authResult.user.userId
+          }
+        },
         { status: 403 }
       );
     }

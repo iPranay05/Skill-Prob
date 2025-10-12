@@ -1,53 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import Navbar from '@/components/Navbar';
 
 export default function HomePage() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#f5f5f5' }}>
       {/* Navigation */}
-      <nav className="sticky top-0 z-50" style={{ backgroundColor: '#f5f5f5' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center space-x-2">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                  <span className="text-white font-bold text-lg">S</span>
-                </div>
-                <span className="text-2xl font-bold" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                  SkillProbe
-                </span>
-              </Link>
-            </div>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="/courses" className="font-medium transition-colors" style={{ color: '#181c31' }}>
-                Courses
-              </Link>
-              <Link href="/mentors" className="font-medium transition-colors" style={{ color: '#181c31' }}>
-                Mentors
-              </Link>
-              <Link href="/live-sessions" className="font-medium transition-colors" style={{ color: '#181c31' }}>
-                Live Sessions
-              </Link>
-              <Link href="/careers" className="font-medium transition-colors" style={{ color: '#181c31' }}>
-                Careers
-              </Link>
-            </div>
-
-            <div className="flex items-center space-x-4">
-              <Link href="/auth/login" className="px-4 py-2 rounded-lg text-sm font-medium transition-colors" style={{ color: '#181c31' }}>
-                Sign In
-              </Link>
-              <Link href="/auth/register" className="text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                Get Started
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* 1. Hero Section */}
       <div className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f5f5f5 0%, rgba(58, 142, 190, 0.1) 100%)' }}>

@@ -44,7 +44,7 @@ export default function RegisterPage() {
 
     // Listen for key combination (Ctrl + Shift + R for Register)
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.shiftKey && e.key === 'R') {
+      if (e.ctrlKey && e.shiftKey && e.key === 'M') {
         setShowSpecialRoles(true);
       }
     };

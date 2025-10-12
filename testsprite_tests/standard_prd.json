@@ -1,0 +1,167 @@
+{
+  "meta": {
+    "project": "Skill Probe LMS",
+    "date": "2025-10-04",
+    "prepared_by": "Software Development Manager"
+  },
+  "product_overview": "Skill Probe LMS is a robust and integrated Learning Management System designed to connect students, mentors, ambassadors, employers, and administrators through a seamless platform. It empowers skill development, live and recorded course management, career services, and referral-driven growth, supported by secure authentication, real-time communication, and multi-gateway payment processing.",
+  "core_goals": [
+    "Enable seamless multi-role user authentication with advanced security measures",
+    "Provide a comprehensive course management system supporting live and recorded content",
+    "Facilitate campus ambassador referral programs with real-time tracking and payouts",
+    "Offer integrated career services through job posting and application management",
+    "Support multi-gateway payment and subscription processing with wallet functionality",
+    "Ensure high system performance, scalability, availability, and security",
+    "Deliver an intuitive, mobile-first, accessible user interface with role-specific dashboards"
+  ],
+  "key_features": [
+    "Multi-role user authentication system with JWT tokens, OTP, and social login",
+    "Full-featured course management supporting multimedia content, live sessions via Google Meet, enrollments, and progress tracking",
+    "Campus ambassador program with referral code generation, point-based rewards, and payout management",
+    "Job portal allowing employers to post jobs, manage applications, and schedule interviews",
+    "Multi-gateway payment processing integrating Stripe and Razorpay with subscription and wallet support",
+    "Real-time communication via live chat, Q&A, and notifications through email, SMS, and push",
+    "Comprehensive security framework including rate limiting, encryption, and input validation",
+    "Analytics and reporting dashboards covering user progress, ambassador ROI, financials, and system usage"
+  ],
+  "user_flow_summary": [
+    "User Registration with OTP verification, role selection, profile setup, and dashboard access",
+    "Mentor Course Creation involving content upload, pricing configuration, live session scheduling, and publication",
+    "Student Course Enrollment including discovery, payment processing, and immediate course access",
+    "Ambassador Application submission, admin approval, referral code generation, and referral tracking",
+    "Employer Job Posting, candidate review, application tracking, and interview scheduling",
+    "Payment processes covering course purchases, subscription management, wallet transactions, and invoice generation"
+  ],
+  "validation_criteria": [
+    "Support registration and login via email, phone OTP, and social providers securely",
+    "Successfully create, schedule, and deliver live and recorded courses with real-time attendance tracking",
+    "Accurately track ambassador referrals, credit points, and manage payout requests",
+    "Process payments through multiple gateways securely with retry and failure handling",
+    "Allow employers to post jobs and manage applications with status updates and notifications",
+    "Achieve API response time under 500ms and system uptime exceeding 99.5%",
+    "Ensure all user interfaces are responsive, WCAG 2.1 AA compliant, and maintain consistent design",
+    "Pass security testing confirming prevention of injection, cross-site scripting, and enforcing role-based access"
+  ],
+  "code_summary": {
+    "tech_stack": [
+      "TypeScript",
+      "Next.js 15",
+      "React 19",
+      "Supabase PostgreSQL",
+      "Redis",
+      "Node.js",
+      "Tailwind CSS",
+      "JWT Authentication",
+      "Zod Validation",
+      "Jest Testing",
+      "Socket.io",
+      "AWS S3",
+      "Stripe Payments",
+      "Razorpay Payments",
+      "Twilio SMS",
+      "Nodemailer Email",
+      "Google Meet API",
+      "EmailJS"
+    ],
+    "features": [
+      {
+        "name": "User Authentication System",
+        "description": "Complete multi-role authentication with JWT tokens, OTP verification, password reset, and session management for Students, Mentors, Ambassadors, Employers, and Admins",
+        "files": [
+          "src/lib/auth.ts",
+          "src/lib/clientAuth.ts",
+          "src/hooks/useAuth.ts",
+          "src/middleware/auth.ts",
+          "src/app/api/auth/login/route.ts",
+          "src/app/api/auth/register/route.ts",
+          "src/app/api/auth/logout/route.ts",
+          "src/app/api/auth/refresh/route.ts",
+          "src/app/api/auth/verify-otp/route.ts",
+          "src/app/auth/login/page.tsx",
+          "src/app/auth/register/page.tsx",
+          "src/components/OTPVerification.tsx"
+        ]
+      },
+      {
+        "name": "Course Management System",
+        "description": "Full-featured LMS with course creation, content management, enrollment system, pricing models, and multi-format course support",
+        "files": [
+          "src/models/Course.ts",
+          "src/lib/courseService.ts",
+          "src/lib/courseContentService.ts",
+          "src/lib/enrollmentService.ts",
+          "src/models/Enrollment.ts",
+          "src/app/api/courses/route.ts",
+          "src/app/courses/page.tsx",
+          "src/app/courses/[courseId]/page.tsx"
+        ]
+      },
+      {
+        "name": "Live Session Management",
+        "description": "Real-time live session platform with Google Meet integration, session scheduling, and participant management",
+        "files": [
+          "src/lib/liveSessionService.ts",
+          "src/lib/googleMeetService.ts",
+          "src/models/LiveSession.ts",
+          "src/app/api/live-sessions/route.ts",
+          "src/app/live-sessions/page.tsx",
+          "src/app/live-sessions/create/page.tsx",
+          "src/components/LiveSessionChat.tsx"
+        ]
+      },
+      {
+        "name": "Payment Processing",
+        "description": "Multi-gateway payment system with Stripe and Razorpay integration, subscription management, and wallet functionality",
+        "files": [
+          "src/lib/paymentService.ts",
+          "src/lib/subscriptionService.ts",
+          "src/lib/walletService.ts",
+          "src/app/api/payments/route.ts",
+          "src/components/RealTimeWallet.tsx"
+        ]
+      },
+      {
+        "name": "Ambassador Referral System",
+        "description": "Campus ambassador program with referral tracking, commission management, and payout system",
+        "files": [
+          "src/lib/ambassadorService.ts",
+          "src/models/Ambassador.ts",
+          "src/app/api/ambassadors/apply/route.ts",
+          "src/app/ambassador/dashboard/page.tsx",
+          "src/components/AmbassadorDashboard.tsx"
+        ]
+      },
+      {
+        "name": "Job Management System",
+        "description": "Job portal with job posting, application management, and career services for students",
+        "files": [
+          "src/lib/jobService.ts",
+          "src/lib/studentCareerService.ts",
+          "src/models/Job.ts",
+          "src/app/api/jobs/route.ts",
+          "src/app/jobs/page.tsx"
+        ]
+      },
+      {
+        "name": "Notification System",
+        "description": "Multi-channel notification system with email, SMS, and real-time push notifications",
+        "files": [
+          "src/lib/notifications.ts",
+          "src/lib/emailService.ts",
+          "src/app/api/notifications/route.ts",
+          "src/components/NotificationCenter.tsx"
+        ]
+      },
+      {
+        "name": "Security Framework",
+        "description": "Comprehensive security system with rate limiting, input validation, encryption, and audit logging",
+        "files": [
+          "src/lib/security/rateLimiting.ts",
+          "src/lib/security/inputValidation.ts",
+          "src/lib/security/encryption.ts",
+          "src/lib/security/middleware.ts"
+        ]
+      }
+    ]
+  }
+}
