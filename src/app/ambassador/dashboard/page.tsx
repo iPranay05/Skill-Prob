@@ -404,6 +404,90 @@ export default function AmbassadorDashboard() {
           </div>
         )}
 
+        {/* KYC Status Alert */}
+        {ambassador.status === 'active' && (
+          <div className="mb-6">
+            {!wallet || !wallet.balance || wallet.balance.points < 100 ? null : (
+              <>
+                {/* Show KYC status only if user has points to withdraw */}
+                {(!ambassador.performance?.kycVerified && !ambassador.performance?.kycStatus) && (
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex">
+                        <div className="flex-shrink-0">
+                          <svg className="h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                          </svg>
+                        </div>
+                        <div className="ml-3">
+                          <h3 className="text-sm font-medium text-blue-800">Complete KYC Verification</h3>
+                          <p className="text-sm text-blue-700 mt-1">
+                            Complete your KYC verification to enable payout requests and withdraw your earnings.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="ml-4">
+                        <button
+                          onClick={() => window.location.href = '/ambassador/kyc'}
+                          className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700"
+                        >
+                          Start KYC
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {ambassador.performance?.kycStatus === 'pending_verification' && (
+                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                    <div className="flex">
+                      <div className="flex-shrink-0">
+                        <svg className="h-5 w-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <div className="ml-3">
+                        <h3 className="text-sm font-medium text-yellow-800">KYC Under Review</h3>
+                        <p className="text-sm text-yellow-700 mt-1">
+                          Your KYC verification is being reviewed. You'll be notified once it's approved.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {ambassador.performance?.kycStatus === 'rejected' && (
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex">
+                        <div className="flex-shrink-0">
+                          <svg className="h-5 w-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </div>
+                        <div className="ml-3">
+                          <h3 className="text-sm font-medium text-red-800">KYC Rejected</h3>
+                          <p className="text-sm text-red-700 mt-1">
+                            Your KYC verification was rejected. Please resubmit with correct information.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="ml-4">
+                        <button
+                          onClick={() => window.location.href = '/ambassador/kyc'}
+                          className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-700"
+                        >
+                          Resubmit KYC
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        )}
+
         {/* Tab Content */}
         {activeTab === 'overview' && (
           <div>

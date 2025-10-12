@@ -79,7 +79,21 @@ export default function SettingsPage() {
           if (response.ok) {
             const data = await response.json();
             if (data.success && data.data) {
-              setSettings(data.data);
+              // Merge with default settings to ensure all properties exist
+              setSettings(prevSettings => ({
+                notifications: {
+                  ...prevSettings.notifications,
+                  ...data.data.notifications
+                },
+                privacy: {
+                  ...prevSettings.privacy,
+                  ...data.data.privacy
+                },
+                preferences: {
+                  ...prevSettings.preferences,
+                  ...data.data.preferences
+                }
+              }));
             }
           }
         } catch (error) {
@@ -198,7 +212,7 @@ export default function SettingsPage() {
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
-                    checked={settings.notifications.email}
+                    checked={settings.notifications?.email || false}
                     onChange={(e) => handleNotificationChange('email', e.target.checked)}
                     className="sr-only peer"
                   />
@@ -214,7 +228,7 @@ export default function SettingsPage() {
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
-                    checked={settings.notifications.sms}
+                    checked={settings.notifications?.sms || false}
                     onChange={(e) => handleNotificationChange('sms', e.target.checked)}
                     className="sr-only peer"
                   />
@@ -230,7 +244,7 @@ export default function SettingsPage() {
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
-                    checked={settings.notifications.push}
+                    checked={settings.notifications?.push || false}
                     onChange={(e) => handleNotificationChange('push', e.target.checked)}
                     className="sr-only peer"
                   />
@@ -246,7 +260,7 @@ export default function SettingsPage() {
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
-                    checked={settings.notifications.courseUpdates}
+                    checked={settings.notifications?.courseUpdates || false}
                     onChange={(e) => handleNotificationChange('courseUpdates', e.target.checked)}
                     className="sr-only peer"
                   />
@@ -262,7 +276,7 @@ export default function SettingsPage() {
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
-                    checked={settings.notifications.liveSessionReminders}
+                    checked={settings.notifications?.liveSessionReminders || false}
                     onChange={(e) => handleNotificationChange('liveSessionReminders', e.target.checked)}
                     className="sr-only peer"
                   />
@@ -278,7 +292,7 @@ export default function SettingsPage() {
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
-                    checked={settings.notifications.paymentNotifications}
+                    checked={settings.notifications?.paymentNotifications || false}
                     onChange={(e) => handleNotificationChange('paymentNotifications', e.target.checked)}
                     className="sr-only peer"
                   />
@@ -297,7 +311,7 @@ export default function SettingsPage() {
                   Profile Visibility
                 </label>
                 <select
-                  value={settings.privacy.profileVisibility}
+                  value={settings.privacy?.profileVisibility || 'public'}
                   onChange={(e) => handlePrivacyChange('profileVisibility', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
@@ -315,7 +329,7 @@ export default function SettingsPage() {
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
-                    checked={settings.privacy.showEmail}
+                    checked={settings.privacy?.showEmail || false}
                     onChange={(e) => handlePrivacyChange('showEmail', e.target.checked)}
                     className="sr-only peer"
                   />
@@ -331,7 +345,7 @@ export default function SettingsPage() {
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
-                    checked={settings.privacy.showPhone}
+                    checked={settings.privacy?.showPhone || false}
                     onChange={(e) => handlePrivacyChange('showPhone', e.target.checked)}
                     className="sr-only peer"
                   />
@@ -350,7 +364,7 @@ export default function SettingsPage() {
                   Language
                 </label>
                 <select
-                  value={settings.preferences.language}
+                  value={settings.preferences?.language || 'en'}
                   onChange={(e) => handlePreferenceChange('language', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
@@ -367,7 +381,7 @@ export default function SettingsPage() {
                   Timezone
                 </label>
                 <select
-                  value={settings.preferences.timezone}
+                  value={settings.preferences?.timezone || 'UTC'}
                   onChange={(e) => handlePreferenceChange('timezone', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
@@ -386,7 +400,7 @@ export default function SettingsPage() {
                   Theme
                 </label>
                 <select
-                  value={settings.preferences.theme}
+                  value={settings.preferences?.theme || 'light'}
                   onChange={(e) => handlePreferenceChange('theme', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
