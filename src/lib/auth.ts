@@ -128,3 +128,11 @@ export async function verifyToken(request: Request) {
     return { success: false, user: null };
   }
 }
+
+// Alias for verifyToken - used by many API routes
+export const verifyAuth = verifyToken;
+
+// JWT-specific verification function
+export async function verifyJWT(request: Request) {
+  return verifyToken(request);
+}

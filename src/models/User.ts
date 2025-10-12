@@ -1,6 +1,9 @@
 import { supabaseAdmin } from '@/lib/database';
 import { User, UserRole, VerificationStatus } from '@/types/user';
 
+// Export User type for other files to import
+export { User } from '@/types/user';
+
 export class UserModel {
   // Convert camelCase to snake_case for database
   private static toDbFormat(userData: any): any {

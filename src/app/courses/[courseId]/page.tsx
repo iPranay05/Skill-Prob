@@ -5,7 +5,9 @@ import { useParams, useRouter } from 'next/navigation';
 import { Course } from '@/models/Course';
 import { getCurrentUser } from '@/lib/clientAuth';
 
-interface CourseDetailPageProps {}
+interface CourseDetailPageProps {
+  // Props can be added here if needed in the future
+}
 
 export default function CourseDetailPage({}: CourseDetailPageProps) {
   const params = useParams();
