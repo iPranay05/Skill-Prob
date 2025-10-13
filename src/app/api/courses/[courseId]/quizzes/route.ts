@@ -5,7 +5,7 @@ import { AppError } from '@/lib/errors';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -18,7 +18,8 @@ export async function GET(
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     }
 
-    const quizzes = await StudentLearningService.getCourseQuizzes(params.courseId);
+    const { courseId } = await params;
+    const quizzes = await StudentLearningService.getCourseQuizzes(courseId);
 
     return NextResponse.json({
       success: true,

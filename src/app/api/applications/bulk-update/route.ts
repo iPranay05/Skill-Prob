@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { JobService } from '@/lib/jobService';
-import { ApplicationStatus } from '@/models/JobPosting';
+import { ApplicationStatus } from '@/models/Job';
 import { verifyAuth } from '@/lib/auth';
+import { supabaseAdmin } from '@/lib/database';
 import { z } from 'zod';
 
 const BulkUpdateSchema = z.object({
@@ -45,12 +45,23 @@ export async function POST(request: NextRequest) {
     // Validate input
     const validatedData = BulkUpdateSchema.parse(body);
 
-    await JobService.bulkUpdateApplicationStatus(
-      validatedData.application_ids,
-      validatedData.status,
-      authResult.user.id,
-      validatedData.notes
-    );
+    // Bulk update applications
+    const { error: updateError } = await supabaseAdmin
+      .from('job_applications')
+      .update({
+        status: validatedData.status,
+        status_updated_by: authResult.user.userId,
+        updated_at: new Date().toISOString(),
+        ...(validatedData.notes && { notes: validatedData.notes })
+      })
+      .in('id', validatedData.application_ids);
+
+    if (updateError) {
+      return NextResponse.json(
+        { success: false, error: 'Failed to update applications' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({
       success: true,

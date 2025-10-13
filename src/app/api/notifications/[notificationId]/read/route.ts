@@ -5,7 +5,7 @@ import { verifyToken } from '@/lib/auth';
 // PUT /api/notifications/[notificationId]/read - Mark notification as read
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { notificationId: string } }
+  { params }: { params: Promise<{ notificationId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -18,7 +18,7 @@ export async function PUT(
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     }
 
-    const { notificationId } = params;
+    const { notificationId } = await params;
 
     const success = await NotificationService.markNotificationAsRead(
       notificationId,

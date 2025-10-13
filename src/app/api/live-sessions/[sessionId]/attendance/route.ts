@@ -5,9 +5,10 @@ import { AppError } from '../../../../../lib/errors';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { sessionId: string } }
+  { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
+    const { sessionId } = await params;
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
     if (!token) {
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
@@ -24,7 +25,7 @@ export async function GET(
     const { data: session, error: sessionError } = await supabase
       .from('live_sessions')
       .select('mentor_id')
-      .eq('id', params.sessionId)
+      .eq('id', sessionId)
       .single();
 
     if (sessionError || !session || session.mentor_id !== decoded.userId) {
@@ -43,7 +44,7 @@ export async function GET(
           last_name
         )
       `)
-      .eq('session_id', params.sessionId)
+      .eq('session_id', sessionId)
       .order('joined_at', { ascending: false });
 
     if (error) {

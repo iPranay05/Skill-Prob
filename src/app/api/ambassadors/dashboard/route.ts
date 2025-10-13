@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
 
     // Check if user is an ambassador (be flexible with role checking)
     const userRole = authResult.user.role;
-    const isAmbassador = userRole === UserRole.AMBASSADOR || userRole === 'ambassador';
+    const isAmbassador = userRole === 'ambassador';
     
     if (!isAmbassador) {
       console.log('Access denied - User role:', userRole, 'Required: ambassador');

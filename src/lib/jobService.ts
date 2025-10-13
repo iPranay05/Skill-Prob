@@ -107,10 +107,21 @@ export class JobService {
   }
 
   static async publishJobPosting(id: string): Promise<JobPosting> {
-    return this.updateJobPosting(id, {
-      status: JobStatus.PUBLISHED,
-      published_at: new Date()
-    });
+    const { data, error } = await supabaseAdmin
+      .from('job_postings')
+      .update({
+        status: JobStatus.PUBLISHED,
+        published_at: new Date().toISOString()
+      })
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      throw new Error(`Failed to publish job posting: ${error.message}`);
+    }
+
+    return this.formatJobPosting(data);
   }
 
   static async searchJobPostings(query: JobSearchQuery): Promise<{
@@ -372,17 +383,28 @@ export class JobService {
     updatedBy: string,
     notes?: string
   ): Promise<JobApplication> {
-    const updates: UpdateJobApplicationInput = {
+    const updates: any = {
       status,
       status_updated_by: updatedBy,
       notes
     };
 
     if (status === ApplicationStatus.REVIEWED) {
-      updates.reviewed_at = new Date();
+      updates.reviewed_at = new Date().toISOString();
     }
 
-    return this.updateJobApplication(applicationId, updates);
+    const { data, error } = await supabaseAdmin
+      .from('job_applications')
+      .update(updates)
+      .eq('id', applicationId)
+      .select()
+      .single();
+
+    if (error) {
+      throw new Error(`Failed to update application status: ${error.message}`);
+    }
+
+    return this.formatJobApplication(data);
   }
 
   static async bulkUpdateApplicationStatus(
@@ -624,5 +646,59 @@ export class JobService {
       status_updated_at: new Date(data.status_updated_at),
       interview_scheduled_at: data.interview_scheduled_at ? new Date(data.interview_scheduled_at) : undefined
     };
+  }
+
+  // Company-related methods
+  static async getJobsByCompany(companyName: string): Promise<JobPosting[]> {
+    const { data, error } = await supabaseAdmin
+      .from('job_postings')
+      .select(`
+        *,
+        job_posting_categories (
+          category_id,
+          job_categories (
+            id,
+            name,
+            slug
+          )
+        )
+      `)
+      .eq('company_name', companyName)
+      .eq('status', 'published')
+      .order('published_at', { ascending: false });
+
+    if (error) {
+      throw new Error(`Failed to get jobs by company: ${error.message}`);
+    }
+
+    return (data || []).map(job => this.formatJobPosting(job));
+  }
+
+  static async updateCompanyInfo(
+    companyName: string,
+    companyData: {
+      company_logo?: string;
+      company_website?: string;
+      company_name?: string;
+    },
+    employerId: string
+  ): Promise<JobPosting[]> {
+    const { data, error } = await supabaseAdmin
+      .from('job_postings')
+      .update({
+        company_logo: companyData.company_logo,
+        company_website: companyData.company_website,
+        company_name: companyData.company_name || companyName,
+        updated_at: new Date().toISOString()
+      })
+      .eq('company_name', companyName)
+      .eq('employer_id', employerId)
+      .select();
+
+    if (error) {
+      throw new Error(`Failed to update company info: ${error.message}`);
+    }
+
+    return (data || []).map(job => this.formatJobPosting(job));
   }
 }

@@ -7,7 +7,7 @@ const liveSessionService = new LiveSessionService();
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { sessionId: string } }
+  { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -41,8 +41,9 @@ export async function POST(
       );
     }
 
+    const { sessionId } = await params;
     const poll = await liveSessionService.createPoll({
-      sessionId: params.sessionId,
+      sessionId,
       createdBy: decoded.userId,
       question: question.trim(),
       options: options.map((opt: any) => ({ text: opt.text })),

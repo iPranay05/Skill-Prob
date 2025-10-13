@@ -5,7 +5,7 @@ import { AppError } from '@/lib/errors';
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { quizId: string } }
+  { params }: { params: Promise<{ quizId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -18,8 +18,9 @@ export async function POST(
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     }
 
+    const { quizId } = await params;
     const attempt = await StudentLearningService.startQuizAttempt(
-      params.quizId,
+      quizId,
       decoded.userId
     );
 
@@ -46,7 +47,7 @@ export async function POST(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { quizId: string } }
+  { params }: { params: Promise<{ quizId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');

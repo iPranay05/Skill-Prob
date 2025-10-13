@@ -4,7 +4,7 @@ import { verifyAuth } from '@/lib/auth';
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { jobId: string } }
+  { params }: { params: Promise<{ jobId: string }> }
 ) {
   try {
     const authResult = await verifyAuth(request);
@@ -21,8 +21,10 @@ export async function POST(
       );
     }
 
+    const { jobId } = await params;
+
     // Get the job posting to check ownership
-    const existingJob = await JobService.getJobPostingById(params.jobId);
+    const existingJob = await JobService.getJobPostingById(jobId);
     if (!existingJob) {
       return NextResponse.json(
         {
@@ -67,7 +69,7 @@ export async function POST(
       );
     }
 
-    const publishedJob = await JobService.publishJobPosting(params.jobId);
+    const publishedJob = await JobService.publishJobPosting(jobId);
 
     return NextResponse.json({
       success: true,

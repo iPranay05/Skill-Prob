@@ -7,7 +7,7 @@ const liveSessionService = new LiveSessionService();
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { sessionId: string } }
+  { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -18,8 +18,9 @@ export async function GET(
     const decoded = await verifyToken(token);
     const { searchParams } = new URL(request.url);
     const limit = parseInt(searchParams.get('limit') || '50');
+    const { sessionId } = await params;
 
-    const messages = await liveSessionService.getChatMessages(params.sessionId, limit);
+    const messages = await liveSessionService.getChatMessages(sessionId, limit);
 
     return NextResponse.json({
       success: true,
@@ -27,7 +28,7 @@ export async function GET(
     });
   } catch (error) {
     console.error('Error fetching chat messages:', error);
-    
+
     if (error instanceof AppError) {
       return NextResponse.json(
         { error: error.message },
@@ -44,7 +45,7 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { sessionId: string } }
+  { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -63,8 +64,9 @@ export async function POST(
       );
     }
 
+    const { sessionId } = await params;
     const chatMessage = await liveSessionService.sendChatMessage({
-      sessionId: params.sessionId,
+      sessionId,
       userId: decoded.userId,
       message: message.trim(),
       messageType,
@@ -78,7 +80,7 @@ export async function POST(
     });
   } catch (error) {
     console.error('Error sending chat message:', error);
-    
+
     if (error instanceof AppError) {
       return NextResponse.json(
         { error: error.message },

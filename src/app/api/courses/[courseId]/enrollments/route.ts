@@ -11,7 +11,7 @@ const enrollmentService = new EnrollmentService();
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
     // Verify authentication
@@ -52,7 +52,8 @@ export async function GET(
       limit: parseInt(searchParams.get('limit') || '10')
     };
 
-    const result = await enrollmentService.getCourseEnrollments(params.courseId, query);
+    const { courseId } = await params;
+    const result = await enrollmentService.getCourseEnrollments(courseId, query);
 
     return NextResponse.json({
       success: true,

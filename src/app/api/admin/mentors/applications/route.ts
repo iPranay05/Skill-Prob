@@ -81,7 +81,7 @@ export async function PUT(request: NextRequest) {
     await adminService.processMentorApplication(
       applicationId,
       decision,
-      authResult.user.id,
+      authResult.user.userId,
       reviewNotes
     );
 

@@ -1,28 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { StudentLearningService } from '@/lib/studentLearningService';
-import { verifyToken } from '@/lib/auth';
+import { verifyAuth } from '@/lib/auth';
 import { AppError } from '@/lib/errors';
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { assignmentId: string } }
+  { params }: { params: Promise<{ assignmentId: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const decoded = verifyToken(token);
-    if (!decoded) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    }
-
     const { submission_text, file_urls } = await request.json();
+    const { assignmentId } = await params;
 
     const submission = await StudentLearningService.submitAssignment(
-      params.assignmentId,
-      decoded.userId,
+      assignmentId,
+      authResult.user.userId,
       { submission_text, file_urls }
     );
 
@@ -49,22 +45,18 @@ export async function POST(
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { assignmentId: string } }
+  { params }: { params: Promise<{ assignmentId: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const decoded = verifyToken(token);
-    if (!decoded) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    }
-
+    const { assignmentId } = await params;
     const submission = await StudentLearningService.getAssignmentSubmission(
-      params.assignmentId,
-      decoded.userId
+      assignmentId,
+      authResult.user.userId
     );
 
     return NextResponse.json({

@@ -59,13 +59,32 @@ export async function GET(request: NextRequest) {
     }
 
     // Apply pagination
-    const { data: users, error, count } = await query
-      .range(offset, offset + limit - 1)
-      .select('*', { count: 'exact' });
+    const { data: users, error } = await query
+      .range(offset, offset + limit - 1);
 
     if (error) {
       throw new APIError(`Failed to fetch users: ${error.message}`, 500);
     }
+
+    // Get total count separately
+    let countQuery = supabaseAdmin
+      .from('users')
+      .select('*', { count: 'exact', head: true });
+
+    // Apply same filters for count
+    if (filter !== 'all') {
+      if (['student', 'mentor', 'ambassador', 'admin', 'super_admin'].includes(filter)) {
+        countQuery = countQuery.eq('role', filter);
+      } else if (['active', 'suspended', 'pending'].includes(filter)) {
+        countQuery = countQuery.eq('status', filter);
+      }
+    }
+
+    if (search) {
+      countQuery = countQuery.or(`email.ilike.%${search}%,profile->>firstName.ilike.%${search}%,profile->>lastName.ilike.%${search}%`);
+    }
+
+    const { count } = await countQuery;
 
     // Format the response
     const formattedUsers = users?.map(user => ({

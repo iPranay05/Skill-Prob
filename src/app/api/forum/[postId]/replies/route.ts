@@ -5,7 +5,7 @@ import { AppError } from '@/lib/errors';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { postId: string } }
+  { params }: { params: Promise<{ postId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -18,10 +18,12 @@ export async function GET(
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     }
 
-    // Increment view count
-    await StudentLearningService.incrementForumViews(params.postId);
+    const { postId } = await params;
 
-    const replies = await StudentLearningService.getForumReplies(params.postId);
+    // Increment view count
+    await StudentLearningService.incrementForumViews(postId);
+
+    const replies = await StudentLearningService.getForumReplies(postId);
 
     return NextResponse.json({
       success: true,
@@ -46,7 +48,7 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { postId: string } }
+  { params }: { params: Promise<{ postId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -68,8 +70,10 @@ export async function POST(
       );
     }
 
+    const { postId } = await params;
+
     const reply = await StudentLearningService.createForumReply({
-      forum_post_id: params.postId,
+      forum_post_id: postId,
       author_id: decoded.userId,
       is_solution: false,
       ...replyData

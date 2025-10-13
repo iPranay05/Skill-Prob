@@ -88,11 +88,11 @@ export async function POST(request: NextRequest) {
 
     // Get client IP and user agent from headers
     const forwarded = request.headers.get('x-forwarded-for');
-    const ipAddress = forwarded ? forwarded.split(',')[0] : request.headers.get('x-real-ip');
-    const userAgent = request.headers.get('user-agent');
+    const ipAddress = forwarded ? forwarded.split(',')[0] : request.headers.get('x-real-ip') || undefined;
+    const userAgent = request.headers.get('user-agent') || undefined;
 
     await systemConfigService.createAuditLog({
-      userId: authResult.user.id,
+      userId: authResult.user.userId,
       action,
       resource,
       resourceId,

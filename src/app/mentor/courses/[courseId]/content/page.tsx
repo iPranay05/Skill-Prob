@@ -35,21 +35,35 @@ interface Course {
   chapters: Chapter[];
 }
 
-export default function CourseContent({ params }: { params: { courseId: string } }) {
+export default function CourseContent({ params }: { params: Promise<{ courseId: string }> }) {
   const router = useRouter();
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeChapter, setActiveChapter] = useState<number>(0);
   const [uploadingVideo, setUploadingVideo] = useState(false);
+  const [courseId, setCourseId] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchCourseContent();
-  }, [params.courseId]);
+    const initializeParams = async () => {
+      const resolvedParams = await params;
+      setCourseId(resolvedParams.courseId);
+    };
+    
+    initializeParams();
+  }, [params]);
+
+  useEffect(() => {
+    if (courseId) {
+      fetchCourseContent();
+    }
+  }, [courseId]);
 
   const fetchCourseContent = async () => {
+    if (!courseId) return;
+    
     try {
-      const response = await fetch(`/api/courses/${params.courseId}/content`, {
+      const response = await fetch(`/api/courses/${courseId}/content`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
         }
@@ -185,10 +199,10 @@ export default function CourseContent({ params }: { params: { courseId: string }
   };
 
   const saveContent = async () => {
-    if (!course) return;
+    if (!course || !courseId) return;
 
     try {
-      const response = await fetch(`/api/courses/${params.courseId}/content`, {
+      const response = await fetch(`/api/courses/${courseId}/content`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

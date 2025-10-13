@@ -88,7 +88,7 @@ export async function PUT(request: NextRequest) {
     await adminService.moderateCourse(
       courseId,
       decision,
-      authResult.user.id,
+      authResult.user.userId,
       reviewNotes,
       qualityScore
     );

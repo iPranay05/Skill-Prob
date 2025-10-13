@@ -1,6 +1,6 @@
 import { OTPVerificationModel } from '../models/OTPVerification';
 import { emailService } from './emailService';
-import { User } from '../models/User';
+import { UserModel } from '../models/User';
 import crypto from 'crypto';
 
 interface SendOTPOptions {
@@ -166,7 +166,7 @@ export class OTPService {
       }
 
       // Get user details for personalization
-      const user = await User.findById(userId);
+      const user = await UserModel.findById(userId);
       if (!user) {
         return { success: false, message: 'User not found' };
       }

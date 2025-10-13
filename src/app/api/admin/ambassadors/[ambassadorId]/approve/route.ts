@@ -40,9 +40,9 @@ export async function POST(
       data: {
         id: ambassador.id,
         status: ambassador.status,
-        reviewedAt: ambassador.reviewedAt || ambassador.reviewed_at,
-        reviewedBy: ambassador.reviewedBy || ambassador.reviewed_by,
-        reviewNotes: ambassador.reviewNotes || ambassador.review_notes
+        reviewedAt: ambassador.reviewedAt,
+        reviewedBy: ambassador.reviewedBy,
+        reviewNotes: ambassador.reviewNotes
       }
     });
 

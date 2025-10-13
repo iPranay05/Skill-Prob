@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 import { connectToDatabase } from '@/lib/database';
 import { ErrorHandler, ValidationError, NotFoundError } from '@/lib/errors';
-import { User } from '@/models/User';
+import { UserModel } from '@/models/User';
 import OTPService from '@/lib/otpService';
 
 export async function POST(request: NextRequest) {
@@ -27,9 +27,9 @@ export async function POST(request: NextRequest) {
     // Find user by email or phone
     let user;
     if (type === 'email') {
-      user = await User.findByEmail(email);
+      user = await UserModel.findByEmail(email);
     } else {
-      user = await User.findByPhone(phone);
+      user = await UserModel.findByPhone(phone);
     }
 
     if (!user) {
@@ -78,9 +78,9 @@ export async function PUT(request: NextRequest) {
     // Find user
     let user;
     if (type === 'email' && email) {
-      user = await User.findByEmail(email);
+      user = await UserModel.findByEmail(email);
     } else if (type === 'phone' && phone) {
-      user = await User.findByPhone(phone);
+      user = await UserModel.findByPhone(phone);
     }
 
     if (!user) {

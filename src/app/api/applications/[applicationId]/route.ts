@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { JobService } from '@/lib/jobService';
 import { UpdateJobApplicationSchema } from '@/models/JobPosting';
 import { verifyAuth } from '@/lib/auth';
+import { supabaseAdmin } from '@/lib/database';
 
 export async function GET(
   request: NextRequest,
@@ -23,9 +23,22 @@ export async function GET(
     }
 
     const { applicationId } = await params;
-    const application = await JobService.getJobApplication(applicationId);
+    // Get application with job posting details
+    const { data: application, error: fetchError } = await supabaseAdmin
+      .from('job_applications')
+      .select(`
+        *,
+        job_postings!inner (
+          id,
+          posted_by,
+          title,
+          company_name
+        )
+      `)
+      .eq('id', applicationId)
+      .single();
 
-    if (!application) {
+    if (fetchError || !application) {
       return NextResponse.json(
         {
           success: false,
@@ -39,8 +52,8 @@ export async function GET(
     }
 
     // Check authorization
-    const isOwner = application.applicant_id === authResult.user.id;
-    const isEmployer = application.job_posting.posted_by === authResult.user.id;
+    const isOwner = application.applicant_id === authResult.user.userId;
+    const isEmployer = application.job_postings.posted_by === authResult.user.userId;
     const isAdmin = ['admin', 'super_admin'].includes(authResult.user.role);
 
     if (!isOwner && !isEmployer && !isAdmin) {
@@ -96,8 +109,21 @@ export async function PUT(
 
     // First get the application to check permissions
     const { applicationId } = await params;
-    const existingApplication = await JobService.getJobApplication(applicationId);
-    if (!existingApplication) {
+    const { data: existingApplication, error: fetchError } = await supabaseAdmin
+      .from('job_applications')
+      .select(`
+        *,
+        job_postings!inner (
+          id,
+          posted_by,
+          title,
+          company_name
+        )
+      `)
+      .eq('id', applicationId)
+      .single();
+
+    if (fetchError || !existingApplication) {
       return NextResponse.json(
         {
           success: false,
@@ -111,7 +137,7 @@ export async function PUT(
     }
 
     // Check if user can update this application
-    const isEmployer = existingApplication.job_posting.posted_by === authResult.user.id;
+    const isEmployer = existingApplication.job_postings.posted_by === authResult.user.userId;
     const isAdmin = ['admin', 'super_admin'].includes(authResult.user.role);
 
     if (!isEmployer && !isAdmin) {
@@ -128,15 +154,28 @@ export async function PUT(
     }
 
     const body = await request.json();
-    
+
     // Validate input
     const validatedData = UpdateJobApplicationSchema.parse(body);
 
-    const application = await JobService.updateJobApplicationStatus(
-      applicationId,
-      validatedData,
-      authResult.user.id
-    );
+    // Update the application
+    const { data: application, error: updateError } = await supabaseAdmin
+      .from('job_applications')
+      .update({
+        ...validatedData,
+        status_updated_by: authResult.user.userId,
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', applicationId)
+      .select()
+      .single();
+
+    if (updateError || !application) {
+      return NextResponse.json(
+        { success: false, error: 'Failed to update application' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({
       success: true,
@@ -145,7 +184,7 @@ export async function PUT(
     });
   } catch (error: any) {
     console.error('Error updating application:', error);
-    
+
     if (error.name === 'ZodError') {
       return NextResponse.json(
         {

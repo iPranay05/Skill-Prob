@@ -15,7 +15,7 @@ const ScheduleInterviewSchema = z.object({
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { applicationId: string } }
+  { params }: { params: Promise<{ applicationId: string }> }
 ) {
   try {
     const authResult = await verifyAuth(request);
@@ -51,8 +51,9 @@ export async function POST(
     // Validate input
     const validatedData = ScheduleInterviewSchema.parse(body);
 
+    const { applicationId } = await params;
     const scheduleRequest: ScheduleInterviewRequest = {
-      application_id: params.applicationId,
+      application_id: applicationId,
       interview_date: new Date(validatedData.interview_date),
       duration_minutes: validatedData.duration_minutes,
       interview_type: validatedData.interview_type,
@@ -62,7 +63,7 @@ export async function POST(
       notes: validatedData.notes
     };
 
-    await InterviewSchedulingService.scheduleInterview(scheduleRequest, authResult.user.id);
+    await InterviewSchedulingService.scheduleInterview(scheduleRequest, authResult.user.userId);
 
     return NextResponse.json({
       success: true,

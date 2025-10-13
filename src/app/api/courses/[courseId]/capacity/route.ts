@@ -9,10 +9,11 @@ const enrollmentService = new EnrollmentService();
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
-    const capacity = await enrollmentService.getCourseCapacity(params.courseId);
+    const { courseId } = await params;
+    const capacity = await enrollmentService.getCourseCapacity(courseId);
 
     return NextResponse.json({
       success: true,

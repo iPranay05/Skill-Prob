@@ -51,7 +51,7 @@ export async function POST(
       applicationId,
       new Date(validatedData.new_interview_date),
       validatedData.reason,
-      authResult.user.id
+      authResult.user.userId
     );
 
     return NextResponse.json({

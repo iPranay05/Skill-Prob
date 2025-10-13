@@ -1,17 +1,26 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface ReferralPageProps {
-  params: {
+  params: Promise<{
     code: string;
-  };
+  }>;
 }
 
 export default function ReferralPage({ params }: ReferralPageProps) {
   const router = useRouter();
-  const { code } = params;
+  const [code, setCode] = useState<string | null>(null);
+
+  useEffect(() => {
+    const initializeParams = async () => {
+      const resolvedParams = await params;
+      setCode(resolvedParams.code);
+    };
+    
+    initializeParams();
+  }, [params]);
 
   useEffect(() => {
     // Track the referral click
@@ -57,7 +66,7 @@ export default function ReferralPage({ params }: ReferralPageProps) {
       
       // Redirect to registration with referral code
       router.push(`/auth/register?ref=${encodeURIComponent(code)}`);
-    } else {
+    } else if (code !== null) {
       // Invalid referral code, redirect to home
       router.push('/');
     }

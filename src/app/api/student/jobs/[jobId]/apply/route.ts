@@ -5,7 +5,7 @@ import { AppError } from '@/lib/errors';
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { jobId: string } }
+  { params }: { params: Promise<{ jobId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -19,9 +19,10 @@ export async function POST(
     }
 
     const applicationData = await request.json();
+    const { jobId } = await params;
 
     const application = await StudentCareerService.applyToJob(
-      params.jobId,
+      jobId,
       decoded.userId,
       applicationData
     );

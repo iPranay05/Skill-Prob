@@ -88,7 +88,7 @@ export async function PUT(request: NextRequest) {
     await adminService.processPayout(
       payoutId,
       decision,
-      authResult.user.id,
+      authResult.user.userId,
       transactionId,
       notes
     );

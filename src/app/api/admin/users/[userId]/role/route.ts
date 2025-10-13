@@ -56,7 +56,7 @@ export async function PUT(
       );
     }
 
-    await adminService.updateUserRole(userId, role, authResult.user.id);
+    await adminService.updateUserRole(userId, role, authResult.user.userId);
 
     return NextResponse.json({
       success: true,

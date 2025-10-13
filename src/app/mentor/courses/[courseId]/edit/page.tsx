@@ -5,20 +5,34 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Course, CourseType, SubscriptionType, COURSE_CATEGORIES } from '../../../../../models/Course';
 
-export default function EditCourse({ params }: { params: { courseId: string } }) {
+export default function EditCourse({ params }: { params: Promise<{ courseId: string }> }) {
   const router = useRouter();
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [courseId, setCourseId] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchCourse();
-  }, [params.courseId]);
+    const initializeParams = async () => {
+      const resolvedParams = await params;
+      setCourseId(resolvedParams.courseId);
+    };
+    
+    initializeParams();
+  }, [params]);
+
+  useEffect(() => {
+    if (courseId) {
+      fetchCourse();
+    }
+  }, [courseId]);
 
   const fetchCourse = async () => {
+    if (!courseId) return;
+    
     try {
-      const response = await fetch(`/api/courses/${params.courseId}`, {
+      const response = await fetch(`/api/courses/${courseId}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
         }
@@ -42,13 +56,13 @@ export default function EditCourse({ params }: { params: { courseId: string } })
   };
 
   const handleSave = async () => {
-    if (!course) return;
+    if (!course || !courseId) return;
 
     setSaving(true);
     setError(null);
 
     try {
-      const response = await fetch(`/api/courses/${params.courseId}`, {
+      const response = await fetch(`/api/courses/${courseId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -131,7 +145,7 @@ export default function EditCourse({ params }: { params: { courseId: string } })
           </div>
           <div className="flex space-x-4">
             <Link
-              href={`/mentor/courses/${params.courseId}/content`}
+              href={`/mentor/courses/${courseId}/content`}
               className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
             >
               Manage Content

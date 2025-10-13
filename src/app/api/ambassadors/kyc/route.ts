@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user is an ambassador
-    if (authResult.user.role !== UserRole.AMBASSADOR) {
+    if (authResult.user.role !== 'ambassador') {
       return NextResponse.json(
         { success: false, error: 'Access denied. Ambassador role required.' },
         { status: 403 }
@@ -173,7 +173,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Check if user is an ambassador
-    if (authResult.user.role !== UserRole.AMBASSADOR) {
+    if (authResult.user.role !== 'ambassador') {
       return NextResponse.json(
         { success: false, error: 'Access denied. Ambassador role required.' },
         { status: 403 }
@@ -194,15 +194,15 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       success: true,
       data: {
-        status: payoutDetails.status || 'not_submitted',
-        verified: payoutDetails.verified || false,
-        submittedAt: payoutDetails.submittedAt,
-        verifiedAt: payoutDetails.verifiedAt,
-        rejectionReason: payoutDetails.rejectionReason,
+        status: (payoutDetails as any)?.status || 'not_submitted',
+        verified: (payoutDetails as any)?.verified || false,
+        submittedAt: (payoutDetails as any)?.submittedAt,
+        verifiedAt: (payoutDetails as any)?.verifiedAt,
+        rejectionReason: (payoutDetails as any)?.rejectionReason,
         // Don't return sensitive data like full bank details
-        hasPersonalInfo: !!(payoutDetails.fullName && payoutDetails.dateOfBirth),
-        hasBankDetails: !!(payoutDetails.bankAccount?.accountNumber),
-        hasDocuments: !!(payoutDetails.documents && Object.keys(payoutDetails.documents).length > 0)
+        hasPersonalInfo: !!((payoutDetails as any)?.fullName && (payoutDetails as any)?.dateOfBirth),
+        hasBankDetails: !!((payoutDetails as any)?.bankAccount?.accountNumber),
+        hasDocuments: !!((payoutDetails as any)?.documents && Object.keys((payoutDetails as any)?.documents || {}).length > 0)
       }
     });
 

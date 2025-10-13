@@ -67,7 +67,7 @@ interface ForumPost {
   created_at: string;
 }
 
-export default function StudentCoursePage({ params }: { params: { courseId: string } }) {
+export default function StudentCoursePage({ params }: { params: Promise<{ courseId: string }> }) {
   const [course, setCourse] = useState<Course | null>(null);
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
   const [assignments, setAssignments] = useState<Assignment[]>([]);
@@ -76,11 +76,22 @@ export default function StudentCoursePage({ params }: { params: { courseId: stri
   const [error, setError] = useState<string>('');
   const [activeTab, setActiveTab] = useState('content');
   const [selectedChapter, setSelectedChapter] = useState<string>('');
+  const [courseId, setCourseId] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
+    const initializeParams = async () => {
+      const resolvedParams = await params;
+      setCourseId(resolvedParams.courseId);
+    };
+    
+    initializeParams();
+  }, [params]);
+
+  useEffect(() => {
+    if (!courseId) return;
     fetchCourseData();
-  }, [params.courseId]);
+  }, [courseId]);
 
   const fetchCourseData = async () => {
     try {
@@ -91,7 +102,7 @@ export default function StudentCoursePage({ params }: { params: { courseId: stri
       }
 
       // Fetch course details
-      const courseResponse = await fetch(`/api/courses/${params.courseId}`, {
+      const courseResponse = await fetch(`/api/courses/${courseId}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -106,7 +117,7 @@ export default function StudentCoursePage({ params }: { params: { courseId: stri
       }
 
       // Fetch quizzes
-      const quizzesResponse = await fetch(`/api/courses/${params.courseId}/quizzes`, {
+      const quizzesResponse = await fetch(`/api/courses/${courseId}/quizzes`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -118,7 +129,7 @@ export default function StudentCoursePage({ params }: { params: { courseId: stri
       }
 
       // Fetch assignments
-      const assignmentsResponse = await fetch(`/api/courses/${params.courseId}/assignments`, {
+      const assignmentsResponse = await fetch(`/api/courses/${courseId}/assignments`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -130,7 +141,7 @@ export default function StudentCoursePage({ params }: { params: { courseId: stri
       }
 
       // Fetch forum posts
-      const forumResponse = await fetch(`/api/courses/${params.courseId}/forum`, {
+      const forumResponse = await fetch(`/api/courses/${courseId}/forum`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },

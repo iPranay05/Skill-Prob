@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
         isValidPassword = await bcrypt.compare(password, user.password);
       } catch (error) {
         console.log('❌ Bcrypt error:', error);
-        console.log('❌ Bcrypt error details:', error.message);
+        console.log('❌ Bcrypt error details:', error instanceof Error ? error.message : 'Unknown error');
         // If bcrypt fails, password might be plain text but doesn't match
         isValidPassword = false;
       }

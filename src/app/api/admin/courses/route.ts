@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
         ratings,
         created_at,
         updated_at,
-        users!courses_mentor_id_fkey(
+        mentor:users(
           id,
           profile
         )
@@ -67,14 +67,33 @@ export async function GET(request: NextRequest) {
     }
 
     // Apply pagination
-    const { data: courses, error, count } = await query
-      .range(offset, offset + limit - 1)
-      .select('*', { count: 'exact' });
+    const { data: courses, error } = await query
+      .range(offset, offset + limit - 1);
 
     if (error) {
       console.error('Courses query error:', error);
       throw new APIError(`Failed to fetch courses: ${error.message}`, 500);
     }
+
+    // Get total count separately
+    let countQuery = supabaseAdmin
+      .from('courses')
+      .select('*', { count: 'exact', head: true });
+
+    // Apply same filters for count
+    if (filter !== 'all') {
+      if (['draft', 'published', 'archived', 'pending_review'].includes(filter)) {
+        countQuery = countQuery.eq('status', filter);
+      } else {
+        countQuery = countQuery.ilike('category', `%${filter}%`);
+      }
+    }
+
+    if (search) {
+      countQuery = countQuery.or(`title.ilike.%${search}%,description.ilike.%${search}%,category.ilike.%${search}%`);
+    }
+
+    const { count } = await countQuery;
 
     // Get enrollment counts for each course
     const courseIds = courses?.map(course => course.id) || [];
@@ -94,9 +113,13 @@ export async function GET(request: NextRequest) {
       title: course.title,
       description: course.description,
       mentorId: course.mentor_id,
-      mentorName: course.users?.profile?.firstName && course.users?.profile?.lastName
-        ? `${course.users.profile.firstName} ${course.users.profile.lastName}`
-        : course.users?.profile?.firstName || 'Unknown Mentor',
+      mentorName: (() => {
+        const mentor = Array.isArray(course.mentor) ? course.mentor[0] : course.mentor;
+        if (mentor?.profile?.firstName && mentor?.profile?.lastName) {
+          return `${mentor.profile.firstName} ${mentor.profile.lastName}`;
+        }
+        return mentor?.profile?.firstName || 'Unknown Mentor';
+      })(),
       category: course.category,
       type: course.type,
       pricing: course.pricing || { amount: 0, currency: 'INR', subscriptionType: 'one-time' },
@@ -123,7 +146,7 @@ export async function GET(request: NextRequest) {
 
   } catch (error) {
     console.error('Admin courses fetch error:', error);
-    
+
     if (error instanceof APIError) {
       return NextResponse.json(
         { success: false, error: error.message },

@@ -6,9 +6,9 @@ import Link from 'next/link';
 import { JobPosting } from '@/models/Job';
 
 interface JobDetailsPageProps {
-  params: {
+  params: Promise<{
     jobId: string;
-  };
+  }>;
 }
 
 interface ApplicationFormData {
@@ -25,17 +25,30 @@ export default function JobDetailsPage({ params }: JobDetailsPageProps) {
   const [applicationData, setApplicationData] = useState<ApplicationFormData>({});
   const [submitting, setSubmitting] = useState(false);
   const [hasApplied, setHasApplied] = useState(false);
+  const [jobId, setJobId] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
+    const initializeParams = async () => {
+      const resolvedParams = await params;
+      setJobId(resolvedParams.jobId);
+    };
+    
+    initializeParams();
+  }, [params]);
+
+  useEffect(() => {
+    if (!jobId) return;
     fetchJobDetails();
     checkApplicationStatus();
-  }, [params.jobId]);
+  }, [jobId]);
 
   const fetchJobDetails = async () => {
+    if (!jobId) return;
+    
     try {
       setLoading(true);
-      const response = await fetch(`/api/student/careers/jobs/${params.jobId}`);
+      const response = await fetch(`/api/student/careers/jobs/${jobId}`);
       
       if (!response.ok) {
         if (response.status === 404) {
@@ -54,8 +67,10 @@ export default function JobDetailsPage({ params }: JobDetailsPageProps) {
   };
 
   const checkApplicationStatus = async () => {
+    if (!jobId) return;
+    
     try {
-      const response = await fetch(`/api/student/careers/jobs/${params.jobId}/application-status`);
+      const response = await fetch(`/api/student/careers/jobs/${jobId}/application-status`);
       if (response.ok) {
         const data = await response.json();
         setHasApplied(data.hasApplied);
@@ -73,7 +88,7 @@ export default function JobDetailsPage({ params }: JobDetailsPageProps) {
     try {
       setSubmitting(true);
       
-      const response = await fetch(`/api/student/careers/jobs/${params.jobId}/apply`, {
+      const response = await fetch(`/api/student/careers/jobs/${jobId}/apply`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

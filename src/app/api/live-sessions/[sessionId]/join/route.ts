@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { LiveSessionService } from '../../../../../lib/liveSessionService';
-import { verifyToken } from '../../../../../lib/auth';
+import { verifyAuth } from '../../../../../lib/auth';
 import { APIError } from '../../../../../lib/errors';
 
 const liveSessionService = new LiveSessionService();
@@ -10,22 +10,20 @@ export async function POST(
   { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
 
-    const decoded = await verifyToken(token);
-    
     // Only students can join sessions through this endpoint
-    if (decoded.role !== 'student') {
+    if (authResult.user.role !== 'student') {
       return NextResponse.json({ error: 'Only students can join sessions' }, { status: 403 });
     }
 
     const { sessionId } = await params;
     const attendance = await liveSessionService.joinSession({
       sessionId,
-      studentId: decoded.userId,
+      studentId: authResult.user.userId,
     });
 
     // Get session details to return the Google Meet link
@@ -46,7 +44,7 @@ export async function POST(
     });
   } catch (error) {
     console.error('Error joining live session:', error);
-    
+
     if (error instanceof APIError) {
       return NextResponse.json(
         { error: error.message },
@@ -66,19 +64,17 @@ export async function DELETE(
   { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
 
-    const decoded = await verifyToken(token);
-    
-    if (decoded.role !== 'student') {
+    if (authResult.user.role !== 'student') {
       return NextResponse.json({ error: 'Only students can leave sessions' }, { status: 403 });
     }
 
     const { sessionId } = await params;
-    await liveSessionService.leaveSession(sessionId, decoded.userId);
+    await liveSessionService.leaveSession(sessionId, authResult.user.userId);
 
     return NextResponse.json({
       success: true,
@@ -86,7 +82,7 @@ export async function DELETE(
     });
   } catch (error) {
     console.error('Error leaving live session:', error);
-    
+
     if (error instanceof APIError) {
       return NextResponse.json(
         { error: error.message },

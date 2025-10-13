@@ -94,7 +94,7 @@ export async function PUT(request: NextRequest) {
       }
     }
 
-    await systemConfigService.updatePricingConfig(body, authResult.user.id);
+    await systemConfigService.updatePricingConfig(body, authResult.user.userId);
 
     return NextResponse.json({
       success: true,

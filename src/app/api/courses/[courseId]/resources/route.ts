@@ -11,10 +11,10 @@ const courseContentService = new CourseContentService();
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
-    const { courseId } = params;
+    const { courseId } = await params;
     
     const resources = await courseContentService.getResourcesByCourse(courseId);
 
@@ -44,7 +44,7 @@ export async function GET(
  */
 export async function POST(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
     // Authenticate and authorize
@@ -57,7 +57,7 @@ export async function POST(
     }
 
     const { userId } = authResult.user!;
-    const { courseId } = params;
+    const { courseId } = await params;
     const body = await request.json();
 
     // Validate request body

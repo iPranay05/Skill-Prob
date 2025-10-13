@@ -4,7 +4,7 @@ import { verifyAuth } from '@/lib/auth';
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { jobId: string } }
+  { params }: { params: Promise<{ jobId: string }> }
 ) {
   try {
     const authResult = await verifyAuth(request);
@@ -21,7 +21,8 @@ export async function POST(
       );
     }
 
-    const savedJob = await JobService.saveJob(authResult.user.id, params.jobId);
+    const { jobId } = await params;
+    const savedJob = await JobService.saveJob(authResult.user.id, jobId);
 
     return NextResponse.json({
       success: true,
@@ -45,7 +46,7 @@ export async function POST(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { jobId: string } }
+  { params }: { params: Promise<{ jobId: string }> }
 ) {
   try {
     const authResult = await verifyAuth(request);
@@ -62,7 +63,8 @@ export async function DELETE(
       );
     }
 
-    await JobService.unsaveJob(authResult.user.id, params.jobId);
+    const { jobId } = await params;
+    await JobService.unsaveJob(authResult.user.id, jobId);
 
     return NextResponse.json({
       success: true,

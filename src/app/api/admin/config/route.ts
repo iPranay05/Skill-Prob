@@ -100,7 +100,7 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    await systemConfigService.updateConfig(key, value, authResult.user.id, description);
+    await systemConfigService.updateConfig(key, value, authResult.user.userId, description);
 
     return NextResponse.json({
       success: true,

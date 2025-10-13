@@ -4,7 +4,7 @@ import { verifyAuth } from '@/lib/auth';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { paymentId: string } }
+  { params }: { params: Promise<{ paymentId: string }> }
 ) {
   try {
     // Verify authentication
@@ -16,7 +16,7 @@ export async function GET(
       );
     }
 
-    const { paymentId } = params;
+    const { paymentId } = await params;
 
     // Get payment status
     const payment = await paymentService.getPaymentStatus(paymentId);

@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 import { connectToDatabase } from '@/lib/database';
 import { ErrorHandler, ValidationError, NotFoundError } from '@/lib/errors';
-import { User } from '@/models/User';
+import { UserModel } from '@/models/User';
 import OTPService from '@/lib/otpService';
 import { emailService } from '@/lib/emailService';
 
@@ -25,9 +25,9 @@ export async function POST(request: NextRequest) {
     // Find user by email or phone
     let user;
     if (type === 'email' && email) {
-      user = await User.findByEmail(email);
+      user = await UserModel.findByEmail(email);
     } else if (type === 'phone' && phone) {
-      user = await User.findByPhone(phone);
+      user = await UserModel.findByPhone(phone);
     } else {
       throw new ValidationError(`${type === 'email' ? 'Email' : 'Phone'} is required for ${type} verification`);
     }
@@ -49,13 +49,13 @@ export async function POST(request: NextRequest) {
 
     // Update user verification status
     if (type === 'email') {
-      await User.updateVerification(user.id!, 'email', true);
+      await UserModel.updateVerification(user.id!, 'email', true);
     } else if (type === 'phone') {
-      await User.updateVerification(user.id!, 'phone', true);
+      await UserModel.updateVerification(user.id!, 'phone', true);
     }
 
     // Check if user is fully verified
-    const updatedUser = await User.findById(user.id!);
+    const updatedUser = await UserModel.findById(user.id!);
     const isFullyVerified = updatedUser!.verification.emailVerified &&
       (!updatedUser!.phone || updatedUser!.verification.phoneVerified);
 

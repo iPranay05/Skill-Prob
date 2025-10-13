@@ -6,19 +6,26 @@ import { Course } from '@/models/Course';
 import { getCurrentUser } from '@/lib/clientAuth';
 
 interface CourseDetailPageProps {
-  params?: { courseId: string };
+  params: Promise<{ courseId: string }>;
 }
 
-export default function CourseDetailPage({}: CourseDetailPageProps) {
-  const params = useParams();
+export default function CourseDetailPage({ params }: CourseDetailPageProps) {
   const router = useRouter();
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<any>(null);
   const [enrolling, setEnrolling] = useState(false);
+  const [courseId, setCourseId] = useState<string | null>(null);
 
-  const courseId = params.courseId as string;
+  useEffect(() => {
+    const initializeParams = async () => {
+      const resolvedParams = await params;
+      setCourseId(resolvedParams.courseId);
+    };
+    
+    initializeParams();
+  }, [params]);
 
   useEffect(() => {
     const fetchData = async () => {

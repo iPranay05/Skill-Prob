@@ -40,6 +40,8 @@ interface AmbassadorDashboardData {
       totalEarnings: number;
       currentPoints: number;
       lifetimePoints: number;
+      kycVerified?: boolean;
+      kycStatus?: string;
     };
     createdAt: string;
   };

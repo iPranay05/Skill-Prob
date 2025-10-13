@@ -35,7 +35,7 @@ export async function PUT(
       );
     }
 
-    await adminService.updateUserStatus(userId, isActive, authResult.user.id);
+    await adminService.updateUserStatus(userId, isActive, authResult.user.userId);
 
     return NextResponse.json({
       success: true,

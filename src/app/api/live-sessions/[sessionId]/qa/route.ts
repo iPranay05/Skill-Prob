@@ -7,7 +7,7 @@ const liveSessionService = new LiveSessionService();
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { sessionId: string } }
+  { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -34,8 +34,9 @@ export async function POST(
       );
     }
 
+    const { sessionId } = await params;
     const qa = await liveSessionService.createQA({
-      sessionId: params.sessionId,
+      sessionId,
       studentId: decoded.userId,
       question: question.trim(),
       isAnonymous,

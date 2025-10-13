@@ -39,25 +39,38 @@ interface ApplicationWithDetails extends JobApplication {
 }
 
 interface ApplicationDetailsPageProps {
-  params: {
+  params: Promise<{
     applicationId: string;
-  };
+  }>;
 }
 
 export default function ApplicationDetailsPage({ params }: ApplicationDetailsPageProps) {
   const [application, setApplication] = useState<ApplicationWithDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [applicationId, setApplicationId] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
+    const initializeParams = async () => {
+      const resolvedParams = await params;
+      setApplicationId(resolvedParams.applicationId);
+    };
+    
+    initializeParams();
+  }, [params]);
+
+  useEffect(() => {
+    if (!applicationId) return;
     fetchApplicationDetails();
-  }, [params.applicationId]);
+  }, [applicationId]);
 
   const fetchApplicationDetails = async () => {
+    if (!applicationId) return;
+    
     try {
       setLoading(true);
-      const response = await fetch(`/api/student/applications/${params.applicationId}`);
+      const response = await fetch(`/api/student/applications/${applicationId}`);
       
       if (!response.ok) {
         if (response.status === 404) {

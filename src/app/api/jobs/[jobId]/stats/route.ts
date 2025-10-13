@@ -4,9 +4,10 @@ import { verifyAuth } from '@/lib/auth';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { jobId: string } }
+  { params }: { params: Promise<{ jobId: string }> }
 ) {
   try {
+    const { jobId } = await params;
     const authResult = await verifyAuth(request);
     if (!authResult.success || !authResult.user) {
       return NextResponse.json(
@@ -22,7 +23,7 @@ export async function GET(
     }
 
     // Get the job posting to check ownership
-    const jobPosting = await JobService.getJobPostingById(params.jobId);
+    const jobPosting = await JobService.getJobPostingById(jobId);
     if (!jobPosting) {
       return NextResponse.json(
         {
@@ -53,7 +54,7 @@ export async function GET(
       );
     }
 
-    const stats = await JobService.getJobPostingStats(params.jobId);
+    const stats = await JobService.getJobPostingStats(jobId);
 
     return NextResponse.json({
       success: true,

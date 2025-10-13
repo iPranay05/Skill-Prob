@@ -3,9 +3,9 @@ import { JobService } from '@/lib/jobService';
 import { verifyToken } from '@/lib/auth';
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     jobId: string;
-  };
+  }>;
 }
 
 export async function GET(request: NextRequest, { params }: RouteParams) {
@@ -27,14 +27,16 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
       );
     }
 
+    const { jobId } = await params;
+
     // Get user's applications
     const applications = await JobService.getApplicationsByApplicant(user.userId);
     
     // Check if user has applied for this job
-    const hasApplied = applications.some(app => app.job_posting_id === params.jobId);
+    const hasApplied = applications.some(app => app.job_posting_id === jobId);
     
     // Get the application if it exists
-    const application = applications.find(app => app.job_posting_id === params.jobId);
+    const application = applications.find(app => app.job_posting_id === jobId);
 
     return NextResponse.json({
       success: true,

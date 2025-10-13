@@ -35,7 +35,7 @@ export async function GET(
       {
         id: '1',
         application_id: applicationId,
-        sender_id: authResult.user.id,
+        sender_id: authResult.user.userId,
         sender_type: authResult.user.role,
         message: 'Thank you for your application. We will review it and get back to you soon.',
         message_type: 'text',
@@ -92,7 +92,7 @@ export async function POST(
     const message = {
       id: Date.now().toString(),
       application_id: applicationId,
-      sender_id: authResult.user.id,
+      sender_id: authResult.user.userId,
       sender_type: authResult.user.role,
       message: validatedData.message,
       message_type: validatedData.message_type,
@@ -100,10 +100,17 @@ export async function POST(
     };
 
     // Update communication count in job_applications table
+    // First get the current count, then increment it
+    const { data: currentApp } = await supabaseAdmin
+      .from('job_applications')
+      .select('communication_count')
+      .eq('id', applicationId)
+      .single();
+    
     await supabaseAdmin
       .from('job_applications')
       .update({
-        communication_count: supabaseAdmin.raw('communication_count + 1'),
+        communication_count: (currentApp?.communication_count || 0) + 1,
         last_communication_at: new Date().toISOString()
       })
       .eq('id', applicationId);

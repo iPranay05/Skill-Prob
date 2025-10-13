@@ -5,7 +5,7 @@ import { verifyAuth } from '@/lib/auth';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { jobId: string } }
+  { params }: { params: Promise<{ jobId: string }> }
 ) {
   try {
     const authResult = await verifyAuth(request);
@@ -22,8 +22,10 @@ export async function GET(
       );
     }
 
+    const { jobId } = await params;
+
     // Get the job posting to check ownership
-    const jobPosting = await JobService.getJobPostingById(params.jobId);
+    const jobPosting = await JobService.getJobPostingById(jobId);
     if (!jobPosting) {
       return NextResponse.json(
         {
@@ -76,7 +78,7 @@ export async function GET(
       }
     });
 
-    const result = await JobService.getApplicationsByJobPosting(params.jobId, query);
+    const result = await JobService.getApplicationsByJobPosting(jobId, query);
 
     return NextResponse.json({
       success: true,
@@ -99,7 +101,7 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { jobId: string } }
+  { params }: { params: Promise<{ jobId: string }> }
 ) {
   try {
     const authResult = await verifyAuth(request);
@@ -130,8 +132,10 @@ export async function POST(
       );
     }
 
+    const { jobId } = await params;
+
     // Check if job posting exists and is published
-    const jobPosting = await JobService.getJobPostingById(params.jobId);
+    const jobPosting = await JobService.getJobPostingById(jobId);
     if (!jobPosting) {
       return NextResponse.json(
         {
@@ -191,7 +195,7 @@ export async function POST(
     // Validate input
     const validationResult = CreateJobApplicationSchema.safeParse({
       ...body,
-      job_posting_id: params.jobId,
+      job_posting_id: jobId,
       applicant_id: authResult.user.id
     });
 

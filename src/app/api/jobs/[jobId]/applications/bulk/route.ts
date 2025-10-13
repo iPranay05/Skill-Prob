@@ -12,7 +12,7 @@ const BulkUpdateSchema = z.object({
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { jobId: string } }
+  { params }: { params: Promise<{ jobId: string }> }
 ) {
   try {
     const authResult = await verifyAuth(request);
@@ -29,8 +29,10 @@ export async function PUT(
       );
     }
 
+    const { jobId } = await params;
+
     // Get the job posting to check ownership
-    const jobPosting = await JobService.getJobPostingById(params.jobId);
+    const jobPosting = await JobService.getJobPostingById(jobId);
     if (!jobPosting) {
       return NextResponse.json(
         {

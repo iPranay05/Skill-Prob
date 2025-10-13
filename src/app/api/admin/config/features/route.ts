@@ -97,7 +97,7 @@ export async function PUT(request: NextRequest) {
     await systemConfigService.updateFeatureFlag(
       flagName, 
       enabled, 
-      authResult.user.id,
+      authResult.user.userId,
       { description, rolloutPercentage, targetRoles }
     );
 

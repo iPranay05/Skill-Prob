@@ -5,7 +5,7 @@ import { AppError } from '@/lib/errors';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -21,8 +21,9 @@ export async function GET(
     const { searchParams } = new URL(request.url);
     const chapterId = searchParams.get('chapterId');
 
+    const { courseId } = await params;
     const posts = await StudentLearningService.getCourseForumPosts(
-      params.courseId,
+      courseId,
       chapterId || undefined
     );
 
@@ -49,7 +50,7 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
@@ -71,8 +72,9 @@ export async function POST(
       );
     }
 
+    const { courseId } = await params;
     const post = await StudentLearningService.createForumPost({
-      course_id: params.courseId,
+      course_id: courseId,
       author_id: decoded.userId,
       post_type: 'discussion',
       is_pinned: false,

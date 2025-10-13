@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { JobService } from '@/lib/jobService';
 import { ApplicationSearchQuery } from '@/models/JobPosting';
 import { verifyAuth } from '@/lib/auth';
+import { supabaseAdmin } from '@/lib/database';
 
 export async function GET(request: NextRequest) {
   try {
@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
     }
 
     const { searchParams } = new URL(request.url);
-    
+
     // Build search query
     const searchQuery: ApplicationSearchQuery = {
       page: parseInt(searchParams.get('page') || '1'),
@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
 
     // For students, only show their applications
     if (authResult.user.role === 'student') {
-      searchQuery.filters!.applicant_id = authResult.user.id;
+      searchQuery.filters!.applicant_id = authResult.user.userId;
     }
 
     // For employers, only show applications for their jobs
@@ -60,28 +60,123 @@ export async function GET(request: NextRequest) {
     let result;
     if (authResult.user.role === 'student') {
       // Get student's applications
-      const applications = await JobService.getStudentApplications(authResult.user.id);
+      const { data: applications, error: studentError } = await supabaseAdmin
+        .from('job_applications')
+        .select(`
+          *,
+          job_postings (
+            id,
+            title,
+            company,
+            location,
+            salary_min,
+            salary_max,
+            currency
+          )
+        `)
+        .eq('applicant_id', authResult.user.userId)
+        .order('created_at', { ascending: false });
+
+      if (studentError) {
+        return NextResponse.json(
+          { success: false, error: 'Failed to fetch applications' },
+          { status: 500 }
+        );
+      }
+
       result = {
-        applications,
-        total: applications.length,
+        applications: applications || [],
+        total: applications?.length || 0,
         page: 1,
         totalPages: 1
       };
     } else if (authResult.user.role === 'employer') {
       // Get employer's applications
-      const applications = await JobService.getEmployerApplications(
-        authResult.user.id,
-        jobPostingId || undefined
-      );
+      let query = supabaseAdmin
+        .from('job_applications')
+        .select(`
+          *,
+          job_postings!inner (
+            id,
+            title,
+            company,
+            location,
+            salary_min,
+            salary_max,
+            currency,
+            employer_id
+          )
+        `)
+        .eq('job_postings.employer_id', authResult.user.userId)
+        .order('created_at', { ascending: false });
+
+      if (jobPostingId) {
+        query = query.eq('job_posting_id', jobPostingId);
+      }
+
+      const { data: applications, error: employerError } = await query;
+
+      if (employerError) {
+        return NextResponse.json(
+          { success: false, error: 'Failed to fetch applications' },
+          { status: 500 }
+        );
+      }
+
       result = {
-        applications,
-        total: applications.length,
+        applications: applications || [],
+        total: applications?.length || 0,
         page: 1,
         totalPages: 1
       };
     } else {
       // Admin can see all applications
-      result = await JobService.getJobApplications(searchQuery);
+      let query = supabaseAdmin
+        .from('job_applications')
+        .select(`
+          *,
+          job_postings (
+            id,
+            title,
+            company,
+            location,
+            salary_min,
+            salary_max,
+            currency
+          )
+        `)
+        .order('created_at', { ascending: false });
+
+      // Apply filters if provided
+      if (searchQuery.filters?.status) {
+        query = query.eq('status', searchQuery.filters.status);
+      }
+      if (searchQuery.filters?.job_posting_id) {
+        query = query.eq('job_posting_id', searchQuery.filters.job_posting_id);
+      }
+
+      // Apply pagination
+      const page = searchQuery.page || 1;
+      const limit = searchQuery.limit || 20;
+      const offset = (page - 1) * limit;
+
+      query = query.range(offset, offset + limit - 1);
+
+      const { data: applications, error: adminError, count } = await query;
+
+      if (adminError) {
+        return NextResponse.json(
+          { success: false, error: 'Failed to fetch applications' },
+          { status: 500 }
+        );
+      }
+
+      result = {
+        applications: applications || [],
+        total: count || 0,
+        page,
+        totalPages: Math.ceil((count || 0) / limit)
+      };
     }
 
     return NextResponse.json({

@@ -49,7 +49,7 @@ export async function POST(
     await InterviewSchedulingService.cancelInterview(
       applicationId,
       validatedData.reason,
-      authResult.user.id
+      authResult.user.userId
     );
 
     return NextResponse.json({
