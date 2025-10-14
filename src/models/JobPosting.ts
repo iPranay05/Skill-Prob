@@ -56,7 +56,7 @@ export const SalarySchema = z.object({
 
 export const ContactPersonSchema = z.object({
   name: z.string(),
-  email: z.string().email(),
+  email: z.string().email({ message: "Invalid email format" }),
   phone: z.string().optional()
 });
 
@@ -81,12 +81,12 @@ export const CompanySchema = z.object({
 });
 
 export const JobPostingSchema = z.object({
-  id: z.string().uuid().optional(),
+  id: z.string().uuid({ message: "Invalid UUID format" }).optional(),
   title: z.string().min(1).max(255),
   description: z.string().min(10),
   short_description: z.string().max(500).optional(),
-  company_id: z.string().uuid(),
-  posted_by: z.string().uuid(),
+  company_id: z.string().uuid({ message: "Invalid UUID format" }),
+  posted_by: z.string().uuid({ message: "Invalid UUID format" }),
   job_type: z.enum([JobType.INTERNSHIP, JobType.FULL_TIME, JobType.PART_TIME, JobType.CONTRACT, JobType.FREELANCE]).default(JobType.INTERNSHIP),
   work_mode: z.enum([WorkMode.REMOTE, WorkMode.ONSITE, WorkMode.HYBRID]).default(WorkMode.REMOTE),
   experience_level: z.enum([ExperienceLevel.ENTRY, ExperienceLevel.JUNIOR, ExperienceLevel.MID, ExperienceLevel.SENIOR, ExperienceLevel.LEAD]).default(ExperienceLevel.ENTRY),
@@ -99,8 +99,8 @@ export const JobPostingSchema = z.object({
   application_deadline: z.date().optional(),
   max_applications: z.number().int().positive().optional(),
   current_applications: z.number().int().min(0).default(0),
-  application_email: z.string().email().optional(),
-  application_url: z.string().url().optional(),
+  application_email: z.string().email({ message: "Invalid email format" }).optional(),
+  application_url: z.string().url({ message: "Invalid URL format" }).optional(),
   contact_person: ContactPersonSchema.optional(),
   status: z.enum([JobStatus.DRAFT, JobStatus.PUBLISHED, JobStatus.CLOSED, JobStatus.ARCHIVED]).default(JobStatus.DRAFT),
   is_featured: z.boolean().default(false),
@@ -114,18 +114,18 @@ export const JobPostingSchema = z.object({
 });
 
 export const JobApplicationSchema = z.object({
-  id: z.string().uuid().optional(),
-  job_posting_id: z.string().uuid(),
-  applicant_id: z.string().uuid(),
-  resume_url: z.string().url().optional(),
+  id: z.string().uuid({ message: "Invalid UUID format" }).optional(),
+  job_posting_id: z.string().uuid({ message: "Invalid UUID format" }),
+  applicant_id: z.string().uuid({ message: "Invalid UUID format" }),
+  resume_url: z.string().url({ message: "Invalid URL format" }).optional(),
   cover_letter: z.string().optional(),
-  portfolio_url: z.string().url().optional(),
+  portfolio_url: z.string().url({ message: "Invalid URL format" }).optional(),
   expected_salary: SalarySchema.optional(),
   availability_date: z.date().optional(),
   additional_info: z.string().optional(),
   status: z.enum([ApplicationStatus.PENDING, ApplicationStatus.REVIEWED, ApplicationStatus.SHORTLISTED, ApplicationStatus.INTERVIEW_SCHEDULED, ApplicationStatus.REJECTED, ApplicationStatus.HIRED]).default(ApplicationStatus.PENDING),
   status_updated_at: z.date().default(() => new Date()),
-  status_updated_by: z.string().uuid().optional(),
+  status_updated_by: z.string().uuid({ message: "Invalid UUID format" }).optional(),
   interview_scheduled_at: z.date().optional(),
   interview_notes: z.string().optional(),
   interview_feedback: z.string().optional(),
@@ -137,24 +137,24 @@ export const JobApplicationSchema = z.object({
 });
 
 export const JobCategorySchema = z.object({
-  id: z.string().uuid().optional(),
+  id: z.string().uuid({ message: "Invalid UUID format" }).optional(),
   name: z.string().min(1).max(100),
   description: z.string().optional(),
   slug: z.string().min(1).max(100),
-  parent_id: z.string().uuid().optional(),
+  parent_id: z.string().uuid({ message: "Invalid UUID format" }).optional(),
   created_at: z.date().default(() => new Date())
 });
 
 export const SavedJobSchema = z.object({
-  id: z.string().uuid().optional(),
-  user_id: z.string().uuid(),
-  job_posting_id: z.string().uuid(),
+  id: z.string().uuid({ message: "Invalid UUID format" }).optional(),
+  user_id: z.string().uuid({ message: "Invalid UUID format" }),
+  job_posting_id: z.string().uuid({ message: "Invalid UUID format" }),
   created_at: z.date().default(() => new Date())
 });
 
 export const JobAlertSchema = z.object({
-  id: z.string().uuid().optional(),
-  user_id: z.string().uuid(),
+  id: z.string().uuid({ message: "Invalid UUID format" }).optional(),
+  user_id: z.string().uuid({ message: "Invalid UUID format" }),
   name: z.string().min(1).max(255),
   keywords: z.array(z.string()).default([]),
   job_types: z.array(z.enum([JobType.INTERNSHIP, JobType.FULL_TIME, JobType.PART_TIME, JobType.CONTRACT, JobType.FREELANCE])).default([]),
@@ -340,7 +340,7 @@ export const UpdateJobApplicationSchema = z.object({
   interview_scheduled_at: z.date().optional(),
   interview_notes: z.string().optional(),
   interview_feedback: z.string().optional(),
-  status_updated_by: z.string().uuid().optional()
+  status_updated_by: z.string().uuid({ message: "Invalid UUID format" }).optional()
 });
 
 export type CreateCompanyInput = z.infer<typeof CreateCompanySchema>;
