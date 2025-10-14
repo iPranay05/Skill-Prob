@@ -122,16 +122,73 @@ class MockRedis {
     return [];
   }
 
+  async zcount(key: string, min: number, max: number): Promise<number> {
+    const set = this.sortedSets.get(key);
+    if (!set) return 0;
+    
+    let count = 0;
+    for (const [, score] of set.entries()) {
+      if (score >= min && score <= max) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  async keys(pattern: string): Promise<string[]> {
+    const keys: string[] = [];
+    
+    // Check regular keys
+    for (const key of this.store.keys()) {
+      if (this.matchPattern(key, pattern)) {
+        keys.push(key);
+      }
+    }
+    
+    // Check sorted set keys
+    for (const key of this.sortedSets.keys()) {
+      if (this.matchPattern(key, pattern)) {
+        keys.push(key);
+      }
+    }
+    
+    return keys;
+  }
+
+  private matchPattern(key: string, pattern: string): boolean {
+    // Simple pattern matching for Redis-style patterns
+    const regex = new RegExp(pattern.replace(/\*/g, '.*').replace(/\?/g, '.'));
+    return regex.test(key);
+  }
+
+  async zrevrange(key: string, start: number, stop: number): Promise<string[]> {
+    const set = this.sortedSets.get(key);
+    if (!set) return [];
+    
+    const sortedEntries = Array.from(set.entries()).sort((a, b) => b[1] - a[1]);
+    return sortedEntries.slice(start, stop + 1).map(entry => entry[0]);
+  }
+
+  async zrem(key: string, member: string): Promise<number> {
+    const set = this.sortedSets.get(key);
+    if (!set) return 0;
+    
+    const existed = set.has(member);
+    set.delete(member);
+    return existed ? 1 : 0;
+  }
+
   // Multi/Pipeline operations (simplified)
   multi() {
     return {
-      zremrangebyscore: (key: string, min: number, max: number) => this,
-      zadd: (key: string, score: number, member: string) => this,
-      expire: (key: string, seconds: number) => this,
+      zremrangebyscore: (_key: string, _min: number, _max: number) => this,
+      zadd: (_key: string, _score: number, _member: string) => this,
+      expire: (_key: string, _seconds: number) => this,
+      zcard: (_key: string) => this,
       exec: async () => {
         // In a real implementation, this would execute all queued commands
         // For mock, we'll just return success
-        return [['OK'], ['OK'], ['OK']];
+        return [['OK'], ['OK'], ['OK'], [5]]; // Added mock zcard result
       }
     };
   }
@@ -148,7 +205,7 @@ class MockRedis {
 let redisInstance: MockRedis | import('ioredis').Redis | null = null;
 
 export const redis = new Proxy({} as MockRedis | import('ioredis').Redis, {
-  get(target, prop) {
+  get(_target, prop) {
     if (!redisInstance) {
       if (isMockRedis) {
         console.log('Using Mock Redis for development');
@@ -168,19 +225,21 @@ export const redis = new Proxy({} as MockRedis | import('ioredis').Redis, {
           });
           
           // Handle connection errors by falling back to mock
-          redisInstance.on('error', (error: Error) => {
-            console.warn('Redis connection failed, switching to mock Redis:', error.message);
-            redisInstance = new MockRedis();
-          });
+          if (redisInstance && 'on' in redisInstance) {
+            redisInstance.on('error', (error: Error) => {
+              console.warn('Redis connection failed, switching to mock Redis:', error.message);
+              redisInstance = new MockRedis();
+            });
 
-          // Prevent unhandled error events
-          redisInstance.on('connect', () => {
-            console.log('Redis connected successfully');
-          });
+            // Prevent unhandled error events
+            redisInstance.on('connect', () => {
+              console.log('Redis connected successfully');
+            });
 
-          redisInstance.on('ready', () => {
-            console.log('Redis ready');
-          });
+            redisInstance.on('ready', () => {
+              console.log('Redis ready');
+            });
+          }
           
         } catch (error) {
           console.warn('Failed to initialize Redis, using mock instead:', error);
@@ -202,7 +261,7 @@ export const redis = new Proxy({} as MockRedis | import('ioredis').Redis, {
 export const connectToDatabase = async () => {
   try {
     // Test Supabase connection
-    const { data, error } = await supabase.from('users').select('count').limit(1);
+    const { error } = await supabase.from('users').select('count').limit(1);
     if (error && error.code !== 'PGRST116') { // PGRST116 is "relation does not exist" which is fine for initial setup
       throw error;
     }

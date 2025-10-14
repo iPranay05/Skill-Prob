@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
     // Validate input
     const validationResult = CreateJobPostingSchema.safeParse({
       ...body,
-      employer_id: authResult.user.id
+      employer_id: authResult.user.userId
     });
 
     if (!validationResult.success) {
@@ -101,7 +101,7 @@ export async function POST(request: NextRequest) {
           error: {
             code: 'VALIDATION_ERROR',
             message: 'Invalid job posting data',
-            details: validationResult.error.errors
+            details: validationResult.error.issues
           }
         },
         { status: 400 }

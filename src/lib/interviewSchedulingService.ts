@@ -1,4 +1,4 @@
-import { JobApplication, ApplicationStatus } from '../models/JobPosting';
+import { JobApplication, ApplicationStatus } from '../models/Job';
 import { JobService } from './jobService';
 import { JobNotificationService } from './jobNotificationService';
 import { AppError } from './errors';
@@ -44,29 +44,25 @@ export class InterviewSchedulingService {
   static async scheduleInterview(request: ScheduleInterviewRequest, scheduledBy: string): Promise<void> {
     try {
       // Get the application details
-      const application = await JobService.getJobApplication(request.application_id);
+      const application = await JobService.getJobApplicationById(request.application_id);
       if (!application) {
         throw new AppError('Job application not found', 404);
       }
 
       // Update application with interview details
-      await JobService.updateJobApplicationStatus(
+      await JobService.updateApplicationStatus(
         request.application_id,
-        {
-          status: ApplicationStatus.INTERVIEW_SCHEDULED,
-          interview_scheduled_at: request.interview_date,
-          interview_notes: request.notes,
-          status_updated_by: scheduledBy
-        },
-        scheduledBy
+        ApplicationStatus.INTERVIEW_SCHEDULED,
+        scheduledBy || 'system',
+        request.notes
       );
 
       // Send notifications
       await JobNotificationService.notifyApplicationStatusChange(
-        { ...application, status: ApplicationStatus.INTERVIEW_SCHEDULED, interview_scheduled_at: request.interview_date },
-        application.job_posting,
-        application.applicant,
-        application.job_posting.company
+        { ...application, status: ApplicationStatus.INTERVIEW_SCHEDULED as any, interview_scheduled_at: request.interview_date } as any,
+        { id: application.job_posting_id } as any,
+        { id: application.applicant_id } as any,
+        { name: 'Company' } as any
       );
 
       // Schedule reminder notifications
@@ -85,7 +81,7 @@ export class InterviewSchedulingService {
     rescheduledBy?: string
   ): Promise<void> {
     try {
-      const application = await JobService.getJobApplication(applicationId);
+      const application = await JobService.getJobApplicationById(applicationId);
       if (!application) {
         throw new AppError('Job application not found', 404);
       }
@@ -95,14 +91,11 @@ export class InterviewSchedulingService {
       }
 
       // Update application with new interview date
-      await JobService.updateJobApplicationStatus(
+      await JobService.updateApplicationStatus(
         applicationId,
-        {
-          interview_scheduled_at: newInterviewDate,
-          interview_notes: reason ? `Rescheduled: ${reason}` : 'Interview rescheduled',
-          status_updated_by: rescheduledBy
-        },
-        rescheduledBy || 'system'
+        ApplicationStatus.INTERVIEW_SCHEDULED,
+        rescheduledBy || 'system',
+        reason ? `Rescheduled: ${reason}` : 'Interview rescheduled'
       );
 
       // Send reschedule notification
@@ -123,21 +116,17 @@ export class InterviewSchedulingService {
     cancelledBy?: string
   ): Promise<void> {
     try {
-      const application = await JobService.getJobApplication(applicationId);
+      const application = await JobService.getJobApplicationById(applicationId);
       if (!application) {
         throw new AppError('Job application not found', 404);
       }
 
       // Update application status back to reviewed or shortlisted
-      await JobService.updateJobApplicationStatus(
+      await JobService.updateApplicationStatus(
         applicationId,
-        {
-          status: ApplicationStatus.REVIEWED,
-          interview_scheduled_at: undefined,
-          interview_notes: reason ? `Interview cancelled: ${reason}` : 'Interview cancelled',
-          status_updated_by: cancelledBy
-        },
-        cancelledBy || 'system'
+        ApplicationStatus.REVIEWED,
+        cancelledBy || 'system',
+        reason ? `Interview cancelled: ${reason}` : 'Interview cancelled'
       );
 
       // Send cancellation notification
@@ -157,10 +146,10 @@ export class InterviewSchedulingService {
     try {
       // This is a simplified implementation
       // In a real system, you would integrate with calendar systems like Google Calendar, Outlook, etc.
-      
+
       const slots: InterviewSlot[] = [];
       const currentDate = new Date(startDate);
-      
+
       while (currentDate <= endDate) {
         // Skip weekends
         if (currentDate.getDay() !== 0 && currentDate.getDay() !== 6) {
@@ -168,10 +157,10 @@ export class InterviewSchedulingService {
           for (let hour = 9; hour < 17; hour++) {
             const slotStart = new Date(currentDate);
             slotStart.setHours(hour, 0, 0, 0);
-            
+
             const slotEnd = new Date(slotStart);
             slotEnd.setHours(hour + 1, 0, 0, 0);
-            
+
             // Check if slot is in the future
             if (slotStart > new Date()) {
               slots.push({
@@ -184,10 +173,10 @@ export class InterviewSchedulingService {
             }
           }
         }
-        
+
         currentDate.setDate(currentDate.getDate() + 1);
       }
-      
+
       return slots;
     } catch (error: any) {
       throw new AppError(`Failed to get available slots: ${error.message}`, 500);
@@ -228,26 +217,26 @@ export class InterviewSchedulingService {
     try {
       // This would typically query a dedicated interviews table
       // For now, we'll use the job applications table
-      
+
       const applications = await JobService.getEmployerApplications(employerId);
-      
-      const scheduledApplications = applications.filter(app => 
+
+      const scheduledApplications = applications.filter((app: any) =>
         app.status === ApplicationStatus.INTERVIEW_SCHEDULED && app.interview_scheduled_at
       );
-      
+
       const now = new Date();
       const weekStart = new Date(now);
       weekStart.setDate(now.getDate() - now.getDay());
       weekStart.setHours(0, 0, 0, 0);
-      
+
       const weekEnd = new Date(weekStart);
       weekEnd.setDate(weekStart.getDate() + 7);
 
-      const upcomingInterviews = scheduledApplications.filter(app => 
+      const upcomingInterviews = scheduledApplications.filter((app: any) =>
         new Date(app.interview_scheduled_at!) > now
       );
 
-      const thisWeekInterviews = scheduledApplications.filter(app => {
+      const thisWeekInterviews = scheduledApplications.filter((app: any) => {
         const interviewDate = new Date(app.interview_scheduled_at!);
         return interviewDate >= weekStart && interviewDate < weekEnd;
       });
@@ -278,7 +267,7 @@ export class InterviewSchedulingService {
         // In a real implementation, you would use a job queue like Bull or Agenda
         // For now, we'll just log the reminder scheduling
         console.log(`Interview reminder scheduled for ${reminderDate} for application ${applicationId}`);
-        
+
         // You could implement this with a cron job or background task processor
         // setTimeout(() => {
         //   this.sendInterviewReminder(applicationId);

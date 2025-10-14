@@ -29,7 +29,7 @@ export async function GET(
     }
 
     // Check if user owns this payment
-    if (payment.student_id !== authResult.user.id && !['admin', 'super_admin'].includes(authResult.user.role)) {
+    if (payment.student_id !== authResult.user.userId && !['admin', 'super_admin'].includes(authResult.user.role)) {
       return NextResponse.json(
         { success: false, error: 'Access denied' },
         { status: 403 }

@@ -85,7 +85,7 @@ export default function EditCourse({ params }: { params: Promise<{ courseId: str
 
   const updateCourse = (updates: Partial<Course>) => {
     if (!course) return;
-    setCourse({ ...course, ...updates });
+    setCourse({ ...course, ...updates } as Course);
   };
 
   const updateNestedField = (section: keyof Course, field: string, value: any) => {
@@ -93,10 +93,10 @@ export default function EditCourse({ params }: { params: Promise<{ courseId: str
     setCourse({
       ...course,
       [section]: {
-        ...course[section],
+        ...(course[section] as any),
         [field]: value
       }
-    });
+    } as Course);
   };
 
   if (loading) {

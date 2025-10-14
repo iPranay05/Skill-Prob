@@ -127,14 +127,14 @@ export class JobNotificationService {
   ): Promise<void> {
     try {
       const template = this.getApplicationStatusTemplate(application.status);
-      
+
       const templateData = {
         applicantName: `${applicant.profile?.firstName || ''} ${applicant.profile?.lastName || ''}`.trim() || applicant.email,
         jobTitle: jobPosting.title,
         companyName: company.name,
         appliedDate: new Date(application.applied_at).toLocaleDateString(),
         applicationId: application.id,
-        interviewDateTime: application.interview_scheduled_at 
+        interviewDateTime: application.interview_scheduled_at
           ? new Date(application.interview_scheduled_at).toLocaleString()
           : '',
         interviewFormat: 'Video Call', // Default format
@@ -143,32 +143,36 @@ export class JobNotificationService {
       };
 
       // Send email notification
-      await NotificationService.sendEmail({
-        to: applicant.email,
-        subject: this.interpolateTemplate(template.subject, templateData),
-        html: this.interpolateTemplate(template.template, templateData),
-        category: 'job_application'
-      });
+      await NotificationService.sendEmail(
+        applicant.email,
+        this.interpolateTemplate(template.subject, templateData),
+        this.interpolateTemplate(template.template, templateData)
+      );
 
       // Send SMS for critical status changes
       if ([ApplicationStatus.SHORTLISTED, ApplicationStatus.INTERVIEW_SCHEDULED, ApplicationStatus.HIRED].includes(application.status)) {
         const smsMessage = this.getSMSMessage(application.status, jobPosting.title, company.name);
-        
+
         if (applicant.phone) {
-          await NotificationService.sendSMS({
-            to: applicant.phone,
-            message: smsMessage
-          });
+          await NotificationService.sendSMS(
+            applicant.phone,
+            smsMessage
+          );
         }
       }
 
       // Create in-app notification
       await NotificationService.createInAppNotification({
-        userId: applicant.id!,
-        title: this.interpolateTemplate(template.subject, templateData),
-        message: this.getInAppMessage(application.status, jobPosting.title, company.name),
-        type: 'job_application',
-        data: {
+        id: `job_app_${application.id}_${Date.now()}`,
+        recipient_id: applicant.id!,
+        channel: 'in_app' as any,
+        priority: 'medium' as any,
+        body: this.getInAppMessage(application.status, jobPosting.title, company.name),
+        scheduled_at: new Date(),
+        status: 'pending' as any,
+        attempts: 0,
+        max_attempts: 3,
+        metadata: {
           applicationId: application.id,
           jobPostingId: jobPosting.id,
           status: application.status
@@ -206,20 +210,24 @@ export class JobNotificationService {
       `;
 
       // Send email notification
-      await NotificationService.sendEmail({
-        to: employer.email,
+      await NotificationService.sendEmail(
+        employer.email,
         subject,
-        html: template,
-        category: 'new_application'
-      });
+        template
+      );
 
       // Create in-app notification
       await NotificationService.createInAppNotification({
-        userId: employer.id!,
-        title: subject,
-        message: `New application from ${applicant.profile?.firstName || applicant.email} for ${jobPosting.title}`,
-        type: 'new_application',
-        data: {
+        id: `new_app_${application.id}_${Date.now()}`,
+        recipient_id: employer.id!,
+        channel: 'in_app' as any,
+        priority: 'medium' as any,
+        body: `New application from ${applicant.profile?.firstName || applicant.email} for ${jobPosting.title}`,
+        scheduled_at: new Date(),
+        status: 'pending' as any,
+        attempts: 0,
+        max_attempts: 3,
+        metadata: {
           applicationId: application.id,
           jobPostingId: jobPosting.id,
           applicantId: applicant.id
@@ -243,16 +251,21 @@ export class JobNotificationService {
       const batchSize = 10;
       for (let i = 0; i < applications.length; i += batchSize) {
         const batch = applications.slice(i, i + batchSize);
-        
+
         const promises = batch.map(async (application) => {
           // Note: In a real implementation, you would fetch the applicant details
           // For now, we'll create a minimal notification
           await NotificationService.createInAppNotification({
-            userId: application.applicant_id,
-            title: `Application Status Updated - ${jobPosting.title}`,
-            message: `Your application status has been updated to: ${newStatus.replace('_', ' ')}`,
-            type: 'job_application',
-            data: {
+            id: `bulk_update_${application.id}_${Date.now()}`,
+            recipient_id: application.applicant_id,
+            channel: 'in_app' as any,
+            priority: 'medium' as any,
+            body: `Your application status has been updated to: ${newStatus.replace('_', ' ')}`,
+            scheduled_at: new Date(),
+            status: 'pending' as any,
+            attempts: 0,
+            max_attempts: 3,
+            metadata: {
               applicationId: application.id,
               jobPostingId: jobPosting.id,
               status: newStatus
@@ -261,7 +274,7 @@ export class JobNotificationService {
         });
 
         await Promise.all(promises);
-        
+
         // Small delay between batches
         if (i + batchSize < applications.length) {
           await new Promise(resolve => setTimeout(resolve, 100));
@@ -308,20 +321,19 @@ export class JobNotificationService {
       `;
 
       // Send email reminder
-      await NotificationService.sendEmail({
-        to: applicant.email,
+      await NotificationService.sendEmail(
+        applicant.email,
         subject,
-        html: template,
-        category: 'interview_reminder'
-      });
+        template
+      );
 
       // Send SMS reminder if phone is available
       if (applicant.phone) {
         const smsMessage = `Interview reminder: ${jobPosting.title} at ${company.name} on ${interviewDate.toLocaleString()}. Good luck!`;
-        await NotificationService.sendSMS({
-          to: applicant.phone,
-          message: smsMessage
-        });
+        await NotificationService.sendSMS(
+          applicant.phone,
+          smsMessage
+        );
       }
 
     } catch (error) {

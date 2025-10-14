@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { StudentCareerService } from '@/lib/studentCareerService';
-import { verifyToken } from '@/lib/auth';
+import { verifyAuth } from '@/lib/auth';
 import { AppError } from '@/lib/errors';
 
 export async function GET(
@@ -8,15 +8,19 @@ export async function GET(
   { params }: { params: Promise<{ jobId: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
     let userId: string | undefined;
 
-    if (token) {
-      const decoded = verifyToken(token);
-      userId = decoded?.userId;
+    try {
+      const authResult = await verifyAuth(request);
+      if (authResult.success && authResult.user) {
+        userId = authResult.user.userId;
+      }
+    } catch {
+      // Optional authentication - continue without userId
     }
 
-    const job = await StudentCareerService.getJobById(params.jobId, userId);
+    const { jobId } = await params;
+    const job = await StudentCareerService.getJobById(jobId, userId);
 
     if (!job) {
       return NextResponse.json(
@@ -31,7 +35,7 @@ export async function GET(
     });
   } catch (error) {
     console.error('Error fetching job:', error);
-    
+
     if (error instanceof AppError) {
       return NextResponse.json(
         { error: error.message },

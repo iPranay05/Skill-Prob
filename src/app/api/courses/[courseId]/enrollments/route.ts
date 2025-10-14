@@ -26,7 +26,7 @@ export async function GET(
     // Check if user has permission to view course enrollments
     // This should be mentor of the course or admin
     const isAdmin = authResult.user.role === 'admin' || authResult.user.role === 'super_admin';
-    
+
     // For mentors, we would need to verify they own the course
     // This is a simplified check - in production, verify course ownership
     if (!isAdmin && authResult.user.role !== 'mentor') {
@@ -37,7 +37,7 @@ export async function GET(
     }
 
     const { searchParams } = new URL(request.url);
-    
+
     // Parse query parameters
     const query: EnrollmentQuery = {
       filters: {
@@ -61,7 +61,7 @@ export async function GET(
     });
   } catch (error) {
     console.error('Get course enrollments error:', error);
-    
+
     if (error instanceof APIError) {
       return NextResponse.json(
         { success: false, error: error.message },

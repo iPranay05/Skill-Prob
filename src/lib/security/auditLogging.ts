@@ -551,7 +551,8 @@ export class AuditLoggingService {
       const { data, error } = await supabaseAdmin
         .from('audit_logs')
         .delete()
-        .lt('created_at', cutoffDate.toISOString());
+        .lt('created_at', cutoffDate.toISOString())
+        .select();
 
       if (error) {
         throw error;

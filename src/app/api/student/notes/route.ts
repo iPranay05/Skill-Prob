@@ -1,25 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { StudentLearningService } from '@/lib/studentLearningService';
-import { verifyToken } from '@/lib/auth';
+import { verifyAuth } from '@/lib/auth';
 import { AppError } from '@/lib/errors';
 
 export async function GET(request: NextRequest) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const decoded = verifyToken(token);
-    if (!decoded) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     }
 
     const { searchParams } = new URL(request.url);
     const courseId = searchParams.get('courseId');
 
     const notes = await StudentLearningService.getStudentNotes(
-      decoded.userId,
+      authResult.user.userId,
       courseId || undefined
     );
 
@@ -46,14 +41,9 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const decoded = verifyToken(token);
-    if (!decoded) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     }
 
     const noteData = await request.json();
@@ -66,7 +56,7 @@ export async function POST(request: NextRequest) {
     }
 
     const note = await StudentLearningService.createNote({
-      student_id: decoded.userId,
+      student_id: authResult.user.userId,
       is_private: true,
       ...noteData
     });

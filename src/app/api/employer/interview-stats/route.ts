@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const stats = await InterviewSchedulingService.getInterviewStats(authResult.user.id);
+    const stats = await InterviewSchedulingService.getInterviewStats(authResult.user.userId);
 
     return NextResponse.json({
       success: true,

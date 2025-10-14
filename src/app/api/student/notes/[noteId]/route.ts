@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { StudentLearningService } from '@/lib/studentLearningService';
-import { verifyToken } from '@/lib/auth';
+import { verifyAuth } from '@/lib/auth';
 import { AppError } from '@/lib/errors';
 
 export async function PUT(
@@ -8,21 +8,17 @@ export async function PUT(
   { params }: { params: Promise<{ noteId: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const decoded = verifyToken(token);
-    if (!decoded) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    }
-
     const updates = await request.json();
+    const { noteId } = await params;
 
     const note = await StudentLearningService.updateNote(
-      params.noteId,
-      decoded.userId,
+      noteId,
+      authResult.user.userId,
       updates
     );
 
@@ -52,17 +48,13 @@ export async function DELETE(
   { params }: { params: Promise<{ noteId: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const decoded = verifyToken(token);
-    if (!decoded) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    }
-
-    await StudentLearningService.deleteNote(params.noteId, decoded.userId);
+    const { noteId } = await params;
+    await StudentLearningService.deleteNote(noteId, authResult.user.userId);
 
     return NextResponse.json({
       success: true,

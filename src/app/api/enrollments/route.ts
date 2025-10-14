@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
       limit: parseInt(searchParams.get('limit') || '10')
     };
 
-    const result = await enrollmentService.getStudentEnrollments(authResult.user.id, query);
+    const result = await enrollmentService.getStudentEnrollments(authResult.user.userId, query);
 
     return NextResponse.json({
       success: true,
@@ -87,7 +87,8 @@ export async function POST(request: NextRequest) {
     // Prepare enrollment data
     const enrollmentData: CreateEnrollmentInput = {
       course_id: body.course_id,
-      student_id: authResult.user.id,
+      student_id: authResult.user.userId,
+      status: body.status || 'active',
       amount_paid: body.amount_paid,
       currency: body.currency || 'INR',
       payment_method: body.payment_method,

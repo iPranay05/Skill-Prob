@@ -32,8 +32,10 @@ export async function PATCH(
       );
     }
 
+    const { paymentId } = await params;
+    
     const payment = await enrollmentService.updatePaymentStatus(
-      params.paymentId,
+      paymentId,
       body.status as PaymentStatus,
       body.gateway_payment_id,
       body.failure_reason

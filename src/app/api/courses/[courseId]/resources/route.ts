@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { CourseContentService } from '../../../../../lib/courseContentService';
-import { AuthMiddleware } from '../../../../../middleware/auth';
+import { verifyAuth } from '../../../../../lib/auth';
 import { APIError } from '../../../../../lib/errors';
 import { CreateResourceSchema } from '../../../../../models/CourseContent';
 
@@ -48,15 +48,17 @@ export async function POST(
 ) {
   try {
     // Authenticate and authorize
-    const authResult = await authMiddleware(request, ['mentor']);
-    if (!authResult.success) {
-      return NextResponse.json(
-        { success: false, error: authResult.error },
-        { status: authResult.statusCode }
-      );
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    
+    // Check if user is a mentor
+    if (authResult.user.role !== 'mentor') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
-    const { userId } = authResult.user!;
+    const { userId } = authResult.user;
     const { courseId } = await params;
     const body = await request.json();
 

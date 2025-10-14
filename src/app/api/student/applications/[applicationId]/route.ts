@@ -11,7 +11,7 @@ interface RouteParams {
 export async function GET(request: NextRequest, { params }: RouteParams) {
   try {
     const { success, user } = await verifyToken(request);
-    
+
     if (!success || !user) {
       return NextResponse.json(
         { error: 'Authentication required' },
@@ -28,7 +28,8 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     }
 
     // Get application details
-    const application = await JobService.getJobApplicationById(params.applicationId);
+    const { applicationId } = await params;
+    const application = await JobService.getJobApplicationById(applicationId);
 
     if (!application) {
       return NextResponse.json(

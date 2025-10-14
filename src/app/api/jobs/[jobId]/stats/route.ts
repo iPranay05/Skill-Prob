@@ -38,7 +38,7 @@ export async function GET(
     }
 
     // Check if user can view stats for this job
-    const canView = authResult.user.id === jobPosting.employer_id || 
+    const canView = authResult.user.userId === jobPosting.employer_id || 
                    ['admin', 'super_admin'].includes(authResult.user.role);
 
     if (!canView) {

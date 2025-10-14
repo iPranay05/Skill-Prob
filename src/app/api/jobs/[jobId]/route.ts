@@ -2,13 +2,15 @@ import { NextRequest, NextResponse } from 'next/server';
 import { JobService } from '@/lib/jobService';
 import { UpdateJobPostingSchema } from '@/models/Job';
 import { verifyAuth } from '@/lib/auth';
+import { ZodError } from 'zod';
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ jobId: string }> }
 ) {
   try {
-    const jobPosting = await JobService.getJobPostingById(params.jobId);
+    const { jobId } = await params;
+    const jobPosting = await JobService.getJobPostingById(jobId);
 
     if (!jobPosting) {
       return NextResponse.json(
@@ -27,22 +29,22 @@ export async function GET(
       success: true,
       data: jobPosting
     });
-  } catch (error) {
-    console.error('Error getting job posting:', error);
+  } catch (error: any) {
+    console.error('Error fetching job posting:', error);
     return NextResponse.json(
       {
         success: false,
         error: {
-          code: 'FETCH_FAILED',
-          message: error instanceof Error ? error.message : 'Failed to get job posting'
+          code: 'FETCH_JOB_ERROR',
+          message: error.message || 'Failed to fetch job posting'
         }
       },
-      { status: 500 }
+      { status: error.status || 500 }
     );
   }
 }
 
-export async function PUT(
+export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ jobId: string }> }
 ) {
@@ -61,9 +63,10 @@ export async function PUT(
       );
     }
 
-    // Get the job posting to check ownership
-    const existingJob = await JobService.getJobPostingById(params.jobId);
-    if (!existingJob) {
+    const { jobId } = await params;
+    const jobPosting = await JobService.getJobPostingById(jobId);
+
+    if (!jobPosting) {
       return NextResponse.json(
         {
           success: false,
@@ -77,7 +80,7 @@ export async function PUT(
     }
 
     // Check if user can update this job posting
-    const canUpdate = authResult.user.id === existingJob.employer_id || 
+    const canUpdate = authResult.user.userId === jobPosting.employer_id ||
                      ['admin', 'super_admin'].includes(authResult.user.role);
 
     if (!canUpdate) {
@@ -94,41 +97,42 @@ export async function PUT(
     }
 
     const body = await request.json();
-    
-    // Validate input
-    const validationResult = UpdateJobPostingSchema.safeParse(body);
 
-    if (!validationResult.success) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: {
-            code: 'VALIDATION_ERROR',
-            message: 'Invalid job posting data',
-            details: validationResult.error.errors
-          }
-        },
-        { status: 400 }
-      );
+    try {
+      const validatedData = UpdateJobPostingSchema.parse(body);
+      const updatedJobPosting = await JobService.updateJobPosting(jobId, validatedData);
+
+      return NextResponse.json({
+        success: true,
+        data: updatedJobPosting
+      });
+    } catch (validationError) {
+      if (validationError instanceof ZodError) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: {
+              code: 'VALIDATION_ERROR',
+              message: 'Invalid job posting data',
+              details: validationError.issues
+            }
+          },
+          { status: 400 }
+        );
+      }
+      throw validationError;
     }
-
-    const updatedJob = await JobService.updateJobPosting(params.jobId, validationResult.data);
-
-    return NextResponse.json({
-      success: true,
-      data: updatedJob
-    });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error updating job posting:', error);
     return NextResponse.json(
       {
         success: false,
         error: {
-          code: 'UPDATE_FAILED',
-          message: error instanceof Error ? error.message : 'Failed to update job posting'
+          code: 'UPDATE_JOB_ERROR',
+          message: error.message || 'Failed to update job posting'
         }
       },
-      { status: 500 }
+      { status: error.status || 500 }
     );
   }
 }
@@ -152,9 +156,10 @@ export async function DELETE(
       );
     }
 
-    // Get the job posting to check ownership
-    const existingJob = await JobService.getJobPostingById(params.jobId);
-    if (!existingJob) {
+    const { jobId } = await params;
+    const jobPosting = await JobService.getJobPostingById(jobId);
+
+    if (!jobPosting) {
       return NextResponse.json(
         {
           success: false,
@@ -168,7 +173,7 @@ export async function DELETE(
     }
 
     // Check if user can delete this job posting
-    const canDelete = authResult.user.id === existingJob.employer_id || 
+    const canDelete = authResult.user.userId === jobPosting.employer_id ||
                      ['admin', 'super_admin'].includes(authResult.user.role);
 
     if (!canDelete) {
@@ -184,23 +189,23 @@ export async function DELETE(
       );
     }
 
-    await JobService.deleteJobPosting(params.jobId);
+    await JobService.deleteJobPosting(jobId);
 
     return NextResponse.json({
       success: true,
       message: 'Job posting deleted successfully'
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error deleting job posting:', error);
     return NextResponse.json(
       {
         success: false,
         error: {
-          code: 'DELETE_FAILED',
-          message: error instanceof Error ? error.message : 'Failed to delete job posting'
+          code: 'DELETE_JOB_ERROR',
+          message: error.message || 'Failed to delete job posting'
         }
       },
-      { status: 500 }
+      { status: error.status || 500 }
     );
   }
 }

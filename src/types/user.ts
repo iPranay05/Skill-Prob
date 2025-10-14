@@ -81,4 +81,5 @@ export interface OTPVerification {
   expiresAt: string;
   verified: boolean;
   createdAt?: string;
+  attempts?: number;
 }

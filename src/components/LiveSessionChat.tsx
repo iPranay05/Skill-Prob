@@ -163,7 +163,7 @@ export function LiveSessionChat({ sessionId, userRole, userId, userName }: LiveS
                 <p>No messages yet. Start the conversation!</p>
               </div>
             ) : (
-              messages.map((message: Message) => (
+              messages.map((message) => (
                 <div
                   key={message.id}
                   className={`p-3 rounded-lg ${getMessageTypeColor(message.messageType)}`}
@@ -267,7 +267,7 @@ export function LiveSessionChat({ sessionId, userRole, userId, userName }: LiveS
                 <p>No questions yet.</p>
               </div>
             ) : (
-              qas.map((qa: QA) => (
+              qas.map((qa) => (
                 <div key={qa.id} className="bg-gray-50 rounded-lg p-4">
                   <div className="mb-3">
                     <div className="flex items-center space-x-2 mb-2">

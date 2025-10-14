@@ -482,6 +482,7 @@ export class RateLimitService {
       }
 
       const averageRequestsPerMinute = Math.round(totalRecentRequests / Math.min(rateLimitKeys.length, 100));
+      const peakRequestsPerMinute = peakMinuteRequests;
 
       // Detect suspicious patterns
       const suspiciousPatterns: Array<{ pattern: string; count: number; severity: 'low' | 'medium' | 'high' }> = [];

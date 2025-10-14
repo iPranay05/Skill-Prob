@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const status = searchParams.get('status') as JobStatus | undefined;
 
-    const jobs = await JobService.getEmployerJobPostings(authResult.user.id, status);
+    const jobs = await JobService.getJobPostingsByEmployer(authResult.user.userId, status);
 
     return NextResponse.json({
       success: true,

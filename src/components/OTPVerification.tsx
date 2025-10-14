@@ -70,9 +70,9 @@ export function OTPVerification({
   // Handle success/error callbacks
   useEffect(() => {
     if (success && onSuccess) {
-      onSuccess({ verified: true, type });
+      onSuccess({ success: true, message: 'Verification successful' });
     }
-  }, [success, onSuccess, type]);
+  }, [success, onSuccess]);
 
   useEffect(() => {
     if (error && onError) {
@@ -197,7 +197,7 @@ export function OTPVerification({
           {otpCode.map((digit, index) => (
             <input
               key={index}
-              ref={el => inputRefs.current[index] = el}
+              ref={el => { inputRefs.current[index] = el; }}
               type="text"
               inputMode="numeric"
               pattern="[0-9]*"
@@ -269,7 +269,7 @@ export function OTPVerification({
         <div className="text-center">
           <p className="text-sm text-gray-600 mb-2">Didn&apos;t receive the code?</p>
           <ResendOTP
-            email={type === 'email' ? email : ''}
+            email={type === 'email' ? (email || '') : ''}
             type={type}
             onSuccess={() => {
               setOtpCode(['', '', '', '', '', '']);

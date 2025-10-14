@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { StudentCareerService } from '@/lib/studentCareerService';
-import { verifyToken } from '@/lib/auth';
+import { verifyAuth } from '@/lib/auth';
 import { AppError } from '@/lib/errors';
 
 export async function POST(
@@ -8,14 +8,9 @@ export async function POST(
   { params }: { params: Promise<{ jobId: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const decoded = verifyToken(token);
-    if (!decoded) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     }
 
     const applicationData = await request.json();
@@ -23,7 +18,7 @@ export async function POST(
 
     const application = await StudentCareerService.applyToJob(
       jobId,
-      decoded.userId,
+      authResult.user.userId,
       applicationData
     );
 

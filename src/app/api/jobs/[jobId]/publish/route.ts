@@ -39,7 +39,7 @@ export async function POST(
     }
 
     // Check if user can publish this job posting
-    const canPublish = authResult.user.id === existingJob.employer_id || 
+    const canPublish = authResult.user.userId === existingJob.employer_id || 
                       ['admin', 'super_admin'].includes(authResult.user.role);
 
     if (!canPublish) {

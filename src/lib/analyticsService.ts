@@ -138,7 +138,7 @@ export class AnalyticsService {
         if (!courseStats.has(courseId)) {
           courseStats.set(courseId, {
             courseId,
-            title: enrollment.courses.title,
+            title: enrollment.courses[0]?.title,
             enrollments: 0,
             revenue: 0
           });
@@ -210,9 +210,9 @@ export class AnalyticsService {
       // Process mentor revenue data
       const mentorStats = new Map();
       mentorRevenueData?.forEach(enrollment => {
-        const mentorId = enrollment.courses.mentor_id;
+        const mentorId = enrollment.courses[0]?.mentor_id;
         if (!mentorStats.has(mentorId)) {
-          const profile = enrollment.courses.users.profile as any;
+          const profile = enrollment.courses[0]?.users?.[0]?.profile as any;
           mentorStats.set(mentorId, {
             mentorId,
             mentorName: `${profile.firstName || ''} ${profile.lastName || ''}`.trim(),
@@ -223,7 +223,8 @@ export class AnalyticsService {
         }
         const stats = mentorStats.get(mentorId);
         stats.totalRevenue += enrollment.amount_paid || 0;
-        stats.courseCount.add(enrollment.courses.id);
+        const courseId = (enrollment.courses as any)?.[0]?.id || (enrollment as any).course_id;
+        if (courseId) stats.courseCount.add(courseId);
         stats.enrollmentCount += 1;
       });
 
@@ -251,11 +252,11 @@ export class AnalyticsService {
       // Process category revenue data
       const categoryStats = new Map();
       categoryRevenueData?.forEach(enrollment => {
-        const categoryId = enrollment.courses.category_id;
+        const categoryId = enrollment.courses[0]?.category_id;
         if (categoryId && !categoryStats.has(categoryId)) {
           categoryStats.set(categoryId, {
             categoryId,
-            categoryName: enrollment.courses.categories?.name || 'Uncategorized',
+            categoryName: enrollment.courses[0]?.categories?.[0]?.name || 'Uncategorized',
             totalRevenue: 0,
             enrollmentCount: 0
           });
@@ -430,7 +431,7 @@ export class AnalyticsService {
       employersData?.forEach(job => {
         const employerId = job.employer_id;
         if (!employerStats.has(employerId)) {
-          const profile = job.users.profile as any;
+          const profile = job.users[0]?.profile as any;
           employerStats.set(employerId, {
             employerId,
             companyName: profile.companyName || profile.firstName || 'Unknown',

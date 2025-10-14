@@ -34,7 +34,8 @@ export async function GET(
       );
     }
 
-    const coupon = await couponService.getCouponById(params.couponId);
+    const { couponId } = await params;
+    const coupon = await couponService.getCouponById(couponId);
     
     if (!coupon) {
       return NextResponse.json(
@@ -44,7 +45,7 @@ export async function GET(
     }
 
     // Non-admin users can only see their own coupons
-    if (!isAdmin && coupon.created_by !== authResult.user.id) {
+    if (!isAdmin && coupon.created_by !== authResult.user.userId) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized to view this coupon' },
         { status: 403 }
@@ -105,7 +106,8 @@ export async function PATCH(
     if (body.valid_until !== undefined) updateData.valid_until = body.valid_until ? new Date(body.valid_until) : undefined;
     if (body.is_active !== undefined) updateData.is_active = body.is_active;
 
-    const coupon = await couponService.updateCoupon(params.couponId, updateData, authResult.user.id);
+    const { couponId } = await params;
+    const coupon = await couponService.updateCoupon(couponId, updateData, authResult.user.userId);
 
     return NextResponse.json({
       success: true,
@@ -145,7 +147,8 @@ export async function DELETE(
       );
     }
 
-    await couponService.deleteCoupon(params.couponId, authResult.user.id);
+    const { couponId } = await params;
+    await couponService.deleteCoupon(couponId, authResult.user.userId);
 
     return NextResponse.json({
       success: true,

@@ -22,7 +22,7 @@ export async function POST(
     }
 
     const { jobId } = await params;
-    const savedJob = await JobService.saveJob(authResult.user.id, jobId);
+    const savedJob = await JobService.saveJob(authResult.user.userId, jobId);
 
     return NextResponse.json({
       success: true,
@@ -64,7 +64,7 @@ export async function DELETE(
     }
 
     const { jobId } = await params;
-    await JobService.unsaveJob(authResult.user.id, jobId);
+    await JobService.unsaveJob(authResult.user.userId, jobId);
 
     return NextResponse.json({
       success: true,

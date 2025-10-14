@@ -107,7 +107,7 @@ export const JobApplicationSchema = z.object({
   resume_url: z.string().url().optional(),
   cover_letter: z.string().optional(),
   portfolio_url: z.string().url().optional(),
-  application_data: z.record(z.any()).default({}),
+  application_data: z.record(z.string(), z.any()).default({}),
   
   // Status tracking
   status: z.enum(['pending', 'reviewed', 'shortlisted', 'interview_scheduled', 'rejected', 'selected', 'withdrawn']).default('pending'),

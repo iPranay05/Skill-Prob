@@ -13,7 +13,7 @@ export default function JoinPage() {
     if (ref) {
       // Store referral code in localStorage for the registration process
       localStorage.setItem('referralCode', ref);
-      
+
       // Track the referral click
       fetch('/api/referrals/track', {
         method: 'POST',

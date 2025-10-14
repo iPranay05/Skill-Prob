@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
       filters: {
         is_active: searchParams.get('is_active') ? searchParams.get('is_active') === 'true' : undefined,
         discount_type: searchParams.get('discount_type') as any || undefined,
-        created_by: isAdmin ? searchParams.get('created_by') || undefined : authResult.user.id,
+        created_by: isAdmin ? searchParams.get('created_by') || undefined : authResult.user.userId,
         valid_only: searchParams.get('valid_only') === 'true'
       },
       sortBy: (searchParams.get('sortBy') as any) || 'created_at',
@@ -120,7 +120,7 @@ export async function POST(request: NextRequest) {
       is_active: body.is_active !== undefined ? body.is_active : true
     };
 
-    const coupon = await couponService.createCoupon(couponData, authResult.user.id);
+    const coupon = await couponService.createCoupon(couponData, authResult.user.userId);
 
     return NextResponse.json({
       success: true,

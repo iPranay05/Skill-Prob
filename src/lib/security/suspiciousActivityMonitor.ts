@@ -4,7 +4,7 @@ import { RateLimitService } from './rateLimiting';
 
 export interface SuspiciousActivity {
   identifier: string;
-  type: 'rate_limit_abuse' | 'login_anomaly' | 'payment_fraud' | 'data_scraping' | 'bot_behavior' | 'geo_anomaly' | 'user_abuse';
+  type: 'rate_limit_abuse' | 'login_anomaly' | 'payment_fraud' | 'data_scraping' | 'bot_behavior' | 'geo_anomaly' | 'user_abuse' | 'distributed_attack';
   severity: 'low' | 'medium' | 'high' | 'critical';
   details: Record<string, any>;
   timestamp?: Date;
@@ -131,7 +131,7 @@ export class SuspiciousActivityMonitor {
     try {
       const timestamp = activity.timestamp || new Date();
       const key = `suspicious_activity:${activity.identifier}:${activity.type}`;
-      
+
       // Store the activity in Redis with expiration
       await redis.setex(
         key,
@@ -141,7 +141,7 @@ export class SuspiciousActivityMonitor {
           timestamp: timestamp.toISOString()
         })
       );
-      
+
       // Log to audit trail
       await AuditService.logSecurityEvent(
         `suspicious_activity_${activity.type}`,
@@ -156,13 +156,13 @@ export class SuspiciousActivityMonitor {
         activity.details.ipAddress,
         activity.details.userAgent
       );
-      
+
       // Check if this triggers any alert rules
       await this.checkAlertRules(activity);
-      
+
       // Update activity counters for pattern detection
       await this.updateActivityCounters(activity);
-      
+
     } catch (error) {
       console.error('Error reporting suspicious activity:', error);
     }
@@ -170,10 +170,10 @@ export class SuspiciousActivityMonitor {
 
   // Check alert rules against the activity
   private static async checkAlertRules(activity: SuspiciousActivity): Promise<void> {
-    const relevantRules = this.ALERT_RULES.filter(rule => 
+    const relevantRules = this.ALERT_RULES.filter(rule =>
       rule.enabled && (rule.type === activity.type || rule.type === 'general')
     );
-    
+
     for (const rule of relevantRules) {
       try {
         const triggered = await this.evaluateRule(rule, activity);
@@ -190,12 +190,12 @@ export class SuspiciousActivityMonitor {
   private static async evaluateRule(rule: AlertRule, activity: SuspiciousActivity): Promise<boolean> {
     for (const condition of rule.conditions) {
       const value = await this.getMetricValue(activity.identifier, condition.field, condition.timeWindow);
-      
+
       if (!this.compareValues(value, condition.operator, condition.threshold)) {
         return false; // All conditions must be met
       }
     }
-    
+
     return true;
   }
 
@@ -203,31 +203,31 @@ export class SuspiciousActivityMonitor {
   private static async getMetricValue(identifier: string, field: string, timeWindow: number): Promise<number> {
     const now = Date.now();
     const windowStart = now - timeWindow;
-    
+
     try {
       switch (field) {
         case 'login_attempts':
           return await this.getActivityCount(identifier, 'auth_login', timeWindow);
-          
+
         case 'payment_failures':
           return await this.getFailedActivityCount(identifier, 'payment', timeWindow);
-          
+
         case 'api_requests':
           return await this.getActivityCount(identifier, 'api', timeWindow);
-          
+
         case 'course_views':
           return await this.getActivityCount(identifier, 'course_view', timeWindow);
-          
+
         case 'user_profiles_viewed':
           return await this.getActivityCount(identifier, 'profile_view', timeWindow);
-          
+
         case 'requests_per_minute':
           const totalRequests = await this.getActivityCount(identifier, 'api', 60 * 1000);
           return totalRequests;
-          
+
         case 'user_lookup_attempts':
           return await this.getActivityCount(identifier, 'user_lookup', timeWindow);
-          
+
         default:
           return 0;
       }
@@ -243,7 +243,7 @@ export class SuspiciousActivityMonitor {
       const key = `rate_limit:${action}:${identifier}`;
       const now = Date.now();
       const windowStart = now - timeWindow;
-      
+
       return await redis.zcount(key, windowStart, now);
     } catch (error) {
       console.error(`Error getting activity count for ${action}:`, error);
@@ -257,7 +257,7 @@ export class SuspiciousActivityMonitor {
       const key = `failed_${action}:${identifier}`;
       const now = Date.now();
       const windowStart = now - timeWindow;
-      
+
       return await redis.zcount(key, windowStart, now);
     } catch (error) {
       console.error(`Error getting failed activity count for ${action}:`, error);
@@ -290,7 +290,7 @@ export class SuspiciousActivityMonitor {
               `Automatic block due to rule: ${rule.name}`
             );
             break;
-            
+
           case 'alert':
             await this.createAlert({
               id: `${rule.id}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
@@ -309,7 +309,7 @@ export class SuspiciousActivityMonitor {
               acknowledged: false
             });
             break;
-            
+
           case 'log':
             await AuditService.logSecurityEvent(
               `rule_triggered_${rule.id}`,
@@ -339,10 +339,10 @@ export class SuspiciousActivityMonitor {
         7 * 24 * 60 * 60, // 7 days
         JSON.stringify(alert)
       );
-      
+
       // Also add to alerts list for easy retrieval
       await redis.zadd('security_alerts', Date.now(), alert.id);
-      
+
       // Log critical alerts to audit trail
       if (alert.severity === 'critical' || alert.severity === 'high') {
         await AuditService.logSecurityEvent(
@@ -357,7 +357,7 @@ export class SuspiciousActivityMonitor {
           }
         );
       }
-      
+
     } catch (error) {
       console.error('Error creating security alert:', error);
     }
@@ -373,12 +373,12 @@ export class SuspiciousActivityMonitor {
         `activity_counter:severity:${activity.severity}:${activity.identifier}`,
         `activity_counter:severity:${activity.severity}:global`
       ];
-      
+
       for (const counter of counters) {
         await redis.zadd(counter, now, `${now}-${Math.random()}`);
         await redis.expire(counter, 24 * 60 * 60); // 24 hours
       }
-      
+
     } catch (error) {
       console.error('Error updating activity counters:', error);
     }
@@ -390,13 +390,13 @@ export class SuspiciousActivityMonitor {
     severity?: 'low' | 'medium' | 'high' | 'critical'
   ): Promise<SuspiciousActivity[]> {
     try {
-      const pattern = severity 
+      const pattern = severity
         ? `suspicious_activity:*:*`
         : `suspicious_activity:*:*`;
-      
+
       const keys = await redis.keys(pattern);
       const activities: SuspiciousActivity[] = [];
-      
+
       for (const key of keys.slice(0, limit)) {
         try {
           const data = await redis.get(key);
@@ -410,12 +410,12 @@ export class SuspiciousActivityMonitor {
           console.error(`Error parsing activity data for key ${key}:`, error);
         }
       }
-      
+
       // Sort by timestamp (most recent first)
-      return activities.sort((a, b) => 
+      return activities.sort((a, b) =>
         new Date(b.timestamp || 0).getTime() - new Date(a.timestamp || 0).getTime()
       );
-      
+
     } catch (error) {
       console.error('Error getting recent activities:', error);
       return [];
@@ -430,7 +430,7 @@ export class SuspiciousActivityMonitor {
     try {
       const alertIds = await redis.zrevrange('security_alerts', 0, limit - 1);
       const alerts: SecurityAlert[] = [];
-      
+
       for (const alertId of alertIds) {
         try {
           const data = await redis.get(`security_alert:${alertId}`);
@@ -444,9 +444,9 @@ export class SuspiciousActivityMonitor {
           console.error(`Error parsing alert data for ${alertId}:`, error);
         }
       }
-      
+
       return alerts;
-      
+
     } catch (error) {
       console.error('Error getting security alerts:', error);
       return [];
@@ -461,15 +461,15 @@ export class SuspiciousActivityMonitor {
     try {
       const key = `security_alert:${alertId}`;
       const data = await redis.get(key);
-      
+
       if (data) {
         const alert = JSON.parse(data);
         alert.acknowledged = true;
         alert.acknowledgedBy = acknowledgedBy;
         alert.acknowledgedAt = new Date();
-        
+
         await redis.setex(key, 7 * 24 * 60 * 60, JSON.stringify(alert));
-        
+
         await AuditService.logSecurityEvent(
           'security_alert_acknowledged',
           'low',
@@ -480,7 +480,7 @@ export class SuspiciousActivityMonitor {
           }
         );
       }
-      
+
     } catch (error) {
       console.error('Error acknowledging alert:', error);
       throw error;
@@ -506,7 +506,7 @@ export class SuspiciousActivityMonitor {
       // Get all suspicious activity keys
       const activityKeys = await redis.keys('suspicious_activity:*');
       const activities: SuspiciousActivity[] = [];
-      
+
       for (const key of activityKeys) {
         try {
           const data = await redis.get(key);
@@ -517,36 +517,36 @@ export class SuspiciousActivityMonitor {
           console.error(`Error parsing activity for ${key}:`, error);
         }
       }
-      
+
       // Get all alerts
       const alerts = await this.getAlerts(1000); // Get more for statistics
-      
+
       // Calculate statistics
       const activitiesByType: Record<string, number> = {};
       const activitiesBySeverity: Record<string, number> = {};
       const identifierCounts: Record<string, { count: number; types: Set<string> }> = {};
-      
+
       activities.forEach(activity => {
         activitiesByType[activity.type] = (activitiesByType[activity.type] || 0) + 1;
         activitiesBySeverity[activity.severity] = (activitiesBySeverity[activity.severity] || 0) + 1;
-        
+
         if (!identifierCounts[activity.identifier]) {
           identifierCounts[activity.identifier] = { count: 0, types: new Set() };
         }
         identifierCounts[activity.identifier].count++;
         identifierCounts[activity.identifier].types.add(activity.type);
       });
-      
+
       const alertsBySeverity: Record<string, number> = {};
       let unacknowledgedAlerts = 0;
-      
+
       alerts.forEach(alert => {
         alertsBySeverity[alert.severity] = (alertsBySeverity[alert.severity] || 0) + 1;
         if (!alert.acknowledged) {
           unacknowledgedAlerts++;
         }
       });
-      
+
       const topSuspiciousIdentifiers = Object.entries(identifierCounts)
         .sort(([, a], [, b]) => b.count - a.count)
         .slice(0, 20)
@@ -555,21 +555,21 @@ export class SuspiciousActivityMonitor {
           count: data.count,
           types: Array.from(data.types)
         }));
-      
+
       // Calculate trends
       const now = Date.now();
-      const last24Hours = activities.filter(a => 
+      const last24Hours = activities.filter(a =>
         new Date(a.timestamp || 0).getTime() > now - 24 * 60 * 60 * 1000
       ).length;
-      
-      const last7Days = activities.filter(a => 
+
+      const last7Days = activities.filter(a =>
         new Date(a.timestamp || 0).getTime() > now - 7 * 24 * 60 * 60 * 1000
       ).length;
-      
-      const last30Days = activities.filter(a => 
+
+      const last30Days = activities.filter(a =>
         new Date(a.timestamp || 0).getTime() > now - 30 * 24 * 60 * 60 * 1000
       ).length;
-      
+
       return {
         totalActivities: activities.length,
         activitiesByType,
@@ -584,7 +584,7 @@ export class SuspiciousActivityMonitor {
           last30Days
         }
       };
-      
+
     } catch (error) {
       console.error('Error getting security statistics:', error);
       return {
@@ -608,11 +608,11 @@ export class SuspiciousActivityMonitor {
   static async cleanup(retentionDays: number = 30): Promise<void> {
     try {
       const cutoffTime = Date.now() - retentionDays * 24 * 60 * 60 * 1000;
-      
+
       // Clean up old activities
       const activityKeys = await redis.keys('suspicious_activity:*');
       let deletedActivities = 0;
-      
+
       for (const key of activityKeys) {
         try {
           const data = await redis.get(key);
@@ -627,23 +627,23 @@ export class SuspiciousActivityMonitor {
           console.error(`Error cleaning up activity ${key}:`, error);
         }
       }
-      
+
       // Clean up old alerts
       const alertIds = await redis.zrangebyscore('security_alerts', 0, cutoffTime);
       let deletedAlerts = 0;
-      
+
       for (const alertId of alertIds) {
         await redis.del(`security_alert:${alertId}`);
         await redis.zrem('security_alerts', alertId);
         deletedAlerts++;
       }
-      
+
       await AuditService.logSystemEvent('security_cleanup', {
         retentionDays,
         deletedActivities,
         deletedAlerts
       });
-      
+
     } catch (error) {
       console.error('Error during security cleanup:', error);
       throw error;

@@ -30,6 +30,7 @@ export interface PaymentResult {
   paymentLink?: string;
   error?: string;
   gatewayResponse?: any;
+  refundId?: string;
 }
 
 export interface WebhookResult {
@@ -41,7 +42,7 @@ export interface WebhookResult {
 
 // Validation schemas
 const PaymentConfigSchema = z.object({
-  gateway: z.enum(['razorpay', 'stripe', 'wallet']),
+  gateway: z.enum(['razorpay', 'stripe', 'wallet'] as const),
   amount: z.number().positive(),
   currency: z.string().length(3),
   description: z.string().min(1),
@@ -49,7 +50,7 @@ const PaymentConfigSchema = z.object({
   courseId: z.string().uuid().optional(),
   subscriptionId: z.string().uuid().optional(),
   enrollmentId: z.string().uuid().optional(),
-  metadata: z.record(z.any()).optional()
+  metadata: z.record(z.string(), z.any()).optional()
 });
 
 class PaymentService {
@@ -83,7 +84,7 @@ class PaymentService {
           
           if (config.gateway === 'stripe' && config.config.secret_key) {
             this.stripe = new Stripe(config.config.secret_key, {
-              apiVersion: '2024-06-20'
+              apiVersion: '2023-10-16' as any
             });
           }
         }

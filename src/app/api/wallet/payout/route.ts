@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     const { data: ambassador } = await supabase
       .from('ambassadors')
       .select('id')
-      .eq('user_id', authResult.user.id)
+      .eq('user_id', authResult.user.userId)
       .single();
 
     if (!ambassador) {
@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
     
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { success: false, error: 'Invalid request data', details: error.errors },
+        { success: false, error: 'Invalid request data', details: error.issues },
         { status: 400 }
       );
     }

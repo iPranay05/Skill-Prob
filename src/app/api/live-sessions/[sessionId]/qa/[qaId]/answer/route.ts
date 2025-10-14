@@ -10,12 +10,12 @@ export async function POST(
   { params }: { params: Promise<{ sessionId: string; qaId: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
-      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+    const authResult = await verifyToken(request);
+
+    if (!authResult.success || !authResult.user) {
+      return NextResponse.json({ error: 'Authentication failed' }, { status: 401 });
     }
 
-    const decoded = await verifyToken(token);
     const body = await request.json();
     const { answer } = body;
 
@@ -27,7 +27,7 @@ export async function POST(
     }
 
     // Only mentors can answer questions
-    if (decoded.role !== 'mentor') {
+    if (authResult.user.role !== 'mentor') {
       return NextResponse.json(
         { error: 'Only mentors can answer questions' },
         { status: 403 }
@@ -38,7 +38,7 @@ export async function POST(
     const qa = await liveSessionService.answerQA({
       qaId,
       answer: answer.trim(),
-      answeredBy: decoded.userId,
+      answeredBy: authResult.user.userId,
     });
 
     return NextResponse.json({
@@ -47,7 +47,7 @@ export async function POST(
     });
   } catch (error) {
     console.error('Error answering Q&A:', error);
-    
+
     if (error instanceof AppError) {
       return NextResponse.json(
         { error: error.message },

@@ -299,6 +299,39 @@ export class JobService {
     return this.formatJobApplication(data);
   }
 
+  // Get applications for an employer
+  static async getEmployerApplications(employerId: string): Promise<JobApplication[]> {
+    try {
+      const { data, error } = await supabaseAdmin
+        .from('job_applications')
+        .select(`
+          *,
+          jobs!inner (
+            title,
+            company_id,
+            companies!inner (
+              name
+            )
+          ),
+          users (
+            email,
+            profile
+          )
+        `)
+        .eq('jobs.companies.id', employerId)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        throw error;
+      }
+
+      return (data || []).map(this.formatJobApplication);
+    } catch (error) {
+      console.error('Error fetching employer applications:', error);
+      return [];
+    }
+  }
+
   static async getApplicationsByJobPosting(jobPostingId: string, query?: ApplicationSearchQuery): Promise<{
     applications: JobApplication[];
     total: number;
@@ -700,5 +733,46 @@ export class JobService {
     }
 
     return (data || []).map(job => this.formatJobPosting(job));
+  }
+
+  static async getCompanies(filters: any = {}): Promise<any[]> {
+    let query = supabaseAdmin
+      .from('job_postings')
+      .select('company_name, company_logo, company_website')
+      .eq('status', 'published');
+
+    // Group by company_name to get unique companies
+    const { data, error } = await query;
+
+    if (error) {
+      throw new Error(`Failed to get companies: ${error.message}`);
+    }
+
+    // Group by company name and get unique companies
+    const companiesMap = new Map();
+    (data || []).forEach(job => {
+      if (!companiesMap.has(job.company_name)) {
+        companiesMap.set(job.company_name, {
+          name: job.company_name,
+          logo: job.company_logo,
+          website: job.company_website
+        });
+      }
+    });
+
+    return Array.from(companiesMap.values());
+  }
+
+  static async createCompany(companyData: any, employerId: string): Promise<any> {
+    // Since we don't have a separate companies table, 
+    // this would typically create a job posting for the company
+    // For now, return the company data as it would be stored
+    return {
+      name: companyData.company_name,
+      logo: companyData.company_logo,
+      website: companyData.company_website,
+      employer_id: employerId,
+      created_at: new Date()
+    };
   }
 }

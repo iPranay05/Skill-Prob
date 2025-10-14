@@ -280,7 +280,7 @@ export class AdminService {
         id: course.id,
         title: course.title,
         mentorId: course.mentor_id,
-        mentorName: `${course.users.profile?.firstName || ''} ${course.users.profile?.lastName || ''}`.trim(),
+        mentorName: `${course.users[0]?.profile?.firstName || ''} ${course.users[0]?.profile?.lastName || ''}`.trim(),
         status: course.status,
         submittedAt: new Date(course.created_at),
         reviewedAt: course.updated_at ? new Date(course.updated_at) : undefined
@@ -366,8 +366,8 @@ export class AdminService {
       return data?.map(payout => ({
         id: payout.id,
         userId: payout.user_id,
-        userType: payout.users.role === 'mentor' ? 'mentor' : 'ambassador',
-        userName: `${payout.users.profile?.firstName || ''} ${payout.users.profile?.lastName || ''}`.trim(),
+        userType: payout.users[0]?.role === 'mentor' ? 'mentor' : 'ambassador',
+        userName: `${payout.users[0]?.profile?.firstName || ''} ${payout.users[0]?.profile?.lastName || ''}`.trim(),
         amount: payout.amount,
         currency: payout.currency,
         status: payout.status,

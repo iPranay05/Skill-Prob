@@ -8,17 +8,13 @@ export async function DELETE(
   { params }: { params: Promise<{ bookmarkId: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const authResult = await verifyToken(request);
+    if (!authResult.success || !authResult.user) {
+      return NextResponse.json({ error: 'Authentication failed' }, { status: 401 });
     }
 
-    const decoded = verifyToken(token);
-    if (!decoded) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    }
-
-    await StudentLearningService.deleteBookmark(params.bookmarkId, decoded.userId);
+    const { bookmarkId } = await params;
+    await StudentLearningService.deleteBookmark(bookmarkId, authResult.user.userId);
 
     return NextResponse.json({
       success: true,

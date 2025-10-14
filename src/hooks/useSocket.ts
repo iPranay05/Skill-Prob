@@ -42,10 +42,10 @@ export function useSocketEvent<T = unknown>(
     if (!socket) return;
 
     const wrappedCallback = (data: T) => callback(data);
-    socket.on(event, wrappedCallback);
+    socket.on(event as any, wrappedCallback);
 
     return () => {
-      socket.off(event, wrappedCallback);
+      socket.off(event as any, wrappedCallback);
     };
   }, [socket, event, ...deps]);
 }
@@ -53,8 +53,26 @@ export function useSocketEvent<T = unknown>(
 export function useLiveSession(sessionId: string) {
   const { socket, isConnected } = useSocket();
   const [participants, setParticipants] = useState<Array<{ id: string; name: string; role: string }>>([]);
-  const [messages, setMessages] = useState<Array<{ id: string; message: string; sender: string; timestamp: Date }>>([]);
-  const [qas, setQAs] = useState<Array<{ id: string; question: string; answer?: string; timestamp: Date }>>([]);
+  const [messages, setMessages] = useState<Array<{ 
+    id: string; 
+    message: string; 
+    sender: string; 
+    timestamp: Date;
+    userId: string;
+    userName: string;
+    userRole: string;
+    messageType: 'text' | 'question' | 'answer';
+  }>>([]);
+  const [qas, setQAs] = useState<Array<{ 
+    id: string; 
+    question: string; 
+    answer?: string; 
+    timestamp: Date;
+    studentId: string;
+    studentName: string;
+    isAnonymous: boolean;
+    answeredAt?: Date;
+  }>>([]);
   const [polls, setPolls] = useState<Array<{ id: string; question: string; options: string[]; votes: Record<string, number> }>>([]);
   const [sessionStatus, setSessionStatus] = useState<string>('scheduled');
 
@@ -65,12 +83,16 @@ export function useLiveSession(sessionId: string) {
     socket.joinSession(sessionId);
 
     // Event handlers
-    const handleUserJoined = (data: { userId: string; userRole: string }) => {
-      setParticipants(prev => [...prev.filter(p => p.userId !== data.userId), data]);
+    const handleUserJoined = (data: { userId: string; userRole: string; userName?: string }) => {
+      setParticipants(prev => [...prev.filter(p => p.id !== data.userId), {
+        id: data.userId,
+        name: data.userName || 'Unknown User',
+        role: data.userRole
+      }]);
     };
 
     const handleUserLeft = (data: { userId: string }) => {
-      setParticipants(prev => prev.filter(p => p.userId !== data.userId));
+      setParticipants(prev => prev.filter(p => p.id !== data.userId));
     };
 
     const handleNewMessage = (message: any) => {
@@ -180,8 +202,8 @@ export function useNotifications() {
   const [unreadCount, setUnreadCount] = useState(0);
 
   useSocketEvent('notification', (notification: any) => {
-    setNotifications(prev => [notification, ...prev]);
-    setUnreadCount(prev => prev + 1);
+    setNotifications((prev: any[]) => [notification, ...prev]);
+    setUnreadCount((prev: number) => prev + 1);
   });
 
   const markAsRead = (notificationId: string) => {
@@ -225,7 +247,7 @@ export function useAnalyticsUpdates() {
   const [analyticsData, setAnalyticsData] = useState<any>({});
 
   useSocketEvent('analytics-update', (data: any) => {
-    setAnalyticsData(prev => ({ ...prev, ...data }));
+    setAnalyticsData((prev: any) => ({ ...prev, ...data }));
   });
 
   return analyticsData;

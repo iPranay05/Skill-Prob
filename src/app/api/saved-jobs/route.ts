@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const savedJobs = await JobService.getSavedJobs(authResult.user.id);
+    const savedJobs = await JobService.getSavedJobs(authResult.user.userId);
 
     return NextResponse.json({
       success: true,

@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyToken } from '@/lib/auth';
+import { verifyAuth } from '@/lib/auth';
 import { supabaseAdmin } from '@/lib/database';
 import { ErrorHandler } from '@/lib/errors';
 
 export async function GET(request: NextRequest) {
   try {
     // Verify authentication
-    const authResult = await verifyToken(request);
+    const authResult = await verifyAuth(request);
     if (!authResult.success || !authResult.user) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
       }
 
       bookmarks = data || [];
-    } catch (error) {
+    } catch (error: any) {
       console.log('Student bookmarks table not found or error:', error.message);
       // Return mock bookmarks for demonstration
       bookmarks = [
@@ -103,19 +103,19 @@ export async function GET(request: NextRequest) {
     }
 
     // Format the response
-    const formattedBookmarks = bookmarks.map(bookmark => ({
+    const formattedBookmarks = bookmarks.map((bookmark: any) => ({
       id: bookmark.id,
       bookmarkedAt: bookmark.bookmarked_at,
       course: {
-        id: bookmark.courses.id,
-        title: bookmark.courses.title,
-        description: bookmark.courses.description,
-        category: bookmark.courses.category,
-        level: bookmark.courses.level,
-        duration: bookmark.courses.duration,
-        price: bookmark.courses.price,
-        thumbnailUrl: bookmark.courses.thumbnail_url,
-        mentorName: bookmark.courses.users?.profile?.firstName 
+        id: bookmark.courses?.id || bookmark.courses,
+        title: bookmark.courses?.title || 'Unknown Course',
+        description: bookmark.courses?.description || '',
+        category: bookmark.courses?.category || 'General',
+        level: bookmark.courses?.level || 'Beginner',
+        duration: bookmark.courses?.duration || 0,
+        price: bookmark.courses?.price || 0,
+        thumbnailUrl: bookmark.courses?.thumbnail_url || '',
+        mentorName: bookmark.courses?.users?.profile?.firstName 
           ? `${bookmark.courses.users.profile.firstName} ${bookmark.courses.users.profile.lastName || ''}`.trim()
           : 'Unknown Mentor'
       }
@@ -127,16 +127,19 @@ export async function GET(request: NextRequest) {
       total: formattedBookmarks.length
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Student bookmarks error:', error);
-    return ErrorHandler.handle(error);
+    return NextResponse.json(
+      { success: false, error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
     // Verify authentication
-    const authResult = await verifyToken(request);
+    const authResult = await verifyAuth(request);
     if (!authResult.success || !authResult.user) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
@@ -218,7 +221,7 @@ export async function POST(request: NextRequest) {
         message: 'Course bookmarked successfully'
       });
 
-    } catch (error) {
+    } catch (error: any) {
       console.log('Bookmarks table not found, returning success anyway:', error.message);
       // Return success even if table doesn't exist
       return NextResponse.json({
@@ -233,16 +236,19 @@ export async function POST(request: NextRequest) {
       });
     }
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Add bookmark error:', error);
-    return ErrorHandler.handle(error);
+    return NextResponse.json(
+      { success: false, error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }
 
 export async function DELETE(request: NextRequest) {
   try {
     // Verify authentication
-    const authResult = await verifyToken(request);
+    const authResult = await verifyAuth(request);
     if (!authResult.success || !authResult.user) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
@@ -285,7 +291,7 @@ export async function DELETE(request: NextRequest) {
         message: 'Bookmark removed successfully'
       });
 
-    } catch (error) {
+    } catch (error: any) {
       console.log('Bookmarks table not found, returning success anyway:', error.message);
       // Return success even if table doesn't exist
       return NextResponse.json({
@@ -294,8 +300,11 @@ export async function DELETE(request: NextRequest) {
       });
     }
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Remove bookmark error:', error);
-    return ErrorHandler.handle(error);
+    return NextResponse.json(
+      { success: false, error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }

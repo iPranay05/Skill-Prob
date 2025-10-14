@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { LiveSessionService } from '../../../../../lib/liveSessionService';
-import { verifyToken } from '../../../../../lib/auth';
+import { verifyAuth } from '../../../../../lib/auth';
 import { AppError } from '../../../../../lib/errors';
 
 const liveSessionService = new LiveSessionService();
@@ -10,12 +10,10 @@ export async function POST(
   { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
-
-    const decoded = await verifyToken(token);
     const body = await request.json();
     const { question, options, pollType, isAnonymous, endsAt } = body;
 
@@ -34,7 +32,7 @@ export async function POST(
     }
 
     // Only mentors can create polls
-    if (decoded.role !== 'mentor') {
+    if (authResult.user.role !== 'mentor') {
       return NextResponse.json(
         { error: 'Only mentors can create polls' },
         { status: 403 }
@@ -44,7 +42,7 @@ export async function POST(
     const { sessionId } = await params;
     const poll = await liveSessionService.createPoll({
       sessionId,
-      createdBy: decoded.userId,
+      createdBy: authResult.user.userId,
       question: question.trim(),
       options: options.map((opt: any) => ({ text: opt.text })),
       pollType: pollType || 'single_choice',

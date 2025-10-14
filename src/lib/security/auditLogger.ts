@@ -1,4 +1,4 @@
-import { database } from '../database';
+import { supabaseAdmin } from '../database';
 
 export interface AuditLogEntry {
   id?: string;
@@ -19,9 +19,9 @@ export interface AuditLogEntry {
 }
 
 export interface SecurityEvent {
-  type: 'login_attempt' | 'login_success' | 'login_failure' | 'logout' | 'password_change' | 
-        'permission_denied' | 'data_export' | 'data_deletion' | 'suspicious_activity' | 
-        'rate_limit_exceeded' | 'file_upload' | 'payment_processed' | 'admin_action';
+  type: 'login_attempt' | 'login_success' | 'login_failure' | 'logout' | 'password_change' |
+  'permission_denied' | 'data_export' | 'data_deletion' | 'suspicious_activity' |
+  'rate_limit_exceeded' | 'file_upload' | 'payment_processed' | 'admin_action';
   userId?: string;
   details: any;
   metadata: {
@@ -50,7 +50,7 @@ export class AuditLogger {
       };
 
       await this.writeAuditLog(auditEntry);
-      
+
       // Check for suspicious patterns
       await this.checkSuspiciousActivity(event);
 
@@ -124,11 +124,23 @@ export class AuditLogger {
   // Write audit log to database
   private static async writeAuditLog(entry: AuditLogEntry): Promise<void> {
     try {
-      await database.collection('audit_logs').insertOne(entry);
-      
+      const { error } = await supabaseAdmin
+        .from('audit_logs')
+        .insert(entry);
+
+      if (error) {
+        throw error;
+      }
+
       // Also write to separate security log for critical events
       if (entry.severity === 'critical') {
-        await database.collection('security_logs').insertOne(entry);
+        const { error: securityError } = await supabaseAdmin
+          .from('security_logs')
+          .insert(entry);
+
+        if (securityError) {
+          console.error('Failed to write security log:', securityError);
+        }
       }
 
     } catch (error) {
@@ -150,10 +162,10 @@ export class AuditLogger {
         success: entry.success,
         details: entry.details
       });
-      
+
       // This would write to a log file in production
       console.log('AUDIT_LOG:', logLine);
-      
+
     } catch (error) {
       console.error('Failed to write file log:', error);
     }
@@ -167,16 +179,17 @@ export class AuditLogger {
 
       // Check for multiple failed login attempts
       if (event.type === 'login_failure') {
-        const recentFailures = await database.collection('audit_logs').countDocuments({
-          action: 'login_failure',
-          ipAddress: event.metadata.ipAddress,
-          timestamp: { $gte: oneHourAgo }
-        });
+        const { count, error } = await supabaseAdmin
+          .from('audit_logs')
+          .select('*', { count: 'exact', head: true })
+          .eq('action', 'login_failure')
+          .eq('ipAddress', event.metadata.ipAddress)
+          .gte('timestamp', oneHourAgo.toISOString());
 
-        if (recentFailures >= 5) {
+        if (!error && count && count >= 5) {
           await this.logSecurityAlert('multiple_login_failures', {
             ipAddress: event.metadata.ipAddress,
-            failureCount: recentFailures,
+            failureCount: count,
             timeWindow: '1 hour'
           });
         }
@@ -184,35 +197,40 @@ export class AuditLogger {
 
       // Check for rapid successive actions
       if (event.userId) {
-        const recentActions = await database.collection('audit_logs').countDocuments({
-          userId: event.userId,
-          timestamp: { $gte: new Date(now.getTime() - 5 * 60 * 1000) } // 5 minutes
-        });
+        const fiveMinutesAgo = new Date(now.getTime() - 5 * 60 * 1000);
+        const { count, error } = await supabaseAdmin
+          .from('audit_logs')
+          .select('*', { count: 'exact', head: true })
+          .eq('userId', event.userId)
+          .gte('timestamp', fiveMinutesAgo.toISOString());
 
-        if (recentActions >= 50) {
+        if (!error && count && count >= 50) {
           await this.logSecurityAlert('rapid_successive_actions', {
             userId: event.userId,
-            actionCount: recentActions,
+            actionCount: count,
             timeWindow: '5 minutes'
           });
         }
       }
 
-      // Check for unusual access patterns
-      if (event.type === 'data_access' && event.userId) {
-        const userActions = await database.collection('audit_logs').find({
-          userId: event.userId,
-          category: 'data_access',
-          timestamp: { $gte: oneHourAgo }
-        }).toArray();
+      // Check for unusual access patterns (for data export events)
+      if (event.type === 'data_export' && event.userId) {
+        const { data: userActions, error } = await supabaseAdmin
+          .from('audit_logs')
+          .select('resourceId')
+          .eq('userId', event.userId)
+          .eq('category', 'data_access')
+          .gte('timestamp', oneHourAgo.toISOString());
 
-        const uniqueResources = new Set(userActions.map(action => action.resourceId));
-        if (uniqueResources.size >= 20) {
-          await this.logSecurityAlert('unusual_data_access_pattern', {
-            userId: event.userId,
-            resourceCount: uniqueResources.size,
-            timeWindow: '1 hour'
-          });
+        if (!error && userActions) {
+          const uniqueResources = new Set(userActions.map(action => action.resourceId).filter(Boolean));
+          if (uniqueResources.size >= 20) {
+            await this.logSecurityAlert('unusual_data_access_pattern', {
+              userId: event.userId,
+              resourceCount: uniqueResources.size,
+              timeWindow: '1 hour'
+            });
+          }
         }
       }
 
@@ -224,7 +242,7 @@ export class AuditLogger {
   // Log security alerts
   private static async logSecurityAlert(alertType: string, details: any): Promise<void> {
     await this.logSystemEvent(`security_alert_${alertType}`, details, 'high');
-    
+
     // Send notification to security team
     await this.notifySecurityTeam(alertType, details);
   }
@@ -249,27 +267,55 @@ export class AuditLogger {
     offset?: number;
   }): Promise<AuditLogEntry[]> {
     try {
-      const query: any = {};
+      let query = supabaseAdmin
+        .from('audit_logs')
+        .select('*')
+        .order('timestamp', { ascending: false })
+        .limit(filters.limit || 100);
 
-      if (filters.userId) query.userId = filters.userId;
-      if (filters.action) query.action = new RegExp(filters.action, 'i');
-      if (filters.resource) query.resource = filters.resource;
-      if (filters.severity) query.severity = filters.severity;
-      if (filters.category) query.category = filters.category;
-      if (filters.success !== undefined) query.success = filters.success;
-
-      if (filters.startDate || filters.endDate) {
-        query.timestamp = {};
-        if (filters.startDate) query.timestamp.$gte = filters.startDate;
-        if (filters.endDate) query.timestamp.$lte = filters.endDate;
+      if (filters.offset) {
+        query = query.range(filters.offset, filters.offset + (filters.limit || 100) - 1);
       }
 
-      return await database.collection('audit_logs')
-        .find(query)
-        .sort({ timestamp: -1 })
-        .limit(filters.limit || 100)
-        .skip(filters.offset || 0)
-        .toArray();
+      if (filters.userId) {
+        query = query.eq('userId', filters.userId);
+      }
+
+      if (filters.action) {
+        query = query.ilike('action', `%${filters.action}%`);
+      }
+
+      if (filters.resource) {
+        query = query.eq('resource', filters.resource);
+      }
+
+      if (filters.severity) {
+        query = query.eq('severity', filters.severity);
+      }
+
+      if (filters.category) {
+        query = query.eq('category', filters.category);
+      }
+
+      if (filters.success !== undefined) {
+        query = query.eq('success', filters.success);
+      }
+
+      if (filters.startDate) {
+        query = query.gte('timestamp', filters.startDate.toISOString());
+      }
+
+      if (filters.endDate) {
+        query = query.lte('timestamp', filters.endDate.toISOString());
+      }
+
+      const { data, error } = await query;
+
+      if (error) {
+        throw error;
+      }
+
+      return data || [];
 
     } catch (error) {
       console.error('Failed to query audit logs:', error);
@@ -289,60 +335,78 @@ export class AuditLogger {
     } = {}
   ): Promise<any> {
     try {
-      const pipeline: any[] = [
-        {
-          $match: {
-            timestamp: { $gte: startDate, $lte: endDate }
-          }
-        }
-      ];
-
-      // Filter by event types
+      // Build category filter
       const categoryFilter: string[] = [];
       if (options.includeUserActions) categoryFilter.push('data_access', 'data_modification');
       if (options.includeSystemEvents) categoryFilter.push('system');
       if (options.includeSecurityEvents) categoryFilter.push('authentication', 'authorization', 'security');
 
+      // Base query
+      let query = supabaseAdmin
+        .from('audit_logs')
+        .select('*')
+        .gte('timestamp', startDate.toISOString())
+        .lte('timestamp', endDate.toISOString());
+
       if (categoryFilter.length > 0) {
-        pipeline.push({ $match: { category: { $in: categoryFilter } } });
+        query = query.in('category', categoryFilter);
       }
 
-      // Group by specified field
-      if (options.groupBy) {
-        let groupField: string;
-        switch (options.groupBy) {
-          case 'user':
-            groupField = '$userId';
-            break;
-          case 'action':
-            groupField = '$action';
-            break;
-          case 'resource':
-            groupField = '$resource';
-            break;
-          case 'day':
-            groupField = { $dateToString: { format: '%Y-%m-%d', date: '$timestamp' } };
-            break;
-          default:
-            groupField = '$action';
-        }
+      const { data: logs, error } = await query;
 
-        pipeline.push({
-          $group: {
-            _id: groupField,
-            count: { $sum: 1 },
-            successCount: { $sum: { $cond: ['$success', 1, 0] } },
-            failureCount: { $sum: { $cond: ['$success', 0, 1] } },
-            severityBreakdown: {
-              $push: '$severity'
-            }
+      if (error) {
+        throw error;
+      }
+
+      let results: any[] = [];
+
+      if (options.groupBy && logs) {
+        // Group data manually since Supabase doesn't support aggregation like MongoDB
+        const grouped = new Map<string, any>();
+
+        logs.forEach(log => {
+          let groupKey: string;
+          switch (options.groupBy) {
+            case 'user':
+              groupKey = log.userId || 'unknown';
+              break;
+            case 'action':
+              groupKey = log.action;
+              break;
+            case 'resource':
+              groupKey = log.resource;
+              break;
+            case 'day':
+              groupKey = new Date(log.timestamp).toISOString().split('T')[0];
+              break;
+            default:
+              groupKey = log.action;
           }
+
+          if (!grouped.has(groupKey)) {
+            grouped.set(groupKey, {
+              _id: groupKey,
+              count: 0,
+              successCount: 0,
+              failureCount: 0,
+              severityBreakdown: []
+            });
+          }
+
+          const group = grouped.get(groupKey);
+          group.count++;
+          if (log.success) {
+            group.successCount++;
+          } else {
+            group.failureCount++;
+          }
+          group.severityBreakdown.push(log.severity);
         });
 
-        pipeline.push({ $sort: { count: -1 } });
+        results = Array.from(grouped.values()).sort((a, b) => b.count - a.count);
+      } else {
+        results = logs || [];
       }
-
-      const results = await database.collection('audit_logs').aggregate(pipeline).toArray();
 
       return {
         reportPeriod: { startDate, endDate },

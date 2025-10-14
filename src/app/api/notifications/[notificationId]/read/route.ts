@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { NotificationService } from '@/lib/notifications';
-import { verifyToken } from '@/lib/auth';
+import { verifyAuth } from '@/lib/auth';
 
 // PUT /api/notifications/[notificationId]/read - Mark notification as read
 export async function PUT(
@@ -8,21 +8,16 @@ export async function PUT(
   { params }: { params: Promise<{ notificationId: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const decoded = verifyToken(token);
-    if (!decoded) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     }
 
     const { notificationId } = await params;
 
     const success = await NotificationService.markNotificationAsRead(
       notificationId,
-      decoded.userId
+      authResult.user.userId
     );
 
     if (!success) {

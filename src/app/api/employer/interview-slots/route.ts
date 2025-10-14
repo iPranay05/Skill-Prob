@@ -79,7 +79,7 @@ export async function GET(request: NextRequest) {
     }
 
     const slots = await InterviewSchedulingService.getAvailableSlots(
-      authResult.user.id,
+      authResult.user.userId,
       startDate,
       endDate
     );

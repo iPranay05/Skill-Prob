@@ -6,7 +6,7 @@ import { ApplicationStatus } from '@/models/Job';
 export async function GET(request: NextRequest) {
   try {
     const { success, user } = await verifyToken(request);
-    
+
     if (!success || !user) {
       return NextResponse.json(
         { error: 'Authentication required' },

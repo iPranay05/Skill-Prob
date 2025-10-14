@@ -35,7 +35,7 @@ export async function GET(
     }
 
     // Check if user owns this subscription
-    if (subscription.student_id !== authResult.user.id && !['admin', 'super_admin'].includes(authResult.user.role)) {
+    if (subscription.student_id !== authResult.user.userId && !['admin', 'super_admin'].includes(authResult.user.role)) {
       return NextResponse.json(
         { success: false, error: 'Access denied' },
         { status: 403 }
@@ -109,7 +109,7 @@ export async function PATCH(
     
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { success: false, error: 'Invalid request data', details: error.errors },
+        { success: false, error: 'Invalid request data', details: error.issues },
         { status: 400 }
       );
     }

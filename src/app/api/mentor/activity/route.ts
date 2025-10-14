@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyToken } from '@/lib/auth';
+import { verifyAuth } from '@/lib/auth';
 import { supabaseAdmin } from '@/lib/database';
 
 /**
@@ -7,17 +7,16 @@ import { supabaseAdmin } from '@/lib/database';
  */
 export async function GET(request: NextRequest) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
 
-    const decoded = await verifyToken(token);
-    if (decoded.role !== 'mentor') {
+    if (authResult.user.role !== 'mentor') {
       return NextResponse.json({ error: 'Only mentors can access activity' }, { status: 403 });
     }
 
-    const mentorId = decoded.userId;
+    const mentorId = authResult.user.userId;
     const { searchParams } = new URL(request.url);
     const limit = parseInt(searchParams.get('limit') || '10');
 

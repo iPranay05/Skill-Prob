@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
     const offset = parseInt(searchParams.get('offset') || '0');
 
     // Get user's wallet
-    const walletResult = await walletService.getWallet(authResult.user.id);
+    const walletResult = await walletService.getWallet(authResult.user.userId);
     if (!walletResult.success || !walletResult.walletId) {
       return NextResponse.json(
         { success: false, error: 'Wallet not found' },

@@ -1,17 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { NotificationService } from '@/lib/notifications';
-import { verifyToken } from '@/lib/auth';
+import { verifyAuth } from '@/lib/auth';
 
 // GET /api/notifications/templates - Get notification templates (admin only)
 export async function GET(request: NextRequest) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const decoded = verifyToken(token);
-    if (!decoded || !['admin', 'super_admin'].includes(decoded.role)) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user || !['admin', 'super_admin'].includes(authResult.user.role)) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
@@ -33,13 +28,8 @@ export async function GET(request: NextRequest) {
 // POST /api/notifications/templates - Create notification template (admin only)
 export async function POST(request: NextRequest) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const decoded = verifyToken(token);
-    if (!decoded || !['admin', 'super_admin'].includes(decoded.role)) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user || !['admin', 'super_admin'].includes(authResult.user.role)) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 

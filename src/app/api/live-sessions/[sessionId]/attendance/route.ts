@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '../../../../../lib/database';
-import { verifyToken } from '../../../../../lib/auth';
+import { verifyAuth } from '../../../../../lib/auth';
 import { AppError } from '../../../../../lib/errors';
 
 export async function GET(
@@ -9,15 +9,13 @@ export async function GET(
 ) {
   try {
     const { sessionId } = await params;
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
-
-    const decoded = await verifyToken(token);
     
     // Only mentors can view attendance details
-    if (decoded.role !== 'mentor') {
+    if (authResult.user.role !== 'mentor') {
       return NextResponse.json({ error: 'Only mentors can view attendance' }, { status: 403 });
     }
 
@@ -28,7 +26,7 @@ export async function GET(
       .eq('id', sessionId)
       .single();
 
-    if (sessionError || !session || session.mentor_id !== decoded.userId) {
+    if (sessionError || !session || session.mentor_id !== authResult.user.userId) {
       return NextResponse.json({ error: 'Session not found or access denied' }, { status: 403 });
     }
 

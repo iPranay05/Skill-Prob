@@ -5,7 +5,7 @@ import { supabase } from '@/lib/database';
 export async function GET(request: NextRequest) {
   try {
     const { success, user } = await verifyToken(request);
-    
+
     if (!success || !user) {
       return NextResponse.json(
         { error: 'Authentication required' },
@@ -56,7 +56,7 @@ export async function GET(request: NextRequest) {
 export async function PUT(request: NextRequest) {
   try {
     const { success, user } = await verifyToken(request);
-    
+
     if (!success || !user) {
       return NextResponse.json(
         { error: 'Authentication required' },
@@ -74,7 +74,7 @@ export async function PUT(request: NextRequest) {
 
     // Parse request body
     const body = await request.json();
-    
+
     // Validate and sanitize profile data
     const profileUpdates = {
       firstName: body.profile?.firstName?.trim(),
@@ -91,8 +91,8 @@ export async function PUT(request: NextRequest) {
 
     // Remove empty strings and null values
     Object.keys(profileUpdates).forEach(key => {
-      if (profileUpdates[key as keyof typeof profileUpdates] === '' || 
-          profileUpdates[key as keyof typeof profileUpdates] === null) {
+      if (profileUpdates[key as keyof typeof profileUpdates] === '' ||
+        profileUpdates[key as keyof typeof profileUpdates] === null) {
         delete profileUpdates[key as keyof typeof profileUpdates];
       }
     });
@@ -100,7 +100,7 @@ export async function PUT(request: NextRequest) {
     // Update user profile
     const { data: updatedProfile, error } = await supabase
       .from('users')
-      .update({ 
+      .update({
         profile: profileUpdates,
         updated_at: new Date().toISOString()
       })

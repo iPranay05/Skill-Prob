@@ -34,7 +34,7 @@ export class SecurityMiddleware {
     handler: (req: NextRequest, context: RequestContext) => Promise<NextResponse>
   ): Promise<NextResponse> {
     const startTime = Date.now();
-    let context: RequestContext;
+    let context: RequestContext | null = null;
     let auditData: any = {};
 
     try {
@@ -354,7 +354,7 @@ export class SecurityMiddleware {
     }
     
     // Fallback to connection IP (may be proxy IP)
-    return request.ip || '127.0.0.1';
+    return (request as any).ip || '127.0.0.1';
   }
 
   // Get resource name from URL path

@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const savedJobs = await JobService.getSavedJobs(authResult.user.id);
+    const savedJobs = await JobService.getSavedJobs(authResult.user.userId);
 
     return NextResponse.json({
       success: true,
@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
           error: {
             code: 'VALIDATION_ERROR',
             message: 'Invalid save job data',
-            details: validationResult.error.errors
+            details: validationResult.error.issues
           }
         },
         { status: 400 }
@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    await JobService.saveJob(authResult.user.id, jobPostingId);
+    await JobService.saveJob(authResult.user.userId, jobPostingId);
 
     return NextResponse.json({
       success: true,
@@ -149,7 +149,7 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    await JobService.unsaveJob(authResult.user.id, jobPostingId);
+    await JobService.unsaveJob(authResult.user.userId, jobPostingId);
 
     return NextResponse.json({
       success: true,

@@ -48,7 +48,7 @@ export async function GET(request: NextRequest) {
 
       certificates = data || [];
     } catch (error) {
-      console.log('Certificates table not found or error:', error.message);
+      console.log('Certificates table not found or error:', error instanceof Error ? error.message : String(error));
       // Return mock certificates for demonstration
       certificates = [
         {
@@ -79,18 +79,23 @@ export async function GET(request: NextRequest) {
     }
 
     // Format the response
-    const formattedCertificates = certificates.map(cert => ({
-      id: cert.id,
-      certificateId: cert.certificate_id,
-      certificateUrl: cert.certificate_url,
-      issuedAt: cert.issued_at,
-      course: {
-        id: cert.courses?.id,
-        title: cert.courses?.title,
-        category: cert.courses?.category,
-        level: cert.courses?.level
-      }
-    }));
+    const formattedCertificates = certificates.map(cert => {
+      // Handle courses field - it can be an object or array from Supabase
+      const courseData = Array.isArray(cert.courses) ? cert.courses[0] : cert.courses;
+
+      return {
+        id: cert.id,
+        certificateId: cert.certificate_id,
+        certificateUrl: cert.certificate_url,
+        issuedAt: cert.issued_at,
+        course: {
+          id: courseData?.id,
+          title: courseData?.title,
+          category: courseData?.category,
+          level: courseData?.level
+        }
+      };
+    });
 
     return NextResponse.json({
       success: true,

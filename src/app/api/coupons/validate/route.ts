@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     const validationData: ValidateCouponInput = {
       code: body.code,
       course_id: body.course_id,
-      user_id: authResult.user.id,
+      user_id: authResult.user.userId,
       amount: body.amount
     };
 

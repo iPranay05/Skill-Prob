@@ -43,19 +43,19 @@ export interface PayoutRequest {
 // Validation schemas
 const TransactionConfigSchema = z.object({
   walletId: z.string().uuid(),
-  type: z.enum(['credit', 'debit', 'conversion', 'payout', 'referral_bonus', 'registration_bonus']),
+  type: z.enum(['credit', 'debit', 'conversion', 'payout', 'referral_bonus', 'registration_bonus'] as const),
   amount: z.number().min(0),
   points: z.number().min(0).optional().default(0),
   description: z.string().min(1),
   referenceId: z.string().optional(),
-  metadata: z.record(z.any()).optional().default({})
+  metadata: z.record(z.string(), z.any()).optional().default({})
 });
 
 const PayoutRequestSchema = z.object({
   ambassadorId: z.string().uuid(),
   amount: z.number().positive(),
   pointsToRedeem: z.number().positive(),
-  bankDetails: z.record(z.any()).optional()
+  bankDetails: z.record(z.string(), z.any()).optional()
 });
 
 class WalletService {

@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyToken } from '@/lib/auth';
+import { verifyAuth } from '@/lib/auth';
 import { supabaseAdmin } from '@/lib/database';
 import { ErrorHandler } from '@/lib/errors';
 
 export async function GET(request: NextRequest) {
   try {
     // Verify authentication
-    const authResult = await verifyToken(request);
+    const authResult = await verifyAuth(request);
     if (!authResult.success || !authResult.user) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
@@ -58,21 +58,21 @@ export async function GET(request: NextRequest) {
     }
 
     // Format the response
-    const formattedCourses = (enrollments || []).map(enrollment => ({
+    const formattedCourses = (enrollments || []).map((enrollment: any) => ({
       enrollmentId: enrollment.id,
       enrolledAt: enrollment.enrolled_at,
       progress: enrollment.progress || 0,
       status: enrollment.status,
       course: {
-        id: enrollment.courses.id,
-        title: enrollment.courses.title,
-        description: enrollment.courses.description,
-        category: enrollment.courses.category,
-        level: enrollment.courses.level,
-        duration: enrollment.courses.duration,
-        price: enrollment.courses.price,
-        thumbnailUrl: enrollment.courses.thumbnail_url,
-        mentorName: enrollment.courses.users?.profile?.firstName 
+        id: enrollment.courses?.id || enrollment.courses,
+        title: enrollment.courses?.title || 'Unknown Course',
+        description: enrollment.courses?.description || '',
+        category: enrollment.courses?.category || 'General',
+        level: enrollment.courses?.level || 'Beginner',
+        duration: enrollment.courses?.duration || 0,
+        price: enrollment.courses?.price || 0,
+        thumbnailUrl: enrollment.courses?.thumbnail_url || '',
+        mentorName: enrollment.courses?.users?.profile?.firstName 
           ? `${enrollment.courses.users.profile.firstName} ${enrollment.courses.users.profile.lastName || ''}`.trim()
           : 'Unknown Mentor'
       }
@@ -84,8 +84,11 @@ export async function GET(request: NextRequest) {
       total: formattedCourses.length
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Student enrolled courses error:', error);
-    return ErrorHandler.handle(error);
+    return NextResponse.json(
+      { success: false, error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }

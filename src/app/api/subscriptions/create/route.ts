@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     // Create subscription
     const result = await subscriptionService.createSubscription({
       ...validatedData,
-      studentId: authResult.user.id
+      studentId: authResult.user.userId
     });
 
     if (!result.success) {
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { success: false, error: 'Invalid request data', details: error.errors },
+        { success: false, error: 'Invalid request data', details: error.issues },
         { status: 400 }
       );
     }

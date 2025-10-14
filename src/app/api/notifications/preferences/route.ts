@@ -1,21 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { NotificationService } from '@/lib/notifications';
-import { verifyToken } from '@/lib/auth';
+import { verifyAuth } from '@/lib/auth';
 
 // GET /api/notifications/preferences - Get user notification preferences
 export async function GET(request: NextRequest) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const decoded = verifyToken(token);
-    if (!decoded) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    }
-
-    const preferences = await NotificationService.getUserPreferences(decoded.userId);
+    const preferences = await NotificationService.getUserPreferences(authResult.user.userId);
 
     return NextResponse.json({
       success: true,
@@ -33,14 +28,9 @@ export async function GET(request: NextRequest) {
 // PUT /api/notifications/preferences - Update user notification preferences
 export async function PUT(request: NextRequest) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const decoded = verifyToken(token);
-    if (!decoded) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     }
 
     const body = await request.json();
@@ -56,7 +46,7 @@ export async function PUT(request: NextRequest) {
       timezone
     } = body;
 
-    const success = await NotificationService.updateUserPreferences(decoded.userId, {
+    const success = await NotificationService.updateUserPreferences(authResult.user.userId, {
       email_enabled,
       sms_enabled,
       push_enabled,

@@ -1,4 +1,4 @@
-import { Server as SocketIOServer } from 'socket.io';
+import { Server as SocketIOServer, Socket } from 'socket.io';
 import { Server as HTTPServer } from 'http';
 import jwt from 'jsonwebtoken';
 import { LiveSessionService } from './liveSessionService';
@@ -8,21 +8,7 @@ interface AuthenticatedSocket extends Socket {
   userRole?: string;
 }
 
-interface Socket {
-  id: string;
-  userId?: string;
-  userRole?: string;
-  join: (room: string) => void;
-  leave: (room: string) => void;
-  emit: (event: string, data?: any) => void;
-  to: (room: string) => any;
-  broadcast: any;
-  handshake: {
-    auth: {
-      token?: string;
-    };
-  };
-}
+
 
 export class SocketServer {
   private io: SocketIOServer;

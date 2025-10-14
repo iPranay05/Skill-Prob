@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { EnrollmentService } from '../../../lib/enrollmentService';
-import { CreateSubscriptionInput, SubscriptionQuery } from '../../../models/Enrollment';
+import { CreateSubscriptionInput, SubscriptionQuery, SubscriptionStatus } from '../../../models/Enrollment';
 import { APIError } from '../../../lib/errors';
-import { verifyJWT } from '../../../lib/auth';
+import { verifyAuth } from '../../../lib/auth';
 
 const enrollmentService = new EnrollmentService();
 
@@ -12,7 +12,7 @@ const enrollmentService = new EnrollmentService();
 export async function POST(request: NextRequest) {
   try {
     // Verify authentication
-    const authResult = await verifyJWT(request);
+    const authResult = await verifyAuth(request);
     if (!authResult.success || !authResult.user) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
 
     // Prepare subscription data
     const subscriptionData: CreateSubscriptionInput = {
-      student_id: authResult.user.id,
+      student_id: authResult.user.userId,
       course_id: body.course_id,
       subscription_type: body.subscription_type || 'monthly',
       amount: body.amount,
@@ -45,7 +45,9 @@ export async function POST(request: NextRequest) {
       gateway_subscription_id: body.gateway_subscription_id,
       gateway_customer_id: body.gateway_customer_id,
       auto_renew: body.auto_renew !== undefined ? body.auto_renew : true,
-      next_billing_date: body.next_billing_date ? new Date(body.next_billing_date) : undefined
+      next_billing_date: body.next_billing_date ? new Date(body.next_billing_date) : undefined,
+      status: SubscriptionStatus.ACTIVE,
+      failed_payment_count: 0
     };
 
     const subscription = await enrollmentService.createSubscription(subscriptionData);

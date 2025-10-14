@@ -1,18 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { NotificationService } from '@/lib/notifications';
-import { verifyToken } from '@/lib/auth';
+import { verifyAuth } from '@/lib/auth';
 
 // GET /api/notifications - Get user's in-app notifications
 export async function GET(request: NextRequest) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const decoded = verifyToken(token);
-    if (!decoded) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     }
 
     const { searchParams } = new URL(request.url);
@@ -20,12 +15,12 @@ export async function GET(request: NextRequest) {
     const offset = parseInt(searchParams.get('offset') || '0');
 
     const notifications = await NotificationService.getInAppNotifications(
-      decoded.userId,
+      authResult.user.userId,
       limit,
       offset
     );
 
-    const unreadCount = await NotificationService.getUnreadCount(decoded.userId);
+    const unreadCount = await NotificationService.getUnreadCount(authResult.user.userId);
 
     return NextResponse.json({
       success: true,
@@ -47,13 +42,8 @@ export async function GET(request: NextRequest) {
 // POST /api/notifications - Send a notification (admin only)
 export async function POST(request: NextRequest) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const decoded = verifyToken(token);
-    if (!decoded || !['admin', 'super_admin'].includes(decoded.role)) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user || !['admin', 'super_admin'].includes(authResult.user.role)) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 

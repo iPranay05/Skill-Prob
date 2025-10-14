@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { JobService } from '@/lib/jobService';
 import { UpdateJobApplicationSchema, ApplicationStatus } from '@/models/Job';
 import { verifyAuth } from '@/lib/auth';
+import { ZodError } from 'zod';
 
 export async function GET(
   request: NextRequest,
@@ -22,7 +23,8 @@ export async function GET(
       );
     }
 
-    const application = await JobService.getJobApplicationById(params.applicationId);
+    const { jobId, applicationId } = await params;
+    const application = await JobService.getJobApplicationById(applicationId);
     if (!application) {
       return NextResponse.json(
         {
@@ -37,9 +39,9 @@ export async function GET(
     }
 
     // Check if user can view this application
-    const jobPosting = await JobService.getJobPostingById(params.jobId);
-    const canView = authResult.user.id === application.applicant_id || 
-                   authResult.user.id === jobPosting?.employer_id ||
+    const jobPosting = await JobService.getJobPostingById(jobId);
+    const canView = authResult.user.userId === application.applicant_id || 
+                   authResult.user.userId === jobPosting?.employer_id ||
                    ['admin', 'super_admin'].includes(authResult.user.role);
 
     if (!canView) {
@@ -48,7 +50,7 @@ export async function GET(
           success: false,
           error: {
             code: 'FORBIDDEN',
-            message: 'You can only view your own applications or applications for your job postings'
+            message: 'You do not have permission to view this application'
           }
         },
         { status: 403 }
@@ -59,22 +61,22 @@ export async function GET(
       success: true,
       data: application
     });
-  } catch (error) {
-    console.error('Error getting job application:', error);
+  } catch (error: any) {
+    console.error('Error fetching job application:', error);
     return NextResponse.json(
       {
         success: false,
         error: {
-          code: 'FETCH_FAILED',
-          message: error instanceof Error ? error.message : 'Failed to get job application'
+          code: 'FETCH_APPLICATION_ERROR',
+          message: error.message || 'Failed to fetch job application'
         }
       },
-      { status: 500 }
+      { status: error.status || 500 }
     );
   }
 }
 
-export async function PUT(
+export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ jobId: string; applicationId: string }> }
 ) {
@@ -93,7 +95,8 @@ export async function PUT(
       );
     }
 
-    const application = await JobService.getJobApplicationById(params.applicationId);
+    const { jobId, applicationId } = await params;
+    const application = await JobService.getJobApplicationById(applicationId);
     if (!application) {
       return NextResponse.json(
         {
@@ -107,32 +110,18 @@ export async function PUT(
       );
     }
 
-    const jobPosting = await JobService.getJobPostingById(params.jobId);
-    if (!jobPosting) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: {
-            code: 'NOT_FOUND',
-            message: 'Job posting not found'
-          }
-        },
-        { status: 404 }
-      );
-    }
+    // Check if user can update this application
+    const jobPosting = await JobService.getJobPostingById(jobId);
+    const canUpdate = authResult.user.userId === jobPosting?.employer_id ||
+                     ['admin', 'super_admin'].includes(authResult.user.role);
 
-    // Check permissions
-    const isApplicant = authResult.user.id === application.applicant_id;
-    const isEmployer = authResult.user.id === jobPosting.employer_id;
-    const isAdmin = ['admin', 'super_admin'].includes(authResult.user.role);
-
-    if (!isApplicant && !isEmployer && !isAdmin) {
+    if (!canUpdate) {
       return NextResponse.json(
         {
           success: false,
           error: {
             code: 'FORBIDDEN',
-            message: 'You can only update your own applications or applications for your job postings'
+            message: 'You do not have permission to update this application'
           }
         },
         { status: 403 }
@@ -140,63 +129,45 @@ export async function PUT(
     }
 
     const body = await request.json();
-    
-    // Validate input
-    const validationResult = UpdateJobApplicationSchema.safeParse(body);
 
-    if (!validationResult.success) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: {
-            code: 'VALIDATION_ERROR',
-            message: 'Invalid application data',
-            details: validationResult.error.errors
-          }
-        },
-        { status: 400 }
+    try {
+      const validatedData = UpdateJobApplicationSchema.parse(body);
+      const updatedApplication = await JobService.updateJobApplication(
+        applicationId,
+        validatedData
       );
-    }
 
-    // Applicants can only withdraw their applications
-    if (isApplicant && !isEmployer && !isAdmin) {
-      if (validationResult.data.status && validationResult.data.status !== ApplicationStatus.WITHDRAWN) {
+      return NextResponse.json({
+        success: true,
+        data: updatedApplication
+      });
+    } catch (validationError) {
+      if (validationError instanceof ZodError) {
         return NextResponse.json(
           {
             success: false,
             error: {
-              code: 'FORBIDDEN',
-              message: 'Applicants can only withdraw their applications'
+              code: 'VALIDATION_ERROR',
+              message: 'Invalid request data',
+              details: validationError.issues
             }
           },
-          { status: 403 }
+          { status: 400 }
         );
       }
+      throw validationError;
     }
-
-    // Add status_updated_by if status is being changed
-    const updates = { ...validationResult.data };
-    if (updates.status) {
-      updates.status_updated_by = authResult.user.id;
-    }
-
-    const updatedApplication = await JobService.updateJobApplication(params.applicationId, updates);
-
-    return NextResponse.json({
-      success: true,
-      data: updatedApplication
-    });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error updating job application:', error);
     return NextResponse.json(
       {
         success: false,
         error: {
-          code: 'UPDATE_FAILED',
-          message: error instanceof Error ? error.message : 'Failed to update job application'
+          code: 'UPDATE_APPLICATION_ERROR',
+          message: error.message || 'Failed to update job application'
         }
       },
-      { status: 500 }
+      { status: error.status || 500 }
     );
   }
 }

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { fileUploadService, FILE_CONFIGS } from '../../../../lib/fileUpload';
-import { AuthMiddleware } from '../../../../middleware/auth';
+import { verifyAuth } from '../../../../lib/auth';
 import { APIError } from '../../../../lib/errors';
 
 /**
@@ -9,11 +9,19 @@ import { APIError } from '../../../../lib/errors';
 export async function POST(request: NextRequest) {
   try {
     // Authenticate user
-    const authResult = await authMiddleware(request, ['mentor', 'student']);
-    if (!authResult.success) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json(
-        { success: false, error: authResult.error },
-        { status: authResult.statusCode }
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    // Check if user has required role
+    if (!['mentor', 'student'].includes(authResult.user.role)) {
+      return NextResponse.json(
+        { success: false, error: 'Insufficient permissions' },
+        { status: 403 }
       );
     }
 
@@ -63,7 +71,7 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Error generating presigned URL:', error);
-    
+
     if (error instanceof APIError) {
       return NextResponse.json(
         { success: false, error: error.message },

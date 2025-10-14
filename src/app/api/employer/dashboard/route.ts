@@ -33,10 +33,10 @@ export async function GET(request: NextRequest) {
     }
 
     // Get employer statistics
-    const stats = await JobService.getEmployerStats(authResult.user.id);
+    const stats = await JobService.getEmployerStats(authResult.user.userId);
 
     // Get recent job postings
-    const recentJobs = await JobService.getJobPostingsByEmployer(authResult.user.id);
+    const recentJobs = await JobService.getJobPostingsByEmployer(authResult.user.userId);
 
     return NextResponse.json({
       success: true,

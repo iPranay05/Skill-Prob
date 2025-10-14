@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { LiveSessionService } from '../../../../../lib/liveSessionService';
-import { verifyToken } from '../../../../../lib/auth';
+import { verifyAuth } from '../../../../../lib/auth';
 import { AppError } from '../../../../../lib/errors';
 
 const liveSessionService = new LiveSessionService();
@@ -10,12 +10,11 @@ export async function GET(
   { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
 
-    const decoded = await verifyToken(token);
     const { searchParams } = new URL(request.url);
     const limit = parseInt(searchParams.get('limit') || '50');
     const { sessionId } = await params;
@@ -24,7 +23,7 @@ export async function GET(
 
     return NextResponse.json({
       success: true,
-      data: messages,
+      data: messages
     });
   } catch (error) {
     console.error('Error fetching chat messages:', error);
@@ -48,14 +47,13 @@ export async function POST(
   { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
 
-    const decoded = await verifyToken(token);
-    const body = await request.json();
-    const { message, messageType, isPrivate, repliedTo } = body;
+    const { sessionId } = await params;
+    const { message, messageType = 'text' } = await request.json();
 
     if (!message || message.trim().length === 0) {
       return NextResponse.json(
@@ -64,19 +62,16 @@ export async function POST(
       );
     }
 
-    const { sessionId } = await params;
     const chatMessage = await liveSessionService.sendChatMessage({
       sessionId,
-      userId: decoded.userId,
-      message: message.trim(),
-      messageType,
-      isPrivate,
-      repliedTo,
+      userId: authResult.user.userId,
+      message,
+      messageType
     });
 
     return NextResponse.json({
       success: true,
-      data: chatMessage,
+      data: chatMessage
     });
   } catch (error) {
     console.error('Error sending chat message:', error);

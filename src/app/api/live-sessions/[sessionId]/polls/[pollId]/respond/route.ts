@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { LiveSessionService } from '../../../../../../../lib/liveSessionService';
-import { verifyToken } from '../../../../../../../lib/auth';
+import { verifyAuth } from '../../../../../../../lib/auth';
 import { AppError } from '../../../../../../../lib/errors';
 
 const liveSessionService = new LiveSessionService();
@@ -10,12 +10,10 @@ export async function POST(
   { params }: { params: Promise<{ sessionId: string; pollId: string }> }
 ) {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
+    const authResult = await verifyAuth(request);
+    if (!authResult.success || !authResult.user) {
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
-
-    const decoded = await verifyToken(token);
     const body = await request.json();
     const { response } = body;
 
@@ -29,7 +27,7 @@ export async function POST(
     const { pollId } = await params;
     const pollResponse = await liveSessionService.submitPollResponse({
       pollId,
-      userId: decoded.userId,
+      userId: authResult.user.userId,
       response,
     });
 

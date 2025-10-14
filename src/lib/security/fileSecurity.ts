@@ -125,7 +125,7 @@ export class FileSecurityService {
       'FFD8FF': 'image/jpeg',
       '89504E47': 'image/png',
       '47494638': 'image/gif',
-      '52494646': 'image/webp',
+      '52494646574542': 'image/webp',
       '25504446': 'application/pdf',
       '504B0304': 'application/zip',
       '526172211A07': 'application/x-rar-compressed',

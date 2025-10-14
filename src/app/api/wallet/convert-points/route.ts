@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     const validatedData = ConvertPointsSchema.parse(body);
 
     // Get user's wallet
-    const walletResult = await walletService.getWallet(authResult.user.id);
+    const walletResult = await walletService.getWallet(authResult.user.userId);
     if (!walletResult.success || !walletResult.walletId) {
       return NextResponse.json(
         { success: false, error: 'Wallet not found' },
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { success: false, error: 'Invalid request data', details: error.errors },
+        { success: false, error: 'Invalid request data', details: error.issues },
         { status: 400 }
       );
     }

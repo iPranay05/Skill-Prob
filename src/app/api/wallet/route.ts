@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Get user's wallet
-    const result = await walletService.getWallet(authResult.user.id);
+    const result = await walletService.getWallet(authResult.user.userId);
 
     if (!result.success) {
       return NextResponse.json(
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     const userType = authResult.user.role === 'ambassador' ? 'ambassador' : 'student';
 
     // Create wallet
-    const result = await walletService.createWallet(authResult.user.id, userType);
+    const result = await walletService.createWallet(authResult.user.userId, userType);
 
     if (!result.success) {
       return NextResponse.json(

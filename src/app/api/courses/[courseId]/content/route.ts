@@ -87,7 +87,7 @@ export async function GET(
 
   } catch (error) {
     console.error('Course content fetch error:', error);
-    
+
     if (error instanceof APIError) {
       return NextResponse.json(
         { success: false, error: error.message },
@@ -235,7 +235,7 @@ export async function PUT(
 
   } catch (error) {
     console.error('Course content update error:', error);
-    
+
     if (error instanceof APIError) {
       return NextResponse.json(
         { success: false, error: error.message },

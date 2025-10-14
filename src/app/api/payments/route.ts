@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { EnrollmentService } from '../../../lib/enrollmentService';
-import { CreatePaymentInput } from '../../../models/Enrollment';
+import { CreatePaymentInput, PaymentStatus } from '../../../models/Enrollment';
 import { APIError } from '../../../lib/errors';
 import { verifyJWT } from '../../../lib/auth';
 
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     const paymentData: CreatePaymentInput = {
       enrollment_id: body.enrollment_id,
       subscription_id: body.subscription_id,
-      student_id: authResult.user.id,
+      student_id: authResult.user.userId,
       amount: body.amount,
       currency: body.currency || 'INR',
       gateway: body.gateway,
@@ -43,7 +43,9 @@ export async function POST(request: NextRequest) {
       payment_method: body.payment_method,
       payment_method_details: body.payment_method_details,
       coupon_code: body.coupon_code,
-      discount_amount: body.discount_amount || 0
+      discount_amount: body.discount_amount || 0,
+      status: PaymentStatus.PENDING,
+      refund_amount: 0
     };
 
     const payment = await enrollmentService.createPayment(paymentData);

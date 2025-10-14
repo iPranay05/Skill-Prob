@@ -47,7 +47,7 @@ export async function PUT(
     }
 
     // Check if user can update applications for this job
-    const canUpdate = authResult.user.id === jobPosting.employer_id || 
+    const canUpdate = authResult.user.userId === jobPosting.employer_id || 
                      ['admin', 'super_admin'].includes(authResult.user.role);
 
     if (!canUpdate) {
@@ -75,7 +75,7 @@ export async function PUT(
           error: {
             code: 'VALIDATION_ERROR',
             message: 'Invalid bulk update data',
-            details: validationResult.error.errors
+            details: validationResult.error.issues
           }
         },
         { status: 400 }
@@ -87,7 +87,7 @@ export async function PUT(
     await JobService.bulkUpdateApplicationStatus(
       applicationIds,
       status as ApplicationStatus,
-      authResult.user.id,
+      authResult.user.userId,
       notes
     );
 

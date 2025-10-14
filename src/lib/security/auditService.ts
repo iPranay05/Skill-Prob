@@ -328,7 +328,7 @@ export class AuditService {
       const failedOperations = totalLogs - successfulOperations;
       const criticalEvents = totalData?.filter(log => log.severity === 'critical').length || 0;
       const securityEvents = totalData?.filter(log => log.category === 'security').length || 0;
-      const authenticationFailures = totalData?.filter(log => 
+      const authenticationFailures = totalData?.filter(log =>
         log.category === 'authentication' && !log.success
       ).length || 0;
 
@@ -490,18 +490,19 @@ export class AuditService {
   static async cleanupOldLogs(retentionDays: number = 365): Promise<number> {
     try {
       const cutoffDate = new Date(Date.now() - retentionDays * 24 * 60 * 60 * 1000);
-      
+
       const { data, error } = await supabase
         .from('audit_logs')
         .delete()
-        .lt('created_at', cutoffDate.toISOString());
+        .lt('created_at', cutoffDate.toISOString())
+        .select();
 
       if (error) {
         throw error;
       }
 
       const deletedCount = Array.isArray(data) ? data.length : 0;
-      
+
       await this.logSystemEvent('audit_cleanup', {
         retentionDays,
         cutoffDate: cutoffDate.toISOString(),
@@ -522,14 +523,14 @@ export class AuditService {
   ): Promise<string> {
     try {
       const { logs } = await this.queryLogs({ ...query, limit: 10000 }); // Large limit for export
-      
+
       if (format === 'csv') {
         const headers = [
           'ID', 'User ID', 'User Email', 'User Role', 'Action', 'Resource', 'Resource ID',
           'IP Address', 'User Agent', 'Session ID', 'Success', 'Error Message',
           'Severity', 'Category', 'Created At', 'Details'
         ];
-        
+
         const csvRows = [
           headers.join(','),
           ...logs.map(log => [
@@ -551,7 +552,7 @@ export class AuditService {
             JSON.stringify(log.details || {}).replace(/"/g, '""')
           ].map(field => `"${field}"`).join(','))
         ];
-        
+
         return csvRows.join('\n');
       } else {
         return JSON.stringify(logs, null, 2);

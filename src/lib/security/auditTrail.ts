@@ -387,13 +387,13 @@ export class AuditTrailService {
       events.forEach(event => {
         // Count by category
         eventsByCategory[event.category] = (eventsByCategory[event.category] || 0) + 1;
-        
+
         // Count by severity
         eventsBySeverity[event.severity] = (eventsBySeverity[event.severity] || 0) + 1;
-        
+
         // Count failed events
         if (!event.success) failedEvents++;
-        
+
         // Count by user
         if (event.userId) {
           userEventCounts[event.userId] = (userEventCounts[event.userId] || 0) + 1;

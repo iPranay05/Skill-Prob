@@ -56,7 +56,9 @@ export interface InAppNotification {
   action_url?: string;
   action_data?: Record<string, any>;
   is_read: boolean;
+  read_at?: string;
   expires_at?: Date;
+  created_at: string;
 }
 
 export interface UserNotificationPreferences {
@@ -87,7 +89,7 @@ export class NotificationService {
     if (this.isMockMode) return null;
     
     if (!this.emailTransporter) {
-      this.emailTransporter = nodemailer.createTransporter({
+      this.emailTransporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: parseInt(process.env.SMTP_PORT || '587'),
         secure: false,

@@ -15,7 +15,10 @@ export async function GET(request: NextRequest) {
       try {
         // Check if user has admin privileges
         if (!context.userRole || !['admin', 'super_admin'].includes(context.userRole)) {
-          return ErrorHandler.unauthorized('Admin access required');
+          return NextResponse.json(
+            { success: false, error: 'Admin access required' },
+            { status: 401 }
+          );
         }
 
         // Get comprehensive security metrics
@@ -103,11 +106,18 @@ export async function GET(request: NextRequest) {
           }
         };
 
-        return ErrorHandler.success(response, 'Security status retrieved successfully');
+        return NextResponse.json({
+          success: true,
+          data: response,
+          message: 'Security status retrieved successfully'
+        });
 
       } catch (error) {
         console.error('Security status error:', error);
-        return ErrorHandler.handle(error);
+        return NextResponse.json(
+          { success: false, error: 'Internal server error' },
+          { status: 500 }
+        );
       }
     }
   );
@@ -122,7 +132,10 @@ export async function POST(request: NextRequest) {
       try {
         // Check if user has super admin privileges
         if (!context.userRole || context.userRole !== 'super_admin') {
-          return ErrorHandler.unauthorized('Super admin access required');
+          return NextResponse.json(
+            { success: false, error: 'Super admin access required' },
+            { status: 401 }
+          );
         }
 
         const body = await request.json();
@@ -152,7 +165,10 @@ export async function POST(request: NextRequest) {
               await RateLimitService.clearRateLimit(parameters.identifier, parameters.action);
               result = { cleared: true, identifier: parameters.identifier, action: parameters.action };
             } else {
-              return ErrorHandler.badRequest('Missing identifier or action parameter');
+              return NextResponse.json(
+                { success: false, error: 'Missing identifier or action parameter' },
+                { status: 400 }
+              );
             }
             break;
 
@@ -165,7 +181,10 @@ export async function POST(request: NextRequest) {
               ]);
               result = { unblocked: true, ipAddress: parameters.ipAddress };
             } else {
-              return ErrorHandler.badRequest('Missing ipAddress parameter');
+              return NextResponse.json(
+                { success: false, error: 'Missing ipAddress parameter' },
+                { status: 400 }
+              );
             }
             break;
 
@@ -178,12 +197,18 @@ export async function POST(request: NextRequest) {
               );
               result = { acknowledged: true, alertId: parameters.alertId };
             } else {
-              return ErrorHandler.badRequest('Missing alertId parameter');
+              return NextResponse.json(
+                { success: false, error: 'Missing alertId parameter' },
+                { status: 400 }
+              );
             }
             break;
 
           default:
-            return ErrorHandler.badRequest(`Unknown action: ${action}`);
+            return NextResponse.json(
+              { success: false, error: `Unknown action: ${action}` },
+              { status: 400 }
+            );
         }
 
         // Log the maintenance action
@@ -195,11 +220,18 @@ export async function POST(request: NextRequest) {
           performedByEmail: context.userEmail
         }, 'medium');
 
-        return ErrorHandler.success(result, `Security maintenance action '${action}' completed successfully`);
+        return NextResponse.json({
+          success: true,
+          data: result,
+          message: `Security maintenance action '${action}' completed successfully`
+        });
 
       } catch (error) {
         console.error('Security maintenance error:', error);
-        return ErrorHandler.handle(error);
+        return NextResponse.json(
+          { success: false, error: 'Internal server error' },
+          { status: 500 }
+        );
       }
     }
   );

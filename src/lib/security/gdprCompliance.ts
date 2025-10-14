@@ -1,25 +1,9 @@
+import { supabaseAdmin } from '../database';
 import { EncryptionService } from './encryption';
-import { database } from '../database';
-
-export interface DataExportRequest {
-  userId: string;
-  requestDate: Date;
-  status: 'pending' | 'processing' | 'completed' | 'failed';
-  downloadUrl?: string;
-  expiresAt?: Date;
-}
-
-export interface DataDeletionRequest {
-  userId: string;
-  requestDate: Date;
-  status: 'pending' | 'processing' | 'completed' | 'failed';
-  deletionDate?: Date;
-  retentionReason?: string;
-}
 
 export interface ConsentRecord {
   userId: string;
-  consentType: 'marketing' | 'analytics' | 'functional' | 'necessary';
+  consentType: 'data_processing' | 'marketing' | 'analytics' | 'cookies';
   granted: boolean;
   timestamp: Date;
   ipAddress: string;
@@ -27,26 +11,60 @@ export interface ConsentRecord {
   version: string;
 }
 
+export interface DataExportRequest {
+  userId: string;
+  requestedAt: Date;
+  status: 'pending' | 'processing' | 'completed' | 'failed';
+  completedAt?: Date;
+  downloadUrl?: string;
+  expiresAt?: Date;
+}
+
+export interface DataDeletionRequest {
+  userId: string;
+  requestedAt: Date;
+  status: 'pending' | 'processing' | 'completed' | 'failed';
+  completedAt?: Date;
+  reason?: string;
+  retentionOverride?: boolean;
+}
+
+export interface SecurityIncident {
+  type: 'data_breach' | 'unauthorized_access' | 'system_compromise' | 'privacy_violation';
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  description: string;
+  affectedUsers?: string[];
+  affectedData?: string[];
+  detectedAt: Date;
+  reportedBy: string;
+  status: 'open' | 'investigating' | 'resolved' | 'closed';
+}
+
 export class GDPRComplianceService {
-  // Data export functionality
+  // Request data export (Right to Data Portability)
   static async requestDataExport(userId: string): Promise<string> {
     try {
-      // Create export request record
       const exportRequest: DataExportRequest = {
         userId,
-        requestDate: new Date(),
+        requestedAt: new Date(),
         status: 'pending'
       };
 
-      const requestId = await database.collection('data_export_requests').insertOne(exportRequest);
-      
+      const { data, error } = await supabaseAdmin
+        .from('data_export_requests')
+        .insert(exportRequest)
+        .select('id')
+        .single();
+
+      if (error) throw error;
+
       // Queue background job for data compilation
-      await this.queueDataExportJob(requestId.insertedId.toString(), userId);
+      await this.queueDataExportJob(data.id);
       
-      return requestId.insertedId.toString();
+      return data.id;
     } catch (error) {
-      console.error('Data export request failed:', error);
-      throw new Error('Failed to process data export request');
+      console.error('Error requesting data export:', error);
+      throw new Error('Failed to request data export');
     }
   }
 
@@ -54,154 +72,200 @@ export class GDPRComplianceService {
   static async compileUserData(userId: string): Promise<any> {
     try {
       const userData: any = {
-        exportDate: new Date().toISOString(),
-        userId,
         personalData: {},
-        activityData: {},
-        preferences: {},
-        consents: []
+        activityData: {
+          enrollments: [],
+          payments: [],
+          sessions: []
+        },
+        consents: [],
+        ambassadorData: null
       };
 
       // Collect user profile data
-      const user = await database.collection('users').findOne({ _id: userId });
+      const { data: user } = await supabaseAdmin
+        .from('users')
+        .select('*')
+        .eq('id', userId)
+        .single();
+
       if (user) {
         userData.personalData = {
           email: user.email,
-          firstName: user.profile?.firstName,
-          lastName: user.profile?.lastName,
-          phone: user.phone,
-          registrationDate: user.createdAt,
-          lastLogin: user.lastLoginAt,
-          profilePicture: user.profile?.avatar
+          profile: user.profile,
+          createdAt: user.created_at,
+          lastLoginAt: user.last_login_at
         };
       }
 
       // Collect course enrollment data
-      const enrollments = await database.collection('enrollments')
-        .find({ studentId: userId }).toArray();
-      userData.activityData.enrollments = enrollments.map(enrollment => ({
-        courseId: enrollment.courseId,
-        enrollmentDate: enrollment.createdAt,
-        completionStatus: enrollment.status,
-        progress: enrollment.progress
-      }));
+      const { data: enrollments } = await supabaseAdmin
+        .from('enrollments')
+        .select('*')
+        .eq('student_id', userId);
+
+      if (enrollments) {
+        userData.activityData.enrollments = enrollments.map((enrollment: any) => ({
+          courseId: enrollment.course_id,
+          enrollmentDate: enrollment.created_at,
+          completionStatus: enrollment.status,
+          progress: enrollment.progress
+        }));
+      }
 
       // Collect payment history
-      const payments = await database.collection('payments')
-        .find({ userId }).toArray();
-      userData.activityData.payments = payments.map(payment => ({
-        amount: payment.amount,
-        currency: payment.currency,
-        date: payment.createdAt,
-        status: payment.status,
-        courseId: payment.courseId
-      }));
+      const { data: payments } = await supabaseAdmin
+        .from('payments')
+        .select('*')
+        .eq('user_id', userId);
+
+      if (payments) {
+        userData.activityData.payments = payments.map((payment: any) => ({
+          amount: payment.amount,
+          currency: payment.currency,
+          date: payment.created_at,
+          status: payment.status
+        }));
+      }
 
       // Collect consent records
-      const consents = await database.collection('consent_records')
-        .find({ userId }).toArray();
-      userData.consents = consents;
+      const { data: consents } = await supabaseAdmin
+        .from('consent_records')
+        .select('*')
+        .eq('user_id', userId);
+
+      userData.consents = consents || [];
 
       // Collect ambassador data if applicable
-      const ambassador = await database.collection('ambassadors').findOne({ userId });
+      const { data: ambassador } = await supabaseAdmin
+        .from('ambassadors')
+        .select('*')
+        .eq('user_id', userId)
+        .single();
+
       if (ambassador) {
         userData.ambassadorData = {
-          referralCode: ambassador.referralCode,
-          totalReferrals: ambassador.performance?.totalReferrals,
-          totalEarnings: ambassador.performance?.totalEarnings,
-          joinDate: ambassador.createdAt
+          joinedAt: ambassador.created_at,
+          totalReferrals: ambassador.total_referrals,
+          totalEarnings: ambassador.total_earnings,
+          status: ambassador.status
         };
       }
 
       return userData;
     } catch (error) {
-      console.error('Data compilation failed:', error);
+      console.error('Error compiling user data:', error);
       throw new Error('Failed to compile user data');
     }
   }
 
-  // Request data deletion (Right to be forgotten)
+  // Request data deletion (Right to be Forgotten)
   static async requestDataDeletion(userId: string, reason?: string): Promise<string> {
     try {
       const deletionRequest: DataDeletionRequest = {
         userId,
-        requestDate: new Date(),
+        requestedAt: new Date(),
         status: 'pending',
-        retentionReason: reason
+        reason
       };
 
-      const requestId = await database.collection('data_deletion_requests').insertOne(deletionRequest);
-      
+      const { data, error } = await supabaseAdmin
+        .from('data_deletion_requests')
+        .insert(deletionRequest)
+        .select('id')
+        .single();
+
+      if (error) throw error;
+
       // Queue background job for data deletion
-      await this.queueDataDeletionJob(requestId.insertedId.toString(), userId);
+      await this.queueDataDeletionJob(data.id);
       
-      return requestId.insertedId.toString();
+      return data.id;
     } catch (error) {
-      console.error('Data deletion request failed:', error);
-      throw new Error('Failed to process data deletion request');
+      console.error('Error requesting data deletion:', error);
+      throw new Error('Failed to request data deletion');
     }
   }
 
-  // Execute data deletion
-  static async executeDataDeletion(userId: string): Promise<void> {
+  // Process data deletion request
+  static async processDataDeletion(userId: string): Promise<void> {
     try {
-      // Check for legal retention requirements
+      // Check retention requirements
       const retentionCheck = await this.checkRetentionRequirements(userId);
+      
       if (retentionCheck.mustRetain) {
+        // Update deletion request status
+        await supabaseAdmin
+          .from('data_deletion_requests')
+          .update({
+            status: 'failed',
+            completed_at: new Date(),
+            reason: retentionCheck.reason
+          })
+          .eq('user_id', userId)
+          .eq('status', 'processing');
+        
         throw new Error(`Cannot delete data: ${retentionCheck.reason}`);
       }
 
-      // Anonymize instead of delete where legally required
+      // Proceed with anonymization instead of deletion for audit trail
       await this.anonymizeUserData(userId);
       
       // Delete non-essential data
       await this.deleteNonEssentialData(userId);
       
       // Update deletion request status
-      await database.collection('data_deletion_requests')
-        .updateOne(
-          { userId, status: 'processing' },
-          { 
-            $set: { 
-              status: 'completed',
-              deletionDate: new Date()
-            }
-          }
-        );
+      await supabaseAdmin
+        .from('data_deletion_requests')
+        .update({
+          status: 'completed',
+          completed_at: new Date()
+        })
+        .eq('user_id', userId)
+        .eq('status', 'processing');
 
     } catch (error) {
-      console.error('Data deletion execution failed:', error);
-      throw new Error('Failed to execute data deletion');
+      console.error('Error processing data deletion:', error);
+      throw error;
     }
   }
 
-  // Check retention requirements
+  // Check if data must be retained for legal/business reasons
   static async checkRetentionRequirements(userId: string): Promise<{ mustRetain: boolean; reason?: string }> {
     // Check for active subscriptions
-    const activeSubscriptions = await database.collection('subscriptions')
-      .countDocuments({ userId, status: 'active' });
-    
-    if (activeSubscriptions > 0) {
-      return { mustRetain: true, reason: 'Active subscriptions exist' };
+    const { count: activeSubscriptions } = await supabaseAdmin
+      .from('subscriptions')
+      .select('*', { count: 'exact', head: true })
+      .eq('user_id', userId)
+      .eq('status', 'active');
+
+    if (activeSubscriptions && activeSubscriptions > 0) {
+      return { mustRetain: true, reason: 'User has active subscriptions' };
     }
 
     // Check for recent financial transactions (7 years retention for tax purposes)
-    const recentPayments = await database.collection('payments')
-      .countDocuments({ 
-        userId, 
-        createdAt: { $gte: new Date(Date.now() - 7 * 365 * 24 * 60 * 60 * 1000) }
-      });
-    
-    if (recentPayments > 0) {
-      return { mustRetain: true, reason: 'Financial records must be retained for 7 years' };
+    const sevenYearsAgo = new Date();
+    sevenYearsAgo.setFullYear(sevenYearsAgo.getFullYear() - 7);
+
+    const { count: recentPayments } = await supabaseAdmin
+      .from('payments')
+      .select('*', { count: 'exact', head: true })
+      .eq('user_id', userId)
+      .gte('created_at', sevenYearsAgo.toISOString());
+
+    if (recentPayments && recentPayments > 0) {
+      return { mustRetain: true, reason: 'Recent financial transactions require 7-year retention' };
     }
 
     // Check for pending legal matters
-    const legalHolds = await database.collection('legal_holds')
-      .countDocuments({ userId, status: 'active' });
-    
-    if (legalHolds > 0) {
-      return { mustRetain: true, reason: 'Data subject to legal hold' };
+    const { count: legalHolds } = await supabaseAdmin
+      .from('legal_holds')
+      .select('*', { count: 'exact', head: true })
+      .eq('user_id', userId)
+      .eq('status', 'active');
+
+    if (legalHolds && legalHolds > 0) {
+      return { mustRetain: true, reason: 'User data is under legal hold' };
     }
 
     return { mustRetain: false };
@@ -209,73 +273,68 @@ export class GDPRComplianceService {
 
   // Anonymize user data
   static async anonymizeUserData(userId: string): Promise<void> {
-    const anonymizedId = `anon_${EncryptionService.generateSecureToken(16)}`;
+    const anonymizedId = `anon_${EncryptionService.generateToken(16)}`;
     
     // Anonymize user profile
-    await database.collection('users').updateOne(
-      { _id: userId },
-      {
-        $set: {
-          email: `${anonymizedId}@anonymized.local`,
+    await supabaseAdmin
+      .from('users')
+      .update({
+        email: `${anonymizedId}@anonymized.local`,
+        profile: {
+          firstName: 'Anonymous',
+          lastName: 'User',
           phone: null,
-          'profile.firstName': 'Anonymous',
-          'profile.lastName': 'User',
-          'profile.avatar': null,
-          'profile.bio': null,
-          anonymized: true,
-          anonymizedAt: new Date()
+          dateOfBirth: null,
+          address: null
         }
-      }
-    );
+      })
+      .eq('id', userId);
 
     // Anonymize course reviews
-    await database.collection('course_reviews').updateMany(
-      { userId },
-      {
-        $set: {
-          authorName: 'Anonymous User',
-          anonymized: true
-        }
-      }
-    );
+    await supabaseAdmin
+      .from('course_reviews')
+      .update({
+        reviewer_name: 'Anonymous User',
+        reviewer_email: `${anonymizedId}@anonymized.local`
+      })
+      .eq('user_id', userId);
 
     // Anonymize forum posts
-    await database.collection('forum_posts').updateMany(
-      { userId },
-      {
-        $set: {
-          authorName: 'Anonymous User',
-          anonymized: true
-        }
-      }
-    );
+    await supabaseAdmin
+      .from('forum_posts')
+      .update({
+        author_name: 'Anonymous User'
+      })
+      .eq('user_id', userId);
   }
 
   // Delete non-essential data
   static async deleteNonEssentialData(userId: string): Promise<void> {
     // Delete uploaded files (profile pictures, assignments)
-    await database.collection('user_files').deleteMany({ userId });
+    await supabaseAdmin.from('user_files').delete().eq('user_id', userId);
     
     // Delete notification preferences
-    await database.collection('notification_preferences').deleteMany({ userId });
+    await supabaseAdmin.from('notification_preferences').delete().eq('user_id', userId);
     
     // Delete browsing history
-    await database.collection('user_activity_logs').deleteMany({ userId });
+    await supabaseAdmin.from('user_activity_logs').delete().eq('user_id', userId);
     
     // Delete temporary data
-    await database.collection('otp_verifications').deleteMany({ userId });
-    await database.collection('password_resets').deleteMany({ userId });
+    await supabaseAdmin.from('otp_verifications').delete().eq('user_id', userId);
+    await supabaseAdmin.from('password_resets').delete().eq('user_id', userId);
   }
 
-  // Consent management
+  // Record user consent
   static async recordConsent(consent: ConsentRecord): Promise<void> {
     try {
-      await database.collection('consent_records').insertOne({
-        ...consent,
-        timestamp: new Date()
-      });
+      await supabaseAdmin
+        .from('consent_records')
+        .insert({
+          ...consent,
+          timestamp: new Date()
+        });
     } catch (error) {
-      console.error('Consent recording failed:', error);
+      console.error('Error recording consent:', error);
       throw new Error('Failed to record consent');
     }
   }
@@ -283,115 +342,123 @@ export class GDPRComplianceService {
   // Get user consents
   static async getUserConsents(userId: string): Promise<ConsentRecord[]> {
     try {
-      return await database.collection('consent_records')
-        .find({ userId })
-        .sort({ timestamp: -1 })
-        .toArray();
+      const { data, error } = await supabaseAdmin
+        .from('consent_records')
+        .select('*')
+        .eq('user_id', userId)
+        .order('timestamp', { ascending: false });
+
+      if (error) throw error;
+      return data || [];
     } catch (error) {
-      console.error('Failed to retrieve consents:', error);
-      throw new Error('Failed to retrieve user consents');
+      console.error('Error fetching user consents:', error);
+      throw new Error('Failed to fetch user consents');
     }
   }
 
-  // Update consent
-  static async updateConsent(userId: string, consentType: string, granted: boolean, metadata: any): Promise<void> {
+  // Validate consent for specific purpose
+  static async validateConsent(userId: string, consentType: ConsentRecord['consentType']): Promise<boolean> {
     try {
-      const consent: ConsentRecord = {
-        userId,
-        consentType: consentType as any,
-        granted,
-        timestamp: new Date(),
-        ipAddress: metadata.ipAddress,
-        userAgent: metadata.userAgent,
-        version: '1.0'
+      const { data, error } = await supabaseAdmin
+        .from('consent_records')
+        .select('*')
+        .eq('user_id', userId)
+        .eq('consent_type', consentType)
+        .order('timestamp', { ascending: false })
+        .limit(1)
+        .single();
+
+      if (error && error.code !== 'PGRST116') throw error;
+      return data?.granted || false;
+    } catch (error) {
+      console.error('Error validating consent:', error);
+      return false;
+    }
+  }
+
+  // Generate privacy policy compliance report
+  static async generateComplianceReport(): Promise<any> {
+    try {
+      const report = {
+        generatedAt: new Date(),
+        dataProcessingActivities: await this.getDataProcessingActivities(),
+        consentMetrics: await this.getConsentMetrics(),
+        dataRetentionStatus: await this.getDataRetentionStatus(),
+        securityIncidents: await this.getSecurityIncidents(),
+        userRights: await this.getUserRightsMetrics()
       };
 
-      await this.recordConsent(consent);
+      return report;
     } catch (error) {
-      console.error('Consent update failed:', error);
-      throw new Error('Failed to update consent');
+      console.error('Error generating compliance report:', error);
+      throw new Error('Failed to generate compliance report');
     }
   }
 
-  // Data portability - export in machine-readable format
-  static async exportDataPortable(userId: string): Promise<string> {
-    try {
-      const userData = await this.compileUserData(userId);
-      
-      // Convert to JSON format for portability
-      const portableData = {
-        format: 'JSON',
-        version: '1.0',
-        exportDate: new Date().toISOString(),
-        data: userData
-      };
-
-      return JSON.stringify(portableData, null, 2);
-    } catch (error) {
-      console.error('Data portability export failed:', error);
-      throw new Error('Failed to export portable data');
-    }
-  }
-
-  // Privacy impact assessment
-  static async assessPrivacyImpact(dataProcessingActivity: string): Promise<any> {
-    // This would implement a privacy impact assessment framework
-    return {
-      activity: dataProcessingActivity,
-      riskLevel: 'medium',
-      mitigationMeasures: [
-        'Data encryption at rest and in transit',
-        'Access controls and authentication',
-        'Regular security audits',
-        'Data minimization practices'
-      ],
-      assessmentDate: new Date()
-    };
-  }
-
-  // Queue background jobs (placeholder - would integrate with job queue)
-  private static async queueDataExportJob(requestId: string, userId: string): Promise<void> {
-    // This would integrate with a job queue system like Bull or Agenda
-    console.log(`Queued data export job for request ${requestId}, user ${userId}`);
-  }
-
-  private static async queueDataDeletionJob(requestId: string, userId: string): Promise<void> {
-    // This would integrate with a job queue system
-    console.log(`Queued data deletion job for request ${requestId}, user ${userId}`);
-  }
-
-  // Data breach notification
-  static async notifyDataBreach(incident: any): Promise<void> {
+  // Report security incident
+  static async reportSecurityIncident(incident: SecurityIncident): Promise<string> {
     try {
       // Log the incident
-      await database.collection('security_incidents').insertOne({
-        ...incident,
-        reportedAt: new Date(),
-        status: 'reported'
-      });
+      const { data, error } = await supabaseAdmin
+        .from('security_incidents')
+        .insert({
+          ...incident,
+          reported_at: new Date(),
+          status: 'open'
+        })
+        .select('id')
+        .single();
 
-      // Notify relevant authorities if required
-      if (incident.severity === 'high') {
-        await this.notifyDataProtectionAuthority(incident);
-      }
+      if (error) throw error;
 
-      // Notify affected users if required
-      if (incident.affectedUsers && incident.affectedUsers.length > 0) {
-        await this.notifyAffectedUsers(incident);
-      }
+      // Notify relevant stakeholders
+      await this.notifySecurityIncident(data.id, incident);
+      
+      return data.id;
     } catch (error) {
-      console.error('Data breach notification failed:', error);
-      throw new Error('Failed to process data breach notification');
+      console.error('Error reporting security incident:', error);
+      throw new Error('Failed to report security incident');
     }
   }
 
-  private static async notifyDataProtectionAuthority(incident: any): Promise<void> {
-    // Implementation would depend on jurisdiction
-    console.log('Notifying data protection authority of incident:', incident.id);
+  // Private helper methods
+  private static async queueDataExportJob(requestId: string): Promise<void> {
+    // Implementation would queue a background job
+    console.log(`Queued data export job for request ${requestId}`);
   }
 
-  private static async notifyAffectedUsers(incident: any): Promise<void> {
-    // Send notifications to affected users
-    console.log(`Notifying ${incident.affectedUsers.length} users of security incident`);
+  private static async queueDataDeletionJob(requestId: string): Promise<void> {
+    // Implementation would queue a background job
+    console.log(`Queued data deletion job for request ${requestId}`);
+  }
+
+  private static async getDataProcessingActivities(): Promise<any[]> {
+    // Implementation would return data processing activities
+    return [];
+  }
+
+  private static async getConsentMetrics(): Promise<any> {
+    // Implementation would return consent metrics
+    return {};
+  }
+
+  private static async getDataRetentionStatus(): Promise<any> {
+    // Implementation would return data retention status
+    return {};
+  }
+
+  private static async getSecurityIncidents(): Promise<any[]> {
+    // Implementation would return recent security incidents
+    return [];
+  }
+
+  private static async getUserRightsMetrics(): Promise<any> {
+    // Implementation would return user rights exercise metrics
+    return {};
+  }
+
+  private static async notifySecurityIncident(incidentId: string, incident: SecurityIncident): Promise<void> {
+    // Implementation would notify relevant stakeholders
+    console.log(`Security incident ${incidentId} reported: ${incident.type}`);
   }
 }

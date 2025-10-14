@@ -4,14 +4,14 @@ import { verifyAuth } from '@/lib/auth';
 import { z } from 'zod';
 
 const CreatePaymentSchema = z.object({
-  gateway: z.enum(['razorpay', 'stripe', 'wallet']),
+  gateway: z.union([z.literal('razorpay'), z.literal('stripe'), z.literal('wallet')]),
   amount: z.number().positive(),
-  currency: z.string().length(3).default('INR'),
+  currency: z.string().refine(val => val.length === 3, { message: "Currency must be 3 characters" }),
   description: z.string().min(1),
   courseId: z.string().uuid().optional(),
   subscriptionId: z.string().uuid().optional(),
   enrollmentId: z.string().uuid().optional(),
-  metadata: z.record(z.any()).optional()
+  metadata: z.record(z.string(), z.any()).optional()
 });
 
 export async function POST(request: NextRequest) {
@@ -32,7 +32,8 @@ export async function POST(request: NextRequest) {
     // Create payment
     const result = await paymentService.createPayment({
       ...validatedData,
-      studentId: authResult.user.id
+      currency: validatedData.currency || 'INR',
+      studentId: authResult.user.userId
     });
 
     if (!result.success) {
@@ -56,7 +57,7 @@ export async function POST(request: NextRequest) {
     
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { success: false, error: 'Invalid request data', details: error.errors },
+        { success: false, error: 'Invalid request data', details: error.issues },
         { status: 400 }
       );
     }

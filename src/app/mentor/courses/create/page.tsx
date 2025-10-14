@@ -67,49 +67,49 @@ export default function CreateCourse() {
     setFormData(prev => ({
       ...prev,
       [field]: value
-    }));
+    } as CourseFormData));
   };
 
   const handleNestedInputChange = (section: string, field: string, value: any) => {
     setFormData(prev => ({
       ...prev,
       [section]: {
-        ...prev[section as keyof CourseFormData],
+        ...(prev[section as keyof CourseFormData] as any),
         [field]: value
       }
-    }));
+    } as CourseFormData));
   };
 
   const handleArrayInputChange = (section: string, field: string, index: number, value: string) => {
     setFormData(prev => ({
       ...prev,
       [section]: {
-        ...prev[section as keyof CourseFormData],
-        [field]: (prev[section as keyof CourseFormData] as any)[field].map((item: string, i: number) => 
+        ...(prev[section as keyof CourseFormData] as any),
+        [field]: ((prev[section as keyof CourseFormData] as any)[field] as string[]).map((item: string, i: number) => 
           i === index ? value : item
         )
       }
-    }));
+    } as CourseFormData));
   };
 
   const addArrayItem = (section: string, field: string) => {
     setFormData(prev => ({
       ...prev,
       [section]: {
-        ...prev[section as keyof CourseFormData],
-        [field]: [...(prev[section as keyof CourseFormData] as any)[field], '']
+        ...(prev[section as keyof CourseFormData] as any),
+        [field]: [...((prev[section as keyof CourseFormData] as any)[field] as string[]), '']
       }
-    }));
+    } as CourseFormData));
   };
 
   const removeArrayItem = (section: string, field: string, index: number) => {
     setFormData(prev => ({
       ...prev,
       [section]: {
-        ...prev[section as keyof CourseFormData],
-        [field]: (prev[section as keyof CourseFormData] as any)[field].filter((_: any, i: number) => i !== index)
+        ...(prev[section as keyof CourseFormData] as any),
+        [field]: ((prev[section as keyof CourseFormData] as any)[field] as string[]).filter((_: any, i: number) => i !== index)
       }
-    }));
+    } as CourseFormData));
   };
 
   const handleTagInput = (value: string) => {

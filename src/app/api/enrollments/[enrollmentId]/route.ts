@@ -23,7 +23,8 @@ export async function GET(
       );
     }
 
-    const enrollment = await enrollmentService.getEnrollmentById(params.enrollmentId);
+    const { enrollmentId } = await params;
+    const enrollment = await enrollmentService.getEnrollmentById(enrollmentId);
     
     if (!enrollment) {
       return NextResponse.json(
@@ -33,7 +34,7 @@ export async function GET(
     }
 
     // Check if user has permission to view this enrollment
-    const isStudent = enrollment.student_id === authResult.user.id;
+    const isStudent = enrollment.student_id === authResult.user.userId;
     const isAdmin = authResult.user.role === 'admin' || authResult.user.role === 'super_admin';
     
     // For mentors, we need to check if they own the course (this would require joining with courses table)
@@ -84,12 +85,14 @@ export async function PATCH(
 
     const body = await request.json();
     
+    const { enrollmentId } = await params;
+    
     // Handle status updates
     if (body.status) {
       const enrollment = await enrollmentService.updateEnrollmentStatus(
-        params.enrollmentId,
+        enrollmentId,
         body.status as EnrollmentStatus,
-        authResult.user.id
+        authResult.user.userId
       );
 
       return NextResponse.json({
@@ -101,8 +104,8 @@ export async function PATCH(
     // Handle progress updates
     if (body.progress) {
       const enrollment = await enrollmentService.updateEnrollmentProgress(
-        params.enrollmentId,
-        authResult.user.id,
+        enrollmentId,
+        authResult.user.userId,
         body.progress
       );
 

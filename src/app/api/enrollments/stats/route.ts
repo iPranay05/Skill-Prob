@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
 
     // For mentors, only show their own course stats
     if (isMentor && !isAdmin) {
-      filters.mentor_id = authResult.user.id;
+      filters.mentor_id = authResult.user.userId;
     }
 
     const stats = await enrollmentService.getEnrollmentStats(filters);

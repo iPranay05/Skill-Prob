@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
           error: {
             code: 'VALIDATION_ERROR',
             message: 'Invalid category data',
-            details: validationResult.error.errors
+            details: validationResult.error.issues
           }
         },
         { status: 400 }

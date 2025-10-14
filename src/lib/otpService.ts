@@ -185,8 +185,7 @@ export class OTPService {
         userId,
         type,
         code,
-        purpose,
-        expiresAt,
+        expiresAt: expiresAt.toISOString(),
         verified: false,
         attempts: 0,
       });
@@ -250,7 +249,7 @@ export class OTPService {
       }
 
       // Check attempts limit
-      if (otpRecord.attempts >= this.MAX_ATTEMPTS) {
+      if ((otpRecord.attempts || 0) >= this.MAX_ATTEMPTS) {
         return {
           success: false,
           message: 'Maximum verification attempts exceeded. Please request a new OTP.',
@@ -268,9 +267,11 @@ export class OTPService {
       // Verify the code
       if (otpRecord.code !== code) {
         // Increment attempts
-        await OTPVerificationModel.update(otpRecord.id, {
-          attempts: otpRecord.attempts + 1,
-        });
+        if (otpRecord.id) {
+          await OTPVerificationModel.update(otpRecord.id, {
+            attempts: (otpRecord.attempts || 0) + 1,
+          });
+        }
 
         return {
           success: false,
@@ -279,7 +280,7 @@ export class OTPService {
       }
 
       // Mark as verified
-      const verifiedOTP = await OTPVerificationModel.markAsVerified(otpRecord.id);
+      const verifiedOTP = otpRecord.id ? await OTPVerificationModel.markAsVerified(otpRecord.id) : null;
 
       return {
         success: true,
@@ -338,8 +339,8 @@ export class OTPService {
       }
 
       const totalSent = data.length;
-      const totalVerified = data.filter(otp => otp.verified).length;
-      const pendingVerification = data.filter(otp => !otp.verified).length;
+      const totalVerified = data.filter((otp: any) => otp.verified).length;
+      const pendingVerification = data.filter((otp: any) => !otp.verified).length;
 
       return {
         totalSent,

@@ -40,7 +40,7 @@ export async function GET(
     }
 
     // Check if user can view applications for this job
-    const canView = authResult.user.id === jobPosting.employer_id || 
+    const canView = authResult.user.userId === jobPosting.employer_id || 
                    ['admin', 'super_admin'].includes(authResult.user.role);
 
     if (!canView) {
@@ -196,7 +196,7 @@ export async function POST(
     const validationResult = CreateJobApplicationSchema.safeParse({
       ...body,
       job_posting_id: jobId,
-      applicant_id: authResult.user.id
+      applicant_id: authResult.user.userId
     });
 
     if (!validationResult.success) {
@@ -206,7 +206,7 @@ export async function POST(
           error: {
             code: 'VALIDATION_ERROR',
             message: 'Invalid application data',
-            details: validationResult.error.errors
+            details: validationResult.error.issues
           }
         },
         { status: 400 }
