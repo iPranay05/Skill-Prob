@@ -4,7 +4,7 @@ import Redis from 'ioredis';
 const CACHE_CONFIG = {
   // Default TTL in seconds
   DEFAULT_TTL: 300, // 5 minutes
-  
+
   // Specific TTLs for different data types
   USER_PROFILE_TTL: 900, // 15 minutes
   COURSE_LIST_TTL: 600, // 10 minutes
@@ -12,7 +12,7 @@ const CACHE_CONFIG = {
   LIVE_SESSION_TTL: 60, // 1 minute
   AMBASSADOR_STATS_TTL: 300, // 5 minutes
   PAYMENT_STATUS_TTL: 30, // 30 seconds
-  
+
   // Cache key prefixes
   PREFIXES: {
     USER: 'user:',
@@ -26,25 +26,42 @@ const CACHE_CONFIG = {
 };
 
 class CacheService {
-  private redis: Redis;
+  private redis!: Redis;
   private isConnected: boolean = false;
 
   constructor() {
-    this.redis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379', {
-      enableReadyCheck: false,
-      maxRetriesPerRequest: 3,
-      lazyConnect: true,
-    });
+    try {
+      this.redis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379', {
+        enableReadyCheck: false,
+        maxRetriesPerRequest: 1,
+        lazyConnect: true,
+        connectTimeout: 5000,
+        commandTimeout: 5000,
+        showFriendlyErrorStack: process.env.NODE_ENV !== 'production'
+      });
 
-    this.redis.on('connect', () => {
-      this.isConnected = true;
-      console.log('✅ Redis cache connected');
-    });
+      this.redis.on('connect', () => {
+        this.isConnected = true;
+        console.log('✅ Redis cache connected');
+      });
 
-    this.redis.on('error', (error) => {
+      this.redis.on('error', (error) => {
+        this.isConnected = false;
+        // Suppress Redis connection errors in development
+        if (process.env.NODE_ENV === 'production') {
+          console.error('❌ Redis cache error:', error);
+        }
+      });
+
+      this.redis.on('close', () => {
+        this.isConnected = false;
+      });
+    } catch (error) {
       this.isConnected = false;
-      console.error('❌ Redis cache error:', error);
-    });
+      if (process.env.NODE_ENV === 'production') {
+        console.error('Failed to initialize Redis cache:', error);
+      }
+    }
   }
 
   /**
@@ -60,7 +77,7 @@ class CacheService {
   async set(key: string, value: any, ttl: number = CACHE_CONFIG.DEFAULT_TTL): Promise<boolean> {
     try {
       if (!this.isConnected) return false;
-      
+
       const serializedValue = JSON.stringify(value);
       await this.redis.setex(key, ttl, serializedValue);
       return true;
@@ -76,7 +93,7 @@ class CacheService {
   async get<T>(key: string): Promise<T | null> {
     try {
       if (!this.isConnected) return null;
-      
+
       const value = await this.redis.get(key);
       return value ? JSON.parse(value) : null;
     } catch (error) {
@@ -91,7 +108,7 @@ class CacheService {
   async delete(key: string): Promise<boolean> {
     try {
       if (!this.isConnected) return false;
-      
+
       await this.redis.del(key);
       return true;
     } catch (error) {
@@ -106,7 +123,7 @@ class CacheService {
   async deletePattern(pattern: string): Promise<boolean> {
     try {
       if (!this.isConnected) return false;
-      
+
       const keys = await this.redis.keys(pattern);
       if (keys.length > 0) {
         await this.redis.del(...keys);
@@ -124,7 +141,7 @@ class CacheService {
   async exists(key: string): Promise<boolean> {
     try {
       if (!this.isConnected) return false;
-      
+
       const result = await this.redis.exists(key);
       return result === 1;
     } catch (error) {
@@ -139,12 +156,12 @@ class CacheService {
   async increment(key: string, ttl: number = CACHE_CONFIG.DEFAULT_TTL): Promise<number> {
     try {
       if (!this.isConnected) return 0;
-      
+
       const multi = this.redis.multi();
       multi.incr(key);
       multi.expire(key, ttl);
       const results = await multi.exec();
-      
+
       return results?.[0]?.[1] as number || 0;
     } catch (error) {
       console.error('Cache increment error:', error);
@@ -200,7 +217,7 @@ class CacheService {
       const detailsKey = this.generateKey(CACHE_CONFIG.PREFIXES.COURSE, `details:${courseId}`);
       await this.delete(detailsKey);
     }
-    
+
     // Invalidate all course lists
     const listPattern = this.generateKey(CACHE_CONFIG.PREFIXES.COURSE, 'list:*');
     return this.deletePattern(listPattern);
@@ -283,10 +300,10 @@ class CacheService {
   async warmCache(): Promise<void> {
     try {
       console.log('🔥 Starting cache warming...');
-      
+
       // Warm popular courses
       // This would typically be called during deployment or scheduled
-      
+
       console.log('✅ Cache warming completed');
     } catch (error) {
       console.error('❌ Cache warming failed:', error);
@@ -299,10 +316,10 @@ class CacheService {
   async getStats(): Promise<any> {
     try {
       if (!this.isConnected) return null;
-      
+
       const info = await this.redis.info('memory');
       const keyspace = await this.redis.info('keyspace');
-      
+
       return {
         connected: this.isConnected,
         memory: info,
@@ -321,7 +338,7 @@ class CacheService {
   async flushAll(): Promise<boolean> {
     try {
       if (!this.isConnected) return false;
-      
+
       await this.redis.flushall();
       return true;
     } catch (error) {

@@ -82,7 +82,41 @@ export class NotificationService {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
-  private static redis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379');
+  private static redis = (() => {
+    try {
+      const redisInstance = new Redis(process.env.REDIS_URL || 'redis://localhost:6379', {
+        maxRetriesPerRequest: 1,
+        lazyConnect: true,
+        connectTimeout: 5000,
+        commandTimeout: 5000,
+        showFriendlyErrorStack: process.env.NODE_ENV !== 'production'
+      });
+
+      redisInstance.on('error', (error) => {
+        // Suppress Redis connection errors in development
+        if (process.env.NODE_ENV === 'production') {
+          console.error('Redis notifications error:', error);
+        } else {
+          // Silently handle Redis connection errors in development
+          // This prevents unhandled error events when Redis is not running
+        }
+      });
+
+      return redisInstance;
+    } catch (error) {
+      if (process.env.NODE_ENV === 'production') {
+        console.error('Failed to initialize Redis for notifications:', error);
+      }
+      // Return a mock Redis-like object for development
+      return {
+        get: () => Promise.resolve(null),
+        set: () => Promise.resolve('OK'),
+        del: () => Promise.resolve(1),
+        exists: () => Promise.resolve(0),
+        expire: () => Promise.resolve(1)
+      } as any;
+    }
+  })();
 
   // Initialize services
   private static getEmailTransporter() {

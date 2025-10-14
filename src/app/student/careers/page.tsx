@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { JobPosting, JobType, ExperienceLevel, WorkMode } from '@/models/Job';
@@ -23,7 +23,7 @@ interface JobSearchResponse {
   limit: number;
 }
 
-export default function StudentCareersPage() {
+function StudentCareersContent() {
   const [jobs, setJobs] = useState<JobPosting[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -31,7 +31,7 @@ export default function StudentCareersPage() {
   const [filters, setFilters] = useState<JobSearchFilters>({});
   const [pagination, setPagination] = useState({ page: 1, total: 0, limit: 20 });
   const [showFilters, setShowFilters] = useState(false);
-  
+
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -75,7 +75,7 @@ export default function StudentCareersPage() {
   const fetchJobs = async (searchFilters: JobSearchFilters = filters, page = 1) => {
     try {
       setLoading(true);
-      
+
       const queryParams = new URLSearchParams();
       if (searchFilters.search) queryParams.set('search', searchFilters.search);
       if (searchFilters.type) queryParams.set('type', searchFilters.type);
@@ -90,14 +90,14 @@ export default function StudentCareersPage() {
 
       // Get the access token from localStorage
       const token = localStorage.getItem('accessToken');
-      
+
       const response = await fetch(`/api/student/careers/jobs?${queryParams}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
-      
+
       if (!response.ok) {
         if (response.status === 401) {
           // Redirect to login if unauthorized
@@ -108,7 +108,7 @@ export default function StudentCareersPage() {
       }
 
       const data = await response.json();
-      
+
       if (data.success) {
         setJobs(data.jobs || []);
         setPagination({ page: data.page || 1, total: data.total || 0, limit: data.limit || 20 });
@@ -398,7 +398,7 @@ export default function StudentCareersPage() {
                           </span>
                         )}
                       </div>
-                      
+
                       <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
                         <span className="font-medium">{job.company_name}</span>
                         <span>•</span>
@@ -464,26 +464,25 @@ export default function StudentCareersPage() {
                 >
                   Previous
                 </button>
-                
+
                 {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                   const page = i + Math.max(1, pagination.page - 2);
                   if (page > totalPages) return null;
-                  
+
                   return (
                     <button
                       key={page}
                       onClick={() => fetchJobs(filters, page)}
-                      className={`px-3 py-2 border rounded-md ${
-                        page === pagination.page
+                      className={`px-3 py-2 border rounded-md ${page === pagination.page
                           ? 'bg-blue-600 text-white border-blue-600'
                           : 'border-gray-300 hover:bg-gray-50'
-                      }`}
+                        }`}
                     >
                       {page}
                     </button>
                   );
                 })}
-                
+
                 <button
                   onClick={() => fetchJobs(filters, pagination.page + 1)}
                   disabled={pagination.page === totalPages}
@@ -497,5 +496,26 @@ export default function StudentCareersPage() {
         )}
       </div>
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="text-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading career opportunities...</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function StudentCareersPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <StudentCareersContent />
+    </Suspense>
   );
 }

@@ -1,11 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
-
-export default function RegisterPage() {
+function RegisterContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
@@ -23,13 +22,13 @@ export default function RegisterPage() {
     // Check for referral code from URL parameter or localStorage
     const refFromUrl = searchParams.get('ref');
     const refFromStorage = localStorage.getItem('referralCode');
-    
+
     if (refFromUrl || refFromStorage) {
       setFormData(prev => ({
         ...prev,
         referralCode: refFromUrl || refFromStorage || ''
       }));
-      
+
       // Clear from localStorage after using it
       if (refFromStorage) {
         localStorage.removeItem('referralCode');
@@ -125,7 +124,7 @@ export default function RegisterPage() {
                 Start your learning journey with thousands of students worldwide
               </p>
             </div>
-            
+
             <div className="space-y-6 opacity-90" style={{ color: '#f5f5f5' }}>
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 245, 245, 0.2)' }}>
@@ -138,7 +137,7 @@ export default function RegisterPage() {
                   <p className="text-sm opacity-75">Learn from industry professionals</p>
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 245, 245, 0.2)' }}>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -150,7 +149,7 @@ export default function RegisterPage() {
                   <p className="text-sm opacity-75">Get recognized certifications</p>
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 245, 245, 0.2)' }}>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -224,7 +223,7 @@ export default function RegisterPage() {
                   />
                 </div>
               </div>
-              
+
               <div>
                 <label htmlFor="email" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
                   Email Address
@@ -395,5 +394,27 @@ export default function RegisterPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className="min-h-screen bg-white flex items-center justify-center" style={{ fontFamily: 'Arial, sans-serif' }}>
+      <div className="text-center">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
+          <span className="text-2xl font-bold" style={{ color: '#f5f5f5' }}>SP</span>
+        </div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 mx-auto mb-4" style={{ borderColor: '#3a8ebe' }}></div>
+        <p style={{ color: '#666' }}>Loading registration form...</p>
+      </div>
+    </div>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <RegisterContent />
+    </Suspense>
   );
 }
