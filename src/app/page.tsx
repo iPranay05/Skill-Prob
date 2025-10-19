@@ -2,2227 +2,895 @@
 
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
+import WhyChooseUs from '@/components/WhyChooseUs';
 
 export default function HomePage() {
-
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#f5f5f5' }}>
-      {/* Navigation */}
-      <Navbar />
+    <>
+      <style jsx>{`
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+      `}</style>
+      
+      <div className="min-h-screen bg-white text-black overflow-hidden font-['Arial',sans-serif]">
+        <Navbar />
+      
+        {/* Hero Section */}
+        <section 
+          className="relative py-24 px-6 overflow-visible bg-white"
+          style={{
+            fontFamily: 'Arial, sans-serif',
+          }}
+        >
+          {/* Animated background elements */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+          
+          {/* Right Bottom Decoration */}
+          <div className="absolute bottom-0 right-0 w-full h-1/2 pointer-events-none">
+            <div className="absolute bottom-0 right-0 w-3/4 h-full bg-purple-100/40 rounded-tl-[100px]"></div>
+          </div>
 
-      {/* 1. Hero Section */}
-      <div className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f5f5f5 0%, rgba(58, 142, 190, 0.1) 100%)' }}>
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-32 w-80 h-80 rounded-full opacity-20 blur-3xl" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}></div>
-          <div className="absolute -bottom-40 -left-32 w-80 h-80 rounded-full opacity-20 blur-3xl" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}></div>
-        </div>
+          <div className="relative z-10 max-w-7xl mx-auto">
+            <div className="mb-28">
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                
+                {/* Left Side */}
+                <div className="space-y-8">
+                  
+                  {/* Tag */}
+                  <div className="inline-flex items-center gap-2 px-5 py-3 bg-white/40 backdrop-blur-lg rounded-full border-2 border-white/60">
+                    <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                    <span className="text-sm font-black" style={{ color: '#5e17eb' }}>
+                      COMPLETE CAREER PLATFORM
+                    </span>
+                  </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24">
-          <div className="text-center">
-            <div className="inline-flex items-center px-4 py-2 rounded-full mb-8" style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', border: '1px solid rgba(58, 142, 190, 0.2)' }}>
-              <span className="w-2 h-2 rounded-full mr-2 animate-pulse" style={{ backgroundColor: '#3a8ebe' }}></span>
-              <p className="text-sm font-medium" style={{ color: '#181c31' }}>SkillProbe - Mentorships, Internships, Jobs</p>
-            </div>
+                  {/* Main Heading */}
+                  <h1 className="text-6xl lg:text-7xl font-black leading-tight text-gray-900">
+                    <span className="block">Transform Your</span>
+                    <span className="block" style={{ color: '#5e17eb' }}>
+                      Skills & Future
+                    </span>
+                  </h1>
 
-            <h1 className="text-6xl lg:text-7xl font-bold mb-8 leading-tight">
-              <span style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Grow your skills,
-              </span>
-              <br />
-              <span style={{ color: '#181c31' }}>define your future</span>
-            </h1>
+                  {/* Features List */}
+                  <div className="space-y-3 pt-4">
+                    {[
+                      "500+ Skill Development Courses",
+                      "Live Classes with Industry Experts", 
+                      "Guaranteed Certification",
+                      "Exclusive Internship Opportunities"
+                    ].map((item, idx) => (
+                      <div key={idx} className="flex items-center gap-3">
+                        <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#5e17eb' }}>
+                          <div className="w-3 h-3 bg-white rounded-full"></div>
+                        </div>
+                        <span className="text-gray-900 font-black text-lg">{item}</span>
+                      </div>
+                    ))}
+                  </div>
 
-            <p className="text-xl mb-12 leading-relaxed max-w-4xl mx-auto font-light" style={{ color: '#666' }}>
-              Skillprobe empowers learners to unlock their true potential by connecting them with experienced mentors,
-              showcasing real-world skills, and enabling meaningful career opportunities. Our mission is to bridge the gap
-              between ambition and achievement through personalized guidance, verified capabilities, and a trusted ecosystem
-              where skills matter.
-            </p>
+                  {/* CTA Buttons */}
+                  <div className="flex gap-4 pt-6">
+                    <button className="px-8 py-4 bg-black text-white font-black text-base rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                      Start Learning Free
+                    </button>
+                    <button className="px-8 py-4 border-2 border-black text-black font-black text-base rounded-xl hover:bg-black hover:text-white transition-all duration-300">
+                      Explore Courses
+                    </button>
+                    <button className="px-8 py-4 border-2 border-gray-600 text-gray-600 font-black text-base rounded-xl hover:bg-gray-600 hover:text-white transition-all duration-300">
+                      Become a Mentor
+                    </button>
+                  </div>
+                </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-              <Link
-                href="/auth/register"
-                className="group relative px-8 py-4 text-white font-semibold rounded-xl hover:shadow-2xl transition-all duration-300 text-lg transform hover:-translate-y-1"
-                style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}
-              >
-                <span className="relative z-10">Get Started Free</span>
-              </Link>
-              <Link
-                href="/demo"
-                className="px-8 py-4 font-semibold rounded-xl border-2 transition-all duration-300 text-lg"
-                style={{ color: '#181c31', borderColor: '#3a8ebe' }}
-              >
-                Watch Demo
-              </Link>
-            </div>
+                {/* Right Side - Simple Visual */}
+                <div className="relative h-96 lg:h-full flex items-center justify-center">
+                  <div className="relative w-full h-96">
+                    
+                    {/* Main Illustration Placeholder */}
+                    <div className="relative w-full h-full bg-white/20 backdrop-blur-lg rounded-3xl border-2 border-white/40 shadow-2xl flex items-center justify-center">
+                      <div className="text-center space-y-6">
+                        <div className="w-32 h-32 mx-auto bg-white/30 rounded-full flex items-center justify-center backdrop-blur-sm">
+                          <div className="w-16 h-16 bg-[#5e17eb] rounded-full flex items-center justify-center">
+                            <span className="text-white text-2xl font-black">SP</span>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <h3 className="text-2xl font-black text-gray-900">Skill Probe</h3>
+                          <p className="text-gray-700 font-bold">Learning Platform</p>
+                        </div>
+                      </div>
+                    </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
-              <div className="text-center">
-                <div className="text-3xl font-bold mb-1" style={{ color: '#3a8ebe' }}>100+</div>
-                <div className="text-sm" style={{ color: '#666' }}>Expert Mentors</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold mb-1" style={{ color: '#181c31' }}>5K+</div>
-                <div className="text-sm" style={{ color: '#666' }}>Students Guided</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold mb-1" style={{ color: '#3a8ebe' }}>95%</div>
-                <div className="text-sm" style={{ color: '#666' }}>Success Rate</div>
+                    {/* Floating Elements */}
+                    <div className="absolute top-8 right-8 w-16 h-16 bg-white/40 backdrop-blur-lg rounded-2xl border border-white/60 flex items-center justify-center shadow-lg">
+                      <span className="text-2xl">📚</span>
+                    </div>
+                    
+                    <div className="absolute bottom-8 left-8 w-16 h-16 bg-white/40 backdrop-blur-lg rounded-2xl border border-white/60 flex items-center justify-center shadow-lg">
+                      <span className="text-2xl">🎯</span>
+                    </div>
+
+                    <div className="absolute top-1/2 left-4 w-12 h-12 bg-white/40 backdrop-blur-lg rounded-xl border border-white/60 flex items-center justify-center shadow-lg">
+                      <span className="text-lg">💡</span>
+                    </div>
+
+                    <div className="absolute top-1/3 right-4 w-12 h-12 bg-white/40 backdrop-blur-lg rounded-xl border border-white/60 flex items-center justify-center shadow-lg">
+                      <span className="text-lg">🚀</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+        <WhyChooseUs/>
 
-      {/* 2. Ace Your Dream Job Interview Section */}
-      <div className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}></div>
-        </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full mb-6" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', border: '1px solid rgba(255, 255, 255, 0.2)' }}>
-              <span className="mr-2" style={{ color: '#f5f5f5' }}>⚡</span>
-              <span className="text-white text-sm font-medium">Limited Time Offer</span>
-            </div>
-            <h2 className="text-5xl font-bold text-white mb-6 leading-tight">
-              Ace Your Dream Job Interview<br />
-              <span style={{ color: '#f5f5f5' }}>
-                with Expert Help – For FREE!
-              </span>
-            </h2>
-            <p className="text-xl mb-8 max-w-3xl mx-auto" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-              Struggling with interviews? Nervous about placements or switching jobs? Skill Probe brings you a FREE 1-on-1 Interview Prep Session — curated for students & professionals like YOU.
-            </p>
-          </div>
+        {/* Featured Categories Section */}
+        <section 
+          className="relative py-24 px-6 overflow-visible bg-gray-50"
+          style={{
+            fontFamily: 'Arial, sans-serif',
+          }}
+        >
+          {/* Animated background elements */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-3xl font-bold text-white mb-8">Why This Is a Game-Changer</h3>
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1" style={{ backgroundColor: '#f5f5f5' }}>
-                    <span className="text-sm" style={{ color: '#181c31' }}>✓</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-1">1-on-1 Mock Interview</h4>
-                    <p style={{ color: 'rgba(245, 245, 245, 0.7)' }}>with an expert mentor from your industry</p>
-                  </div>
+          <div className="relative z-10 max-w-7xl mx-auto">
+            <div className="mb-28">
+              <div className="text-center space-y-8">
+                
+                {/* Tag */}
+                <div className="inline-flex items-center gap-2 px-5 py-3 bg-white/40 backdrop-blur-lg rounded-full border-2 border-white/60">
+                  <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <span className="text-sm font-black" style={{ color: '#5e17eb' }}>
+                    FEATURED CATEGORIES
+                  </span>
                 </div>
-                <div className="flex items-start">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1" style={{ backgroundColor: '#f5f5f5' }}>
-                    <span className="text-sm" style={{ color: '#181c31' }}>✓</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-1">Instant Resume Feedback</h4>
-                    <p style={{ color: 'rgba(245, 245, 245, 0.7)' }}>Get actionable insights to improve your CV</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1" style={{ backgroundColor: '#f5f5f5' }}>
-                    <span className="text-sm" style={{ color: '#181c31' }}>✓</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-1">Personalized Tips</h4>
-                    <p style={{ color: 'rgba(245, 245, 245, 0.7)' }}>Tailored strategies to ace your next interview</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1" style={{ backgroundColor: '#f5f5f5' }}>
-                    <span className="text-sm" style={{ color: '#181c31' }}>✓</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-1">Flexible Timing</h4>
-                    <p style={{ color: 'rgba(245, 245, 245, 0.7)' }}>You choose your slot that works best</p>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div className="rounded-3xl p-8 shadow-2xl" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', border: '1px solid rgba(255, 255, 255, 0.2)' }}>
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-bold mb-4" style={{ backgroundColor: '#f5f5f5', color: '#181c31' }}>
-                  🔥 FREE SESSION
-                </div>
-                <h3 className="text-3xl font-bold text-white mb-4">Limited-Time Free Offer!</h3>
-                <p className="mb-8" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-                  No group sessions. No fluff. Just real, personalized guidance. Book your session now – slots are filling fast!
+                {/* Main Heading */}
+                <h2 className="text-6xl lg:text-7xl font-black leading-tight text-gray-900">
+                  <span className="block">Explore</span>
+                  <span className="block" style={{ color: '#5e17eb' }}>
+                    In-Demand Skills
+                  </span>
+                </h2>
+
+                {/* Subheading */}
+                <p className="text-2xl text-gray-900 leading-relaxed font-black max-w-lg mx-auto">
+                  Choose from our most popular skill categories and start your learning journey today
                 </p>
               </div>
-
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-                  <span className="mr-3" style={{ color: '#f5f5f5' }}>✓</span>
-                  <span>30-minute personalized session</span>
-                </div>
-                <div className="flex items-center" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-                  <span className="mr-3" style={{ color: '#f5f5f5' }}>✓</span>
-                  <span>Industry expert mentor</span>
-                </div>
-                <div className="flex items-center" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-                  <span className="mr-3" style={{ color: '#f5f5f5' }}>✓</span>
-                  <span>Actionable feedback report</span>
-                </div>
-              </div>
-
-              <Link
-                href="/auth/register"
-                className="w-full block text-center px-8 py-4 font-bold rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-                style={{ backgroundColor: '#f5f5f5', color: '#181c31' }}
-              >
-                Book Free Session Now
-              </Link>
-
-              <p className="text-center text-sm mt-4" style={{ color: 'rgba(245, 245, 245, 0.6)' }}>
-                ⏰ Only 50 slots available this month
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 3. Core Features Section */}
-      <div className="py-24" style={{ backgroundColor: '#f5f5f5' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)', color: '#3a8ebe' }}>
-              ✨ SKILLPROBE FEATURES
-            </div>
-            <h2 className="text-5xl font-bold mb-6 leading-tight" style={{ color: '#181c31' }}>
-              Core Features of
-              <span style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}> Skillprobe</span>
-            </h2>
-            <p className="text-xl max-w-4xl mx-auto leading-relaxed" style={{ color: '#666' }}>
-              Explore mentorship like never before. SkillProbe connects candidates with vetted industry mentors for paid sessions
-              that offer insights, networking, and career growth. Get advice, learn the ropes, and invest in your future — one session at a time.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="group bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" style={{ borderColor: 'rgba(58, 142, 190, 0.1)' }}>
-              <div className="w-16 h-16 mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-4 transition-colors" style={{ color: '#181c31' }}>Expert Mentor Matching</h3>
-              <p className="leading-relaxed" style={{ color: '#666' }}>
-                Get paired with industry professionals tailored to your career goals and interests using our AI-powered matching system.
-              </p>
             </div>
 
-            <div className="group bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" style={{ borderColor: 'rgba(58, 142, 190, 0.1)' }}>
-              <div className="w-16 h-16 mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}>
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-4 transition-colors" style={{ color: '#181c31' }}>Mentorship Opportunities</h3>
-              <p className="leading-relaxed" style={{ color: '#666' }}>
-                Mentors earn for their time while students invest in real, hands-on learning experiences with transparent pricing.
-              </p>
-            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {[
+                {
+                  title: "Web Development",
+                  description: "Full-stack development with modern frameworks and technologies. Build scalable web applications.",
+                  skills: ["HTML, CSS, JavaScript", "React, Node.js", "MERN Stack"],
+                  courses: "120+ Courses",
+                  style: "featured", // Featured card
+                  icon: (
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M14.6 16.6l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4zm-5.2 0L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4z"/>
+                    </svg>
+                  )
+                },
+                {
+                  title: "Data Science & AI",
+                  description: "Advanced analytics, machine learning, and artificial intelligence solutions for business.",
+                  skills: ["Python Programming", "Machine Learning", "Data Analytics"],
+                  courses: "85+ Courses",
+                  style: "compact", // Compact card
+                  icon: (
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                    </svg>
+                  )
+                },
+                {
+                  title: "Digital Marketing",
+                  description: "Strategic digital marketing, SEO optimization, and brand building for modern businesses.",
+                  skills: ["SEO Optimization", "Social Media Marketing", "Content Strategy"],
+                  courses: "95+ Courses",
+                  style: "minimal", // Minimal card
+                  icon: (
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                    </svg>
+                  )
+                },
+                {
+                  title: "Design & Creative",
+                  description: "Professional UI/UX design, graphic design, and creative solutions for digital products.",
+                  skills: ["UI/UX Design", "Adobe Creative Suite", "Video Production"],
+                  courses: "75+ Courses",
+                  style: "bordered", // Bordered card
+                  icon: (
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                  )
+                },
+                {
+                  title: "Business & Management",
+                  description: "Leadership development, strategic management, and business operations excellence.",
+                  skills: ["Leadership Skills", "Project Management", "Business Strategy"],
+                  courses: "110+ Courses",
+                  style: "elevated", // Elevated card
+                  icon: (
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/>
+                    </svg>
+                  )
+                },
+                {
+                  title: "Programming Languages",
+                  description: "Master essential programming languages and software development fundamentals.",
+                  skills: ["Java Programming", "Python Development", "JavaScript Mastery"],
+                  courses: "140+ Courses",
+                  style: "solid", // Solid card
+                  icon: (
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M14.6 16.6l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4zm-5.2 0L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4z"/>
+                    </svg>
+                  )
+                }
+              ].map((category, idx: number) => {
+                // Different card styles based on category.style
+                const getCardStyle = (style: string) => {
+                  switch(style) {
+                    case 'featured':
+                      return "relative h-full bg-purple-600 text-white rounded-xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-2";
+                    case 'compact':
+                      return "relative h-full bg-white rounded-lg border-l-4 border-purple-600 p-5 shadow-sm transition-all duration-300 hover:shadow-md";
+                    case 'minimal':
+                      return "relative h-full bg-transparent border-2 border-gray-200 rounded-xl p-6 transition-all duration-300 hover:bg-white hover:shadow-lg";
+                    case 'bordered':
+                      return "relative h-full bg-white rounded-xl border-2 border-purple-200 p-6 transition-all duration-300 hover:border-purple-400 hover:shadow-lg";
+                    case 'elevated':
+                      return "relative h-full bg-white rounded-xl p-6 shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1";
+                    case 'solid':
+                      return "relative h-full bg-white rounded-xl p-6 border border-gray-200 transition-all duration-300 hover:shadow-lg hover:bg-purple-50";
+                    default:
+                      return "relative h-full bg-white rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:shadow-lg";
+                  }
+                };
 
-            <div className="group bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" style={{ borderColor: 'rgba(58, 142, 190, 0.1)' }}>
-              <div className="w-16 h-16 mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-4 transition-colors" style={{ color: '#181c31' }}>Psychometric Assessments</h3>
-              <p className="leading-relaxed" style={{ color: '#666' }}>
-                Enable you to identify the right candidates and help your people develop their potential through data-driven insights.
-              </p>
-            </div>
+                const getIconStyle = (style: string) => {
+                  switch(style) {
+                    case 'featured':
+                      return "w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center text-white";
+                    case 'compact':
+                      return "w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600";
+                    case 'minimal':
+                      return "w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 group-hover:bg-purple-100 group-hover:text-purple-600 transition-colors duration-300";
+                    case 'bordered':
+                      return "w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center text-purple-600";
+                    case 'elevated':
+                      return "w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-gray-700 group-hover:bg-purple-100 group-hover:text-purple-600 transition-colors duration-300";
+                    case 'solid':
+                      return "w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 group-hover:bg-purple-200 transition-colors duration-300";
+                    default:
+                      return "w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-gray-600";
+                  }
+                };
 
-            <div className="group bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" style={{ borderColor: 'rgba(58, 142, 190, 0.1)' }}>
-              <div className="w-16 h-16 mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}>
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-4 transition-colors" style={{ color: '#181c31' }}>1-on-1 Sessions</h3>
-              <p className="leading-relaxed" style={{ color: '#666' }}>
-                Book private, personalized mentorship calls for career advice, skill-building, or portfolio reviews with video conferencing.
-              </p>
-            </div>
+                const getTextStyle = (style: string) => {
+                  switch(style) {
+                    case 'featured':
+                      return { title: "text-xl font-bold text-white mb-2", desc: "text-white/90 text-sm leading-relaxed", skill: "text-white/80 text-xs font-medium" };
+                    case 'compact':
+                      return { title: "text-lg font-bold text-gray-900 mb-2", desc: "text-gray-600 text-sm leading-relaxed", skill: "text-gray-600 text-xs font-medium" };
+                    case 'minimal':
+                      return { title: "text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-900 transition-colors duration-300", desc: "text-gray-600 text-sm leading-relaxed", skill: "text-gray-600 text-xs font-medium" };
+                    case 'bordered':
+                      return { title: "text-xl font-bold text-gray-900 mb-2", desc: "text-gray-600 text-sm leading-relaxed", skill: "text-gray-600 text-xs font-medium" };
+                    case 'elevated':
+                      return { title: "text-xl font-bold text-gray-900 mb-2", desc: "text-gray-600 text-sm leading-relaxed", skill: "text-gray-600 text-xs font-medium" };
+                    case 'solid':
+                      return { title: "text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-900 transition-colors duration-300", desc: "text-gray-600 text-sm leading-relaxed", skill: "text-gray-600 text-xs font-medium" };
+                    default:
+                      return { title: "text-xl font-bold text-gray-900 mb-2", desc: "text-gray-600 text-sm leading-relaxed", skill: "text-gray-600 text-xs font-medium" };
+                  }
+                };
 
-            <div className="group bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" style={{ borderColor: 'rgba(58, 142, 190, 0.1)' }}>
-              <div className="w-16 h-16 mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-4 transition-colors" style={{ color: '#181c31' }}>Progress Tracking</h3>
-              <p className="leading-relaxed" style={{ color: '#666' }}>
-                Monitor your growth, session history, and goals through an intuitive dashboard experience with detailed analytics.
-              </p>
-            </div>
-
-            <div className="group bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" style={{ borderColor: 'rgba(58, 142, 190, 0.1)' }}>
-              <div className="w-16 h-16 mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}>
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-4 transition-colors" style={{ color: '#181c31' }}>Flexible Scheduling</h3>
-              <p className="leading-relaxed" style={{ color: '#666' }}>
-                Choose time slots that work for you and connect with mentors across different time zones with smart calendar integration.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 4. Find Your Mentor Section */}
-      <div className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)', color: '#3a8ebe' }}>
-                👨‍🏫 EXPERT MENTORS
-              </div>
-              <h2 className="text-5xl font-bold mb-6 leading-tight" style={{ color: '#181c31' }}>
-                Find Your
-                <span style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}> Mentor</span>
-              </h2>
-              <p className="text-xl mb-8 leading-relaxed" style={{ color: '#666' }}>
-                Over 100 mentors trust Skillprobe to connect with passionate learners, share their expertise, and grow their professional impact. Get personalized guidance from professionals who've been where you want to go.
-              </p>
-
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center">
-                  <div className="w-6 h-6 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: '#3a8ebe' }}>
-                    <span className="text-white text-xs">✓</span>
+                return (
+                  <div key={idx} className="group cursor-pointer">
+                    <div className={getCardStyle(category.style)}>
+                      
+                      {/* Header */}
+                      <div className="flex items-start justify-between mb-4">
+                        <div className={getIconStyle(category.style)}>
+                          {category.icon}
+                        </div>
+                        <span className={`text-xs font-semibold px-2 py-1 rounded-full ${
+                          category.style === 'featured' ? 'text-white bg-white/20' : 'text-gray-500 bg-gray-100'
+                        }`}>
+                          {category.courses}
+                        </span>
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="space-y-4">
+                        <div>
+                          <h3 className={getTextStyle(category.style).title}>
+                            {category.title}
+                          </h3>
+                          <p className={getTextStyle(category.style).desc}>
+                            {category.description}
+                          </p>
+                        </div>
+                        
+                        {/* Skills List */}
+                        <div className="space-y-1">
+                          {category.skills.map((skill, skillIndex) => (
+                            <div key={skillIndex} className="flex items-center gap-2">
+                              <div className={`w-1 h-1 rounded-full ${
+                                category.style === 'featured' ? 'bg-white/60' : 'bg-gray-400'
+                              }`}></div>
+                              <span className={getTextStyle(category.style).skill}>{skill}</span>
+                            </div>
+                          ))}
+                        </div>
+                        
+                        {/* CTA */}
+                        <div className="pt-2">
+                          <div className={`flex items-center text-sm font-semibold transition-colors duration-300 ${
+                            category.style === 'featured' ? 'text-white hover:text-white/80' : 'text-purple-600 hover:text-purple-700'
+                          }`}>
+                            <span>Explore Courses</span>
+                            <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <span style={{ color: '#181c31' }}>1-on-1 personalized mentorship sessions</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-6 h-6 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: '#3a8ebe' }}>
-                    <span className="text-white text-xs">✓</span>
-                  </div>
-                  <span style={{ color: '#181c31' }}>Industry professionals from top companies</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-6 h-6 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: '#3a8ebe' }}>
-                    <span className="text-white text-xs">✓</span>
-                  </div>
-                  <span style={{ color: '#181c31' }}>Flexible scheduling across time zones</span>
-                </div>
-              </div>
-
-              <Link
-                href="/mentors"
-                className="inline-flex items-center px-8 py-4 text-white font-semibold rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-                style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}
-              >
-                Browse Mentors
+                );
+              })}
+            </div>
+            
+            {/* View All Categories Button */}
+            <div className="text-center mt-12">
+              <Link href="/courses" className="inline-flex items-center px-8 py-4 bg-[#5e17eb] text-white font-semibold rounded-xl hover:bg-[#4a12c4] hover:shadow-lg transition-all duration-300">
+                View All Categories
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </Link>
             </div>
-
-            <div className="relative">
-              {/* Mentor Cards */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white rounded-2xl p-6 shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                    <span className="text-white font-bold">JS</span>
-                  </div>
-                  <h4 className="font-bold mb-1" style={{ color: '#181c31' }}>John Smith</h4>
-                  <p className="text-sm mb-3" style={{ color: '#666' }}>Senior Developer at Google</p>
-                  <div className="flex items-center">
-                    <div className="flex text-sm" style={{ color: '#3a8ebe' }}>★★★★★</div>
-                    <span className="text-xs ml-2" style={{ color: '#666' }}>4.9 (127)</span>
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-2xl p-6 shadow-lg transform -rotate-3 hover:rotate-0 transition-transform duration-300 mt-8" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}>
-                    <span className="text-white font-bold">SJ</span>
-                  </div>
-                  <h4 className="font-bold mb-1" style={{ color: '#181c31' }}>Sarah Johnson</h4>
-                  <p className="text-sm mb-3" style={{ color: '#666' }}>Data Scientist at Meta</p>
-                  <div className="flex items-center">
-                    <div className="flex text-sm" style={{ color: '#3a8ebe' }}>★★★★★</div>
-                    <span className="text-xs ml-2" style={{ color: '#666' }}>4.8 (89)</span>
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-2xl p-6 shadow-lg transform rotate-2 hover:rotate-0 transition-transform duration-300" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                    <span className="text-white font-bold">MC</span>
-                  </div>
-                  <h4 className="font-bold mb-1" style={{ color: '#181c31' }}>Mike Chen</h4>
-                  <p className="text-sm mb-3" style={{ color: '#666' }}>Marketing Director at Uber</p>
-                  <div className="flex items-center">
-                    <div className="flex text-sm" style={{ color: '#3a8ebe' }}>★★★★★</div>
-                    <span className="text-xs ml-2" style={{ color: '#666' }}>4.7 (156)</span>
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-2xl p-6 shadow-lg transform -rotate-1 hover:rotate-0 transition-transform duration-300 mt-4" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}>
-                    <span className="text-white font-bold">AL</span>
-                  </div>
-                  <h4 className="font-bold mb-1" style={{ color: '#181c31' }}>Anna Lee</h4>
-                  <p className="text-sm mb-3" style={{ color: '#666' }}>UX Designer at Apple</p>
-                  <div className="flex items-center">
-                    <div className="flex text-sm" style={{ color: '#3a8ebe' }}>★★★★★</div>
-                    <span className="text-xs ml-2" style={{ color: '#666' }}>4.9 (203)</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full blur-xl opacity-20" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}></div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 rounded-full blur-xl opacity-20" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}></div>
-            </div>
           </div>
-        </div>
-      </div>
+        </section>
 
-      {/* 5. Popular Courses Section */}
-      <div className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)', color: '#3a8ebe' }}>
-              🔥 TRENDING COURSES
-            </div>
-            <h2 className="text-5xl font-bold mb-6 leading-tight" style={{ color: '#181c31' }}>
-              Most Popular
-              <span style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}> Courses</span>
-            </h2>
-            <p className="text-xl max-w-3xl mx-auto" style={{ color: '#666' }}>
-              Join thousands of students learning from industry experts. Start your journey with our most popular courses.
-            </p>
-          </div>
+        {/* How It Works Section */}
+        <section 
+          className="relative py-24 px-6 overflow-visible bg-gray-50"
+          style={{
+            fontFamily: 'Arial, sans-serif',
+          }}
+        >
+          {/* Animated background elements */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {/* Course Card 1 */}
-            <div className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <div className="relative">
-                <div className="h-48 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                  <div className="text-center text-white">
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                      </svg>
-                    </div>
-                    <h3 className="text-lg font-bold">Full Stack Development</h3>
-                  </div>
+          <div className="relative z-10 max-w-7xl mx-auto">
+            <div className="mb-28">
+              <div className="text-center space-y-8">
+                
+                {/* Tag */}
+                <div className="inline-flex items-center gap-2 px-5 py-3 bg-white/40 backdrop-blur-lg rounded-full border-2 border-white/60">
+                  <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <span className="text-sm font-black" style={{ color: '#5e17eb' }}>
+                    HOW IT WORKS
+                  </span>
                 </div>
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold text-white" style={{ backgroundColor: '#3a8ebe' }}>BESTSELLER</span>
-                </div>
-                <div className="absolute top-4 right-4">
-                  <div className="flex items-center bg-white/90 backdrop-blur-sm rounded-full px-2 py-1">
-                    <span className="text-sm" style={{ color: '#3a8ebe' }}>★</span>
-                    <span className="text-sm font-semibold ml-1" style={{ color: '#181c31' }}>4.9</span>
-                  </div>
-                </div>
-              </div>
-              <div className="p-6">
-                <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)' }}>
-                    <span className="font-bold text-sm" style={{ color: '#3a8ebe' }}>JS</span>
-                  </div>
-                  <span className="text-sm" style={{ color: '#666' }}>John Smith • Senior Developer</span>
-                </div>
-                <h4 className="text-xl font-bold mb-2 transition-colors" style={{ color: '#181c31' }}>
-                  Complete Full Stack Web Development Bootcamp
-                </h4>
-                <p className="text-sm mb-4 line-clamp-2" style={{ color: '#666' }}>
-                  Master React, Node.js, MongoDB, and more. Build real-world projects and get job-ready skills.
+
+                {/* Main Heading */}
+                <h2 className="text-6xl lg:text-7xl font-black leading-tight text-gray-900">
+                  <span className="block">Start Your</span>
+                  <span className="block" style={{ color: '#5e17eb' }}>
+                    Learning Journey
+                  </span>
+                </h2>
+
+                {/* Subheading */}
+                <p className="text-2xl text-gray-900 leading-relaxed font-black max-w-lg mx-auto">
+                  Master new skills in just 3 simple steps
                 </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 text-sm" style={{ color: '#666' }}>
-                    <span className="flex items-center">
-                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      40h
-                    </span>
-                    <span className="flex items-center">
-                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                      </svg>
-                      2.5k
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-2xl font-bold" style={{ color: '#181c31' }}>$99</span>
-                    <span className="line-through ml-2" style={{ color: '#666' }}>$199</span>
-                  </div>
-                </div>
               </div>
             </div>
 
-            {/* Course Card 2 */}
-            <div className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <div className="relative">
-                <div className="h-48 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}>
-                  <div className="text-center text-white">
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-lg font-bold">Data Science & AI</h3>
-                  </div>
-                </div>
-                <div className="absolute top-4 right-4">
-                  <div className="flex items-center bg-white/90 backdrop-blur-sm rounded-full px-2 py-1">
-                    <span className="text-sm" style={{ color: '#3a8ebe' }}>★</span>
-                    <span className="text-sm font-semibold ml-1" style={{ color: '#181c31' }}>4.8</span>
-                  </div>
-                </div>
-              </div>
-              <div className="p-6">
-                <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)' }}>
-                    <span className="font-bold text-sm" style={{ color: '#3a8ebe' }}>AI</span>
-                  </div>
-                  <span className="text-sm" style={{ color: '#666' }}>Sarah Johnson • Data Scientist</span>
-                </div>
-                <h4 className="text-xl font-bold mb-2 transition-colors" style={{ color: '#181c31' }}>
-                  Machine Learning & AI Fundamentals
-                </h4>
-                <p className="text-sm mb-4 line-clamp-2" style={{ color: '#666' }}>
-                  Learn Python, TensorFlow, and build ML models. Perfect for beginners starting in AI.
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 text-sm" style={{ color: '#666' }}>
-                    <span className="flex items-center">
-                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      35h
-                    </span>
-                    <span className="flex items-center">
-                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 715.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                      </svg>
-                      1.8k
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-2xl font-bold" style={{ color: '#181c31' }}>$129</span>
-                    <span className="line-through ml-2" style={{ color: '#666' }}>$249</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Course Card 3 */}
-            <div className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <div className="relative">
-                <div className="h-48 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}>
-                  <div className="text-center text-white">
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-lg font-bold">Digital Marketing</h3>
-                  </div>
-                </div>
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold text-white" style={{ backgroundColor: '#3a8ebe' }}>HOT</span>
-                </div>
-                <div className="absolute top-4 right-4">
-                  <div className="flex items-center bg-white/90 backdrop-blur-sm rounded-full px-2 py-1">
-                    <span className="text-sm" style={{ color: '#3a8ebe' }}>★</span>
-                    <span className="text-sm font-semibold ml-1" style={{ color: '#181c31' }}>4.7</span>
-                  </div>
-                </div>
-              </div>
-              <div className="p-6">
-                <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)' }}>
-                    <span className="font-bold text-sm" style={{ color: '#3a8ebe' }}>DM</span>
-                  </div>
-                  <span className="text-sm" style={{ color: '#666' }}>Mike Chen • Marketing Expert</span>
-                </div>
-                <h4 className="text-xl font-bold mb-2 transition-colors" style={{ color: '#181c31' }}>
-                  Complete Digital Marketing Mastery
-                </h4>
-                <p className="text-sm mb-4 line-clamp-2" style={{ color: '#666' }}>
-                  Master SEO, Social Media, PPC, and Analytics. Grow your business or career in marketing.
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 text-sm text-gray-500">
-                    <span className="flex items-center">
-                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      28h
-                    </span>
-                    <span className="flex items-center">
-                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                      </svg>
-                      3.2k
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-2xl font-bold" style={{ color: '#181c31' }}>$79</span>
-                    <span className="line-through ml-2" style={{ color: '#666' }}>$159</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center">
-            <Link
-              href="/courses"
-              className="inline-flex items-center px-8 py-4 text-white font-semibold rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-              style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}
-            >
-              View All Courses
-              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Find Your Mentor Section */}
-      <div className="py-24" style={{ backgroundColor: '#f5f5f5' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)', color: '#3a8ebe' }}>
-                👨‍🏫 EXPERT MENTORS
-              </div>
-              <h2 className="text-5xl font-bold mb-6 leading-tight" style={{ color: '#181c31' }}>
-                Learn from
-                <span style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}> Industry Experts</span>
-              </h2>
-              <p className="text-xl mb-8 leading-relaxed" style={{ color: '#666' }}>
-                Over 500+ verified mentors from top companies like Google, Microsoft, Amazon, and Meta trust SkillProbe to share their expertise. Get personalized guidance from professionals who've built successful careers in your field of interest.
-              </p>
-
-              <div className="space-y-6 mb-8">
-                <div className="flex items-start">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1" style={{ backgroundColor: '#3a8ebe' }}>
-                    <span className="text-white text-sm">✓</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-1" style={{ color: '#181c31' }}>1-on-1 Personalized Sessions</h4>
-                    <p style={{ color: '#666' }}>Direct access to industry experts for career guidance, skill development, and portfolio reviews</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1" style={{ backgroundColor: '#3a8ebe' }}>
-                    <span className="text-white text-sm">✓</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-1" style={{ color: '#181c31' }}>Verified Industry Professionals</h4>
-                    <p style={{ color: '#666' }}>All mentors are thoroughly vetted with proven track records at leading companies</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1" style={{ backgroundColor: '#3a8ebe' }}>
-                    <span className="text-white text-sm">✓</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-1" style={{ color: '#181c31' }}>Flexible Global Scheduling</h4>
-                    <p style={{ color: '#666' }}>Connect with mentors across different time zones with our smart scheduling system</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1" style={{ backgroundColor: '#3a8ebe' }}>
-                    <span className="text-white text-sm">✓</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-1" style={{ color: '#181c31' }}>Affordable Pricing</h4>
-                    <p style={{ color: '#666' }}>Quality mentorship starting from just $25/session with transparent pricing</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Link
-                  href="/mentors"
-                  className="inline-flex items-center px-8 py-4 text-white font-semibold rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-                  style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}
+            {/* Steps Grid */}
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
+              {[
+                {
+                  num: "01",
+                  icon: (
+                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                  ),
+                  title: "Choose Your Course",
+                  description: "Browse through 500+ courses across multiple categories. Filter by type (live/recorded), price, ratings, and mentor expertise to find your perfect match."
+                },
+                {
+                  num: "02",
+                  icon: (
+                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                    </svg>
+                  ),
+                  title: "Learn & Practice",
+                  description: "Attend live interactive sessions or watch recorded content. Complete assignments, take quizzes, and work on real-world projects with expert guidance."
+                },
+                {
+                  num: "03",
+                  icon: (
+                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                  ),
+                  title: "Get Certified & Hired",
+                  description: "Earn your certification and apply to exclusive internships. Showcase your skills and kickstart your career with confidence and industry recognition."
+                }
+              ].map((step, idx) => (
+                <div
+                  key={idx}
+                  className="group cursor-pointer"
                 >
-                  Browse Mentors
-                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </Link>
-                <Link
-                  href="/become-mentor"
-                  className="inline-flex items-center px-8 py-4 font-semibold rounded-xl border-2 transition-all duration-300"
-                  style={{ color: '#181c31', borderColor: '#3a8ebe' }}
-                >
-                  Become a Mentor
-                </Link>
-              </div>
+                  {/* Step Card */}
+                  <div className="min-h-[400px] p-8 rounded-2xl transition-all duration-300 bg-white border-4 border-purple-600 shadow-2xl hover:shadow-3xl hover:-translate-y-2 hover:border-purple-800 hover:scale-105 hover:bg-purple-50">
+                    
+                    {/* Number */}
+                    <div className="text-6xl font-black text-purple-600 mb-4">
+                      {step.num}
+                    </div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="text-2xl font-bold mb-1" style={{ color: '#3a8ebe' }}>500+</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Expert Mentors</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold mb-1" style={{ color: '#181c31' }}>10K+</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Sessions Completed</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold mb-1" style={{ color: '#3a8ebe' }}>4.9</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Average Rating</div>
-                </div>
-              </div>
-            </div>
+                    {/* Icon */}
+                    <div className="w-14 h-14 rounded-lg flex items-center justify-center mb-6 bg-purple-100 text-purple-600">
+                      {step.icon}
+                    </div>
 
-            <div className="relative">
-              {/* Mentor Cards */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white rounded-2xl p-6 shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                    <span className="text-white font-bold">JS</span>
-                  </div>
-                  <h4 className="font-bold mb-1" style={{ color: '#181c31' }}>John Smith</h4>
-                  <p className="text-sm mb-3" style={{ color: '#666' }}>Senior Developer at Google</p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex text-sm" style={{ color: '#3a8ebe' }}>★★★★★</div>
-                    <span className="text-xs" style={{ color: '#666' }}>4.9 (127)</span>
-                  </div>
-                  <div className="mt-2 text-xs" style={{ color: '#3a8ebe' }}>$45/session</div>
-                </div>
+                    {/* Content */}
+                    <h3 className="text-2xl font-black mb-3 text-gray-900">{step.title}</h3>
+                    <p className="text-base leading-relaxed font-semibold text-gray-600 mb-4">
+                      {step.description}
+                    </p>
 
-                <div className="bg-white rounded-2xl p-6 shadow-lg transform -rotate-3 hover:rotate-0 transition-transform duration-300 mt-8" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}>
-                    <span className="text-white font-bold">SJ</span>
-                  </div>
-                  <h4 className="font-bold mb-1" style={{ color: '#181c31' }}>Sarah Johnson</h4>
-                  <p className="text-sm mb-3" style={{ color: '#666' }}>Data Scientist at Meta</p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex text-sm" style={{ color: '#3a8ebe' }}>★★★★★</div>
-                    <span className="text-xs" style={{ color: '#666' }}>4.8 (89)</span>
-                  </div>
-                  <div className="mt-2 text-xs" style={{ color: '#3a8ebe' }}>$55/session</div>
-                </div>
+                    {/* Arrow */}
+                    <div className="flex items-center gap-2 font-black mt-6 text-purple-600 hover:text-purple-700 transition-colors duration-300">
+                      <span>Learn More</span>
+                      <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
 
-                <div className="bg-white rounded-2xl p-6 shadow-lg transform rotate-2 hover:rotate-0 transition-transform duration-300" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                    <span className="text-white font-bold">MC</span>
                   </div>
-                  <h4 className="font-bold mb-1" style={{ color: '#181c31' }}>Mike Chen</h4>
-                  <p className="text-sm mb-3" style={{ color: '#666' }}>Marketing Director at Uber</p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex text-sm" style={{ color: '#3a8ebe' }}>★★★★★</div>
-                    <span className="text-xs" style={{ color: '#666' }}>4.7 (156)</span>
-                  </div>
-                  <div className="mt-2 text-xs" style={{ color: '#3a8ebe' }}>$40/session</div>
                 </div>
-
-                <div className="bg-white rounded-2xl p-6 shadow-lg transform -rotate-1 hover:rotate-0 transition-transform duration-300 mt-4" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}>
-                    <span className="text-white font-bold">AL</span>
-                  </div>
-                  <h4 className="font-bold mb-1" style={{ color: '#181c31' }}>Anna Lee</h4>
-                  <p className="text-sm mb-3" style={{ color: '#666' }}>UX Designer at Apple</p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex text-sm" style={{ color: '#3a8ebe' }}>★★★★★</div>
-                    <span className="text-xs" style={{ color: '#666' }}>4.9 (203)</span>
-                  </div>
-                  <div className="mt-2 text-xs" style={{ color: '#3a8ebe' }}>$50/session</div>
-                </div>
-              </div>
-
-              {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full blur-xl opacity-20" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}></div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 rounded-full blur-xl opacity-20" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}></div>
+              ))}
             </div>
           </div>
-        </div>
-      </div>
+        </section>
 
-      {/* The Future of Career Growth Section */}
-      <div className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)', color: '#3a8ebe' }}>
-              🚀 FUTURE OF GROWTH
-            </div>
-            <h2 className="text-5xl font-bold mb-6 leading-tight" style={{ color: '#181c31' }}>
-              The Future of
-              <span style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}> Career Growth</span>
-            </h2>
-            <p className="text-xl max-w-4xl mx-auto" style={{ color: '#666' }}>
-              SkillProbe is revolutionizing professional development by creating a global ecosystem where ambition meets expertise. We're building the future where quality mentorship is accessible, affordable, and outcome-driven for everyone.
-            </p>
-          </div>
+        {/* Student Success Stories */}
+        <section 
+          className="relative py-24 px-6 overflow-visible bg-purple-50"
+          style={{
+            fontFamily: 'Arial, sans-serif',
+          }}
+        >
+          {/* Animated background elements */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
-            <div>
+          <div className="relative z-10 max-w-7xl mx-auto">
+            {/* Header Section */}
+            <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+              
+              {/* Left Side - Content */}
               <div className="space-y-8">
-                <div className="flex items-start">
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center mr-6 mt-1" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                    <span className="text-white font-bold text-xl">01</span>
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold mb-4" style={{ color: '#181c31' }}>AI-Powered Mentor Matching</h3>
-                    <p style={{ color: '#666' }}>
-                      Our advanced algorithm analyzes your goals, experience level, and learning style to connect you with the perfect mentor who understands your journey and can accelerate your growth.
-                    </p>
-                  </div>
+                {/* Tag */}
+                <div className="inline-flex items-center gap-2 px-5 py-3 bg-white/40 backdrop-blur-lg rounded-full border-2 border-white/60">
+                  <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <span className="text-sm font-black" style={{ color: '#5e17eb' }}>
+                    SUCCESS STORIES
+                  </span>
                 </div>
 
-                <div className="flex items-start">
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center mr-6 mt-1" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}>
-                    <span className="text-white font-bold text-xl">02</span>
+                {/* Main Heading */}
+                <h2 className="text-5xl lg:text-6xl font-black leading-tight text-gray-900">
+                  <span className="block">Real Stories,</span>
+                  <span className="block" style={{ color: '#5e17eb' }}>
+                    Real Success
+                  </span>
+                </h2>
+
+                {/* Subheading */}
+                <p className="text-xl text-gray-900 leading-relaxed font-semibold">
+                  Join 50,000+ learners who transformed their careers with Skill Probe. From beginners to industry experts.
+                </p>
+
+                {/* Stats */}
+                <div className="grid grid-cols-3 gap-6 pt-8">
+                  <div className="text-center">
+                    <div className="text-3xl font-black text-white mb-2">50K+</div>
+                    <div className="text-sm font-semibold text-gray-900">Students</div>
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-bold mb-4" style={{ color: '#181c31' }}>Outcome-Based Learning</h3>
-                    <p style={{ color: '#666' }}>
-                      Every mentorship session is designed with clear objectives and measurable outcomes. Track your progress, celebrate milestones, and see tangible results in your career advancement.
-                    </p>
+                  <div className="text-center">
+                    <div className="text-3xl font-black text-white mb-2">95%</div>
+                    <div className="text-sm font-semibold text-gray-900">Success Rate</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-black text-white mb-2">₹8L+</div>
+                    <div className="text-sm font-semibold text-gray-900">Avg Package</div>
                   </div>
                 </div>
+              </div>
 
-                <div className="flex items-start">
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center mr-6 mt-1" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                    <span className="text-white font-bold text-xl">03</span>
+              {/* Right Side - Featured Testimonial */}
+              <div className="relative">
+                <div className="bg-white/20 backdrop-blur-lg border-2 border-white/30 rounded-3xl p-8 shadow-2xl">
+                  {/* Quote Icon */}
+                  <div className="w-16 h-16 bg-white/30 rounded-2xl flex items-center justify-center mb-6">
+                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+                    </svg>
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-bold mb-4" style={{ color: '#181c31' }}>Global Career Opportunities</h3>
-                    <p style={{ color: '#666' }}>
-                      Access exclusive job opportunities, internships, and project collaborations through our network of mentor companies and partner organizations worldwide.
-                    </p>
+                  
+                  {/* Quote */}
+                  <p className="text-xl text-gray-900 font-semibold leading-relaxed mb-8 italic">
+                    "Skill Probe completely transformed my career. From a confused college student to landing my dream job at Google - this platform made it possible!"
+                  </p>
+                  
+                  {/* Author */}
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center">
+                      <span className="text-white font-black text-xl">AS</span>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-black text-gray-900">Arjun Singh</h4>
+                      <p className="text-purple-600 font-semibold">Software Engineer @ Google</p>
+                      <div className="flex items-center gap-1 mt-1">
+                        {[...Array(5)].map((_, i) => (
+                          <svg key={i} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                          </svg>
+                        ))}
+                      </div>
+                    </div>
                   </div>
+                </div>
+                
+                {/* Floating Elements */}
+                <div className="absolute -top-4 -right-4 w-8 h-8 bg-purple-100 rounded-full"></div>
+                <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-purple-50 rounded-full"></div>
+              </div>
+            </div>
+
+            {/* Testimonials Carousel Style */}
+            <div className="space-y-8">
+              <h3 className="text-3xl font-black text-center text-gray-900 mb-12">More Success Stories</h3>
+              
+              <div className="grid md:grid-cols-2 gap-8">
+                {[
+                  {
+                    quote: "Live classes made learning web development so much easier. I landed my first internship within 2 months!",
+                    name: "Priya Sharma",
+                    role: "Full Stack Developer",
+                    company: "Flipkart",
+                    rating: 5,
+                    initials: "PS"
+                },
+                {
+                  quote: "The campus ambassador program is amazing! I've already earned ₹15,000 while helping friends discover quality courses.",
+                  name: "Rahul Verma", 
+                  role: "Campus Ambassador",
+                  company: "Skill Probe",
+                  rating: 5,
+                  initials: "RV"
+                }
+              ].map((testimonial, idx) => (
+                <div key={idx} className="bg-white/15 backdrop-blur-lg border border-white/20 rounded-2xl p-6 hover:bg-white/25 transition-all duration-300 hover:scale-105">
+                  
+                  {/* Quote */}
+                  <p className="text-gray-900 font-semibold mb-6 italic">
+                    "{testimonial.quote}"
+                  </p>
+                  
+                  {/* Author & Rating */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
+                        <span className="text-white font-black text-sm">{testimonial.initials}</span>
+                      </div>
+                      <div>
+                        <h4 className="font-black text-gray-900">{testimonial.name}</h4>
+                        <p className="text-sm text-purple-600 font-semibold">{testimonial.role} @ {testimonial.company}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-1">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <svg key={i} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Campus Ambassador Program */}
+        <section 
+          className="relative py-24 px-6 overflow-visible bg-white"
+          style={{
+            fontFamily: 'Arial, sans-serif',
+          }}
+        >
+          {/* Animated background elements */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+
+          <div className="relative z-10 max-w-7xl mx-auto">
+            
+            {/* Header Section */}
+            <div className="text-center mb-20">
+              {/* Tag */}
+              <div className="inline-flex items-center gap-2 px-5 py-3 bg-white rounded-full border-2 border-black mb-8">
+                <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                <span className="text-sm font-black" style={{ color: '#5e17eb' }}>
+                  CAMPUS AMBASSADOR PROGRAM
+                </span>
+              </div>
+
+              {/* Main Heading */}
+              <h2 className="text-6xl lg:text-7xl font-black leading-tight mb-8" style={{ color: '#000000' }}>
+                <span className="block">Earn Money Online</span>
+                <span className="block" style={{ color: '#5e17eb' }}>
+                  While You Learn
+                </span>
+              </h2>
+
+              {/* Subheading */}
+              <p className="text-2xl leading-relaxed font-black max-w-4xl mx-auto" style={{ color: '#000000' }}>
+                Become a Skill Probe Campus Ambassador and earn up to ₹500 per referral. Share courses, grow your network, and convert points to real money.
+              </p>
+            </div>
+
+            {/* Earning Structure */}
+            <div className="grid lg:grid-cols-4 gap-6 mb-16">
+              
+              {/* Registration Points */}
+              <div className="bg-white border-2 border-black rounded-3xl p-6">
+                <div className="text-center">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
+                    <svg className="w-8 h-8" fill="#ffffff" viewBox="0 0 24 24">
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-black mb-2" style={{ color: '#000000' }}>50 Points</h3>
+                  <p className="font-semibold text-sm" style={{ color: '#000000' }}>Per Registration</p>
+                </div>
+              </div>
+
+              {/* Purchase Points */}
+              <div className="bg-white border-2 border-black rounded-3xl p-6">
+                <div className="text-center">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
+                    <svg className="w-8 h-8" fill="#ffffff" viewBox="0 0 24 24">
+                      <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-black mb-2" style={{ color: '#000000' }}>500 Points</h3>
+                  <p className="font-semibold text-sm" style={{ color: '#000000' }}>Per Course Purchase</p>
+                </div>
+              </div>
+
+              {/* Ambassador Referral */}
+              <div className="bg-white border-2 border-black rounded-3xl p-6">
+                <div className="text-center">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
+                    <svg className="w-8 h-8" fill="#ffffff" viewBox="0 0 24 24">
+                      <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4h3v4h2v-7.5c0-1.1.9-2 2-2s2 .9 2 2V18h2v-4h3v4h4v2H0v-2h4z"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-black mb-2" style={{ color: '#000000' }}>₹100 + 10%</h3>
+                  <p className="font-semibold text-sm" style={{ color: '#000000' }}>Ambassador Referral</p>
+                </div>
+              </div>
+
+              {/* Point Conversion */}
+              <div className="bg-white border-2 border-black rounded-3xl p-6">
+                <div className="text-center">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
+                    <svg className="w-8 h-8" fill="#ffffff" viewBox="0 0 24 24">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-black mb-2" style={{ color: '#000000' }}>100 = ₹100</h3>
+                  <p className="font-semibold text-sm" style={{ color: '#000000' }}>Point Conversion</p>
                 </div>
               </div>
             </div>
 
-            <div className="rounded-3xl p-8" style={{ background: 'linear-gradient(135deg, rgba(58, 142, 190, 0.05) 0%, rgba(24, 28, 49, 0.02) 100%)', border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <div className="text-center mb-8">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <h4 className="text-lg font-semibold mb-4" style={{ color: '#3a8ebe' }}>Empowering Professionals Globally</h4>
-                <h3 className="text-3xl font-bold mb-6" style={{ color: '#181c31' }}>
-                  Complete Career<br />Transformation Platform
+            {/* Milestone Bonuses */}
+            <div className="mb-16">
+              <h3 className="text-3xl font-black text-center mb-12" style={{ color: '#000000' }}>Milestone Bonuses</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[
+                  { referrals: '10', bonus: '₹500' },
+                  { referrals: '25', bonus: '₹1,500' },
+                  { referrals: '50', bonus: '₹5,000' },
+                  { referrals: '100', bonus: '₹15,000' }
+                ].map((milestone, idx: number) => (
+                  <div key={idx} className="bg-white border-2 border-black rounded-2xl p-6 text-center">
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
+                      <span className="font-black text-lg" style={{ color: '#ffffff' }}>{milestone.referrals}</span>
+                    </div>
+                    <h4 className="text-xl font-black mb-1" style={{ color: '#000000' }}>{milestone.bonus}</h4>
+                    <p className="font-semibold text-sm" style={{ color: '#000000' }}>{milestone.referrals} Successful Referrals</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* CTA Section */}
+            <div className="text-center">
+              <div className="bg-white border-2 border-black rounded-3xl p-12">
+                <h3 className="text-3xl font-black mb-4" style={{ color: '#000000' }}>
+                  Ready to Become an Ambassador?
                 </h3>
-                <p className="mb-8" style={{ color: '#666' }}>
-                  From skill assessment and personalized learning paths to interview preparation and salary negotiation - SkillProbe provides everything professionals need to achieve their career aspirations.
+                <p className="text-lg mb-8" style={{ color: '#000000' }}>
+                  Join our Campus Ambassador Program and start earning money while you learn!
                 </p>
-              </div>
-
-              {/* Success Metrics */}
-              <div className="grid grid-cols-2 gap-6 mb-8">
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2" style={{ color: '#3a8ebe' }}>85%</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Career Advancement</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2" style={{ color: '#181c31' }}>3x</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Faster Learning</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2" style={{ color: '#3a8ebe' }}>92%</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Goal Achievement</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2" style={{ color: '#181c31' }}>40%</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Salary Increase</div>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link
+                    href="/auth/register"
+                    className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300" 
+                    style={{ backgroundColor: '#5e17eb', color: '#ffffff' }}
+                  >
+                    Get Started Free
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="px-10 py-4 border-2 font-bold text-lg rounded-xl transition-all duration-300"
+                    style={{ borderColor: '#000000', color: '#000000' }}
+                  >
+                    Talk to Our Team
+                  </Link>
                 </div>
               </div>
-
-              <Link
-                href="/about"
-                className="w-full block text-center px-6 py-3 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg"
-                style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}
-              >
-                Discover Your Potential →
-              </Link>
             </div>
           </div>
+        </section>
 
-          {/* Future Vision */}
-          <div className="text-center p-8 rounded-2xl" style={{ background: 'linear-gradient(135deg, rgba(24, 28, 49, 0.05) 0%, rgba(58, 142, 190, 0.05) 100%)' }}>
-            <h3 className="text-2xl font-bold mb-4" style={{ color: '#181c31' }}>Building Tomorrow's Workforce Today</h3>
-            <p className="text-lg max-w-4xl mx-auto" style={{ color: '#666' }}>
-              Join us in creating a world where geographical boundaries don't limit career growth, where expertise is shared freely, and where every professional has access to the guidance they need to reach their full potential.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Learning Paths Section */}
-      <div className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)', color: '#3a8ebe' }}>
-              🎯 LEARNING PATHS
-            </div>
-            <h2 className="text-5xl font-bold mb-6 leading-tight" style={{ color: '#181c31' }}>
-              Structured
-              <span style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}> Learning Journeys</span>
-            </h2>
-            <p className="text-xl max-w-3xl mx-auto" style={{ color: '#666' }}>
-              Follow curated learning tracks designed by industry experts and successful professionals. Each path includes hands-on projects, mentor guidance, and job placement assistance to ensure your success.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Learning Path 1 */}
-            <div className="relative">
-              <div className="rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, rgba(58, 142, 190, 0.05) 0%, rgba(24, 28, 49, 0.02) 100%)', border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                    </svg>
-                  </div>
-                  <span className="text-white px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: '#3a8ebe' }}>BEGINNER</span>
-                </div>
-
-                <h3 className="text-2xl font-bold mb-4" style={{ color: '#181c31' }}>Frontend Developer</h3>
-                <p className="mb-6" style={{ color: '#666' }}>
-                  Master HTML, CSS, JavaScript, and React. Build responsive websites and modern web applications with hands-on projects and mentor guidance.
-                </p>
-
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: '#3a8ebe' }}>
-                      <span className="text-white text-xs">1</span>
-                    </div>
-                    <span className="text-sm" style={{ color: '#181c31' }}>HTML & CSS Fundamentals</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: '#3a8ebe' }}>
-                      <span className="text-white text-xs">2</span>
-                    </div>
-                    <span className="text-sm" style={{ color: '#181c31' }}>JavaScript Essentials</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: '#3a8ebe' }}>
-                      <span className="text-white text-xs">3</span>
-                    </div>
-                    <span className="text-sm" style={{ color: '#181c31' }}>React Development</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center mr-3">
-                      <span className="text-gray-600 text-xs">4</span>
-                    </div>
-                    <span className="text-gray-500 text-sm">Portfolio Projects & Job Prep</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between text-sm mb-6" style={{ color: '#666' }}>
-                  <span>6 months • 120 hours</span>
-                  <span className="flex items-center">
-                    <span className="mr-1" style={{ color: '#3a8ebe' }}>★</span>
-                    4.8 (2.1k reviews)
+        {/* Final CTA Section */}
+        <section 
+          className="relative py-24 px-6 overflow-visible bg-purple-50"
+          style={{
+            fontFamily: 'Arial, sans-serif',
+          }}
+        >
+          {/* Animated background elements */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+          
+          <div className="relative z-10 max-w-6xl mx-auto">
+            
+            {/* Main CTA Card */}
+            <div className="bg-white rounded-3xl p-12 lg:p-16 shadow-2xl border-2 border-gray-100 mb-16">
+              <div className="text-center space-y-8">
+                
+                {/* Tag */}
+                <div className="inline-flex items-center gap-2 px-6 py-3 bg-purple-100 rounded-full border-2 border-purple-200">
+                  <div className="w-3 h-3 rounded-full bg-purple-600"></div>
+                  <span className="text-sm font-bold text-purple-600 uppercase tracking-wide">
+                    Get Started Today
                   </span>
                 </div>
 
-                <Link href="/learning-paths/frontend" className="w-full block text-center px-6 py-3 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                  Start Learning Path
-                </Link>
+                {/* Main Headline */}
+                <div className="space-y-6">
+                  <h2 className="text-4xl lg:text-6xl font-black leading-tight text-gray-900">
+                    <span className="block">Ready to Master</span>
+                    <span className="block text-purple-600">New Skills?</span>
+                  </h2>
+                  
+                  <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Join thousands of learners who are already advancing their careers with Skill Probe. Start with a free trial today!
+                  </p>
+                </div>
+
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                  <Link
+                    href="/auth/register"
+                    className="group px-10 py-4 bg-purple-600 text-white font-bold text-lg rounded-xl hover:bg-purple-700 hover:shadow-lg transition-all duration-300 hover:scale-105"
+                  >
+                    <span className="flex items-center justify-center gap-3">
+                      Get Started Free
+                      <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </span>
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="px-10 py-4 border-2 border-purple-600 text-purple-600 font-bold text-lg rounded-xl hover:bg-purple-50 transition-all duration-300"
+                  >
+                    Talk to Our Team
+                  </Link>
+                </div>
               </div>
             </div>
 
-            {/* Learning Path 2 */}
-            <div className="relative">
-              <div className="rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, rgba(24, 28, 49, 0.05) 0%, rgba(58, 142, 190, 0.02) 100%)', border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}>
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
+            {/* Trust Indicators */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                { number: '500+', label: 'Courses Available', icon: (
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                )},
+                { number: '50K+', label: 'Active Learners', icon: (
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4h3v4h2v-7.5c0-1.1.9-2 2-2s2 .9 2 2V18h2v-4h3v4h4v2H0v-2h4z"/>
+                  </svg>
+                )},
+                { number: '200+', label: 'Expert Mentors', icon: (
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                  </svg>
+                )},
+                { number: '95%', label: 'Job Success Rate', icon: (
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/>
+                  </svg>
+                )}
+              ].map((item, idx: number) => (
+                <div key={idx} className="bg-white rounded-2xl p-6 text-center shadow-lg border-2 border-gray-100 hover:border-purple-300 transition-all duration-300">
+                  <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 mx-auto mb-4">
+                    {item.icon}
                   </div>
-                  <span className="text-white px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: '#181c31' }}>INTERMEDIATE</span>
+                  <div className="text-2xl font-black text-gray-900 mb-2">{item.number}</div>
+                  <div className="text-gray-600 font-semibold text-sm">{item.label}</div>
                 </div>
-
-                <h3 className="text-2xl font-bold mb-4" style={{ color: '#181c31' }}>Data Scientist</h3>
-                <p className="mb-6" style={{ color: '#666' }}>
-                  Learn Python, machine learning, and data visualization. Analyze data and build predictive models with real-world datasets.
-                </p>
-
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: '#3a8ebe' }}>
-                      <span className="text-white text-xs">1</span>
-                    </div>
-                    <span className="text-sm" style={{ color: '#181c31' }}>Python for Data Science</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: '#3a8ebe' }}>
-                      <span className="text-white text-xs">2</span>
-                    </div>
-                    <span className="text-sm" style={{ color: '#181c31' }}>Statistics & Probability</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: '#3a8ebe' }}>
-                      <span className="text-white text-xs">3</span>
-                    </div>
-                    <span className="text-sm" style={{ color: '#181c31' }}>Machine Learning</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center mr-3">
-                      <span className="text-gray-600 text-xs">4</span>
-                    </div>
-                    <span className="text-gray-500 text-sm">Real-world Projects & Portfolio</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between text-sm mb-6" style={{ color: '#666' }}>
-                  <span>8 months • 160 hours</span>
-                  <span className="flex items-center">
-                    <span className="mr-1" style={{ color: '#3a8ebe' }}>★</span>
-                    4.9 (1.8k reviews)
-                  </span>
-                </div>
-
-                <Link href="/learning-paths/data-science" className="w-full block text-center px-6 py-3 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                  Start Learning Path
-                </Link>
-              </div>
-            </div>
-
-            {/* Learning Path 3 */}
-            <div className="relative">
-              <div className="rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, rgba(58, 142, 190, 0.02) 0%, rgba(24, 28, 49, 0.05) 100%)', border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
-                    </svg>
-                  </div>
-                  <span className="text-white px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: '#181c31' }}>ADVANCED</span>
-                </div>
-
-                <h3 className="text-2xl font-bold mb-4" style={{ color: '#181c31' }}>Digital Marketer</h3>
-                <p className="mb-6" style={{ color: '#666' }}>
-                  Master SEO, social media, PPC, and analytics. Drive growth and build successful marketing campaigns with data-driven strategies.
-                </p>
-
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: '#3a8ebe' }}>
-                      <span className="text-white text-xs">1</span>
-                    </div>
-                    <span className="text-sm" style={{ color: '#181c31' }}>Marketing Fundamentals</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: '#3a8ebe' }}>
-                      <span className="text-white text-xs">2</span>
-                    </div>
-                    <span className="text-sm" style={{ color: '#181c31' }}>SEO & Content Marketing</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: '#3a8ebe' }}>
-                      <span className="text-white text-xs">3</span>
-                    </div>
-                    <span className="text-sm" style={{ color: '#181c31' }}>Paid Advertising</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center mr-3">
-                      <span className="text-gray-600 text-xs">4</span>
-                    </div>
-                    <span className="text-gray-500 text-sm">Campaign Management & Analytics</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between text-sm mb-6" style={{ color: '#666' }}>
-                  <span>5 months • 100 hours</span>
-                  <span className="flex items-center">
-                    <span className="mr-1" style={{ color: '#3a8ebe' }}>★</span>
-                    4.7 (1.5k reviews)
-                  </span>
-                </div>
-
-                <Link href="/learning-paths/digital-marketing" className="w-full block text-center px-6 py-3 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                  Start Learning Path
-                </Link>
-              </div>
+              ))}
             </div>
           </div>
-
-          <div className="text-center mt-12">
-            <Link
-              href="/learning-paths"
-              className="inline-flex items-center px-8 py-4 text-white font-semibold rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-              style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}
-            >
-              Explore All Learning Paths
-              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </Link>
-          </div>
-        </div>
+        </section>
       </div>
-
-      {/* Trust Section */}
-      <div className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-black mb-8">
-            Trusted by Mentors and candidates around the Globe.
-          </h2>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-            Skillprobe has gained trust of various mentors and candidates, helping mentors to share their experience and earn side income and guiding candidates to grow their career.
-          </p>
-        </div>
-      </div>
-
-      {/* Integrations Section */}
-      <div className="py-24" style={{ backgroundColor: '#f5f5f5' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)', color: '#3a8ebe' }}>
-              🔗 INTEGRATIONS
-            </div>
-            <h2 className="text-5xl font-bold mb-6 leading-tight" style={{ color: '#181c31' }}>
-              Seamless Tools to Manage Your
-              <span style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}> Learning Journey</span>
-            </h2>
-            <p className="text-xl max-w-4xl mx-auto" style={{ color: '#666' }}>
-              SkillProbe integrates with your favorite productivity tools and platforms, creating a unified learning ecosystem that fits seamlessly into your workflow and maximizes your learning efficiency.
-            </p>
-          </div>
-
-          {/* Integration Categories */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div className="text-center p-8 bg-white rounded-2xl shadow-sm" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#181c31' }}>Calendar & Scheduling</h3>
-              <p className="mb-6" style={{ color: '#666' }}>
-                Sync with Google Calendar, Outlook, and Apple Calendar for seamless session scheduling and automated reminders.
-              </p>
-              <div className="space-y-2">
-                <div className="flex items-center justify-center">
-                  <span className="text-sm" style={{ color: '#3a8ebe' }}>• Google Calendar</span>
-                </div>
-                <div className="flex items-center justify-center">
-                  <span className="text-sm" style={{ color: '#3a8ebe' }}>• Microsoft Outlook</span>
-                </div>
-                <div className="flex items-center justify-center">
-                  <span className="text-sm" style={{ color: '#3a8ebe' }}>• Apple Calendar</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center p-8 bg-white rounded-2xl shadow-sm" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}>
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#181c31' }}>Video Conferencing</h3>
-              <p className="mb-6" style={{ color: '#666' }}>
-                Built-in video calls with Zoom, Google Meet, and Microsoft Teams integration for high-quality mentorship sessions.
-              </p>
-              <div className="space-y-2">
-                <div className="flex items-center justify-center">
-                  <span className="text-sm" style={{ color: '#3a8ebe' }}>• Zoom Integration</span>
-                </div>
-                <div className="flex items-center justify-center">
-                  <span className="text-sm" style={{ color: '#3a8ebe' }}>• Google Meet</span>
-                </div>
-                <div className="flex items-center justify-center">
-                  <span className="text-sm" style={{ color: '#3a8ebe' }}>• Microsoft Teams</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center p-8 bg-white rounded-2xl shadow-sm" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#181c31' }}>Productivity Tools</h3>
-              <p className="mb-6" style={{ color: '#666' }}>
-                Connect with Notion, Slack, Trello, and other productivity tools to streamline your learning workflow.
-              </p>
-              <div className="space-y-2">
-                <div className="flex items-center justify-center">
-                  <span className="text-sm" style={{ color: '#3a8ebe' }}>• Notion Integration</span>
-                </div>
-                <div className="flex items-center justify-center">
-                  <span className="text-sm" style={{ color: '#3a8ebe' }}>• Slack Notifications</span>
-                </div>
-                <div className="flex items-center justify-center">
-                  <span className="text-sm" style={{ color: '#3a8ebe' }}>• Trello Boards</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* API & Developer Tools */}
-          <div className="text-center p-8 rounded-2xl" style={{ background: 'linear-gradient(135deg, rgba(58, 142, 190, 0.05) 0%, rgba(24, 28, 49, 0.02) 100%)', border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-            <div className="max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4" style={{ color: '#181c31' }}>Developer-Friendly API</h3>
-              <p className="text-lg mb-8" style={{ color: '#666' }}>
-                Build custom integrations with our comprehensive REST API. Connect SkillProbe with your existing systems, create custom workflows, and extend functionality to meet your organization's unique needs.
-              </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div className="text-center">
-                  <div className="text-2xl font-bold mb-2" style={{ color: '#3a8ebe' }}>REST API</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Full Access</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold mb-2" style={{ color: '#181c31' }}>Webhooks</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Real-time Events</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold mb-2" style={{ color: '#3a8ebe' }}>SDKs</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Multiple Languages</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold mb-2" style={{ color: '#181c31' }}>24/7</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Developer Support</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Testimonials Section */}
-      <div className="py-24 bg-white relative overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-32 h-32 rounded-full opacity-10 blur-2xl" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}></div>
-          <div className="absolute bottom-20 right-10 w-40 h-40 rounded-full opacity-10 blur-2xl" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}></div>
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)', color: '#3a8ebe' }}>
-              💬 TESTIMONIALS
-            </div>
-            <h2 className="text-5xl font-bold mb-6 leading-tight" style={{ color: '#181c31' }}>
-              What Our
-              <span style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}> Community</span> Says
-            </h2>
-            <p className="text-xl max-w-4xl mx-auto" style={{ color: '#666' }}>
-              Hear from mentors and learners who have transformed their careers through SkillProbe. Real stories, real results, real impact on professional growth and success.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
-            {/* Mentor Testimonial 1 */}
-            <div className="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <div className="flex items-center mb-6">
-                <div className="relative">
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center mr-4 shadow-lg" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                    <span className="text-white font-bold text-lg">SJ</span>
-                  </div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-2 border-white flex items-center justify-center" style={{ backgroundColor: '#3a8ebe' }}>
-                    <span className="text-white text-xs">✓</span>
-                  </div>
-                </div>
-                <div>
-                  <h4 className="font-bold text-lg" style={{ color: '#181c31' }}>Siddhant Jain</h4>
-                  <p className="text-sm" style={{ color: '#666' }}>Senior Developer @Google</p>
-                  <div className="flex items-center mt-1">
-                    <div className="flex text-sm" style={{ color: '#3a8ebe' }}>★★★★★</div>
-                    <span className="text-xs ml-2" style={{ color: '#666' }}>5.0</span>
-                  </div>
-                </div>
-              </div>
-              <blockquote className="text-lg leading-relaxed italic mb-4" style={{ color: '#666' }}>
-                "SkillProbe gave me the platform to connect with aspiring developers globally. The process is seamless, and I've helped 80+ students land their dream jobs at top companies!"
-              </blockquote>
-              <div className="flex items-center text-sm" style={{ color: '#666' }}>
-                <span className="mr-4">💼 80+ mentees</span>
-                <span>💰 $2.5k/month</span>
-              </div>
-            </div>
-
-            {/* Learner Testimonial 1 */}
-            <div className="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <div className="flex items-center mb-6">
-                <div className="relative">
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center mr-4 shadow-lg" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}>
-                    <span className="text-white font-bold text-lg">PR</span>
-                  </div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-2 border-white flex items-center justify-center" style={{ backgroundColor: '#3a8ebe' }}>
-                    <span className="text-white text-xs">✓</span>
-                  </div>
-                </div>
-                <div>
-                  <h4 className="font-bold text-lg" style={{ color: '#181c31' }}>Priya Sharma</h4>
-                  <p className="text-sm" style={{ color: '#666' }}>Software Engineer @Microsoft</p>
-                  <div className="flex items-center mt-1">
-                    <div className="flex text-sm" style={{ color: '#3a8ebe' }}>★★★★★</div>
-                    <span className="text-xs ml-2" style={{ color: '#666' }}>5.0</span>
-                  </div>
-                </div>
-              </div>
-              <blockquote className="text-lg leading-relaxed italic mb-4" style={{ color: '#666' }}>
-                "My mentor helped me transition from a non-tech background to landing a software engineer role at Microsoft. The personalized guidance was invaluable!"
-              </blockquote>
-              <div className="flex items-center text-sm" style={{ color: '#666' }}>
-                <span className="mr-4">🚀 Career Switch</span>
-                <span>💼 Microsoft Hire</span>
-              </div>
-            </div>
-
-            {/* Mentor Testimonial 2 */}
-            <div className="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <div className="flex items-center mb-6">
-                <div className="relative">
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center mr-4 shadow-lg" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                    <span className="text-white font-bold text-lg">AK</span>
-                  </div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-2 border-white flex items-center justify-center" style={{ backgroundColor: '#3a8ebe' }}>
-                    <span className="text-white text-xs">✓</span>
-                  </div>
-                </div>
-                <div>
-                  <h4 className="font-bold text-lg" style={{ color: '#181c31' }}>Abdul Kirmani</h4>
-                  <p className="text-sm" style={{ color: '#666' }}>Data Scientist @Meta</p>
-                  <div className="flex items-center mt-1">
-                    <div className="flex text-sm" style={{ color: '#3a8ebe' }}>★★★★★</div>
-                    <span className="text-xs ml-2" style={{ color: '#666' }}>4.9</span>
-                  </div>
-                </div>
-              </div>
-              <blockquote className="text-lg leading-relaxed italic mb-4" style={{ color: '#666' }}>
-                "The mentor tools are exactly what professionals need. I can manage sessions, provide feedback, and track progress easily. It's my favorite side income!"
-              </blockquote>
-              <div className="flex items-center text-sm" style={{ color: '#666' }}>
-                <span className="mr-4">💼 45+ mentees</span>
-                <span>⭐ 4.9 rating</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Success Stories Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
-            <div className="text-center p-6 rounded-2xl" style={{ background: 'linear-gradient(135deg, rgba(58, 142, 190, 0.05) 0%, rgba(24, 28, 49, 0.02) 100%)', border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <h4 className="text-xl font-bold mb-4" style={{ color: '#181c31' }}>Career Transformations</h4>
-              <div className="grid grid-cols-3 gap-4">
-                <div>
-                  <div className="text-2xl font-bold" style={{ color: '#3a8ebe' }}>150+</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Job Placements</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold" style={{ color: '#181c31' }}>65%</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Salary Increase</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold" style={{ color: '#3a8ebe' }}>90%</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Goal Achievement</div>
-                </div>
-              </div>
-            </div>
-            <div className="text-center p-6 rounded-2xl" style={{ background: 'linear-gradient(135deg, rgba(24, 28, 49, 0.05) 0%, rgba(58, 142, 190, 0.05) 100%)', border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <h4 className="text-xl font-bold mb-4" style={{ color: '#181c31' }}>Mentor Success</h4>
-              <div className="grid grid-cols-3 gap-4">
-                <div>
-                  <div className="text-2xl font-bold" style={{ color: '#3a8ebe' }}>$3.2k</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Avg Monthly</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold" style={{ color: '#181c31' }}>4.8</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Avg Rating</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold" style={{ color: '#3a8ebe' }}>95%</div>
-                  <div className="text-sm" style={{ color: '#666' }}>Retention Rate</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Testimonials carousel indicators */}
-          <div className="flex justify-center mt-12 space-x-2">
-            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#3a8ebe' }}></div>
-            <div className="w-3 h-3 rounded-full bg-gray-300"></div>
-            <div className="w-3 h-3 rounded-full bg-gray-300"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* FAQ Section */}
-      <div className="py-24" style={{ backgroundColor: '#f5f5f5' }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)', color: '#3a8ebe' }}>
-              ❓ OUR FAQS
-            </div>
-            <h2 className="text-5xl font-bold mb-6 leading-tight" style={{ color: '#181c31' }}>
-              Frequently Asked
-              <span style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}> Questions</span>
-            </h2>
-            <p className="text-lg mb-8" style={{ color: '#666' }}>
-              Everything you need to know about SkillProbe. Can't find the answer you're looking for?
-              <Link href="/help" className="font-semibold hover:underline ml-1" style={{ color: '#3a8ebe' }}>
-                Contact our support team
-              </Link>
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#181c31' }}>How do I become a mentor on SkillProbe?</h3>
-              <p style={{ color: '#666' }}>
-                Becoming a mentor is simple! Sign up with your professional email, complete your detailed profile including work experience, skills, and expertise areas. Upload your resume and portfolio, set your availability and pricing. Our team reviews applications within 48 hours, and once approved, you can start accepting mentorship sessions immediately.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#181c31' }}>What does it cost to use SkillProbe?</h3>
-              <p style={{ color: '#666' }}>
-                Creating an account and browsing mentor profiles is completely free. Mentorship sessions are priced individually by mentors, typically ranging from $25-$150 per session. We also offer subscription plans for frequent learners with discounted rates and additional features like priority booking and extended session recordings.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#181c31' }}>How do I find the right mentor for my goals?</h3>
-              <p style={{ color: '#666' }}>
-                Our AI-powered matching system analyzes your goals, experience level, and learning preferences to recommend the best mentors. You can filter by industry, company, expertise, price range, and availability. Each mentor profile includes detailed background, specializations, student reviews, and success stories to help you make the right choice.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#181c31' }}>What happens during a mentorship session?</h3>
-              <p style={{ color: '#666' }}>
-                Sessions are conducted via integrated video calls with screen sharing capabilities. Your mentor will provide personalized guidance based on your specific goals - whether it's career advice, technical skills, interview preparation, or project reviews. Sessions are recorded (with permission) for your reference, and you'll receive actionable takeaways and resources afterward.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#181c31' }}>Can companies use SkillProbe for employee development?</h3>
-              <p style={{ color: '#666' }}>
-                Absolutely! We offer enterprise solutions for companies looking to upskill their teams. Our corporate plans include bulk session credits, team management dashboards, progress tracking, and custom mentor matching based on your company's specific needs and technologies. Contact our enterprise team for customized pricing and features.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#181c31' }}>What if I'm not satisfied with a session?</h3>
-              <p style={{ color: '#666' }}>
-                Your satisfaction is our priority. If you're not completely satisfied with a session, contact our support team within 24 hours. We offer full refunds for unsatisfactory sessions and will help you find a better mentor match. We also have a rating system that helps maintain high-quality standards across our mentor network.
-              </p>
-            </div>
-          </div>
-
-          {/* Additional Help Section */}
-          <div className="text-center mt-16 p-8 rounded-2xl" style={{ background: 'linear-gradient(135deg, rgba(58, 142, 190, 0.05) 0%, rgba(24, 28, 49, 0.02) 100%)', border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-            <h3 className="text-2xl font-bold mb-4" style={{ color: '#181c31' }}>Still have questions?</h3>
-            <p className="text-lg mb-6" style={{ color: '#666' }}>
-              Our support team is here to help you succeed. Get in touch and we'll respond within 2 hours.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/help"
-                className="px-8 py-3 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300"
-                style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}
-              >
-                Contact Support
-              </Link>
-              <Link
-                href="/help/guides"
-                className="px-8 py-3 font-semibold rounded-xl border-2 transition-all duration-300"
-                style={{ color: '#181c31', borderColor: '#3a8ebe' }}
-              >
-                Browse Help Guides
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Ready to Level Up CTA Section */}
-      <div className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}></div>
-        </div>
-
-        {/* Floating elements */}
-        <div className="absolute top-20 left-20 w-20 h-20 rounded-full blur-xl animate-pulse opacity-20" style={{ background: 'linear-gradient(135deg, #f5f5f5 0%, rgba(245, 245, 245, 0.5) 100%)' }}></div>
-        <div className="absolute bottom-20 right-20 w-32 h-32 rounded-full blur-xl animate-pulse delay-1000 opacity-20" style={{ background: 'linear-gradient(135deg, rgba(245, 245, 245, 0.5) 0%, #f5f5f5 100%)' }}></div>
-
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mb-12">
-            <div className="inline-flex items-center px-6 py-3 rounded-full text-sm font-medium mb-8" style={{ backgroundColor: 'rgba(245, 245, 245, 0.1)', border: '1px solid rgba(245, 245, 245, 0.2)', color: '#f5f5f5' }}>
-              🚀 Ready to Level Up?
-            </div>
-            <h2 className="text-6xl lg:text-7xl font-bold mb-8 leading-tight" style={{ color: '#f5f5f5' }}>
-              Ready to Transform
-              <br />
-              <span style={{ background: 'linear-gradient(135deg, #f5f5f5 0%, rgba(245, 245, 245, 0.8) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Your Career?
-              </span>
-            </h2>
-            <p className="text-xl mb-12 max-w-4xl mx-auto leading-relaxed" style={{ color: 'rgba(245, 245, 245, 0.9)' }}>
-              Join over 25,000 professionals who have accelerated their careers through SkillProbe.
-              Get access to industry-leading mentors, personalized learning paths, and exclusive job opportunities
-              that will transform your professional journey forever.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-            <Link
-              href="/auth/register"
-              className="group relative px-12 py-5 font-bold rounded-2xl hover:shadow-2xl transition-all duration-300 text-lg transform hover:-translate-y-1"
-              style={{ backgroundColor: '#f5f5f5', color: '#181c31' }}
-            >
-              <span className="relative z-10 flex items-center">
-                Start Your Journey Today
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </span>
-            </Link>
-            <Link
-              href="/mentors"
-              className="px-12 py-5 font-semibold rounded-2xl border-2 backdrop-blur-sm transition-all duration-300 text-lg"
-              style={{ color: '#f5f5f5', borderColor: 'rgba(245, 245, 245, 0.3)' }}
-            >
-              Find Your Mentor
-            </Link>
-          </div>
-
-          {/* Success Metrics */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mb-12">
-            <div className="text-center">
-              <div className="text-4xl font-bold mb-2" style={{ color: '#f5f5f5' }}>25K+</div>
-              <div className="text-sm" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>Active Learners</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold mb-2" style={{ color: '#f5f5f5' }}>500+</div>
-              <div className="text-sm" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>Expert Mentors</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold mb-2" style={{ color: '#f5f5f5' }}>98%</div>
-              <div className="text-sm" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>Success Rate</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold mb-2" style={{ color: '#f5f5f5' }}>50+</div>
-              <div className="text-sm" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>Countries</div>
-            </div>
-          </div>
-
-          {/* Value Propositions */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
-            <div className="text-center p-6 rounded-2xl" style={{ backgroundColor: 'rgba(245, 245, 245, 0.1)', border: '1px solid rgba(245, 245, 245, 0.2)' }}>
-              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 245, 245, 0.2)' }}>
-                <svg className="w-8 h-8" style={{ color: '#f5f5f5' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-3" style={{ color: '#f5f5f5' }}>Fast-Track Your Career</h3>
-              <p style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-                Accelerate your professional growth with personalized mentorship and industry insights
-              </p>
-            </div>
-            <div className="text-center p-6 rounded-2xl" style={{ backgroundColor: 'rgba(245, 245, 245, 0.1)', border: '1px solid rgba(245, 245, 245, 0.2)' }}>
-              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 245, 245, 0.2)' }}>
-                <svg className="w-8 h-8" style={{ color: '#f5f5f5' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-3" style={{ color: '#f5f5f5' }}>Learn from the Best</h3>
-              <p style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-                Connect with industry leaders from top companies like Google, Microsoft, and Meta
-              </p>
-            </div>
-            <div className="text-center p-6 rounded-2xl" style={{ backgroundColor: 'rgba(245, 245, 245, 0.1)', border: '1px solid rgba(245, 245, 245, 0.2)' }}>
-              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 245, 245, 0.2)' }}>
-                <svg className="w-8 h-8" style={{ color: '#f5f5f5' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-3" style={{ color: '#f5f5f5' }}>Guaranteed Results</h3>
-              <p style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-                98% of our learners achieve their career goals within 6 months or get their money back
-              </p>
-            </div>
-          </div>
-
-          <div className="text-center">
-            <p className="text-sm" style={{ color: 'rgba(245, 245, 245, 0.7)' }}>
-              ✨ No credit card required • 🎯 Free consultation available • 🔒 100% secure platform
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Become an Ambassador Section */}
-      <div className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}></div>
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full mb-6" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', border: '1px solid rgba(255, 255, 255, 0.2)' }}>
-              <span className="mr-2" style={{ color: '#f5f5f5' }}>🚀</span>
-              <span className="text-white text-sm font-medium">Join Our Ambassador Program</span>
-            </div>
-            <h2 className="text-5xl font-bold text-white mb-6 leading-tight">
-              Become a SkillProbe<br />
-              <span style={{ color: '#f5f5f5' }}>
-                Ambassador
-              </span>
-            </h2>
-            <p className="text-xl mb-8 max-w-3xl mx-auto" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-              Join our exclusive ambassador program and earn while helping others discover the power of mentorship. Share SkillProbe with your network and get rewarded for every successful referral.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-3xl font-bold text-white mb-8">Why Become an Ambassador?</h3>
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1" style={{ backgroundColor: '#f5f5f5' }}>
-                    <span className="text-sm" style={{ color: '#181c31' }}>💰</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-1">Earn Commission</h4>
-                    <p style={{ color: 'rgba(245, 245, 245, 0.7)' }}>Get up to 20% commission on every successful referral</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1" style={{ backgroundColor: '#f5f5f5' }}>
-                    <span className="text-sm" style={{ color: '#181c31' }}>🎯</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-1">Flexible Work</h4>
-                    <p style={{ color: 'rgba(245, 245, 245, 0.7)' }}>Work on your own schedule and promote at your pace</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1" style={{ backgroundColor: '#f5f5f5' }}>
-                    <span className="text-sm" style={{ color: '#181c31' }}>🌟</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-1">Exclusive Benefits</h4>
-                    <p style={{ color: 'rgba(245, 245, 245, 0.7)' }}>Access to exclusive events, training, and networking opportunities</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1" style={{ backgroundColor: '#f5f5f5' }}>
-                    <span className="text-sm" style={{ color: '#181c31' }}>📈</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-1">Growth Opportunities</h4>
-                    <p style={{ color: 'rgba(245, 245, 245, 0.7)' }}>Build your personal brand while helping others grow</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-3xl p-8 shadow-2xl" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', border: '1px solid rgba(255, 255, 255, 0.2)' }}>
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-bold mb-4" style={{ backgroundColor: '#f5f5f5', color: '#181c31' }}>
-                  🎉 LIMITED SPOTS AVAILABLE
-                </div>
-                <h3 className="text-3xl font-bold text-white mb-4">Join the Ambassador Program</h3>
-                <p className="mb-8" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-                  Be part of an exclusive community that's shaping the future of professional mentorship. Apply now and start earning!
-                </p>
-              </div>
-
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-                  <span className="mr-3" style={{ color: '#f5f5f5' }}>✓</span>
-                  <span>Comprehensive training program</span>
-                </div>
-                <div className="flex items-center" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-                  <span className="mr-3" style={{ color: '#f5f5f5' }}>✓</span>
-                  <span>Marketing materials provided</span>
-                </div>
-                <div className="flex items-center" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-                  <span className="mr-3" style={{ color: '#f5f5f5' }}>✓</span>
-                  <span>Dedicated support team</span>
-                </div>
-                <div className="flex items-center" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-                  <span className="mr-3" style={{ color: '#f5f5f5' }}>✓</span>
-                  <span>Monthly performance bonuses</span>
-                </div>
-              </div>
-
-              <Link
-                href="/ambassador/apply"
-                className="w-full block text-center px-8 py-4 font-bold rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-                style={{ backgroundColor: '#f5f5f5', color: '#181c31' }}
-              >
-                Apply to Become Ambassador
-              </Link>
-
-              <p className="text-center text-sm mt-4" style={{ color: 'rgba(245, 245, 245, 0.6)' }}>
-                ⏰ Applications reviewed within 48 hours
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Footer */}
-      <footer style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }} className="text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12">
-            <p className="text-gray-300 max-w-2xl">
-              Skill Development Company Helping College Students And Working Professional To Enhance Their Skill And Hunt The Correct Suitable Opportunity For Them In Their Professional Life.
-            </p>
-            <div className="mt-4">
-              <p className="text-sm text-gray-400">contact</p>
-              <p className="text-white">admin@skillprobe.co</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
-            <div>
-              <h4 className="text-lg font-semibold mb-4 text-purple-400">INFO</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li><Link href="/" className="hover:text-white">Home</Link></li>
-                <li><Link href="/about" className="hover:text-white">About Us</Link></li>
-                <li><Link href="/services" className="hover:text-white">Services</Link></li>
-                <li><Link href="/contact" className="hover:text-white">Contacts</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold mb-4 text-purple-400">PRODUCTS</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li><Link href="/proctoring" className="hover:text-white">Proctoring</Link></li>
-                <li><Link href="/coding-interview" className="hover:text-white">Coding Interview Platform</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold mb-4 text-purple-400">APPLY</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li><Link href="/internships" className="hover:text-white">Internships</Link></li>
-                <li><Link href="/jobs" className="hover:text-white">Jobs</Link></li>
-                <li><Link href="/scholarships" className="hover:text-white">Scholarships</Link></li>
-                <li><Link href="/ppo" className="hover:text-white">PPO Programmes</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold mb-4 text-purple-400">SOLUTIONS</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li><Link href="/staffing" className="hover:text-white">Staffing</Link></li>
-                <li><Link href="/talent-engagement" className="hover:text-white">Talent Engagement</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold mb-4 text-purple-400">PARTICIPATE</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li><Link href="/quiz" className="hover:text-white">Quiz & Competition</Link></li>
-                <li><Link href="/assessments" className="hover:text-white">Assessments</Link></li>
-                <li><Link href="/workshop" className="hover:text-white">Workshop</Link></li>
-                <li><Link href="/webinar" className="hover:text-white">Webinar</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold mb-4 text-purple-400">PRACTICE</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li><Link href="/interview-prep" className="hover:text-white">Interview Preparation</Link></li>
-                <li><Link href="/coding-assessment" className="hover:text-white">Coding Assessment</Link></li>
-                <li><Link href="/case-studies" className="hover:text-white">Case Studies</Link></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-700 mt-12 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="flex items-center space-x-6 mb-4 md:mb-0">
-                <span className="text-gray-300">English</span>
-                <Link href="/privacy" className="text-gray-300 hover:text-white">Privacy Policy</Link>
-                <Link href="/support" className="text-gray-300 hover:text-white">Support</Link>
-              </div>
-              <p className="text-gray-400 text-center">
-                © 2025 Skillprobe. All rights reserved
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </>
   );
 }
-<div className="py-24" style={{ backgroundColor: '#f5f5f5' }}>
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold mb-4" style={{ color: '#181c31' }}>
-        The Future of<br />Career Growth
-      </h2>
-      <p className="text-xl max-w-3xl mx-auto" style={{ color: '#666' }}>
-        SkillProbe bridges the gap between ambition and guidance by connecting candidates to paid mentorships from top industry experts.
-      </p>
-    </div>
-
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-      <div>
-        <div className="mb-8">
-          <div className="flex items-start mb-6">
-            <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4 mt-1" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)' }}>
-              <span className="font-bold text-lg" style={{ color: '#3a8ebe' }}>01</span>
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold mb-3" style={{ color: '#181c31' }}>Personalized 1-on-1 Mentorship</h3>
-              <p style={{ color: '#666' }}>
-                Connect directly with mentors from your desired domain and get real guidance.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-start">
-            <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4 mt-1" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)' }}>
-              <span className="font-bold text-lg" style={{ color: '#3a8ebe' }}>02</span>
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold mb-3" style={{ color: '#181c31' }}>Paid & Valued Sessions</h3>
-              <p style={{ color: '#666' }}>
-                candidates invest in their future. Mentors earn by sharing their experience.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="rounded-2xl p-8" style={{ background: 'linear-gradient(135deg, rgba(58, 142, 190, 0.1) 0%, rgba(24, 28, 49, 0.05) 100%)' }}>
-        <h4 className="text-lg font-semibold mb-4" style={{ color: '#3a8ebe' }}>Empowering candidates Everywhere</h4>
-        <h3 className="text-3xl font-bold mb-6" style={{ color: '#181c31' }}>
-          All-in-One Platform for<br />Mentorship & Growth
-        </h3>
-        <p className="mb-6" style={{ color: '#666' }}>
-          From career clarity to resume feedback and mock interviews, SkillProbe has everything candidates need to grow with confidence.
-        </p>
-        <Link
-          href="/about"
-          className="font-semibold hover:underline"
-          style={{ color: '#3a8ebe' }}
-        >
-          Know More →
-        </Link>
-      </div>
-    </div>
-  </div>
-</div>
-
-{/* 6. All-in-One Platform Section with Slide Mode */ }
-<div className="py-24 bg-white">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center mb-16">
-      <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)', color: '#3a8ebe' }}>
-        🚀 ALL-IN-ONE PLATFORM
-      </div>
-      <h2 className="text-5xl font-bold mb-6 leading-tight" style={{ color: '#181c31' }}>
-        Everything You Need in
-        <span style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}> One Place</span>
-      </h2>
-      <p className="text-xl max-w-3xl mx-auto" style={{ color: '#666' }}>
-        Comprehensive tools and features designed to accelerate your learning journey and career growth.
-      </p>
-    </div>
-
-    {/* Slide Content */}
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div className="text-center p-8 rounded-3xl transition-all duration-300 hover:shadow-lg" style={{ backgroundColor: 'rgba(58, 142, 190, 0.05)' }}>
-        <div className="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-          <span className="font-bold text-2xl text-white">01</span>
-        </div>
-        <h3 className="text-2xl font-bold mb-4" style={{ color: '#181c31' }}>Real Industry Mentors</h3>
-        <p className="mb-4" style={{ color: '#666' }}>
-          Connect directly with experienced professionals from top companies. Gain real-world knowledge and insider insights to navigate your career path effectively.
-        </p>
-        <p style={{ color: '#666' }}>
-          Skillprobe ensures every mentor is vetted and verified so you get authentic guidance tailored to your goals.
-        </p>
-      </div>
-
-      <div className="text-center p-8 rounded-3xl transition-all duration-300 hover:shadow-lg" style={{ backgroundColor: 'rgba(58, 142, 190, 0.05)' }}>
-        <div className="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}>
-          <span className="font-bold text-2xl text-white">02</span>
-        </div>
-        <h3 className="text-2xl font-bold mb-4" style={{ color: '#181c31' }}>One-on-One Sessions</h3>
-        <p className="mb-4" style={{ color: '#666' }}>
-          Book personalized sessions with mentors for resume reviews, career planning, skill development, and mock interviews.
-        </p>
-        <p style={{ color: '#666' }}>
-          No generic advice—just focused, practical guidance based on your unique situation and career aspirations.
-        </p>
-      </div>
-
-      <div className="text-center p-8 rounded-3xl transition-all duration-300 hover:shadow-lg" style={{ backgroundColor: 'rgba(58, 142, 190, 0.05)' }}>
-        <div className="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-          <span className="font-bold text-2xl text-white">03</span>
-        </div>
-        <h3 className="text-2xl font-bold mb-4" style={{ color: '#181c31' }}>Skill-Based Learning Paths</h3>
-        <p className="mb-4" style={{ color: '#666' }}>
-          Follow curated learning tracks designed by mentors based on in-demand industry skills—no fluff, only what matters.
-        </p>
-        <p style={{ color: '#666' }}>
-          Combine self-paced learning with live mentor support to maximize your upskilling journey on Skillprobe.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-{/* 7. Trusted by Mentors Section */ }
-<div className="py-24" style={{ backgroundColor: '#f5f5f5' }}>
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 className="text-4xl font-bold mb-8" style={{ color: '#181c31' }}>
-      Trusted by Mentors and candidates around the Globe.
-    </h2>
-    <p className="text-xl max-w-4xl mx-auto" style={{ color: '#666' }}>
-      Skillprobe has gained trust of various mentors and candidates, helping mentors to share their experience and earn side income and guiding candidates to grow their career.
-    </p>
-  </div>
-</div>
-
-{/* 8. Integrations Section */ }
-<div className="py-24 bg-white">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)', color: '#3a8ebe' }}>
-      🔗 INTEGRATIONS
-    </div>
-    <h2 className="text-4xl font-bold mb-6" style={{ color: '#181c31' }}>
-      Seamless Tools to Manage Your Learning Journey Anytime, Anywhere.
-    </h2>
-    <p className="text-xl max-w-4xl mx-auto" style={{ color: '#666' }}>
-      Skillprobe integrates essential tools like calendar scheduling, video conferencing, and real-time chat—so you can learn, connect, and grow without switching platforms.
-    </p>
-  </div>
-</div>
-
-{/* 9. Testimonials Section */ }
-<div className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(58, 142, 190, 0.05) 0%, rgba(24, 28, 49, 0.02) 100%)' }}>
-  {/* Background decorative elements */}
-  <div className="absolute inset-0 overflow-hidden">
-    <div className="absolute top-20 left-10 w-32 h-32 rounded-full blur-2xl opacity-10" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}></div>
-    <div className="absolute bottom-20 right-10 w-40 h-40 rounded-full blur-2xl opacity-10" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}></div>
-  </div>
-
-  <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center mb-20">
-      <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)', color: '#3a8ebe' }}>
-        💬 TESTIMONIALS
-      </div>
-      <h2 className="text-5xl font-bold mb-6 leading-tight" style={{ color: '#181c31' }}>
-        Mentor's
-        <span style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}> Testimonials</span>
-      </h2>
-      <p className="text-xl max-w-3xl mx-auto" style={{ color: '#666' }}>
-        Mentors trust Skillprobe to connect with passionate learners, share their expertise, and grow their professional impact.
-      </p>
-    </div>
-
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-      <div className="group bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl hover:bg-white transition-all duration-500 transform hover:-translate-y-2" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-        <div className="flex items-center mb-6">
-          <div className="relative">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center mr-4 shadow-lg" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-              <span className="text-white font-bold text-lg">SJ</span>
-            </div>
-            <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-2 border-white flex items-center justify-center" style={{ backgroundColor: '#3a8ebe' }}>
-              <span className="text-white text-xs">✓</span>
-            </div>
-          </div>
-          <div>
-            <h4 className="font-bold text-lg" style={{ color: '#181c31' }}>Siddhant Jain</h4>
-            <p className="text-sm" style={{ color: '#666' }}>Senior Software Developer @Skillprobe</p>
-            <div className="flex items-center mt-1">
-              <div className="flex" style={{ color: '#3a8ebe' }}>
-                ★★★★★
-              </div>
-              <span className="text-xs ml-2" style={{ color: '#666' }}>5.0</span>
-            </div>
-          </div>
-        </div>
-        <blockquote className="text-lg leading-relaxed italic" style={{ color: '#666' }}>
-          "Skillprobe gave me the platform to connect with aspiring developers. The process is smooth, and the dashboard makes mentoring truly effortless. I've helped 50+ students land their dream jobs!"
-        </blockquote>
-        <div className="mt-6 flex items-center text-sm" style={{ color: '#666' }}>
-          <span className="mr-4">💼 50+ mentees</span>
-          <span>⭐ 4.9 rating</span>
-        </div>
-      </div>
-
-      <div className="group bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl hover:bg-white transition-all duration-500 transform hover:-translate-y-2" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-        <div className="flex items-center mb-6">
-          <div className="relative">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center mr-4 shadow-lg" style={{ background: 'linear-gradient(135deg, #3a8ebe 0%, #181c31 100%)' }}>
-              <span className="text-white font-bold text-lg">AK</span>
-            </div>
-            <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-2 border-white flex items-center justify-center" style={{ backgroundColor: '#3a8ebe' }}>
-              <span className="text-white text-xs">✓</span>
-            </div>
-          </div>
-          <div>
-            <h4 className="font-bold text-lg" style={{ color: '#181c31' }}>Abdul Samad Kirmani</h4>
-            <p className="text-sm" style={{ color: '#666' }}>Software Developer</p>
-            <div className="flex items-center mt-1">
-              <div className="flex" style={{ color: '#3a8ebe' }}>
-                ★★★★★
-              </div>
-              <span className="text-xs ml-2" style={{ color: '#666' }}>5.0</span>
-            </div>
-          </div>
-        </div>
-        <blockquote className="text-lg leading-relaxed italic" style={{ color: '#666' }}>
-          "The mentor tools on Skillprobe are exactly what professionals need. I can manage sessions, provide feedback, and track mentee progress easily. It's become my favorite side hustle!"
-        </blockquote>
-        <div className="mt-6 flex items-center text-sm" style={{ color: '#666' }}>
-          <span className="mr-4">💼 30+ mentees</span>
-          <span>⭐ 4.8 rating</span>
-        </div>
-      </div>
-    </div>
-
-    {/* Additional testimonials carousel indicators */}
-    <div className="flex justify-center mt-12 space-x-2">
-      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#3a8ebe' }}></div>
-      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'rgba(58, 142, 190, 0.3)' }}></div>
-      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'rgba(58, 142, 190, 0.3)' }}></div>
-    </div>
-  </div>
-</div>
-
-{/* 10. Contact Us Section */ }
-<div className="py-24 bg-white">
-  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center mb-16">
-      <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)', color: '#3a8ebe' }}>
-        📧 CONTACT US
-      </div>
-      <h2 className="text-5xl font-bold mb-6" style={{ color: '#181c31' }}>
-        Send Us a Message
-      </h2>
-      <p className="text-xl" style={{ color: '#666' }}>
-        Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
-      </p>
-    </div>
-
-    <div className="bg-white rounded-3xl p-8 shadow-xl" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-      <form className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#181c31' }}>
-              First Name
-            </label>
-            <input
-              type="text"
-              className="w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 transition-colors"
-              style={{ borderColor: 'rgba(58, 142, 190, 0.2)' }}
-              placeholder="Enter your first name"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#181c31' }}>
-              Last Name
-            </label>
-            <input
-              type="text"
-              className="w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 transition-colors"
-              style={{ borderColor: 'rgba(58, 142, 190, 0.2)' }}
-              placeholder="Enter your last name"
-            />
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: '#181c31' }}>
-            Email
-          </label>
-          <input
-            type="email"
-            className="w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 transition-colors"
-            style={{ borderColor: 'rgba(58, 142, 190, 0.2)' }}
-            placeholder="Enter your email"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: '#181c31' }}>
-            Subject
-          </label>
-          <input
-            type="text"
-            className="w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 transition-colors"
-            style={{ borderColor: 'rgba(58, 142, 190, 0.2)' }}
-            placeholder="What's this about?"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: '#181c31' }}>
-            Message
-          </label>
-          <textarea
-            rows={6}
-            className="w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 transition-colors resize-none"
-            style={{ borderColor: 'rgba(58, 142, 190, 0.2)' }}
-            placeholder="Tell us more about your inquiry..."
-          ></textarea>
-        </div>
-
-        <div className="text-center">
-          <button
-            type="submit"
-            className="px-8 py-4 text-white font-semibold rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-            style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}
-          >
-            Send Message
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-{/* 11. FAQ Section */ }
-<div className="py-24" style={{ backgroundColor: '#f5f5f5' }}>
-  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center mb-16">
-      <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'rgba(58, 142, 190, 0.1)', color: '#3a8ebe' }}>
-        ❓ OUR FAQS
-      </div>
-      <h2 className="text-4xl font-bold mb-4" style={{ color: '#181c31' }}>
-        Frequently Asked<br />Questions
-      </h2>
-      <Link href="/help" className="font-semibold hover:underline" style={{ color: '#3a8ebe' }}>
-        Know More →
-      </Link>
-    </div>
-
-    <div className="space-y-6">
-      <div className="bg-white rounded-lg p-6 shadow-sm" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-        <h3 className="text-lg font-semibold mb-3" style={{ color: '#181c31' }}>How do I become a mentor?</h3>
-        <p style={{ color: '#666' }}>
-          To become a mentor, simply sign up as a mentor and complete your multi-step profile, including your professional background, skills, and availability. Once approved, your profile becomes visible to mentees seeking guidance.
-        </p>
-      </div>
-
-      <div className="bg-white rounded-lg p-6 shadow-sm" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-        <h3 className="text-lg font-semibold mb-3" style={{ color: '#181c31' }}>Is Skillprobe free to use?</h3>
-        <p style={{ color: '#666' }}>
-          Creating an account and browsing mentor or mentee profiles is free. Some advanced features, personalized services, or premium mentorship sessions may require a subscription or one-time payment.
-        </p>
-      </div>
-
-      <div className="bg-white rounded-lg p-6 shadow-sm" style={{ border: '1px solid rgba(58, 142, 190, 0.1)' }}>
-        <h3 className="text-lg font-semibold mb-3" style={{ color: '#181c31' }}>Can recruiters use Skillprobe?</h3>
-        <p style={{ color: '#666' }}>
-          Yes, recruiters can use Skillprobe to explore verified mentor and mentee profiles, view their skills and achievements, and connect with potential candidates for hiring or collaboration.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-{/* 12. Footer */ }
-<footer className="py-16" style={{ backgroundColor: '#181c31' }}>
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="mb-12">
-      <p className="max-w-2xl" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-        Skill Development Company Helping College Students And Working Professional To Enhance Their Skill And Hunt The Correct Suitable Opportunity For Them In Their Professional Life.
-      </p>
-      <div className="mt-4">
-        <p className="text-sm" style={{ color: 'rgba(245, 245, 245, 0.6)' }}>contact</p>
-        <p className="text-white">admin@skillprobe.co</p>
-      </div>
-    </div>
-
-    <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
-      <div>
-        <h4 className="text-lg font-semibold mb-4" style={{ color: '#3a8ebe' }}>INFO</h4>
-        <ul className="space-y-2" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-          <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-          <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
-          <li><Link href="/services" className="hover:text-white transition-colors">Services</Link></li>
-          <li><Link href="/contact" className="hover:text-white transition-colors">Contacts</Link></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="text-lg font-semibold mb-4" style={{ color: '#3a8ebe' }}>PRODUCTS</h4>
-        <ul className="space-y-2" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-          <li><Link href="/proctoring" className="hover:text-white transition-colors">Proctoring</Link></li>
-          <li><Link href="/coding-interview" className="hover:text-white transition-colors">Coding Interview Platform</Link></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="text-lg font-semibold mb-4" style={{ color: '#3a8ebe' }}>APPLY</h4>
-        <ul className="space-y-2" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-          <li><Link href="/internships" className="hover:text-white transition-colors">Internships</Link></li>
-          <li><Link href="/jobs" className="hover:text-white transition-colors">Jobs</Link></li>
-          <li><Link href="/scholarships" className="hover:text-white transition-colors">Scholarships</Link></li>
-          <li><Link href="/ppo" className="hover:text-white transition-colors">PPO Programmes</Link></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="text-lg font-semibold mb-4" style={{ color: '#3a8ebe' }}>SOLUTIONS</h4>
-        <ul className="space-y-2" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-          <li><Link href="/staffing" className="hover:text-white transition-colors">Staffing</Link></li>
-          <li><Link href="/talent-engagement" className="hover:text-white transition-colors">Talent Engagement</Link></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="text-lg font-semibold mb-4" style={{ color: '#3a8ebe' }}>PARTICIPATE</h4>
-        <ul className="space-y-2" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-          <li><Link href="/quiz" className="hover:text-white transition-colors">Quiz & Competition</Link></li>
-          <li><Link href="/assessments" className="hover:text-white transition-colors">Assessments</Link></li>
-          <li><Link href="/workshop" className="hover:text-white transition-colors">Workshop</Link></li>
-          <li><Link href="/webinar" className="hover:text-white transition-colors">Webinar</Link></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="text-lg font-semibold mb-4" style={{ color: '#3a8ebe' }}>PRACTICE</h4>
-        <ul className="space-y-2" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-          <li><Link href="/interview-prep" className="hover:text-white transition-colors">Interview Preparation</Link></li>
-          <li><Link href="/coding-assessment" className="hover:text-white transition-colors">Coding Assessment</Link></li>
-          <li><Link href="/case-studies" className="hover:text-white transition-colors">Case Studies</Link></li>
-        </ul>
-      </div>
-    </div>
-
-    <div className="border-t mt-12 pt-8" style={{ borderColor: 'rgba(58, 142, 190, 0.3)' }}>
-      <div className="flex flex-col md:flex-row justify-between items-center">
-        <div className="flex items-center space-x-6 mb-4 md:mb-0" style={{ color: 'rgba(245, 245, 245, 0.8)' }}>
-          <span>English</span>
-          <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-          <Link href="/support" className="hover:text-white transition-colors">Support</Link>
-        </div>
-        <p className="text-center" style={{ color: 'rgba(245, 245, 245, 0.6)' }}>
-          © 2025 Skillprobe. All rights reserved
-        </p>
-      </div>
-    </div>
-  </div>
-</footer>
