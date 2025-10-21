@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '@/hooks/useAuth';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
   const { user, loading, logout } = useAuth();
@@ -61,7 +62,12 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-gray-200">
+    <motion.nav 
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="sticky top-0 z-50 bg-white border-b border-gray-200"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center">
@@ -78,26 +84,67 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-              Homepage
-            </Link>
-            <Link href="/about" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-              About Us
-            </Link>
-            <Link href="/courses" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-              Courses
-            </Link>
-            <Link href="/for-students" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-              For Students
-            </Link>
-            <Link href="/for-mentors" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-              For Mentors
-            </Link>
-            <Link href="/for-ambassadors" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-              For Ambassadors
-            </Link>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="hidden md:flex items-center space-x-8"
+          >
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.4 }}
+            >
+              <Link href="/" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+                Homepage
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.4 }}
+            >
+              <Link href="/about" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+                About Us
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.4 }}
+            >
+              <Link href="/courses" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+                Courses
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.7, duration: 0.4 }}
+            >
+              <Link href="/for-students" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+                For Students
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.4 }}
+            >
+              <Link href="/for-mentors" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+                For Mentors
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.9, duration: 0.4 }}
+            >
+              <Link href="/for-ambassadors" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+                For Ambassadors
+              </Link>
+            </motion.div>
+          </motion.div>
 
           {/* Mobile menu button */}
           <div className="md:hidden">
@@ -180,8 +227,15 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      {showMobileMenu && (
-        <div className="md:hidden bg-white border-t border-gray-200">
+      <AnimatePresence>
+        {showMobileMenu && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden bg-white border-t border-gray-200 overflow-hidden"
+          >
           <div className="px-4 py-4 space-y-4">
             <Link 
               href="/" 
@@ -280,8 +334,9 @@ export default function Navbar() {
               </div>
             )}
           </div>
-        </div>
-      )}
-    </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 }

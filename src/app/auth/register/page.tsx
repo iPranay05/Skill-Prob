@@ -17,9 +17,11 @@ function RegisterContent() {
     referralCode: ''
   });
   const [showSpecialRoles, setShowSpecialRoles] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   useEffect(() => {
-    // Check for referral code from URL parameter or localStorage
     const refFromUrl = searchParams.get('ref');
     const refFromStorage = localStorage.getItem('referralCode');
 
@@ -29,19 +31,16 @@ function RegisterContent() {
         referralCode: refFromUrl || refFromStorage || ''
       }));
 
-      // Clear from localStorage after using it
       if (refFromStorage) {
         localStorage.removeItem('referralCode');
       }
     }
 
-    // Check for special access parameter
     const specialAccess = searchParams.get('access');
     if (specialAccess === 'admin' || specialAccess === 'mentor' || specialAccess === 'employee') {
       setShowSpecialRoles(true);
     }
 
-    // Listen for key combination (Ctrl + Shift + R for Register)
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.shiftKey && e.key === 'M') {
         setShowSpecialRoles(true);
@@ -51,10 +50,6 @@ function RegisterContent() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [searchParams]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -69,7 +64,6 @@ function RegisterContent() {
     setError('');
     setSuccess('');
 
-    // Validate passwords match
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       setLoading(false);
@@ -110,55 +104,75 @@ function RegisterContent() {
   };
 
   return (
-    <div className="min-h-screen bg-white" style={{ fontFamily: 'Arial, sans-serif' }}>
-      <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
-        {/* Left Side - Branding */}
-        <div className="hidden lg:flex lg:flex-col lg:justify-center lg:px-12" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-          <div className="max-w-md mx-auto text-center">
-            <div className="mb-8">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#f5f5f5' }}>
-                <span className="text-3xl font-bold" style={{ color: '#181c31' }}>SP</span>
+    <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: '#ffffff', fontFamily: 'Arial, sans-serif' }}>
+      {/* Animated gradient background */}
+      <div className="absolute inset-0 opacity-10" style={{ backgroundColor: '#5e17eb' }}></div>
+      
+      {/* Floating gradient blobs */}
+      <div className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-pulse" style={{ backgroundColor: '#5e17eb' }}></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-pulse" style={{ backgroundColor: '#5e17eb', animationDelay: '2s' }}></div>
+
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 min-h-screen">
+        {/* Left Side - Premium Content */}
+        <div className="hidden lg:flex lg:flex-col lg:justify-center lg:px-12" style={{ backgroundColor: '#5e17eb' }}>
+          <div className="max-w-md">
+            {/* Gradient Card with Stats */}
+            <div className="mb-12 rounded-3xl p-8 shadow-2xl transform hover:scale-105 transition-transform duration-300" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', border: '2px solid rgba(255, 255, 255, 0.2)' }}>
+              <div className="mb-6">
+                <div className="inline-block px-4 py-2 rounded-full text-sm font-semibold mb-4" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', color: '#ffffff' }}>
+                  Join 10,000+ Students
+                </div>
+                <h1 className="text-4xl font-bold mb-2" style={{ color: '#ffffff' }}>Master Your Skills</h1>
+                <p className="text-lg" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+                  Learn from industry experts and get certified
+                </p>
               </div>
-              <h1 className="text-4xl font-bold mb-4" style={{ color: '#f5f5f5' }}>Join SkillProbe!</h1>
-              <p className="text-xl opacity-90" style={{ color: '#f5f5f5' }}>
-                Start your learning journey with thousands of students worldwide
-              </p>
+
+              {/* Stats Grid */}
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(255, 255, 255, 0.15)', border: '2px solid rgba(255, 255, 255, 0.2)' }}>
+                  <div className="text-3xl font-bold" style={{ color: '#ffffff' }}>98%</div>
+                  <div className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Success Rate</div>
+                </div>
+                <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(255, 255, 255, 0.15)', border: '2px solid rgba(255, 255, 255, 0.2)' }}>
+                  <div className="text-3xl font-bold" style={{ color: '#ffffff' }}>500+</div>
+                  <div className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Expert Mentors</div>
+                </div>
+              </div>
+
+              {/* Features */}
+              <div className="space-y-3">
+                <div className="flex items-center space-x-3" style={{ color: '#ffffff' }}>
+                  <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm">Lifetime access to courses</span>
+                </div>
+                <div className="flex items-center space-x-3" style={{ color: '#ffffff' }}>
+                  <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm">Industry-recognized certificates</span>
+                </div>
+                <div className="flex items-center space-x-3" style={{ color: '#ffffff' }}>
+                  <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm">1-on-1 mentoring sessions</span>
+                </div>
+              </div>
             </div>
 
-            <div className="space-y-6 opacity-90" style={{ color: '#f5f5f5' }}>
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 245, 245, 0.2)' }}>
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-                  </svg>
-                </div>
-                <div className="text-left">
-                  <h3 className="font-semibold">Expert Mentors</h3>
-                  <p className="text-sm opacity-75">Learn from industry professionals</p>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 245, 245, 0.2)' }}>
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div className="text-left">
-                  <h3 className="font-semibold">Certified Courses</h3>
-                  <p className="text-sm opacity-75">Get recognized certifications</p>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'rgba(245, 245, 245, 0.2)' }}>
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <div className="text-left">
-                  <h3 className="font-semibold">Fast Track Learning</h3>
-                  <p className="text-sm opacity-75">Accelerate your career growth</p>
+            {/* Social Proof */}
+            <div className="rounded-2xl p-6" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', border: '2px solid rgba(255, 255, 255, 0.2)' }}>
+              <p className="font-semibold mb-4" style={{ color: '#ffffff' }}>
+                "SkillProbe transformed my career. The mentors are incredibly supportive!"
+              </p>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-full" style={{ backgroundColor: 'rgba(255, 255, 255, 0.3)' }}></div>
+                <div>
+                  <p className="font-semibold" style={{ color: '#ffffff' }}>Sarah Johnson</p>
+                  <p className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Product Manager at Tech Co.</p>
                 </div>
               </div>
             </div>
@@ -166,226 +180,259 @@ function RegisterContent() {
         </div>
 
         {/* Right Side - Register Form */}
-        <div className="flex flex-col justify-center px-6 py-12 lg:px-12">
+        <div className="flex flex-col justify-center px-6 py-12 lg:px-12" style={{ backgroundColor: '#ffffff' }}>
           <div className="max-w-md mx-auto w-full">
-            {/* Mobile Logo */}
-            <div className="lg:hidden text-center mb-8">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-                <span className="text-2xl font-bold" style={{ color: '#f5f5f5' }}>SP</span>
-              </div>
-              <h1 className="text-2xl font-bold" style={{ color: '#181c31' }}>SkillProbe</h1>
-            </div>
-
+            {/* Logo */}
             <div className="mb-8">
-              <h2 className="text-3xl font-bold mb-2" style={{ color: '#181c31' }}>
-                Create your account
+              <div className="w-14 h-14 mb-6 rounded-2xl flex items-center justify-center shadow-lg" style={{ backgroundColor: '#5e17eb' }}>
+                <span className="text-2xl font-bold" style={{ color: '#ffffff' }}>SP</span>
+              </div>
+              <h2 className="text-4xl font-bold mb-2" style={{ color: '#000000' }}>
+                Create Account
               </h2>
-              <p style={{ color: '#666' }}>
+              <p style={{ color: '#000000' }}>
                 Already have an account?{' '}
-                <Link href="/auth/login" className="font-semibold hover:underline" style={{ color: '#3a8ebe' }}>
-                  Sign in here
+                <Link href="/auth/login" className="font-semibold hover:underline" style={{ color: '#5e17eb' }}>
+                  Sign in
                 </Link>
               </p>
             </div>
 
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-5" onSubmit={handleSubmit}>
+              {/* Name Fields */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
+                  <label className="block text-sm font-semibold mb-2" style={{ color: '#000000' }}>
                     First Name
                   </label>
                   <input
-                    id="firstName"
                     name="firstName"
                     type="text"
                     required
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
-                    style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
+                    className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent transition-all"
+                    style={{
+                      backgroundColor: '#ffffff',
+                      border: '2px solid #000000',
+                      color: '#000000',
+                      '--tw-ring-color': '#5e17eb'
+                    } as any}
                     placeholder="First name"
                   />
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
+                  <label className="block text-sm font-semibold mb-2" style={{ color: '#000000' }}>
                     Last Name
                   </label>
                   <input
-                    id="lastName"
                     name="lastName"
                     type="text"
                     required
                     value={formData.lastName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
-                    style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
+                    className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent transition-all"
+                    style={{
+                      backgroundColor: '#ffffff',
+                      border: '2px solid #000000',
+                      color: '#000000',
+                      '--tw-ring-color': '#5e17eb'
+                    } as any}
                     placeholder="Last name"
                   />
                 </div>
               </div>
 
+              {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
+                <label className="block text-sm font-semibold mb-2" style={{ color: '#000000' }}>
                   Email Address
                 </label>
                 <input
-                  id="email"
                   name="email"
                   type="email"
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
-                  style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
+                  className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent transition-all"
+                  style={{
+                    backgroundColor: '#ffffff',
+                    border: '2px solid #5e17eb',
+                    color: '#000000',
+                    '--tw-ring-color': '#5e17eb'
+                  } as any}
                   placeholder="Enter your email"
                 />
               </div>
 
+              {/* Phone */}
               <div>
-                <label htmlFor="phone" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
-                  Phone Number <span style={{ color: '#666' }} className="font-normal">(Optional)</span>
+                <label className="block text-sm font-semibold mb-2" style={{ color: '#000000' }}>
+                  Phone Number <span className="font-normal" style={{ color: '#000000' }}>(Optional)</span>
                 </label>
                 <input
-                  id="phone"
                   name="phone"
                   type="tel"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
-                  style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
+                  className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent transition-all"
+                  style={{
+                    backgroundColor: '#ffffff',
+                    border: '2px solid #5e17eb',
+                    color: '#000000',
+                    '--tw-ring-color': '#5e17eb'
+                  } as any}
                   placeholder="Enter your phone number"
                 />
               </div>
 
+              {/* Password */}
               <div>
-                <label htmlFor="password" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
+                <label className="block text-sm font-semibold mb-2" style={{ color: '#000000' }}>
                   Password
                 </label>
                 <input
-                  id="password"
                   name="password"
                   type="password"
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
-                  style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
+                  className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent transition-all"
+                  style={{
+                    backgroundColor: '#ffffff',
+                    border: '2px solid #5e17eb',
+                    color: '#000000',
+                    '--tw-ring-color': '#5e17eb'
+                  } as any}
                   placeholder="Create a password"
                 />
               </div>
 
+              {/* Confirm Password */}
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
+                <label className="block text-sm font-semibold mb-2" style={{ color: '#000000' }}>
                   Confirm Password
                 </label>
                 <input
-                  id="confirmPassword"
                   name="confirmPassword"
                   type="password"
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
-                  style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
+                  className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent transition-all"
+                  style={{
+                    backgroundColor: '#ffffff',
+                    border: '2px solid #5e17eb',
+                    color: '#000000',
+                    '--tw-ring-color': '#5e17eb'
+                  } as any}
                   placeholder="Confirm your password"
                 />
               </div>
 
+              {/* Referral Code */}
               <div>
-                <label htmlFor="referralCode" className="block text-sm font-semibold mb-2" style={{ color: '#181c31' }}>
-                  Referral Code <span style={{ color: '#666' }} className="font-normal">(Optional)</span>
+                <label className="block text-sm font-semibold mb-2" style={{ color: '#000000' }}>
+                  Referral Code <span className="font-normal" style={{ color: '#000000' }}>(Optional)</span>
                 </label>
                 <input
-                  id="referralCode"
                   name="referralCode"
                   type="text"
                   value={formData.referralCode}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent bg-white"
-                  style={{ borderColor: 'rgba(58, 142, 190, 0.3)', color: '#181c31', '--tw-ring-color': '#3a8ebe' } as any}
+                  className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent transition-all"
+                  style={{
+                    backgroundColor: '#ffffff',
+                    border: '2px solid #5e17eb',
+                    color: '#000000',
+                    '--tw-ring-color': '#5e17eb'
+                  } as any}
                   placeholder="Enter referral code"
                 />
               </div>
 
+              {/* Error Message */}
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
+                <div className="px-4 py-3 rounded-xl text-sm font-medium border-2" style={{ backgroundColor: '#ffffff', border: '2px solid #ff4444', color: '#ff4444' }}>
                   {error}
                 </div>
               )}
 
+              {/* Success Message */}
               {success && (
-                <div className="bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-lg text-sm">
+                <div className="px-4 py-3 rounded-xl text-sm font-medium border-2" style={{ backgroundColor: '#ffffff', border: '2px solid #4caf50', color: '#4caf50' }}>
                   {success}
                 </div>
               )}
 
+              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 px-4 font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', color: '#f5f5f5' }}
+                className="w-full py-3 px-4 font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
+                style={{ backgroundColor: '#5e17eb', color: '#ffffff' }}
               >
                 {loading ? (
                   <div className="flex items-center justify-center">
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                    {loading ? 'Creating Account...' : 'Sending Verification Email...'}
+                    Creating Account...
                   </div>
                 ) : (
                   'Create Account'
                 )}
               </button>
 
-              {/* Special Roles Section - Hidden by default */}
+              {/* Special Roles Section */}
               {showSpecialRoles && (
-                <div className="mt-6 p-4 rounded-lg border-2 border-dashed" style={{ borderColor: '#3a8ebe', backgroundColor: 'rgba(58, 142, 190, 0.05)' }}>
+                <div className="mt-6 p-4 rounded-2xl border-2 border-dashed" style={{ borderColor: '#5e17eb', backgroundColor: '#ffffff' }}>
                   <div className="text-center mb-4">
-                    <h3 className="text-lg font-semibold" style={{ color: '#181c31' }}>Special Registration</h3>
-                    <p className="text-sm" style={{ color: '#666' }}>Register as mentor or employee</p>
+                    <h3 className="text-lg font-semibold" style={{ color: '#000000' }}>Special Registration</h3>
+                    <p className="text-sm" style={{ color: '#000000' }}>Register as mentor or employee</p>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <Link
                       href="/auth/register?role=mentor"
-                      className="block text-center px-4 py-3 rounded-lg border-2 transition-all duration-200 hover:shadow-md"
-                      style={{ borderColor: '#3a8ebe', color: '#3a8ebe' }}
+                      className="block text-center px-4 py-3 rounded-xl border-2 transition-all duration-200 hover:shadow-md"
+                      style={{ borderColor: '#5e17eb', color: '#5e17eb' }}
                     >
                       <div className="font-semibold">Mentor Registration</div>
                       <div className="text-xs opacity-75">For industry experts</div>
                     </Link>
                     <Link
                       href="/auth/register?role=employee"
-                      className="block text-center px-4 py-3 rounded-lg border-2 transition-all duration-200 hover:shadow-md"
-                      style={{ borderColor: '#181c31', color: '#181c31' }}
+                      className="block text-center px-4 py-3 rounded-xl border-2 transition-all duration-200 hover:shadow-md"
+                      style={{ borderColor: '#000000', color: '#000000' }}
                     >
                       <div className="font-semibold">Employee Registration</div>
                       <div className="text-xs opacity-75">For company staff</div>
                     </Link>
                   </div>
-                  <div className="text-center mt-3">
-                    <button
-                      onClick={() => setShowSpecialRoles(false)}
-                      className="text-xs underline"
-                      style={{ color: '#666' }}
-                    >
-                      Hide special access
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowSpecialRoles(false)}
+                    className="text-xs underline w-full mt-3"
+                    style={{ color: '#000000' }}
+                  >
+                    Hide special access
+                  </button>
                 </div>
               )}
 
+              {/* Terms and Privacy */}
               <div className="text-center">
-                <p className="text-sm" style={{ color: '#666' }}>
+                <p className="text-xs" style={{ color: '#000000' }}>
                   By creating an account, you agree to our{' '}
-                  <Link href="/terms" className="hover:underline" style={{ color: '#3a8ebe' }}>
+                  <Link href="/terms" className="hover:underline" style={{ color: '#5e17eb' }}>
                     Terms of Service
                   </Link>{' '}
                   and{' '}
-                  <Link href="/privacy" className="hover:underline" style={{ color: '#3a8ebe' }}>
+                  <Link href="/privacy" className="hover:underline" style={{ color: '#5e17eb' }}>
                     Privacy Policy
                   </Link>
                 </p>
                 {!showSpecialRoles && (
-                  <p className="text-xs mt-2" style={{ color: '#999' }}>
-                    Press Ctrl+Shift+R for special access
+                  <p className="text-xs mt-3" style={{ color: '#000000' }}>
+                    Press Ctrl+Shift+M for special access
                   </p>
                 )}
               </div>
@@ -399,13 +446,13 @@ function RegisterContent() {
 
 function LoadingFallback() {
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center" style={{ fontFamily: 'Arial, sans-serif' }}>
+    <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#ffffff', fontFamily: 'Arial, sans-serif' }}>
       <div className="text-center">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
-          <span className="text-2xl font-bold" style={{ color: '#f5f5f5' }}>SP</span>
+        <div className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center shadow-lg" style={{ backgroundColor: '#5e17eb' }}>
+          <span className="text-2xl font-bold" style={{ color: '#ffffff' }}>SP</span>
         </div>
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 mx-auto mb-4" style={{ borderColor: '#3a8ebe' }}></div>
-        <p style={{ color: '#666' }}>Loading registration form...</p>
+        <div className="animate-spin rounded-full h-8 w-8 border-4 mx-auto mb-4" style={{ borderColor: '#5e17eb', borderTopColor: '#ffffff' }}></div>
+        <p style={{ color: '#000000' }}>Loading registration form...</p>
       </div>
     </div>
   );

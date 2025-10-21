@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { Search, Filter, Star, Users, Clock, CheckCircle, Play, Calendar } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 export default function LandingPageCourses() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -13,6 +14,18 @@ export default function LandingPageCourses() {
     rating: [],
     level: []
   });
+
+  // Refs for scroll animations
+  const filterRef = useRef(null);
+  const categoriesRef = useRef(null);
+  const featuresRef = useRef(null);
+  const coursesRef = useRef(null);
+
+  // Check if sections are in view
+  const isFilterInView = useInView(filterRef, { once: true, margin: "-100px" });
+  const isCategoriesInView = useInView(categoriesRef, { once: true, margin: "-100px" });
+  const isFeaturesInView = useInView(featuresRef, { once: true, margin: "-100px" });
+  const isCoursesInView = useInView(coursesRef, { once: true, margin: "-100px" });
 
   const categories = [
     {
@@ -156,36 +169,74 @@ export default function LandingPageCourses() {
   ];
 
   return (
-    <div className="min-h-screen bg-white" style={{ fontFamily: 'Arial, sans-serif' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#ffffff', fontFamily: 'Arial, sans-serif' }}>
       
       {/* Hero Section */}
-      <section className="relative py-24 px-6 overflow-visible bg-white">
-        {/* Animated background elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+      <section className="relative py-24 px-6 overflow-visible" style={{ backgroundColor: '#ffffff' }}>
+        {/* Illustration Elements */}
+        <div className="absolute top-10 right-10 w-32 h-32 opacity-10 pointer-events-none">
+          <svg viewBox="0 0 100 100" className="w-full h-full" style={{ fill: '#5e17eb' }}>
+            <circle cx="20" cy="20" r="8"/>
+            <circle cx="50" cy="15" r="6"/>
+            <circle cx="80" cy="25" r="10"/>
+            <circle cx="30" cy="50" r="7"/>
+            <circle cx="70" cy="45" r="9"/>
+            <circle cx="15" cy="80" r="6"/>
+            <circle cx="85" cy="75" r="8"/>
+          </svg>
+        </div>
+        <div className="absolute bottom-10 left-10 w-40 h-40 opacity-10 pointer-events-none">
+          <svg viewBox="0 0 100 100" className="w-full h-full" style={{ fill: '#5e17eb' }}>
+            <polygon points="50,10 90,90 10,90"/>
+            <polygon points="30,30 70,30 50,60"/>
+          </svg>
+        </div>
         
         <div className="relative z-10 max-w-7xl mx-auto text-center">
           {/* Tag */}
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-black mb-8">
+          <motion.div 
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 mb-8"
+            style={{ backgroundColor: '#ffffff', borderColor: '#000000' }}
+          >
             <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
             <span className="text-sm font-bold uppercase tracking-wide" style={{ color: '#5e17eb' }}>
               Explore Our Courses
             </span>
-          </div>
+          </motion.div>
 
           {/* Main Heading */}
-          <h1 className="text-5xl lg:text-6xl font-black leading-tight mb-6" style={{ color: '#000000' }}>
+          <motion.h1 
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-5xl lg:text-6xl font-black leading-tight mb-6" 
+            style={{ color: '#000000' }}
+          >
             <span className="block">Master In-Demand Skills</span>
             <span className="block" style={{ color: '#5e17eb' }}>with Expert Mentors</span>
-          </h1>
+          </motion.h1>
 
           {/* Description */}
-          <p className="text-xl leading-relaxed max-w-4xl mx-auto mb-12" style={{ color: '#000000' }}>
+          <motion.p 
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+            className="text-xl leading-relaxed max-w-4xl mx-auto mb-12" 
+            style={{ color: '#000000' }}
+          >
             Choose from 500+ carefully curated courses designed to help you build job-ready skills. Whether you prefer live interactive sessions or self-paced learning, we have the perfect course for you.
-          </p>
+          </motion.p>
 
           {/* Search Bar */}
-          <div className="max-w-2xl mx-auto">
+          <motion.div 
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+            className="max-w-2xl mx-auto"
+          >
             <div className="relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{ color: '#5e17eb' }} />
               <input
@@ -193,22 +244,36 @@ export default function LandingPageCourses() {
                 placeholder="Search for courses..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 text-lg border-2 border-black rounded-xl focus:outline-none focus:border-purple-600"
-                style={{ color: '#000000' }}
+                className="w-full pl-12 pr-4 py-4 text-lg border-2 rounded-xl focus:outline-none"
+                style={{ backgroundColor: '#ffffff', borderColor: '#000000', color: '#000000', '--tw-ring-color': '#5e17eb' } as any}
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Filter Section */}
-      <section className="py-12 px-6 bg-gray-50">
+      <section ref={filterRef} className="py-12 px-6" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-black mb-8 text-center" style={{ color: '#000000' }}>Filter Your Learning Path</h2>
+          <motion.h2 
+            initial={{ y: 50, opacity: 0 }}
+            animate={isFilterInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-3xl font-black mb-8 text-center" 
+            style={{ color: '#000000' }}
+          >
+            Filter Your Learning Path
+          </motion.h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Course Type Filter */}
-            <div className="bg-white rounded-2xl p-6 border-2 border-black">
+            <motion.div 
+              initial={{ y: 50, opacity: 0 }}
+              animate={isFilterInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+              className="rounded-2xl p-6 border-2"
+              style={{ backgroundColor: '#ffffff', borderColor: '#000000' }}
+            >
               <h3 className="text-xl font-black mb-4" style={{ color: '#5e17eb' }}>Course Type</h3>
               <div className="space-y-3">
                 {['Live Classes', 'Recorded Sessions', 'Hybrid (Live + Recorded)'].map((type) => (
@@ -218,10 +283,16 @@ export default function LandingPageCourses() {
                   </label>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Categories Filter */}
-            <div className="bg-white rounded-2xl p-6 border-2 border-black">
+            <motion.div 
+              initial={{ y: 50, opacity: 0 }}
+              animate={isFilterInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              className="rounded-2xl p-6 border-2"
+              style={{ backgroundColor: '#ffffff', borderColor: '#000000' }}
+            >
               <h3 className="text-xl font-black mb-4" style={{ color: '#5e17eb' }}>Categories</h3>
               <div className="space-y-3">
                 {['Web Development', 'Data Science & AI', 'Digital Marketing', 'Design & Creative', 'Business & Management', 'Programming Languages'].map((category) => (
@@ -231,10 +302,16 @@ export default function LandingPageCourses() {
                   </label>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Price & Level Filter */}
-            <div className="bg-white rounded-2xl p-6 border-2 border-black">
+            <motion.div 
+              initial={{ y: 50, opacity: 0 }}
+              animate={isFilterInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              className="rounded-2xl p-6 border-2"
+              style={{ backgroundColor: '#ffffff', borderColor: '#000000' }}
+            >
               <h3 className="text-xl font-black mb-4" style={{ color: '#5e17eb' }}>Price & Level</h3>
               <div className="space-y-4">
                 <div>
@@ -260,21 +337,57 @@ export default function LandingPageCourses() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Popular Categories */}
-      <section className="py-20 px-6 bg-white">
+      <section ref={categoriesRef} className="relative py-20 px-6" style={{ backgroundColor: '#ffffff' }}>
+        {/* Background Illustrations */}
+        <div className="absolute top-20 right-20 w-24 h-24 opacity-5 pointer-events-none">
+          <svg viewBox="0 0 100 100" className="w-full h-full" style={{ fill: '#5e17eb' }}>
+            <rect x="10" y="10" width="20" height="20" rx="5"/>
+            <rect x="40" y="10" width="20" height="20" rx="5"/>
+            <rect x="70" y="10" width="20" height="20" rx="5"/>
+            <rect x="10" y="40" width="20" height="20" rx="5"/>
+            <rect x="40" y="40" width="20" height="20" rx="5"/>
+            <rect x="70" y="40" width="20" height="20" rx="5"/>
+            <rect x="10" y="70" width="20" height="20" rx="5"/>
+            <rect x="40" y="70" width="20" height="20" rx="5"/>
+            <rect x="70" y="70" width="20" height="20" rx="5"/>
+          </svg>
+        </div>
+        <div className="absolute bottom-20 left-20 w-28 h-28 opacity-5 pointer-events-none">
+          <svg viewBox="0 0 100 100" className="w-full h-full" style={{ fill: '#5e17eb' }}>
+            <path d="M50 10 L90 50 L50 90 L10 50 Z"/>
+            <path d="M50 25 L75 50 L50 75 L25 50 Z"/>
+          </svg>
+        </div>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Popular Categories</h2>
+            <motion.h2 
+              initial={{ y: 50, opacity: 0 }}
+              animate={isCategoriesInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-4xl font-black mb-4" 
+              style={{ color: '#000000' }}
+            >
+              Popular Categories
+            </motion.h2>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8">
             {categories.map((category, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-8 border-2 border-black">
+              <motion.div 
+                key={idx} 
+                initial={{ y: 50, opacity: 0 }}
+                animate={isCategoriesInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.2, ease: "easeOut" }}
+                whileHover={{ scale: 1.02, y: -5 }}
+                className="rounded-2xl p-8 border-2"
+                style={{ backgroundColor: '#ffffff', borderColor: '#000000' }}
+              >
                 <h3 className="text-2xl font-black mb-4" style={{ color: '#5e17eb' }}>{category.title}</h3>
                 <p className="mb-6 leading-relaxed" style={{ color: '#000000' }}>{category.description}</p>
                 <div className="space-y-2">
@@ -286,7 +399,7 @@ export default function LandingPageCourses() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

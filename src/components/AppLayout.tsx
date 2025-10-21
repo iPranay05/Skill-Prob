@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Navigation from './Navigation';
+import Navbar from './Navbar';
 import { SocketProvider } from '../contexts/SocketContext';
 import { RealTimeNotifications } from './RealTimeNotifications';
 
@@ -32,7 +32,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <SocketProvider authToken={authToken || undefined}>
       <div className="min-h-screen bg-gray-50">
-        <Navigation />
+        <Navbar />
         <main>{children}</main>
         <RealTimeNotifications />
       </div>

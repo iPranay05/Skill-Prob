@@ -2,8 +2,20 @@
 
 import Link from 'next/link';
 import { CheckCircle, Play, BookOpen, Award, Users, Clock, Star, Download, Smartphone, Globe, Shield, Gift } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 export default function ForStudents() {
+  // Refs for scroll animations
+  const benefitsRef = useRef(null);
+  const stepsRef = useRef(null);
+  const successRef = useRef(null);
+
+  // Check if sections are in view
+  const isBenefitsInView = useInView(benefitsRef, { once: true, margin: "-100px" });
+  const isStepsInView = useInView(stepsRef, { once: true, margin: "-100px" });
+  const isSuccessInView = useInView(successRef, { once: true, margin: "-100px" });
+
   const features = [
     {
       title: 'Unlimited Course Access',
@@ -239,20 +251,35 @@ export default function ForStudents() {
       </section>
 
       {/* Student Benefits */}
-      <section className="py-20 px-6 bg-gray-50">
+      <section ref={benefitsRef} className="py-20 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Student Benefits</h2>
+            <motion.h2 
+              initial={{ y: 50, opacity: 0 }}
+              animate={isBenefitsInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-4xl font-black mb-4" 
+              style={{ color: '#000000' }}
+            >
+              Student Benefits
+            </motion.h2>
           </div>
           
           <div className="grid md:grid-cols-2 gap-6">
             {benefits.map((benefit, idx) => (
-              <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-xl border-2 border-gray-100">
+              <motion.div 
+                key={idx} 
+                initial={{ y: 50, opacity: 0 }}
+                animate={isBenefitsInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
+                whileHover={{ scale: 1.02, y: -3 }}
+                className="flex items-start gap-4 p-6 bg-white rounded-xl border-2 border-gray-100"
+              >
                 <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: '#5e17eb' }}>
                   <CheckCircle className="w-4 h-4" style={{ color: '#ffffff' }} />
                 </div>
                 <p className="font-semibold" style={{ color: '#000000' }}>{benefit}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

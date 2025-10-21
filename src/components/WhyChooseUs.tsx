@@ -2,6 +2,7 @@
 
 import { Video, Award, Briefcase, Users, TrendingUp, Zap, ArrowRight, Sparkles, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function WhyChooseUs() {
   const [activeFeature, setActiveFeature] = useState<number | null>(null);
@@ -61,44 +62,77 @@ export default function WhyChooseUs() {
         {/* Header Section */}
         <div className="text-center mb-20">
           {/* Tag */}
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-purple-200 mb-8">
+          <motion.div 
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-purple-200 mb-8"
+          >
             <Sparkles className="w-5 h-5 text-purple-600" />
             <span className="text-sm font-bold text-purple-600 uppercase tracking-wide">
               Why Choose Skill Probe
             </span>
-          </div>
+          </motion.div>
 
           {/* Main Heading */}
-          <h1 className="text-5xl lg:text-6xl font-black leading-tight text-gray-900 mb-6">
+          <motion.h1 
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-5xl lg:text-6xl font-black leading-tight text-gray-900 mb-6"
+          >
             <span className="block">Your Complete Learning &</span>
             <span className="block text-purple-600">Career Growth Platform</span>
-          </h1>
+          </motion.h1>
 
           {/* Subheading */}
-          <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          <motion.p 
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+            className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto"
+          >
             Transform your career with live classes, industry certifications, real internships, and expert mentorship - all in one platform.
-          </p>
+          </motion.p>
         </div>
 
         {/* Stats Section */}
         <div className="grid md:grid-cols-3 gap-8 mb-20">
-          <div className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100 hover:border-purple-300 transition-all duration-300">
+          <motion.div 
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100 hover:border-purple-300 transition-all duration-300"
+          >
             <div className="text-4xl font-black text-purple-600 mb-2">10K+</div>
             <p className="text-gray-900 font-bold text-lg">Active Learners</p>
             <p className="text-gray-600 text-sm">Worldwide community</p>
-          </div>
+          </motion.div>
           
-          <div className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100 hover:border-purple-300 transition-all duration-300">
+          <motion.div 
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100 hover:border-purple-300 transition-all duration-300"
+          >
             <div className="text-4xl font-black text-purple-600 mb-2">1000+</div>
             <p className="text-gray-900 font-bold text-lg">Successful Placements</p>
             <p className="text-gray-600 text-sm">Top companies hired</p>
-          </div>
+          </motion.div>
           
-          <div className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100 hover:border-purple-300 transition-all duration-300">
+          <motion.div 
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100 hover:border-purple-300 transition-all duration-300"
+          >
             <div className="text-4xl font-black text-purple-600 mb-2">95%</div>
             <p className="text-gray-900 font-bold text-lg">Success Rate</p>
             <p className="text-gray-600 text-sm">Industry leading</p>
-          </div>
+          </motion.div>
         </div>
 
         {/* Features Grid */}

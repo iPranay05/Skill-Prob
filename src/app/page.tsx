@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import { motion } from 'framer-motion';
 // Dynamic imports for client components to prevent hydration errors
  const Navbar = dynamic(() => import('@/components/Navbar'), { ssr: false });
  const WhyChooseUs = dynamic(() => import('@/components/WhyChooseUs'), { ssr: false });
@@ -30,49 +31,97 @@ export default function HomePage() {
               <div className="grid lg:grid-cols-2 gap-16 items-center">
                 
                 {/* Left Side */}
-                <div className="space-y-6 md:space-y-8 max-w-2xl">
+                <motion.div 
+                  initial={{ x: -100, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="space-y-6 md:space-y-8 max-w-2xl"
+                >
                   
                   {/* Main Heading */}
-                  <h1 className="text-5xl font-black leading-tight text-gray-900">
+                  <motion.h1 
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                    className="text-5xl font-black leading-tight text-gray-900"
+                  >
                     <span className="block">Transform Your</span>
                     <span className="block">Skills, Transform</span>
                     <span className="block">Your Future</span>
-                  </h1>
+                  </motion.h1>
 
                   {/* Description */}
-                  <p className="text-lg md:text-xl lg:text-xl text-gray-600 leading-relaxed max-w-xl font-medium">
+                  <motion.p 
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+                    className="text-lg md:text-xl lg:text-xl text-gray-600 leading-relaxed max-w-xl font-medium"
+                  >
                     Master skills through live classes and expert mentorship. Get certified and land your dream job.
-                  </p>
+                  </motion.p>
 
                   {/* CTA Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4">
-                    <button className="px-6 md:px-8 py-3 md:py-4 bg-purple-600 text-white font-semibold text-sm md:text-base rounded-xl hover:bg-purple-700 transition-all duration-300 w-full sm:w-auto">
+                  <motion.div 
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+                    className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4"
+                  >
+                    <motion.button 
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="px-6 md:px-8 py-3 md:py-4 bg-purple-600 text-white font-semibold text-sm md:text-base rounded-xl hover:bg-purple-700 transition-all duration-300 w-full sm:w-auto"
+                    >
                       Start Learning Free
-                    </button>
-                    <button className="px-6 md:px-8 py-3 md:py-4 border border-gray-300 text-gray-700 font-semibold text-sm md:text-base rounded-xl hover:bg-gray-50 transition-all duration-300 w-full sm:w-auto">
+                    </motion.button>
+                    <motion.button 
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="px-6 md:px-8 py-3 md:py-4 border border-gray-300 text-gray-700 font-semibold text-sm md:text-base rounded-xl hover:bg-gray-50 transition-all duration-300 w-full sm:w-auto"
+                    >
                       Explore Courses
-                    </button>
-                    <button className="text-purple-600 font-semibold text-sm md:text-base hover:text-purple-700 transition-all duration-300 py-3 md:py-4 text-center sm:text-left">
+                    </motion.button>
+                    <motion.button 
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="text-purple-600 font-semibold text-sm md:text-base hover:text-purple-700 transition-all duration-300 py-3 md:py-4 text-center sm:text-left"
+                    >
                       Become a Mentor
-                    </button>
-                  </div>
-                </div>
+                    </motion.button>
+                  </motion.div>
+                </motion.div>
 
                 {/* Right Side - Hero Image with Statistics */}
-                <div className="relative h-96 lg:h-full flex items-center justify-center">
+                <motion.div 
+                  initial={{ x: 100, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+                  className="relative h-96 lg:h-full flex items-center justify-center"
+                >
                   <div className="relative w-full h-96">
                     
                     {/* Hero Image */}
-                    <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl">
+                    <motion.div 
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+                      className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl"
+                    >
                       <img 
                         src="/images/girl working on laptop.jpeg" 
                         alt="Girl working on laptop" 
                         className="w-full h-full object-cover"
                       />
-                    </div>
+                    </motion.div>
 
                     {/* 50K+ Active Learners - Bottom Left Corner */}
-                    <div className="absolute bottom-4 left-4 bg-white rounded-2xl px-5 py-4 shadow-xl border border-gray-100">
+                    <motion.div 
+                      initial={{ y: 50, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+                      whileHover={{ scale: 1.05, y: -5 }}
+                      className="absolute bottom-4 left-4 bg-white rounded-2xl px-5 py-4 shadow-xl border border-gray-100"
+                    >
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
                           <svg className="w-7 h-7 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
@@ -84,10 +133,16 @@ export default function HomePage() {
                           <div className="text-sm font-semibold text-gray-600">Active Learners</div>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
 
                     {/* 10K+ Certifications - Top Right Corner */}
-                    <div className="absolute top-4 right-4 bg-white rounded-2xl px-5 py-4 shadow-xl border border-gray-100">
+                    <motion.div 
+                      initial={{ y: -50, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
+                      whileHover={{ scale: 1.05, y: -5 }}
+                      className="absolute top-4 right-4 bg-white rounded-2xl px-5 py-4 shadow-xl border border-gray-100"
+                    >
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
                           <svg className="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
@@ -99,9 +154,9 @@ export default function HomePage() {
                           <div className="text-sm font-semibold text-gray-600">Certifications</div>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
           </div>

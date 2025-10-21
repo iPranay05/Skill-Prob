@@ -98,7 +98,7 @@ function LoginContent() {
     <div className="min-h-screen bg-white" style={{ fontFamily: 'Arial, sans-serif' }}>
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
         {/* Left Side - Branding */}
-        <div className="hidden lg:flex lg:flex-col lg:justify-center lg:px-12" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
+        <div className="hidden lg:flex lg:flex-col lg:justify-center lg:px-12" style={{ background: 'linear-gradient(135deg, #5e17eb 0%,rgb(119, 95, 95) 100%)' }}>
           <div className="max-w-md mx-auto text-center">
             <div className="mb-8">
               <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#f5f5f5' }}>
@@ -155,7 +155,7 @@ function LoginContent() {
           <div className="max-w-md mx-auto w-full">
             {/* Mobile Logo */}
             <div className="lg:hidden text-center mb-8">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #5e17eb 0%, #ffffff 100%)' }}>
                 <span className="text-2xl font-bold" style={{ color: '#f5f5f5' }}>SP</span>
               </div>
               <h1 className="text-2xl font-bold" style={{ color: '#181c31' }}>SkillProbe</h1>
@@ -236,7 +236,7 @@ function LoginContent() {
                 type="submit"
                 disabled={loading}
                 className="w-full py-3 px-4 font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)', color: '#f5f5f5' }}
+                style={{ background: 'linear-gradient(135deg, #5e17eb 0%, #ffffff 100%)', color: '#f5f5f5' }}
               >
                 {loading ? (
                   <div className="flex items-center justify-center">
@@ -314,7 +314,7 @@ function LoadingFallback() {
   return (
     <div className="min-h-screen bg-white flex items-center justify-center" style={{ fontFamily: 'Arial, sans-serif' }}>
       <div className="text-center">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #181c31 0%, #3a8ebe 100%)' }}>
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #5e17eb 0%, #ffffff 100%)' }}>
           <span className="text-2xl font-bold" style={{ color: '#f5f5f5' }}>SP</span>
         </div>
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 mx-auto mb-4" style={{ borderColor: '#3a8ebe' }}></div>

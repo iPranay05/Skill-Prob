@@ -2,8 +2,20 @@
 
 import Link from 'next/link';
 import { CheckCircle } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 export default function AboutUs() {
+  // Refs for scroll animations
+  const valuesRef = useRef(null);
+  const advantagesRef = useRef(null);
+  const differentiatorRef = useRef(null);
+
+  // Check if sections are in view
+  const isValuesInView = useInView(valuesRef, { once: true, margin: "-100px" });
+  const isAdvantagesInView = useInView(advantagesRef, { once: true, margin: "-100px" });
+  const isDifferentiatorInView = useInView(differentiatorRef, { once: true, margin: "-100px" });
+
   const stats = [
     { number: '50,000+', label: 'Active Learners' },
     { number: '500+', label: 'Skill Development Courses' },
@@ -75,21 +87,37 @@ export default function AboutUs() {
         
         <div className="relative z-10 max-w-7xl mx-auto text-center">
           {/* Tag */}
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-black mb-8">
+          <motion.div 
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-black mb-8"
+          >
             <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
             <span className="text-sm font-bold uppercase tracking-wide" style={{ color: '#5e17eb' }}>
               About Skill Probe
             </span>
-          </div>
+          </motion.div>
 
           {/* Main Heading */}
-          <h1 className="text-5xl lg:text-6xl font-black leading-tight mb-6" style={{ color: '#000000' }}>
+          <motion.h1 
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-5xl lg:text-6xl font-black leading-tight mb-6" 
+            style={{ color: '#000000' }}
+          >
             <span className="block">Empowering Learners,</span>
             <span className="block" style={{ color: '#5e17eb' }}>Building Careers</span>
-          </h1>
+          </motion.h1>
 
           {/* Our Mission */}
-          <div className="max-w-4xl mx-auto">
+          <motion.div 
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+            className="max-w-4xl mx-auto"
+          >
             <h2 className="text-3xl font-black mb-6" style={{ color: '#000000' }}>Our Mission</h2>
             <p className="text-lg leading-relaxed mb-6" style={{ color: '#000000' }}>
               Skill Probe is India's leading skill training and certification platform dedicated to bridging the gap between education and employment. We believe that quality education should be accessible, affordable, and outcome-driven.
@@ -97,7 +125,7 @@ export default function AboutUs() {
             <p className="text-lg leading-relaxed" style={{ color: '#000000' }}>
               Founded with a vision to democratize skill development, we combine the best of live interactive learning with flexible recorded content, ensuring every learner can master in-demand skills at their own pace.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -110,10 +138,17 @@ export default function AboutUs() {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {stats.map((stat, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100">
+              <motion.div 
+                key={idx} 
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100"
+              >
                 <div className="text-4xl font-black mb-2" style={{ color: '#5e17eb' }}>{stat.number}</div>
                 <p className="font-bold" style={{ color: '#000000' }}>{stat.label}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -138,18 +173,33 @@ export default function AboutUs() {
       </section>
 
       {/* Our Values */}
-      <section className="py-20 px-6 bg-gray-50">
+      <section ref={valuesRef} className="py-20 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Our Values</h2>
+            <motion.h2 
+              initial={{ y: 50, opacity: 0 }}
+              animate={isValuesInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-4xl font-black mb-4" 
+              style={{ color: '#000000' }}
+            >
+              Our Values
+            </motion.h2>
           </div>
           
           <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-8 max-w-4xl mx-auto">
             {values.map((value, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-8 border-2 border-black">
+              <motion.div 
+                key={idx} 
+                initial={{ x: idx % 2 === 0 ? -50 : 50, opacity: 0 }}
+                animate={isValuesInView ? { x: 0, opacity: 1 } : { x: idx % 2 === 0 ? -50 : 50, opacity: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.2, ease: "easeOut" }}
+                whileHover={{ scale: 1.02, y: -5 }}
+                className="bg-white rounded-2xl p-8 border-2 border-black"
+              >
                 <h3 className="text-xl font-black mb-4" style={{ color: '#5e17eb' }}>{value.title}</h3>
                 <p className="leading-relaxed" style={{ color: '#000000' }}>{value.description}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
