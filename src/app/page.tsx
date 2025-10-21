@@ -1,50 +1,24 @@
 'use client';
-
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import WhyChooseUs from '@/components/WhyChooseUs';
+import dynamic from 'next/dynamic';
+// Dynamic imports for client components to prevent hydration errors
+ const Navbar = dynamic(() => import('@/components/Navbar'), { ssr: false });
+ const WhyChooseUs = dynamic(() => import('@/components/WhyChooseUs'), { ssr: false });
 
 export default function HomePage() {
   return (
     <>
-      <style jsx>{`
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-      `}</style>
       
-      <div className="min-h-screen bg-white text-black overflow-hidden font-['Arial',sans-serif]">
+      <div className="min-h-screen bg-white text-black overflow-hidden">
         <Navbar />
       
         {/* Hero Section */}
         <section 
           className="relative py-24 px-6 overflow-visible bg-white"
-          style={{
-            fontFamily: 'Arial, sans-serif',
-          }}
         >
           {/* Animated background elements */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20  pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20  pointer-events-none"></div>
           
           {/* Right Bottom Decoration */}
           <div className="absolute bottom-0 right-0 w-full h-1/2 pointer-events-none">
@@ -56,89 +30,75 @@ export default function HomePage() {
               <div className="grid lg:grid-cols-2 gap-16 items-center">
                 
                 {/* Left Side */}
-                <div className="space-y-8">
+                <div className="space-y-6 md:space-y-8 max-w-2xl">
                   
-                  {/* Tag */}
-                  <div className="inline-flex items-center gap-2 px-5 py-3 bg-white/40 backdrop-blur-lg rounded-full border-2 border-white/60">
-                    <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                    <span className="text-sm font-black" style={{ color: '#5e17eb' }}>
-                      COMPLETE CAREER PLATFORM
-                    </span>
-                  </div>
-
                   {/* Main Heading */}
-                  <h1 className="text-6xl lg:text-7xl font-black leading-tight text-gray-900">
+                  <h1 className="text-5xl font-black leading-tight text-gray-900">
                     <span className="block">Transform Your</span>
-                    <span className="block" style={{ color: '#5e17eb' }}>
-                      Skills & Future
-                    </span>
+                    <span className="block">Skills, Transform</span>
+                    <span className="block">Your Future</span>
                   </h1>
 
-                  {/* Features List */}
-                  <div className="space-y-3 pt-4">
-                    {[
-                      "500+ Skill Development Courses",
-                      "Live Classes with Industry Experts", 
-                      "Guaranteed Certification",
-                      "Exclusive Internship Opportunities"
-                    ].map((item, idx) => (
-                      <div key={idx} className="flex items-center gap-3">
-                        <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#5e17eb' }}>
-                          <div className="w-3 h-3 bg-white rounded-full"></div>
-                        </div>
-                        <span className="text-gray-900 font-black text-lg">{item}</span>
-                      </div>
-                    ))}
-                  </div>
+                  {/* Description */}
+                  <p className="text-lg md:text-xl lg:text-xl text-gray-600 leading-relaxed max-w-xl font-medium">
+                    Master skills through live classes and expert mentorship. Get certified and land your dream job.
+                  </p>
 
                   {/* CTA Buttons */}
-                  <div className="flex gap-4 pt-6">
-                    <button className="px-8 py-4 bg-black text-white font-black text-base rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                  <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4">
+                    <button className="px-6 md:px-8 py-3 md:py-4 bg-purple-600 text-white font-semibold text-sm md:text-base rounded-xl hover:bg-purple-700 transition-all duration-300 w-full sm:w-auto">
                       Start Learning Free
                     </button>
-                    <button className="px-8 py-4 border-2 border-black text-black font-black text-base rounded-xl hover:bg-black hover:text-white transition-all duration-300">
+                    <button className="px-6 md:px-8 py-3 md:py-4 border border-gray-300 text-gray-700 font-semibold text-sm md:text-base rounded-xl hover:bg-gray-50 transition-all duration-300 w-full sm:w-auto">
                       Explore Courses
                     </button>
-                    <button className="px-8 py-4 border-2 border-gray-600 text-gray-600 font-black text-base rounded-xl hover:bg-gray-600 hover:text-white transition-all duration-300">
+                    <button className="text-purple-600 font-semibold text-sm md:text-base hover:text-purple-700 transition-all duration-300 py-3 md:py-4 text-center sm:text-left">
                       Become a Mentor
                     </button>
                   </div>
                 </div>
 
-                {/* Right Side - Simple Visual */}
+                {/* Right Side - Hero Image with Statistics */}
                 <div className="relative h-96 lg:h-full flex items-center justify-center">
                   <div className="relative w-full h-96">
                     
-                    {/* Main Illustration Placeholder */}
-                    <div className="relative w-full h-full bg-white/20 backdrop-blur-lg rounded-3xl border-2 border-white/40 shadow-2xl flex items-center justify-center">
-                      <div className="text-center space-y-6">
-                        <div className="w-32 h-32 mx-auto bg-white/30 rounded-full flex items-center justify-center backdrop-blur-sm">
-                          <div className="w-16 h-16 bg-[#5e17eb] rounded-full flex items-center justify-center">
-                            <span className="text-white text-2xl font-black">SP</span>
-                          </div>
+                    {/* Hero Image */}
+                    <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl">
+                      <img 
+                        src="/images/girl working on laptop.jpeg" 
+                        alt="Girl working on laptop" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+
+                    {/* 50K+ Active Learners - Bottom Left Corner */}
+                    <div className="absolute bottom-4 left-4 bg-white rounded-2xl px-5 py-4 shadow-xl border border-gray-100">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                          <svg className="w-7 h-7 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                          </svg>
                         </div>
-                        <div className="space-y-2">
-                          <h3 className="text-2xl font-black text-gray-900">Skill Probe</h3>
-                          <p className="text-gray-700 font-bold">Learning Platform</p>
+                        <div>
+                          <div className="text-2xl font-black text-gray-900">50K+</div>
+                          <div className="text-sm font-semibold text-gray-600">Active Learners</div>
                         </div>
                       </div>
                     </div>
 
-                    {/* Floating Elements */}
-                    <div className="absolute top-8 right-8 w-16 h-16 bg-white/40 backdrop-blur-lg rounded-2xl border border-white/60 flex items-center justify-center shadow-lg">
-                      <span className="text-2xl">📚</span>
-                    </div>
-                    
-                    <div className="absolute bottom-8 left-8 w-16 h-16 bg-white/40 backdrop-blur-lg rounded-2xl border border-white/60 flex items-center justify-center shadow-lg">
-                      <span className="text-2xl">🎯</span>
-                    </div>
-
-                    <div className="absolute top-1/2 left-4 w-12 h-12 bg-white/40 backdrop-blur-lg rounded-xl border border-white/60 flex items-center justify-center shadow-lg">
-                      <span className="text-lg">💡</span>
-                    </div>
-
-                    <div className="absolute top-1/3 right-4 w-12 h-12 bg-white/40 backdrop-blur-lg rounded-xl border border-white/60 flex items-center justify-center shadow-lg">
-                      <span className="text-lg">🚀</span>
+                    {/* 10K+ Certifications - Top Right Corner */}
+                    <div className="absolute top-4 right-4 bg-white rounded-2xl px-5 py-4 shadow-xl border border-gray-100">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                          <svg className="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                          </svg>
+                        </div>
+                        <div>
+                          <div className="text-2xl font-black text-gray-900">10K+</div>
+                          <div className="text-sm font-semibold text-gray-600">Certifications</div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -152,13 +112,10 @@ export default function HomePage() {
         {/* Featured Categories Section */}
         <section 
           className="relative py-24 px-6 overflow-visible bg-gray-50"
-          style={{
-            fontFamily: 'Arial, sans-serif',
-          }}
         >
           {/* Animated background elements */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20  pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20  pointer-events-none"></div>
 
           <div className="relative z-10 max-w-7xl mx-auto">
             <div className="mb-28">
@@ -166,8 +123,8 @@ export default function HomePage() {
                 
                 {/* Tag */}
                 <div className="inline-flex items-center gap-2 px-5 py-3 bg-white/40 backdrop-blur-lg rounded-full border-2 border-white/60">
-                  <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span className="text-sm font-black" style={{ color: '#5e17eb' }}>
+                  <div className="w-4 h-4 rounded-full bg-purple-600"></div>
+                  <span className="text-sm font-black text-purple-600">
                     FEATURED CATEGORIES
                   </span>
                 </div>
@@ -175,7 +132,7 @@ export default function HomePage() {
                 {/* Main Heading */}
                 <h2 className="text-6xl lg:text-7xl font-black leading-tight text-gray-900">
                   <span className="block">Explore</span>
-                  <span className="block" style={{ color: '#5e17eb' }}>
+                  <span className="block text-purple-600">
                     In-Demand Skills
                   </span>
                 </h2>
@@ -209,7 +166,7 @@ export default function HomePage() {
                   style: "compact", // Compact card
                   icon: (
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
                     </svg>
                   )
                 },
@@ -245,7 +202,7 @@ export default function HomePage() {
                   style: "elevated", // Elevated card
                   icon: (
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/>
+                      <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/>
                     </svg>
                   )
                 },
@@ -392,13 +349,10 @@ export default function HomePage() {
         {/* How It Works Section */}
         <section 
           className="relative py-24 px-6 overflow-visible bg-gray-50"
-          style={{
-            fontFamily: 'Arial, sans-serif',
-          }}
         >
           {/* Animated background elements */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20  pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20  pointer-events-none"></div>
 
           <div className="relative z-10 max-w-7xl mx-auto">
             <div className="mb-28">
@@ -406,8 +360,8 @@ export default function HomePage() {
                 
                 {/* Tag */}
                 <div className="inline-flex items-center gap-2 px-5 py-3 bg-white/40 backdrop-blur-lg rounded-full border-2 border-white/60">
-                  <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span className="text-sm font-black" style={{ color: '#5e17eb' }}>
+                  <div className="w-4 h-4 rounded-full bg-purple-600"></div>
+                  <span className="text-sm font-black text-purple-600">
                     HOW IT WORKS
                   </span>
                 </div>
@@ -415,7 +369,7 @@ export default function HomePage() {
                 {/* Main Heading */}
                 <h2 className="text-6xl lg:text-7xl font-black leading-tight text-gray-900">
                   <span className="block">Start Your</span>
-                  <span className="block" style={{ color: '#5e17eb' }}>
+                  <span className="block text-purple-600">
                     Learning Journey
                   </span>
                 </h2>
@@ -502,13 +456,10 @@ export default function HomePage() {
         {/* Student Success Stories */}
         <section 
           className="relative py-24 px-6 overflow-visible bg-purple-50"
-          style={{
-            fontFamily: 'Arial, sans-serif',
-          }}
         >
           {/* Animated background elements */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20  pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20  pointer-events-none"></div>
 
           <div className="relative z-10 max-w-7xl mx-auto">
             {/* Header Section */}
@@ -518,8 +469,8 @@ export default function HomePage() {
               <div className="space-y-8">
                 {/* Tag */}
                 <div className="inline-flex items-center gap-2 px-5 py-3 bg-white/40 backdrop-blur-lg rounded-full border-2 border-white/60">
-                  <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span className="text-sm font-black" style={{ color: '#5e17eb' }}>
+                  <div className="w-4 h-4 rounded-full bg-purple-600"></div>
+                  <span className="text-sm font-black text-purple-600">
                     SUCCESS STORIES
                   </span>
                 </div>
@@ -527,7 +478,7 @@ export default function HomePage() {
                 {/* Main Heading */}
                 <h2 className="text-5xl lg:text-6xl font-black leading-tight text-gray-900">
                   <span className="block">Real Stories,</span>
-                  <span className="block" style={{ color: '#5e17eb' }}>
+                  <span className="block text-purple-600">
                     Real Success
                   </span>
                 </h2>
@@ -654,13 +605,10 @@ export default function HomePage() {
         {/* Campus Ambassador Program */}
         <section 
           className="relative py-24 px-6 overflow-visible bg-white"
-          style={{
-            fontFamily: 'Arial, sans-serif',
-          }}
         >
           {/* Animated background elements */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20  pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20  pointer-events-none"></div>
 
           <div className="relative z-10 max-w-7xl mx-auto">
             
@@ -668,22 +616,22 @@ export default function HomePage() {
             <div className="text-center mb-20">
               {/* Tag */}
               <div className="inline-flex items-center gap-2 px-5 py-3 bg-white rounded-full border-2 border-black mb-8">
-                <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                <span className="text-sm font-black" style={{ color: '#5e17eb' }}>
+                <div className="w-4 h-4 rounded-full bg-purple-600"></div>
+                <span className="text-sm font-black text-purple-600">
                   CAMPUS AMBASSADOR PROGRAM
                 </span>
               </div>
 
               {/* Main Heading */}
-              <h2 className="text-6xl lg:text-7xl font-black leading-tight mb-8" style={{ color: '#000000' }}>
+              <h2 className="text-6xl lg:text-7xl font-black leading-tight mb-8 text-black">
                 <span className="block">Earn Money Online</span>
-                <span className="block" style={{ color: '#5e17eb' }}>
+                <span className="block text-purple-600">
                   While You Learn
                 </span>
               </h2>
 
               {/* Subheading */}
-              <p className="text-2xl leading-relaxed font-black max-w-4xl mx-auto" style={{ color: '#000000' }}>
+              <p className="text-2xl leading-relaxed font-black max-w-4xl mx-auto text-black">
                 Become a Skill Probe Campus Ambassador and earn up to ₹500 per referral. Share courses, grow your network, and convert points to real money.
               </p>
             </div>
@@ -694,59 +642,59 @@ export default function HomePage() {
               {/* Registration Points */}
               <div className="bg-white border-2 border-black rounded-3xl p-6">
                 <div className="text-center">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-purple-600">
                     <svg className="w-8 h-8" fill="#ffffff" viewBox="0 0 24 24">
                       <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-black mb-2" style={{ color: '#000000' }}>50 Points</h3>
-                  <p className="font-semibold text-sm" style={{ color: '#000000' }}>Per Registration</p>
+                  <h3 className="text-2xl font-black mb-2 text-black">50 Points</h3>
+                  <p className="font-semibold text-sm text-black">Per Registration</p>
                 </div>
               </div>
 
               {/* Purchase Points */}
               <div className="bg-white border-2 border-black rounded-3xl p-6">
                 <div className="text-center">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-purple-600">
                     <svg className="w-8 h-8" fill="#ffffff" viewBox="0 0 24 24">
                       <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-black mb-2" style={{ color: '#000000' }}>500 Points</h3>
-                  <p className="font-semibold text-sm" style={{ color: '#000000' }}>Per Course Purchase</p>
+                  <h3 className="text-2xl font-black mb-2 text-black">500 Points</h3>
+                  <p className="font-semibold text-sm text-black">Per Course Purchase</p>
                 </div>
               </div>
 
               {/* Ambassador Referral */}
               <div className="bg-white border-2 border-black rounded-3xl p-6">
                 <div className="text-center">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-purple-600">
                     <svg className="w-8 h-8" fill="#ffffff" viewBox="0 0 24 24">
                       <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4h3v4h2v-7.5c0-1.1.9-2 2-2s2 .9 2 2V18h2v-4h3v4h4v2H0v-2h4z"/>
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-black mb-2" style={{ color: '#000000' }}>₹100 + 10%</h3>
-                  <p className="font-semibold text-sm" style={{ color: '#000000' }}>Ambassador Referral</p>
+                  <h3 className="text-2xl font-black mb-2 text-black">₹100 + 10%</h3>
+                  <p className="font-semibold text-sm text-black">Ambassador Referral</p>
                 </div>
               </div>
 
               {/* Point Conversion */}
               <div className="bg-white border-2 border-black rounded-3xl p-6">
                 <div className="text-center">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-purple-600">
                     <svg className="w-8 h-8" fill="#ffffff" viewBox="0 0 24 24">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-black mb-2" style={{ color: '#000000' }}>100 = ₹100</h3>
-                  <p className="font-semibold text-sm" style={{ color: '#000000' }}>Point Conversion</p>
+                  <h3 className="text-2xl font-black mb-2 text-black">100 = ₹100</h3>
+                  <p className="font-semibold text-sm text-black">Point Conversion</p>
                 </div>
               </div>
             </div>
 
             {/* Milestone Bonuses */}
             <div className="mb-16">
-              <h3 className="text-3xl font-black text-center mb-12" style={{ color: '#000000' }}>Milestone Bonuses</h3>
+              <h3 className="text-3xl font-black text-center mb-12 text-black">Milestone Bonuses</h3>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
                   { referrals: '10', bonus: '₹500' },
@@ -755,11 +703,11 @@ export default function HomePage() {
                   { referrals: '100', bonus: '₹15,000' }
                 ].map((milestone, idx: number) => (
                   <div key={idx} className="bg-white border-2 border-black rounded-2xl p-6 text-center">
-                    <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
-                      <span className="font-black text-lg" style={{ color: '#ffffff' }}>{milestone.referrals}</span>
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 bg-purple-600">
+                      <span className="font-black text-lg text-white">{milestone.referrals}</span>
                     </div>
-                    <h4 className="text-xl font-black mb-1" style={{ color: '#000000' }}>{milestone.bonus}</h4>
-                    <p className="font-semibold text-sm" style={{ color: '#000000' }}>{milestone.referrals} Successful Referrals</p>
+                    <h4 className="text-xl font-black mb-1 text-black">{milestone.bonus}</h4>
+                    <p className="font-semibold text-sm text-black">{milestone.referrals} Successful Referrals</p>
                   </div>
                 ))}
               </div>
@@ -768,24 +716,22 @@ export default function HomePage() {
             {/* CTA Section */}
             <div className="text-center">
               <div className="bg-white border-2 border-black rounded-3xl p-12">
-                <h3 className="text-3xl font-black mb-4" style={{ color: '#000000' }}>
+                <h3 className="text-3xl font-black mb-4 text-black">
                   Ready to Become an Ambassador?
                 </h3>
-                <p className="text-lg mb-8" style={{ color: '#000000' }}>
+                <p className="text-lg mb-8 text-black">
                   Join our Campus Ambassador Program and start earning money while you learn!
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     href="/auth/register"
-                    className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300" 
-                    style={{ backgroundColor: '#5e17eb', color: '#ffffff' }}
+                    className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300 bg-purple-600 text-white"
                   >
                     Get Started Free
                   </Link>
                   <Link
                     href="/contact"
-                    className="px-10 py-4 border-2 font-bold text-lg rounded-xl transition-all duration-300"
-                    style={{ borderColor: '#000000', color: '#000000' }}
+                    className="px-10 py-4 border-2 font-bold text-lg rounded-xl transition-all duration-300 border-black text-black"
                   >
                     Talk to Our Team
                   </Link>
@@ -798,13 +744,10 @@ export default function HomePage() {
         {/* Final CTA Section */}
         <section 
           className="relative py-24 px-6 overflow-visible bg-purple-50"
-          style={{
-            fontFamily: 'Arial, sans-serif',
-          }}
         >
           {/* Animated background elements */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20  pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20  pointer-events-none"></div>
           
           <div className="relative z-10 max-w-6xl mx-auto">
             
