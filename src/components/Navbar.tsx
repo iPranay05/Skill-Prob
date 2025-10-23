@@ -98,8 +98,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.4 }}
                 >
-                  <Link href="/mentor/dashboard" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-                    Dashboard
+                  <Link href="/mentor/dashboard" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Dashboard</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -107,8 +108,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.4 }}
                 >
-                  <Link href="/mentor/courses" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-                    My Courses
+                  <Link href="/mentor/courses" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">My Courses</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -116,8 +118,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.6, duration: 0.4 }}
                 >
-                  <Link href="/mentor/students" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-                    Students
+                  <Link href="/mentor/students" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Students</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -125,8 +128,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.7, duration: 0.4 }}
                 >
-                  <Link href="/mentor/analytics" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-                    Analytics
+                  <Link href="/mentor/analytics" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Analytics</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -134,8 +138,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.8, duration: 0.4 }}
                 >
-                  <Link href="/live-sessions/create" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-                    Create Meet
+                  <Link href="/live-sessions/create" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Create Meet</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
               </>
@@ -147,8 +152,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.4 }}
                 >
-                  <Link href="/" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-                    Homepage
+                  <Link href="/" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Homepage</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -156,8 +162,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.4 }}
                 >
-                  <Link href="/about" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-                    About Us
+                  <Link href="/about" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">About Us</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -165,8 +172,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.6, duration: 0.4 }}
                 >
-                  <Link href="/courses" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-                    Courses
+                  <Link href="/courses" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Courses</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -174,8 +182,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.7, duration: 0.4 }}
                 >
-                  <Link href="/for-students" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-                    For Students
+                  <Link href="/for-students" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">For Students</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -183,8 +192,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.8, duration: 0.4 }}
                 >
-                  <Link href="/for-mentors" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-                    For Mentors
+                  <Link href="/for-mentors" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">For Mentors</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -192,8 +202,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.9, duration: 0.4 }}
                 >
-                  <Link href="/for-ambassadors" className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-                    For Ambassadors
+                  <Link href="/for-ambassadors" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">For Ambassadors</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
               </>
@@ -204,11 +215,17 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
-              className="p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-700"
+              className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors text-gray-700"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              {showMobileMenu ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
             </button>
           </div>
 
@@ -268,10 +285,10 @@ export default function Navbar() {
               </div>
             ) : (
               <>
-                <Link href="/auth/login" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                <Link href="/auth/login" className="text-[#5e17eb] hover:text-white font-medium px-4 py-2 border-2 border-[#5e17eb] hover:bg-[#5e17eb] rounded-lg transition-all duration-300">
                   Sign In
                 </Link>
-                <Link href="/auth/register" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                <Link href="/auth/register" className="bg-[#5e17eb] hover:bg-[#4a12c4] text-white px-4 py-2 rounded-lg font-medium transition-colors duration-300">
                   Get Started
                 </Link>
               </>
@@ -417,14 +434,14 @@ export default function Navbar() {
                 <div className="pt-4 border-t border-gray-200 space-y-4">
                   <Link
                     href="/auth/login"
-                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    className="block text-[#5e17eb] hover:text-white font-medium py-2 px-4 border-2 border-[#5e17eb] hover:bg-[#5e17eb] rounded-lg transition-all duration-300 text-center"
                     onClick={() => setShowMobileMenu(false)}
                   >
                     Sign In
                   </Link>
                   <Link
                     href="/auth/register"
-                    className="block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium text-center transition-colors"
+                    className="block bg-[#5e17eb] hover:bg-[#4a12c4] text-white px-4 py-2 rounded-lg font-medium text-center transition-colors duration-300"
                     onClick={() => setShowMobileMenu(false)}
                   >
                     Get Started

@@ -189,22 +189,22 @@ export default function CareerServices() {
               onClick={() => setActiveService(service.id)}
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 hover:border-purple-300 hover:shadow-xl transition-all duration-300 text-left group relative"
+              className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 hover:border-[#5e17eb] hover:shadow-xl transition-all duration-300 text-left group relative"
             >
-              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 mb-4 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300">
+              <div className="w-12 h-12 bg-[#5e17eb]/10 rounded-xl flex items-center justify-center text-[#5e17eb] mb-4 group-hover:bg-[#5e17eb] group-hover:text-white transition-colors duration-300">
                 {service.icon}
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-purple-900 transition-colors duration-300">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#5e17eb] transition-colors duration-300">
                 {service.title}
               </h3>
               <p className="text-gray-600 text-sm mb-4">
                 {service.shortDesc}
               </p>
               <div className="flex items-center justify-between">
-                <span className="text-purple-600 font-medium text-sm group-hover:text-purple-700 transition-colors duration-300">
+                <span className="text-[#5e17eb] font-medium text-sm group-hover:text-[#4a12c4] transition-colors duration-300">
                   Learn More
                 </span>
-                <ArrowRight className="w-4 h-4 text-purple-600 group-hover:text-purple-700 group-hover:translate-x-1 transition-all duration-300" />
+                <ArrowRight className="w-4 h-4 text-[#5e17eb] group-hover:text-[#4a12c4] group-hover:translate-x-1 transition-all duration-300" />
               </div>
             </motion.button>
           ))}
@@ -236,7 +236,7 @@ export default function CareerServices() {
                       {/* Header */}
                       <div className="flex items-center justify-between mb-6">
                         <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600">
+                          <div className="w-10 h-10 bg-[#5e17eb]/10 rounded-lg flex items-center justify-center text-[#5e17eb]">
                             {service.icon}
                           </div>
                           <h3 className="text-2xl font-bold text-gray-900">
@@ -257,7 +257,7 @@ export default function CareerServices() {
                         <ul className="space-y-3">
                           {service.content.benefits.map((benefit, index) => (
                             <li key={index} className="flex items-start space-x-3">
-                              <div className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                              <div className="w-2 h-2 bg-[#5e17eb] rounded-full mt-2 flex-shrink-0"></div>
                               <span className="text-gray-700">{benefit}</span>
                             </li>
                           ))}
@@ -276,7 +276,7 @@ export default function CareerServices() {
                               name="name"
                               value={formData.name}
                               onChange={handleInputChange}
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-900"
                               placeholder="Enter your full name"
                               required
                             />
@@ -291,7 +291,7 @@ export default function CareerServices() {
                               name="phone"
                               value={formData.phone}
                               onChange={handleInputChange}
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-900"
                               placeholder="Enter your phone number"
                               required
                             />
@@ -306,7 +306,7 @@ export default function CareerServices() {
                               name="email"
                               value={formData.email}
                               onChange={handleInputChange}
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-900"
                               placeholder="Enter your email address"
                               required
                             />
@@ -321,7 +321,7 @@ export default function CareerServices() {
                               name="city"
                               value={formData.city}
                               onChange={handleInputChange}
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-900"
                               placeholder="Enter your city"
                               required
                             />
@@ -337,7 +337,7 @@ export default function CareerServices() {
                             name="collegeName"
                             value={formData.collegeName}
                             onChange={handleInputChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-900"
                             placeholder="Enter your college name"
                             required
                           />
@@ -361,7 +361,7 @@ export default function CareerServices() {
                         <button
                           type="submit"
                           disabled={loading}
-                          className="w-full py-3 px-4 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                          className="w-full py-3 px-4 bg-[#5e17eb] text-white font-semibold rounded-lg hover:bg-[#4a12c4] focus:outline-none focus:ring-2 focus:ring-[#5e17eb] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
                         >
                           {loading ? (
                             <div className="flex items-center justify-center">
