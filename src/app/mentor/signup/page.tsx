@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
 
 export default function MentorSignupPage() {
     const router = useRouter();
@@ -141,7 +140,6 @@ export default function MentorSignupPage() {
 
     return (
         <div className="min-h-screen bg-gray-50">
-            <Navbar />
 
             <div className="max-w-2xl mx-auto px-6 py-12">
                 {/* Header */}

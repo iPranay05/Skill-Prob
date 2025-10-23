@@ -13,29 +13,35 @@ interface AppLayoutProps {
 export default function AppLayout({ children }: AppLayoutProps) {
   const pathname = usePathname();
   const [authToken, setAuthToken] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
   
-  // Don't show navigation on auth pages
-  const isAuthPage = pathname.startsWith('/auth') || pathname === '/';
+  // Don't show navigation on auth pages (but show on homepage)
+  const isAuthPage = pathname.startsWith('/auth');
 
-  // Get auth token from localStorage
+  // Get auth token from localStorage after mount
   useEffect(() => {
+    setMounted(true);
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
       setAuthToken(token);
     }
   }, []);
-  
+
+  // For auth pages, render without navbar
   if (isAuthPage) {
     return <>{children}</>;
   }
 
+  // For all other pages, render with navbar
   return (
-    <SocketProvider authToken={authToken || undefined}>
-      <div className="min-h-screen bg-gray-50">
-        <Navbar />
-        <main>{children}</main>
-        <RealTimeNotifications />
-      </div>
-    </SocketProvider>
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      <main>{children}</main>
+      {mounted && authToken && (
+        <SocketProvider authToken={authToken}>
+          <RealTimeNotifications />
+        </SocketProvider>
+      )}
+    </div>
   );
 }
