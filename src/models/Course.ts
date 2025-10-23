@@ -68,7 +68,6 @@ export const CourseSchema = z.object({
   short_description: z.string().max(500).optional(),
   mentor_id: z.string().uuid(),
   category_id: z.string().uuid().optional(),
-  category: z.string(),
   tags: z.array(z.string()).default([]),
   type: z.nativeEnum(CourseType),
   pricing: CoursePricingSchema,

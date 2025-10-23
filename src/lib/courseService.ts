@@ -50,7 +50,7 @@ export class CourseService {
         description: validatedData.description,
         short_description: validatedData.short_description,
         mentor_id: mentorId,
-        category: validatedData.category,
+        category_id: validatedData.category_id || null, // Use category_id instead of category
         type: validatedData.type,
         status: CourseStatus.DRAFT,
         slug,

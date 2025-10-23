@@ -1,14 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { CourseType, SubscriptionType, COURSE_CATEGORIES } from '../../../../models/Course';
+import { CourseType, SubscriptionType } from '../../../../models/Course';
 
 interface CourseFormData {
   title: string;
   description: string;
   short_description: string;
-  category: string;
+  category_id: string;
   tags: string[];
   type: CourseType;
   pricing: {
@@ -39,12 +39,54 @@ export default function CreateCourse() {
   const [currentStep, setCurrentStep] = useState(1);
   const [uploadingThumbnail, setUploadingThumbnail] = useState(false);
   const [uploadingTrailer, setUploadingTrailer] = useState(false);
+  const [categories, setCategories] = useState<{ id: string, name: string, description?: string, count: number }[]>([]);
+
+  useEffect(() => {
+    // Check authentication on component load
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      router.push('/auth/login');
+      return;
+    }
+
+    fetchCategories();
+  }, [router]);
+
+  const fetchCategories = async () => {
+    try {
+      const token = localStorage.getItem('accessToken');
+      console.log('Fetching categories...');
+      const response = await fetch('/api/courses/categories', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      console.log('Categories response status:', response.status);
+
+      if (response.status === 401) {
+        router.push('/auth/login');
+        return;
+      }
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Categories data:', data);
+        setCategories(data.data || []);
+      } else {
+        const errorData = await response.json();
+        console.error('Categories API error:', errorData);
+      }
+    } catch (error) {
+      console.error('Failed to fetch categories:', error);
+    }
+  };
 
   const [formData, setFormData] = useState<CourseFormData>({
     title: '',
     description: '',
     short_description: '',
-    category: '',
+    category_id: '',
     tags: [],
     type: CourseType.RECORDED,
     pricing: {
@@ -85,7 +127,7 @@ export default function CreateCourse() {
       ...prev,
       [section]: {
         ...(prev[section as keyof CourseFormData] as any),
-        [field]: ((prev[section as keyof CourseFormData] as any)[field] as string[]).map((item: string, i: number) => 
+        [field]: ((prev[section as keyof CourseFormData] as any)[field] as string[]).map((item: string, i: number) =>
           i === index ? value : item
         )
       }
@@ -139,9 +181,9 @@ export default function CreateCourse() {
       }
 
       const result = await response.json();
-      
+
       handleNestedInputChange('media', type, result.data.url);
-      
+
     } catch (err) {
       setError(`Failed to upload ${type}: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {
@@ -153,10 +195,10 @@ export default function CreateCourse() {
   const validateStep = (step: number): boolean => {
     switch (step) {
       case 1:
-        return !!(formData.title && formData.description && formData.category);
+        return !!(formData.title && formData.description && formData.category_id);
       case 2:
         return formData.content.syllabus.some(item => item.trim()) &&
-               formData.content.learningOutcomes.some(item => item.trim());
+          formData.content.learningOutcomes.some(item => item.trim());
       case 3:
         return formData.pricing.amount >= 0;
       default:
@@ -181,6 +223,33 @@ export default function CreateCourse() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    // Check authentication
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      setError('Please login to continue');
+      router.push('/auth/login');
+      return;
+    }
+
+    // Client-side validation
+    if (formData.description.length < 10) {
+      setError('Description must be at least 10 characters long');
+      return;
+    }
+
+    if (!formData.title.trim()) {
+      setError('Course title is required');
+      return;
+    }
+
+    if (!formData.category_id) {
+      setError('Please select a category');
+      return;
+    }
+
+    console.log('Form data before submission:', formData);
+
     setLoading(true);
 
     try {
@@ -194,25 +263,43 @@ export default function CreateCourse() {
         }
       };
 
+      console.log('Sending form data:', cleanedFormData);
+
       const response = await fetch('/api/courses', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(cleanedFormData)
       });
 
       if (!response.ok) {
+        if (response.status === 401) {
+          setError('Session expired. Please login again.');
+          localStorage.removeItem('accessToken');
+          router.push('/auth/login');
+          return;
+        }
+
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to create course');
+        console.error('Course creation error:', errorData);
+        console.error('Form data sent:', cleanedFormData);
+
+        // Show more specific error message
+        if (response.status === 400) {
+          setError(`Validation error: ${errorData.error || 'Please check all required fields'}`);
+        } else {
+          setError(errorData.error || 'Failed to create course');
+        }
+        return;
       }
 
       const result = await response.json();
-      
+
       // Redirect to course management or dashboard
       router.push(`/mentor/courses/${result.data.id}`);
-      
+
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
@@ -223,7 +310,7 @@ export default function CreateCourse() {
   const renderStep1 = () => (
     <div className="space-y-6">
       <h3 className="text-lg font-medium text-gray-900">Basic Information</h3>
-      
+
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Course Title *
@@ -232,7 +319,7 @@ export default function CreateCourse() {
           type="text"
           value={formData.title}
           onChange={(e) => handleInputChange('title', e.target.value)}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
           placeholder="Enter course title"
           required
         />
@@ -246,7 +333,7 @@ export default function CreateCourse() {
           type="text"
           value={formData.short_description}
           onChange={(e) => handleInputChange('short_description', e.target.value)}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
           placeholder="Brief description for course cards"
           maxLength={500}
         />
@@ -260,10 +347,16 @@ export default function CreateCourse() {
           value={formData.description}
           onChange={(e) => handleInputChange('description', e.target.value)}
           rows={6}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Detailed course description"
+          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          placeholder="Detailed course description (minimum 10 characters)"
           required
+          minLength={10}
         />
+        {formData.description.length > 0 && formData.description.length < 10 && (
+          <p className="text-red-500 text-sm mt-1">
+            Description must be at least 10 characters long ({formData.description.length}/10)
+          </p>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -272,14 +365,14 @@ export default function CreateCourse() {
             Category *
           </label>
           <select
-            value={formData.category}
-            onChange={(e) => handleInputChange('category', e.target.value)}
-            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={formData.category_id}
+            onChange={(e) => handleInputChange('category_id', e.target.value)}
+            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
             required
           >
             <option value="">Select a category</option>
-            {COURSE_CATEGORIES.map(category => (
-              <option key={category} value={category}>{category}</option>
+            {categories.map(category => (
+              <option key={category.id} value={category.id}>{category.name}</option>
             ))}
           </select>
         </div>
@@ -291,7 +384,7 @@ export default function CreateCourse() {
           <select
             value={formData.type}
             onChange={(e) => handleInputChange('type', e.target.value as CourseType)}
-            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
           >
             <option value={CourseType.RECORDED}>Recorded</option>
             <option value={CourseType.LIVE}>Live</option>
@@ -308,7 +401,7 @@ export default function CreateCourse() {
           type="text"
           value={formData.tags.join(', ')}
           onChange={(e) => handleTagInput(e.target.value)}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
           placeholder="React, JavaScript, Web Development"
         />
       </div>
@@ -318,7 +411,7 @@ export default function CreateCourse() {
   const renderStep2 = () => (
     <div className="space-y-6">
       <h3 className="text-lg font-medium text-gray-900">Course Content</h3>
-      
+
       {/* Syllabus */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -330,7 +423,7 @@ export default function CreateCourse() {
               type="text"
               value={item}
               onChange={(e) => handleArrayInputChange('content', 'syllabus', index, e.target.value)}
-              className="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
               placeholder={`Topic ${index + 1}`}
             />
             {formData.content.syllabus.length > 1 && (
@@ -364,7 +457,7 @@ export default function CreateCourse() {
               type="text"
               value={item}
               onChange={(e) => handleArrayInputChange('content', 'prerequisites', index, e.target.value)}
-              className="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
               placeholder={`Prerequisite ${index + 1}`}
             />
             {formData.content.prerequisites.length > 1 && (
@@ -398,7 +491,7 @@ export default function CreateCourse() {
               type="text"
               value={item}
               onChange={(e) => handleArrayInputChange('content', 'learningOutcomes', index, e.target.value)}
-              className="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
               placeholder={`Learning outcome ${index + 1}`}
             />
             {formData.content.learningOutcomes.length > 1 && (
@@ -426,7 +519,7 @@ export default function CreateCourse() {
   const renderStep3 = () => (
     <div className="space-y-6">
       <h3 className="text-lg font-medium text-gray-900">Pricing & Enrollment</h3>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -437,7 +530,7 @@ export default function CreateCourse() {
             min="0"
             value={formData.pricing.amount}
             onChange={(e) => handleNestedInputChange('pricing', 'amount', parseFloat(e.target.value) || 0)}
-            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
             placeholder="0"
           />
         </div>
@@ -449,7 +542,7 @@ export default function CreateCourse() {
           <select
             value={formData.pricing.currency}
             onChange={(e) => handleNestedInputChange('pricing', 'currency', e.target.value)}
-            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
           >
             <option value="INR">INR (₹)</option>
             <option value="USD">USD ($)</option>
@@ -464,7 +557,7 @@ export default function CreateCourse() {
           <select
             value={formData.pricing.subscriptionType}
             onChange={(e) => handleNestedInputChange('pricing', 'subscriptionType', e.target.value as SubscriptionType)}
-            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
           >
             <option value={SubscriptionType.ONE_TIME}>One-time Payment</option>
             <option value={SubscriptionType.MONTHLY}>Monthly Subscription</option>
@@ -492,7 +585,7 @@ export default function CreateCourse() {
   const renderStep4 = () => (
     <div className="space-y-6">
       <h3 className="text-lg font-medium text-gray-900">Media & SEO</h3>
-      
+
       {/* Thumbnail Upload */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -501,9 +594,9 @@ export default function CreateCourse() {
         <div className="border-2 border-dashed border-gray-300 rounded-lg p-6">
           {formData.media.thumbnail ? (
             <div className="text-center">
-              <img 
-                src={formData.media.thumbnail} 
-                alt="Thumbnail preview" 
+              <img
+                src={formData.media.thumbnail}
+                alt="Thumbnail preview"
                 className="mx-auto h-32 w-48 object-cover rounded-lg mb-4"
               />
               <button
@@ -550,9 +643,9 @@ export default function CreateCourse() {
         <div className="border-2 border-dashed border-gray-300 rounded-lg p-6">
           {formData.media.trailer ? (
             <div className="text-center">
-              <video 
-                src={formData.media.trailer} 
-                controls 
+              <video
+                src={formData.media.trailer}
+                controls
                 className="mx-auto h-32 w-48 rounded-lg mb-4"
               />
               <button
@@ -636,25 +729,22 @@ export default function CreateCourse() {
           <div className="flex items-center justify-between">
             {[1, 2, 3, 4].map((step) => (
               <div key={step} className="flex items-center">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                  step <= currentStep 
-                    ? 'bg-blue-600 text-white' 
-                    : 'bg-gray-200 text-gray-600'
-                }`}>
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${step <= currentStep
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-200 text-gray-600'
+                  }`}>
                   {step}
                 </div>
-                <div className={`ml-2 text-sm font-medium ${
-                  step <= currentStep ? 'text-blue-600' : 'text-gray-500'
-                }`}>
+                <div className={`ml-2 text-sm font-medium ${step <= currentStep ? 'text-blue-600' : 'text-gray-500'
+                  }`}>
                   {step === 1 && 'Basic Info'}
                   {step === 2 && 'Content'}
                   {step === 3 && 'Pricing'}
                   {step === 4 && 'Media & SEO'}
                 </div>
                 {step < 4 && (
-                  <div className={`ml-4 w-16 h-0.5 ${
-                    step < currentStep ? 'bg-blue-600' : 'bg-gray-200'
-                  }`} />
+                  <div className={`ml-4 w-16 h-0.5 ${step < currentStep ? 'bg-blue-600' : 'bg-gray-200'
+                    }`} />
                 )}
               </div>
             ))}

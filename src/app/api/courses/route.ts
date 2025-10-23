@@ -81,6 +81,9 @@ export async function POST(request: NextRequest) {
     const { userId } = authResult.user;
     const body = await request.json();
 
+    // Add mentor_id from authenticated user
+    body.mentor_id = userId;
+
     // Validate request body
     const validatedData = CreateCourseSchema.parse(body);
 

@@ -9,10 +9,14 @@ import { UserRole, VerificationStatus } from '@/types/user';
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('🚀 Registration API called');
     await connectToDatabase();
 
     const body = await request.json();
-    const { email, phone, password, firstName, lastName, referralCode } = body;
+    console.log('📝 Request body:', body);
+    const { email, phone, password, firstName, lastName, referralCode, role, mentorInfo } = body;
+    console.log('👤 Role:', role);
+    console.log('🎓 Mentor info:', mentorInfo);
 
     // Validate required fields
     validateRequired(body, ['email', 'password', 'firstName', 'lastName']);
@@ -85,10 +89,24 @@ export async function POST(request: NextRequest) {
       email: email.toLowerCase(),
       phone,
       password: hashedPassword,
-      role: UserRole.STUDENT,
+      role: role === 'mentor' ? 'mentor' : UserRole.STUDENT,
       profile: {
         firstName,
-        lastName
+        lastName,
+        ...(mentorInfo && {
+          // Education
+          degree: mentorInfo.degree,
+          major: mentorInfo.major,
+          cgpa: mentorInfo.cgpa,
+          university: mentorInfo.university,
+          startYear: mentorInfo.startYear,
+          endYear: mentorInfo.endYear,
+          // Professional
+          skills: mentorInfo.skills,
+          experience: mentorInfo.experience,
+          linkedinUrl: mentorInfo.linkedinUrl,
+          motivation: mentorInfo.motivation
+        })
       },
       verification: {
         emailVerified: false,
