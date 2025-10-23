@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
   try {
     // Verify the token and get user info
     const authResult = await verifyToken(request);
-    
+
     if (!authResult.success || !authResult.user) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
@@ -22,13 +22,12 @@ export async function GET(request: NextRequest) {
       user: {
         id: authResult.user.userId,
         email: authResult.user.email,
-        role: authResult.user.role,
-        name: authResult.user.name || null
+        role: authResult.user.role
       }
     });
   } catch (error) {
     console.error('Error in /api/auth/me:', error);
-    
+
     return NextResponse.json(
       { success: false, error: 'Internal server error' },
       { status: 500 }

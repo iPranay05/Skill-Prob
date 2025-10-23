@@ -9,7 +9,7 @@ const supabase = createClient(
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  context: { params: Promise<{ courseId: string }> }
 ) {
   try {
     // Verify authentication
@@ -21,7 +21,7 @@ export async function GET(
       );
     }
 
-    const { courseId } = params;
+    const { courseId } = await context.params;
     const userId = authResult.user.userId;
 
     // Check if student is enrolled

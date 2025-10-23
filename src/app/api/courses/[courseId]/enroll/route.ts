@@ -9,7 +9,7 @@ const supabase = createClient(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  context: { params: Promise<{ courseId: string }> }
 ) {
   try {
     // Verify authentication
@@ -21,7 +21,7 @@ export async function POST(
       );
     }
 
-    const { courseId } = params;
+    const { courseId } = await context.params;
     const userId = authResult.user.userId;
 
     // Check if course exists
@@ -94,7 +94,7 @@ export async function POST(
 // Check enrollment status
 export async function GET(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  context: { params: Promise<{ courseId: string }> }
 ) {
   try {
     const authResult = await verifyToken(request);
@@ -105,7 +105,7 @@ export async function GET(
       );
     }
 
-    const { courseId } = params;
+    const { courseId } = await context.params;
     const userId = authResult.user.userId;
 
     const { data: enrollment } = await supabase
