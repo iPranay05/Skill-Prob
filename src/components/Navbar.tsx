@@ -144,6 +144,114 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
               </>
+            ) : user && user.role === 'student' ? (
+              // Student Navigation
+              <>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4, duration: 0.4 }}
+                >
+                  <Link href="/student/dashboard" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Dashboard</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.4 }}
+                >
+                  <Link href="/courses" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Browse Courses</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.6, duration: 0.4 }}
+                >
+                  <Link href="/student/courses" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">My Courses</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.7, duration: 0.4 }}
+                >
+                  <Link href="/live-sessions" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Live Sessions</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.8, duration: 0.4 }}
+                >
+                  <Link href="/jobs" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Jobs</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+              </>
+            ) : user && user.role === 'ambassador' ? (
+              // Ambassador Navigation
+              <>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4, duration: 0.4 }}
+                >
+                  <Link href="/ambassador/dashboard" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Dashboard</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.4 }}
+                >
+                  <Link href="/courses" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Courses</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.6, duration: 0.4 }}
+                >
+                  <Link href="/live-sessions" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Live Sessions</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.7, duration: 0.4 }}
+                >
+                  <Link href="/ambassador/referrals" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Referrals</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.8, duration: 0.4 }}
+                >
+                  <Link href="/ambassador/earnings" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Earnings</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+              </>
             ) : (
               // Default Navigation
               <>
@@ -345,6 +453,84 @@ export default function Navbar() {
                     onClick={() => setShowMobileMenu(false)}
                   >
                     Create Meet
+                  </Link>
+                </>
+              ) : user && user.role === 'student' ? (
+                // Student Mobile Navigation
+                <>
+                  <Link
+                    href="/student/dashboard"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/courses"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Browse Courses
+                  </Link>
+                  <Link
+                    href="/student/courses"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    My Courses
+                  </Link>
+                  <Link
+                    href="/live-sessions"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Live Sessions
+                  </Link>
+                  <Link
+                    href="/jobs"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Jobs
+                  </Link>
+                </>
+              ) : user && user.role === 'ambassador' ? (
+                // Ambassador Mobile Navigation
+                <>
+                  <Link
+                    href="/ambassador/dashboard"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/courses"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Courses
+                  </Link>
+                  <Link
+                    href="/live-sessions"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Live Sessions
+                  </Link>
+                  <Link
+                    href="/ambassador/referrals"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Referrals
+                  </Link>
+                  <Link
+                    href="/ambassador/earnings"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Earnings
                   </Link>
                 </>
               ) : (

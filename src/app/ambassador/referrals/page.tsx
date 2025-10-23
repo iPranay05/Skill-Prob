@@ -176,8 +176,8 @@ export default function AmbassadorReferralsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Referral Management</h1>
-          <p className="text-gray-600 mt-2">Track your referrals and grow your network</p>
+          <h1 className="text-3xl font-bold text-gray-900">Referral Management</h1>
+          <p className="text-gray-700 mt-2">Track your referrals and grow your network</p>
         </div>
 
         {/* Stats Cards */}
@@ -185,7 +185,7 @@ export default function AmbassadorReferralsPage() {
           <div className="bg-white rounded-2xl shadow-lg p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">Total Referrals</p>
+                <p className="text-gray-700 text-sm font-medium">Total Referrals</p>
                 <p className="text-3xl font-bold text-blue-600">{stats?.totalReferrals || 0}</p>
               </div>
               <div className="text-4xl">👥</div>
@@ -195,7 +195,7 @@ export default function AmbassadorReferralsPage() {
           <div className="bg-white rounded-2xl shadow-lg p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">Conversions</p>
+                <p className="text-gray-700 text-sm font-medium">Conversions</p>
                 <p className="text-3xl font-bold text-green-600">{stats?.successfulConversions || 0}</p>
               </div>
               <div className="text-4xl">✅</div>
@@ -205,7 +205,7 @@ export default function AmbassadorReferralsPage() {
           <div className="bg-white rounded-2xl shadow-lg p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">Conversion Rate</p>
+                <p className="text-gray-700 text-sm font-medium">Conversion Rate</p>
                 <p className="text-3xl font-bold text-purple-600">{stats?.conversionRate || 0}%</p>
               </div>
               <div className="text-4xl">📈</div>
@@ -215,7 +215,7 @@ export default function AmbassadorReferralsPage() {
           <div className="bg-white rounded-2xl shadow-lg p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">Points Earned</p>
+                <p className="text-gray-700 text-sm font-medium">Points Earned</p>
                 <p className="text-3xl font-bold text-yellow-600">{stats?.totalPointsEarned || 0}</p>
               </div>
               <div className="text-4xl">⭐</div>
@@ -225,7 +225,7 @@ export default function AmbassadorReferralsPage() {
           <div className="bg-white rounded-2xl shadow-lg p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">Pending</p>
+                <p className="text-gray-700 text-sm font-medium">Pending</p>
                 <p className="text-3xl font-bold text-orange-600">{stats?.pendingReferrals || 0}</p>
               </div>
               <div className="text-4xl">⏳</div>
@@ -248,7 +248,7 @@ export default function AmbassadorReferralsPage() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${activeTab === tab.id
                     ? 'border-purple-600 text-purple-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                    : 'border-transparent text-gray-700 hover:text-gray-900'
                     }`}
                 >
                   <span className="mr-2">{tab.icon}</span>
@@ -281,49 +281,49 @@ export default function AmbassadorReferralsPage() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="bg-gray-50 rounded-xl p-6">
-                    <h3 className="text-lg font-semibold mb-4">How It Works</h3>
+                    <h3 className="text-lg font-semibold mb-4 text-gray-900">How It Works</h3>
                     <div className="space-y-4">
                       <div className="flex items-start space-x-3">
                         <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
                         <div>
-                          <p className="font-medium">Share Your Code</p>
-                          <p className="text-sm text-gray-600">Share your unique referral code with friends</p>
+                          <p className="font-medium text-gray-900">Share Your Code</p>
+                          <p className="text-sm text-gray-700">Share your unique referral code with friends</p>
                         </div>
                       </div>
                       <div className="flex items-start space-x-3">
                         <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</div>
                         <div>
-                          <p className="font-medium">They Register</p>
-                          <p className="text-sm text-gray-600">Friends sign up using your referral code</p>
+                          <p className="font-medium text-gray-900">They Register</p>
+                          <p className="text-sm text-gray-700">Friends sign up using your referral code</p>
                         </div>
                       </div>
                       <div className="flex items-start space-x-3">
                         <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</div>
                         <div>
-                          <p className="font-medium">Earn Points</p>
-                          <p className="text-sm text-gray-600">Get points when they make their first purchase</p>
+                          <p className="font-medium text-gray-900">Earn Points</p>
+                          <p className="text-sm text-gray-700">Get points when they make their first purchase</p>
                         </div>
                       </div>
                     </div>
                   </div>
 
                   <div className="bg-gray-50 rounded-xl p-6">
-                    <h3 className="text-lg font-semibold mb-4">Earning Structure</h3>
+                    <h3 className="text-lg font-semibold mb-4 text-gray-900">Earning Structure</h3>
                     <div className="space-y-3">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Registration Bonus</span>
-                        <span className="font-semibold">50 points</span>
+                        <span className="text-gray-700">Registration Bonus</span>
+                        <span className="font-semibold text-gray-900">50 points</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">First Purchase (10%)</span>
-                        <span className="font-semibold">Variable</span>
+                        <span className="text-gray-700">First Purchase (10%)</span>
+                        <span className="font-semibold text-gray-900">Variable</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Course Completion Bonus</span>
-                        <span className="font-semibold">100 points</span>
+                        <span className="text-gray-700">Course Completion Bonus</span>
+                        <span className="font-semibold text-gray-900">100 points</span>
                       </div>
                       <div className="flex justify-between border-t pt-3">
-                        <span className="font-semibold">Minimum Payout</span>
+                        <span className="font-semibold text-gray-900">Minimum Payout</span>
                         <span className="font-semibold text-purple-600">1,000 points</span>
                       </div>
                     </div>
@@ -334,16 +334,16 @@ export default function AmbassadorReferralsPage() {
 
             {activeTab === 'referrals' && (
               <div>
-                <h2 className="text-2xl font-bold mb-6">My Referrals</h2>
+                <h2 className="text-2xl font-bold mb-6 text-gray-900">My Referrals</h2>
                 <div className="space-y-4">
                   {referrals.length > 0 ? (
                     referrals.map((referral) => (
                       <div key={referral.id} className="bg-gray-50 rounded-xl p-6">
                         <div className="flex justify-between items-start">
                           <div className="flex-1">
-                            <h3 className="font-semibold text-gray-800">{referral.studentName || 'Student'}</h3>
-                            <p className="text-gray-600 text-sm">{referral.studentEmail}</p>
-                            <p className="text-gray-500 text-xs mt-1">
+                            <h3 className="font-semibold text-gray-900">{referral.studentName || 'Student'}</h3>
+                            <p className="text-gray-700 text-sm">{referral.studentEmail}</p>
+                            <p className="text-gray-600 text-xs mt-1">
                               Registered on {new Date(referral.registrationDate).toLocaleDateString()}
                             </p>
                           </div>
@@ -351,7 +351,7 @@ export default function AmbassadorReferralsPage() {
                             <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(referral.status)}`}>
                               {referral.status.charAt(0).toUpperCase() + referral.status.slice(1)}
                             </span>
-                            <p className="text-sm text-gray-600 mt-2">
+                            <p className="text-sm text-gray-700 mt-2">
                               Points: <span className="font-semibold text-purple-600">
                                 {referral.conversionEvents?.reduce((total: number, event: any) => total + (event.pointsEarned || 0), 0) || 0}
                               </span>
@@ -363,8 +363,8 @@ export default function AmbassadorReferralsPage() {
                   ) : (
                     <div className="text-center py-12">
                       <div className="text-6xl mb-4">🤝</div>
-                      <h3 className="text-xl font-semibold text-gray-800 mb-2">No Referrals Yet</h3>
-                      <p className="text-gray-600 mb-6">Start sharing your referral code to see your referrals here!</p>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-2">No Referrals Yet</h3>
+                      <p className="text-gray-700 mb-6">Start sharing your referral code to see your referrals here!</p>
                       <button
                         onClick={() => setActiveTab('share')}
                         className="bg-purple-600 text-white px-6 py-3 rounded-xl hover:bg-purple-700 transition-colors"
@@ -379,12 +379,12 @@ export default function AmbassadorReferralsPage() {
 
             {activeTab === 'share' && (
               <div>
-                <h2 className="text-2xl font-bold mb-6">Share & Promote</h2>
+                <h2 className="text-2xl font-bold mb-6 text-gray-900">Share & Promote</h2>
 
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-6">
                     <div className="bg-gray-50 rounded-xl p-6">
-                      <h3 className="text-lg font-semibold mb-4">Share on Social Media</h3>
+                      <h3 className="text-lg font-semibold mb-4 text-gray-900">Share on Social Media</h3>
                       <div className="grid grid-cols-2 gap-4">
                         <button
                           onClick={() => shareReferralLink('whatsapp')}
@@ -418,13 +418,13 @@ export default function AmbassadorReferralsPage() {
                     </div>
 
                     <div className="bg-gray-50 rounded-xl p-6">
-                      <h3 className="text-lg font-semibold mb-4">Referral Link</h3>
+                      <h3 className="text-lg font-semibold mb-4 text-gray-900">Referral Link</h3>
                       <div className="flex space-x-2">
                         <input
                           type="text"
                           value={referralCode ? `${window.location.origin}/r/${referralCode}` : 'Loading...'}
                           readOnly
-                          className="flex-1 px-4 py-2 border border-gray-300 rounded-xl bg-white"
+                          className="flex-1 px-4 py-2 border border-gray-300 rounded-xl bg-white text-gray-900"
                         />
                         <button
                           onClick={() => referralCode && navigator.clipboard.writeText(`${window.location.origin}/r/${referralCode}`)}
@@ -439,23 +439,23 @@ export default function AmbassadorReferralsPage() {
 
                   <div className="space-y-6">
                     <div className="bg-gray-50 rounded-xl p-6">
-                      <h3 className="text-lg font-semibold mb-4">Marketing Materials</h3>
+                      <h3 className="text-lg font-semibold mb-4 text-gray-900">Marketing Materials</h3>
                       <div className="space-y-3">
                         <button className="w-full text-left p-3 bg-white rounded-xl hover:shadow-md transition-shadow">
                           <div className="flex items-center justify-between">
-                            <span className="font-medium">Social Media Graphics</span>
+                            <span className="font-medium text-gray-900">Social Media Graphics</span>
                             <span className="text-purple-600">Download</span>
                           </div>
                         </button>
                         <button className="w-full text-left p-3 bg-white rounded-xl hover:shadow-md transition-shadow">
                           <div className="flex items-center justify-between">
-                            <span className="font-medium">Email Templates</span>
+                            <span className="font-medium text-gray-900">Email Templates</span>
                             <span className="text-purple-600">Download</span>
                           </div>
                         </button>
                         <button className="w-full text-left p-3 bg-white rounded-xl hover:shadow-md transition-shadow">
                           <div className="flex items-center justify-between">
-                            <span className="font-medium">Course Information Sheets</span>
+                            <span className="font-medium text-gray-900">Course Information Sheets</span>
                             <span className="text-purple-600">Download</span>
                           </div>
                         </button>
@@ -463,8 +463,8 @@ export default function AmbassadorReferralsPage() {
                     </div>
 
                     <div className="bg-gray-50 rounded-xl p-6">
-                      <h3 className="text-lg font-semibold mb-4">Tips for Success</h3>
-                      <ul className="space-y-2 text-sm text-gray-600">
+                      <h3 className="text-lg font-semibold mb-4 text-gray-900">Tips for Success</h3>
+                      <ul className="space-y-2 text-sm text-gray-700">
                         <li>• Share your personal learning experience</li>
                         <li>• Target students interested in tech careers</li>
                         <li>• Use social media and campus networks</li>
@@ -479,66 +479,129 @@ export default function AmbassadorReferralsPage() {
 
             {activeTab === 'analytics' && (
               <div>
-                <h2 className="text-2xl font-bold mb-6">Referral Analytics</h2>
+                <h2 className="text-2xl font-bold mb-6 text-gray-900">Referral Analytics</h2>
 
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div className="bg-gray-50 rounded-xl p-6">
-                    <h3 className="text-lg font-semibold mb-4">Conversion Funnel</h3>
+                    <h3 className="text-lg font-semibold mb-4 text-gray-900">Conversion Funnel</h3>
                     <div className="space-y-4">
                       <div className="flex justify-between items-center">
-                        <span>Link Clicks</span>
-                        <span className="font-semibold">245</span>
+                        <span className="text-gray-700">Total Referrals</span>
+                        <span className="font-semibold text-gray-900">{stats?.totalReferrals || 0}</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
                         <div className="bg-blue-600 h-2 rounded-full" style={{ width: '100%' }}></div>
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <span>Registrations</span>
-                        <span className="font-semibold">89</span>
+                        <span className="text-gray-700">Successful Conversions</span>
+                        <span className="font-semibold text-gray-900">{stats?.successfulConversions || 0}</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div className="bg-green-600 h-2 rounded-full" style={{ width: '36%' }}></div>
+                        <div
+                          className="bg-green-600 h-2 rounded-full"
+                          style={{
+                            width: `${stats?.totalReferrals ? (stats.successfulConversions / stats.totalReferrals) * 100 : 0}%`
+                          }}
+                        ></div>
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <span>First Purchase</span>
-                        <span className="font-semibold">34</span>
+                        <span className="text-gray-700">Pending Referrals</span>
+                        <span className="font-semibold text-gray-900">{stats?.pendingReferrals || 0}</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div className="bg-purple-600 h-2 rounded-full" style={{ width: '14%' }}></div>
+                        <div
+                          className="bg-orange-600 h-2 rounded-full"
+                          style={{
+                            width: `${stats?.totalReferrals ? (stats.pendingReferrals / stats.totalReferrals) * 100 : 0}%`
+                          }}
+                        ></div>
                       </div>
                     </div>
                   </div>
 
                   <div className="bg-gray-50 rounded-xl p-6">
-                    <h3 className="text-lg font-semibold mb-4">Top Performing Channels</h3>
+                    <h3 className="text-lg font-semibold mb-4 text-gray-900">Performance Summary</h3>
                     <div className="space-y-4">
-                      {[
-                        { channel: 'WhatsApp', referrals: 15, percentage: 45 },
-                        { channel: 'Instagram', referrals: 12, percentage: 36 },
-                        { channel: 'LinkedIn', referrals: 4, percentage: 12 },
-                        { channel: 'Direct Link', referrals: 3, percentage: 9 }
-                      ].map((item, index) => (
-                        <div key={index} className="flex justify-between items-center">
-                          <div>
-                            <p className="font-medium">{item.channel}</p>
-                            <p className="text-sm text-gray-600">{item.referrals} referrals</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="font-semibold">{item.percentage}%</p>
-                            <div className="w-20 bg-gray-200 rounded-full h-2 mt-1">
-                              <div
-                                className="bg-purple-600 h-2 rounded-full"
-                                style={{ width: `${item.percentage}%` }}
-                              ></div>
-                            </div>
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <p className="font-medium text-gray-900">Conversion Rate</p>
+                          <p className="text-sm text-gray-700">Overall success rate</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-semibold text-gray-900">{stats?.conversionRate?.toFixed(1) || 0}%</p>
+                          <div className="w-20 bg-gray-200 rounded-full h-2 mt-1">
+                            <div
+                              className="bg-purple-600 h-2 rounded-full"
+                              style={{ width: `${Math.min(stats?.conversionRate || 0, 100)}%` }}
+                            ></div>
                           </div>
                         </div>
-                      ))}
+                      </div>
+
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <p className="font-medium text-gray-900">Points Earned</p>
+                          <p className="text-sm text-gray-700">Total points from referrals</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-semibold text-gray-900">{stats?.totalPointsEarned || 0}</p>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <p className="font-medium text-gray-900">Active Referrals</p>
+                          <p className="text-sm text-gray-700">Currently pending</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-semibold text-gray-900">{stats?.pendingReferrals || 0}</p>
+                        </div>
+                      </div>
+
+                      {stats?.totalReferrals === 0 && (
+                        <div className="text-center py-8">
+                          <div className="text-4xl mb-2">📊</div>
+                          <p className="text-gray-600 text-sm">No analytics data yet</p>
+                          <p className="text-gray-500 text-xs">Start referring to see your performance metrics</p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
+
+                {/* Additional Analytics Section */}
+                {stats && stats.totalReferrals > 0 && (
+                  <div className="mt-8 bg-gray-50 rounded-xl p-6">
+                    <h3 className="text-lg font-semibold mb-4 text-gray-900">Recent Activity</h3>
+                    <div className="space-y-3">
+                      {referrals.slice(0, 5).map((referral, index) => (
+                        <div key={referral.id} className="flex justify-between items-center py-2 border-b border-gray-200 last:border-b-0">
+                          <div>
+                            <p className="font-medium text-gray-900">{referral.studentEmail}</p>
+                            <p className="text-sm text-gray-600">
+                              Registered {new Date(referral.registrationDate).toLocaleDateString()}
+                            </p>
+                          </div>
+                          <div className="text-right">
+                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${referral.status === 'converted' ? 'bg-green-100 text-green-800' :
+                                referral.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                                  'bg-gray-100 text-gray-800'
+                              }`}>
+                              {referral.status}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                      {referrals.length === 0 && (
+                        <div className="text-center py-4">
+                          <p className="text-gray-600 text-sm">No referral activity yet</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>

@@ -14,9 +14,10 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
     console.log('📝 Request body:', body);
-    const { email, phone, password, firstName, lastName, referralCode, role, mentorInfo } = body;
+    const { email, phone, password, firstName, lastName, referralCode, role, mentorInfo, ambassadorInfo } = body;
     console.log('👤 Role:', role);
     console.log('🎓 Mentor info:', mentorInfo);
+    console.log('🎯 Ambassador info:', ambassadorInfo);
 
     // Validate required fields
     validateRequired(body, ['email', 'password', 'firstName', 'lastName']);
@@ -84,12 +85,20 @@ export async function POST(request: NextRequest) {
     // Generate referral code for new user
     const userReferralCode = AuthService.generateReferralCode(firstName, lastName);
 
+    // Determine user role
+    let userRole = UserRole.STUDENT; // default
+    if (role === 'mentor') {
+      userRole = UserRole.MENTOR;
+    } else if (role === 'ambassador') {
+      userRole = UserRole.AMBASSADOR;
+    }
+
     // Create user data
     const userData: any = {
       email: email.toLowerCase(),
       phone,
       password: hashedPassword,
-      role: role === 'mentor' ? 'mentor' : UserRole.STUDENT,
+      role: userRole,
       profile: {
         firstName,
         lastName,
@@ -106,6 +115,29 @@ export async function POST(request: NextRequest) {
           experience: mentorInfo.experience,
           linkedinUrl: mentorInfo.linkedinUrl,
           motivation: mentorInfo.motivation
+        }),
+        ...(ambassadorInfo && {
+          // Personal Information
+          dateOfBirth: ambassadorInfo.dateOfBirth,
+          gender: ambassadorInfo.gender,
+          city: ambassadorInfo.city,
+          state: ambassadorInfo.state,
+          country: ambassadorInfo.country,
+          // Education
+          currentEducation: ambassadorInfo.currentEducation,
+          institution: ambassadorInfo.institution,
+          course: ambassadorInfo.course,
+          year: ambassadorInfo.year,
+          // Social Media
+          instagramHandle: ambassadorInfo.instagramHandle,
+          linkedinUrl: ambassadorInfo.linkedinUrl,
+          twitterHandle: ambassadorInfo.twitterHandle,
+          // Ambassador Specific
+          referralSource: ambassadorInfo.referralSource,
+          networkSize: ambassadorInfo.networkSize,
+          motivation: ambassadorInfo.motivation,
+          availableHours: ambassadorInfo.availableHours,
+          previousExperience: ambassadorInfo.previousExperience
         })
       },
       verification: {
@@ -130,6 +162,42 @@ export async function POST(request: NextRequest) {
 
     // Create user
     const user = await UserModel.create(userData);
+
+    // If user is an ambassador, create ambassador record
+    if (role === 'ambassador' && ambassadorInfo && user.id) {
+      try {
+        const { AmbassadorService } = await import('@/lib/ambassadorService');
+        
+        // Create ambassador application data
+        const ambassadorApplication = {
+          motivation: ambassadorInfo.motivation,
+          socialMedia: [
+            ...(ambassadorInfo.instagramHandle ? [{
+              platform: 'instagram',
+              handle: ambassadorInfo.instagramHandle,
+              followers: 0 // Default, can be updated later
+            }] : []),
+            ...(ambassadorInfo.linkedinUrl ? [{
+              platform: 'linkedin',
+              handle: ambassadorInfo.linkedinUrl,
+              followers: 0
+            }] : []),
+            ...(ambassadorInfo.twitterHandle ? [{
+              platform: 'twitter',
+              handle: ambassadorInfo.twitterHandle,
+              followers: 0
+            }] : [])
+          ],
+          experience: ambassadorInfo.previousExperience || 'No previous experience mentioned'
+        };
+
+        await AmbassadorService.applyForAmbassador(user.id, ambassadorApplication);
+        console.log('✅ Ambassador record created successfully');
+      } catch (ambassadorError) {
+        console.error('❌ Failed to create ambassador record:', ambassadorError);
+        // Don't fail the registration, just log the error
+      }
+    }
 
     // Generate and send email OTP
     const emailOTP = AuthService.generateOTP();

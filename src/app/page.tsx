@@ -290,12 +290,12 @@ export default function HomePage() {
                 >
                   Get Started Free
                 </Link>
-                <Link
+                {/* <Link
                   href="/contact"
                   className="px-10 py-4 border-2 font-bold text-lg rounded-xl transition-all duration-300 border-black text-black"
                 >
                   Talk to Our Team
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>

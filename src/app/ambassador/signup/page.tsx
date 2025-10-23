@@ -64,11 +64,11 @@ export default function AmbassadorSignupPage() {
 
         // Validate required fields
         const requiredFields = [
-            'firstName', 'lastName', 'email', 'password', 'dateOfBirth', 
-            'city', 'state', 'country', 'currentEducation', 'institution', 
+            'firstName', 'lastName', 'email', 'password', 'dateOfBirth',
+            'city', 'state', 'country', 'currentEducation', 'institution',
             'networkSize', 'motivation', 'availableHours'
         ];
-        
+
         for (const field of requiredFields) {
             if (!formData[field as keyof typeof formData]) {
                 setError(`Please fill in the ${field.replace(/([A-Z])/g, ' $1').toLowerCase()} field`);
@@ -154,7 +154,7 @@ export default function AmbassadorSignupPage() {
                         Become a Campus Ambassador
                     </h1>
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Join our Campus Ambassador Program and start earning money while you learn! 
+                        Join our Campus Ambassador Program and start earning money while you learn!
                         Build your network, gain experience, and make a difference.
                     </p>
                 </div>
