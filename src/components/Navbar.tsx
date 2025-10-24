@@ -496,13 +496,6 @@ export default function Navbar() {
                       <p className="text-xs text-gray-500 capitalize">{user.role}</p>
                     </div>
                     <Link
-                      href={getDashboardLink()}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-                      onClick={() => setShowDropdown(false)}
-                    >
-                      Dashboard
-                    </Link>
-                    <Link
                       href="/student/profile"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                       onClick={() => setShowDropdown(false)}
@@ -812,13 +805,6 @@ export default function Navbar() {
                       <p className="text-xs text-gray-500 capitalize">{user.role}</p>
                     </div>
                   </div>
-                  <Link
-                    href={getDashboardLink()}
-                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
-                    onClick={() => setShowMobileMenu(false)}
-                  >
-                    Dashboard
-                  </Link>
                   <Link
                     href="/student/profile"
                     className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
