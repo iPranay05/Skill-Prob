@@ -252,6 +252,134 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
               </>
+            ) : user && user.role === 'admin' ? (
+              // Admin Navigation
+              <>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4, duration: 0.4 }}
+                >
+                  <Link href="/admin/dashboard" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Dashboard</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.4 }}
+                >
+                  <Link href="/admin/users" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Manage Users</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.6, duration: 0.4 }}
+                >
+                  <Link href="/admin/courses" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Manage Courses</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.7, duration: 0.4 }}
+                >
+                  <Link href="/admin/kyc" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">KYC Reviews</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.8, duration: 0.4 }}
+                >
+                  <Link href="/admin/analytics" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Analytics</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+              </>
+            ) : user && user.role === 'super_admin' ? (
+              // Super Admin Navigation (Enhanced with additional features)
+              <>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4, duration: 0.4 }}
+                >
+                  <Link href="/admin/dashboard" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Dashboard</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.4 }}
+                >
+                  <Link href="/admin/users" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Manage Users</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.6, duration: 0.4 }}
+                >
+                  <Link href="/admin/courses" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Manage Courses</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.7, duration: 0.4 }}
+                >
+                  <Link href="/admin/kyc" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">KYC Reviews</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.8, duration: 0.4 }}
+                >
+                  <Link href="/admin/analytics" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Analytics</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.9, duration: 0.4 }}
+                >
+                  <Link href="/admin/system" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">System Config</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 1.0, duration: 0.4 }}
+                >
+                  <Link href="/admin/audit" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Audit Logs</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
+                </motion.div>
+              </>
             ) : (
               // Default Navigation
               <>
@@ -531,6 +659,98 @@ export default function Navbar() {
                     onClick={() => setShowMobileMenu(false)}
                   >
                     Earnings
+                  </Link>
+                </>
+              ) : user && user.role === 'admin' ? (
+                // Admin Mobile Navigation
+                <>
+                  <Link
+                    href="/admin/dashboard"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/admin/users"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Manage Users
+                  </Link>
+                  <Link
+                    href="/admin/courses"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Manage Courses
+                  </Link>
+                  <Link
+                    href="/admin/kyc"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    KYC Reviews
+                  </Link>
+                  <Link
+                    href="/admin/analytics"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Analytics
+                  </Link>
+                </>
+              ) : user && user.role === 'super_admin' ? (
+                // Super Admin Mobile Navigation (Enhanced)
+                <>
+                  <Link
+                    href="/admin/dashboard"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/admin/users"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Manage Users
+                  </Link>
+                  <Link
+                    href="/admin/courses"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Manage Courses
+                  </Link>
+                  <Link
+                    href="/admin/kyc"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    KYC Reviews
+                  </Link>
+                  <Link
+                    href="/admin/analytics"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Analytics
+                  </Link>
+                  <Link
+                    href="/admin/system"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    System Config
+                  </Link>
+                  <Link
+                    href="/admin/audit"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Audit Logs
                   </Link>
                 </>
               ) : (

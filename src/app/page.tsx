@@ -73,13 +73,13 @@ export default function HomePage() {
                     </motion.button>
                   </Link>
                   <Link href="/courses">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-6 md:px-8 py-3 md:py-4 border border-gray-300 text-gray-700 font-semibold text-sm md:text-base rounded-xl hover:bg-gray-50 transition-all duration-300 w-full sm:w-auto"
-                  >
-                    Explore Courses
-                  </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="px-6 md:px-8 py-3 md:py-4 border border-gray-300 text-gray-700 font-semibold text-sm md:text-base rounded-xl hover:bg-gray-50 transition-all duration-300 w-full sm:w-auto"
+                    >
+                      Explore Courses
+                    </motion.button>
                   </Link>
                   <Link href="/mentor/signup">
                     <motion.button

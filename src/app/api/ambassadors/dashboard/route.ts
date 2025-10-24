@@ -19,12 +19,12 @@ export async function GET(request: NextRequest) {
     // Check if user is an ambassador (be flexible with role checking)
     const userRole = authResult.user.role;
     const isAmbassador = userRole === 'ambassador';
-    
+
     if (!isAmbassador) {
       console.log('Access denied - User role:', userRole, 'Required: ambassador');
       return NextResponse.json(
-        { 
-          success: false, 
+        {
+          success: false,
           error: `Access denied. Ambassador role required. Current role: ${userRole}`,
           debug: {
             userRole: userRole,
@@ -216,6 +216,11 @@ export async function GET(request: NextRequest) {
       retentionRate: 78.5
     };
 
+    // Get KYC status from payout_details
+    const payoutDetails = ambassador.payoutDetails || {};
+    const kycStatus = (payoutDetails as any)?.status || 'not_submitted';
+    const kycVerified = (payoutDetails as any)?.verified || false;
+
     return NextResponse.json({
       success: true,
       data: {
@@ -223,7 +228,11 @@ export async function GET(request: NextRequest) {
           id: ambassador.id,
           referralCode: (ambassador as any).referral_code || ambassador.referralCode,
           status: ambassador.status,
-          performance: ambassador.performance,
+          performance: {
+            ...ambassador.performance,
+            kycStatus: kycStatus,
+            kycVerified: kycVerified
+          },
           createdAt: (ambassador as any).created_at || ambassador.createdAt
         },
         analytics: enhancedAnalytics,
