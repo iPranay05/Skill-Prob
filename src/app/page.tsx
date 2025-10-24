@@ -63,13 +63,16 @@ export default function HomePage() {
                   transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
                   className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4 justify-center lg:justify-start"
                 >
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-6 md:px-8 py-3 md:py-4 bg-[#5e17eb] text-white font-semibold text-sm md:text-base rounded-xl hover:bg-[#4a12c4] transition-all duration-300 w-full sm:w-auto"
-                  >
-                    Start Learning Free
-                  </motion.button>
+                  <Link href="/auth/register">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="px-6 md:px-8 py-3 md:py-4 bg-[#5e17eb] text-white font-semibold text-sm md:text-base rounded-xl hover:bg-[#4a12c4] transition-all duration-300 w-full sm:w-auto"
+                    >
+                      Start Learning Free
+                    </motion.button>
+                  </Link>
+                  <Link href="/courses">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -77,6 +80,7 @@ export default function HomePage() {
                   >
                     Explore Courses
                   </motion.button>
+                  </Link>
                   <Link href="/mentor/signup">
                     <motion.button
                       whileHover={{ scale: 1.05 }}

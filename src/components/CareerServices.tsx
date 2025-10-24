@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, FileText, Linkedin, Clock, Users, ArrowRight } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 interface FormData {
   name: string;
@@ -115,23 +116,42 @@ export default function CareerServices() {
     try {
       const serviceTitle = services.find(s => s.id === activeService)?.title;
       
-      const requestBody = {
-        service: serviceTitle,
-        ...formData,
-        submittedAt: Date.now() // Use timestamp instead of ISO string
-      };
+      // Send email notification via EmailJS
+      try {
+        console.log('📧 Sending career service email notification...');
+        
+        // EmailJS configuration - Add these to your .env.local file
+        const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'your_service_id';
+        const templateId = process.env.NEXT_PUBLIC_EMAILJS_CAREER_TEMPLATE_ID || 'your_career_template_id';
+        const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'your_public_key';
 
-      console.log('Career service request:', requestBody);
+        // Initialize EmailJS
+        emailjs.init(publicKey);
 
-      // Here you would typically send to your API
-      // const response = await fetch('/api/career-services', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(requestBody)
-      // });
+        // Prepare email template parameters
+        const templateParams = {
+          to_email: 'your-email@example.com', // Replace with your email
+          from_name: formData.name,
+          service_type: serviceTitle,
+          applicant_name: formData.name,
+          applicant_email: formData.email,
+          applicant_phone: formData.phone,
+          applicant_city: formData.city,
+          college_name: formData.collegeName,
+          submission_date: new Date().toLocaleString(),
+          service_description: services.find(s => s.id === activeService)?.shortDesc || '',
+          
+          // Additional context
+          request_type: 'Career Service Request',
+          urgency: activeService === 'interview-prep' ? 'High - Last Minute Preparation' : 'Normal'
+        };
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+        const emailResult = await emailjs.send(serviceId, templateId, templateParams);
+        console.log('✅ Career service email sent successfully:', emailResult);
+      } catch (emailError) {
+        console.error('❌ Failed to send career service email:', emailError);
+        // Continue with success message even if email fails
+      }
 
       setSuccess(`Thank you! Your ${serviceTitle} request has been submitted successfully. We'll contact you within 24 hours.`);
       setFormData({
