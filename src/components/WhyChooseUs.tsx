@@ -63,15 +63,15 @@ export default function WhyChooseUs() {
       <div className="relative z-10 max-w-7xl mx-auto">
 
         {/* Header Section */}
-        <div className="text-center mb-16">
+        <div className="text-left mb-10">
           {/* Tag */}
           <motion.div
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-gray-200 mb-8 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full border-2 border-gray-200 mb-4 shadow-sm"
           >
-            <Sparkles className="w-5 h-5 text-[#5e17eb]" />
+            <Sparkles className="w-4 h-4 text-[#5e17eb]" />
             <span className="text-sm font-bold text-gray-700 uppercase tracking-wide">
               Who's using Skill Probe?
             </span>
@@ -82,7 +82,7 @@ export default function WhyChooseUs() {
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-4xl lg:text-5xl font-bold leading-tight text-gray-700 mb-6"
+            className="text-3xl lg:text-4xl font-bold leading-tight text-gray-700 mb-4"
           >
             Empowering Every Stakeholder in the
             <span className="block text-[#5e17eb]">Education Ecosystem</span>
@@ -93,36 +93,36 @@ export default function WhyChooseUs() {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-            className="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto"
+            className="text-base text-gray-600 leading-relaxed max-w-2xl"
           >
             From students to corporations to educational institutions - we provide tailored solutions for everyone
           </motion.p>
         </div>
 
         {/* User Type Cards */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6">
           {userTypes.map((userType, index) => (
             <motion.div
               key={userType.id}
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 * index, ease: "easeOut" }}
-              className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
+              className="bg-white rounded-xl p-4 shadow-md border border-gray-100"
             >
               {/* Single Icon */}
-              <div className="mb-6">
-                <div className={`w-12 h-12 ${userType.bgColor} rounded-xl flex items-center justify-center`}>
+              <div className="mb-4">
+                <div className={`w-10 h-10 ${userType.bgColor} rounded-lg flex items-center justify-center`}>
                   {userType.icon}
                 </div>
               </div>
 
               {/* Title */}
-              <h3 className="text-lg font-semibold text-gray-700 mb-3">
+              <h3 className="text-base font-semibold text-gray-700 mb-2">
                 {userType.title}
               </h3>
 
               {/* Description */}
-              <p className="text-gray-600 mb-6 text-sm leading-relaxed">
+              <p className="text-gray-600 mb-4 text-xs leading-relaxed">
                 {userType.description}
               </p>
 
@@ -140,7 +140,7 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Bottom Stats */}
-        <div className="grid md:grid-cols-3 gap-8 mt-16">
+        <div className="grid md:grid-cols-3 gap-6 mt-10">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}

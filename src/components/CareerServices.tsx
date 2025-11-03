@@ -207,21 +207,21 @@ export default function CareerServices() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-left mb-10"
         >
-          <div className="inline-flex items-center px-4 py-2 bg-[#5e17eb]/10 rounded-full text-[#5e17eb] font-medium text-sm mb-6">
+          <div className="inline-flex items-center px-3 py-1 bg-[#5e17eb]/10 rounded-full text-[#5e17eb] font-medium text-sm mb-4">
             🚀 Career Services
           </div>
-          <h2 className="text-4xl lg:text-5xl font-semibold text-gray-700 mb-6 leading-tight">
+          <h2 className="text-3xl lg:text-4xl font-semibold text-gray-700 mb-4 leading-tight">
             Accelerate Your Career Growth
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-gray-600 max-w-2xl leading-relaxed">
             Get personalized career services from industry experts to land your dream job faster
           </p>
         </motion.div>
 
         {/* Service Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {services.map((service, index) => (
               <motion.button
                 key={service.id}
@@ -231,10 +231,10 @@ export default function CareerServices() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100 hover:border-[#5e17eb]/30 hover:shadow-2xl transition-all duration-500 text-left group relative"
+                className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:border-[#5e17eb]/30 hover:shadow-xl transition-all duration-500 text-left group relative"
               >
                 {/* Image Section */}
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-36 overflow-hidden">
                   <img 
                     src={service.image} 
                     alt={service.title}
@@ -254,11 +254,11 @@ export default function CareerServices() {
                 </div>
 
                 {/* Content Section */}
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-700 mb-2 group-hover:text-[#5e17eb] transition-colors duration-300">
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-2 group-hover:text-[#5e17eb] transition-colors duration-300">
                     {service.title}
                   </h3>
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                  <p className="text-gray-600 text-xs mb-3 leading-relaxed">
                     {service.shortDesc}
                   </p>
                   
@@ -284,7 +284,7 @@ export default function CareerServices() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="mt-16 bg-white/60 backdrop-blur-sm rounded-3xl p-8 border border-white/20 shadow-xl"
+          className="mt-10 bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg"
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
