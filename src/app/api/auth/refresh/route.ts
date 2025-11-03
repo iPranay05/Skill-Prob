@@ -1,24 +1,45 @@
-import { NextRequest } from 'next/server';
-import { AuthService } from '@/lib/auth';
-import { ErrorHandler, ValidationError, validateRequired } from '@/lib/errors';
+import { NextRequest, NextResponse } from 'next/server';
+import { AuthService } from '../../../../lib/auth';
 
+/**
+ * POST /api/auth/refresh - Refresh access token using refresh token
+ */
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { refreshToken } = body;
+    const { refreshToken } = await request.json();
 
-    // Validate required fields
-    validateRequired(body, ['refreshToken']);
+    if (!refreshToken) {
+      return NextResponse.json(
+        { success: false, error: 'Refresh token is required' },
+        { status: 400 }
+      );
+    }
 
     // Refresh the access token
     const newTokens = await AuthService.refreshAccessToken(refreshToken);
 
-    return ErrorHandler.success(
-      { tokens: newTokens },
-      'Tokens refreshed successfully'
-    );
+    return NextResponse.json({
+      success: true,
+      data: {
+        accessToken: newTokens.accessToken,
+        refreshToken: newTokens.refreshToken
+      }
+    });
 
   } catch (error) {
-    return ErrorHandler.handle(error);
+    console.error('Token refresh error:', error);
+
+    // Check if it's a specific auth error
+    if (error instanceof Error && error.message.includes('Invalid or expired refresh token')) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid or expired refresh token' },
+        { status: 401 }
+      );
+    }
+
+    return NextResponse.json(
+      { success: false, error: 'Failed to refresh token' },
+      { status: 500 }
+    );
   }
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { authenticatedFetch } from '@/lib/clientAuth';
 
 interface Course {
   id: string;
@@ -34,21 +35,9 @@ export default function CreateLiveSessionPage() {
 
   const fetchCourses = async () => {
     try {
-      const token = localStorage.getItem('accessToken');
-      console.log('Token exists:', !!token);
-      if (!token) {
-        console.log('No token found, redirecting to login');
-        router.push('/auth/login');
-        return;
-      }
-
-      // First get the current user info to get mentor ID
+      // First get the current user info to verify mentor role
       console.log('Fetching user info...');
-      const userResponse = await fetch('/api/auth/me', {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      const userResponse = await authenticatedFetch('/api/auth/me');
 
       console.log('User response status:', userResponse.status);
       if (!userResponse.ok) {
@@ -60,13 +49,7 @@ export default function CreateLiveSessionPage() {
 
       const userData = await userResponse.json();
       console.log('User data:', userData);
-      const mentorId = userData.user?.id;
-      const userRole = userData.user?.role;
-
-      if (!mentorId) {
-        setError('Unable to identify mentor');
-        return;
-      }
+      const userRole = userData.data?.role;
 
       // Check if user is a mentor
       if (userRole !== 'mentor') {
@@ -75,23 +58,25 @@ export default function CreateLiveSessionPage() {
       }
 
       // Fetch courses created by this mentor only
-      const response = await fetch(`/api/courses?mentorId=${mentorId}&status=published`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      const response = await authenticatedFetch('/api/mentor/courses?status=published');
 
       if (response.ok) {
         const data = await response.json();
+        console.log('Courses data:', data);
         // The API returns { success: true, data: { courses: [...], total: ..., page: ... } }
         setCourses(data.data?.courses || []);
       } else {
-        console.error('Failed to fetch courses:', response.status);
+        const errorData = await response.json();
+        console.error('Failed to fetch courses:', response.status, errorData);
         setError('Failed to load your courses');
       }
     } catch (error) {
       console.error('Error fetching courses:', error);
-      setError('Failed to load your courses');
+      if (error instanceof Error && error.message === 'No access token available') {
+        router.push('/auth/login');
+      } else {
+        setError('Failed to load your courses');
+      }
     }
   };
 
@@ -167,12 +152,10 @@ export default function CreateLiveSessionPage() {
     setLoading(true);
 
     try {
-      const token = localStorage.getItem('accessToken');
-      const response = await fetch('/api/live-sessions', {
+      const response = await authenticatedFetch('/api/live-sessions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(formData),
       });

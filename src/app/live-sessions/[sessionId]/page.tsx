@@ -60,28 +60,28 @@ export default function LiveSessionPage() {
   const params = useParams();
   const router = useRouter();
   const sessionId = params.sessionId as string;
-  
+
   const [session, setSession] = useState<LiveSession | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>('');
   const [userRole, setUserRole] = useState<string>('');
   const [userId, setUserId] = useState<string>('');
   const [hasJoined, setHasJoined] = useState(false);
-  
+
   // Chat state
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [activeTab, setActiveTab] = useState<'chat' | 'qa' | 'polls'>('chat');
-  
+
   // Q&A state
   const [qaItems, setQaItems] = useState<QAItem[]>([]);
   const [newQuestion, setNewQuestion] = useState('');
   const [isAnonymous, setIsAnonymous] = useState(false);
-  
+
   // Polls state
   const [polls, setPolls] = useState<Poll[]>([]);
   const [pollResponses, setPollResponses] = useState<Record<string, any>>({});
-  
+
   // Socket connection
   const socketRef = useRef<Socket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -89,7 +89,7 @@ export default function LiveSessionPage() {
   useEffect(() => {
     fetchSession();
     fetchUserProfile();
-    
+
     return () => {
       if (socketRef.current) {
         socketRef.current.disconnect();
@@ -143,6 +143,7 @@ export default function LiveSessionPage() {
 
       if (response.ok) {
         const data = await response.json();
+        console.log('Session data:', data.data); // Debug log
         setSession(data.data);
       } else {
         setError('Session not found');
@@ -231,7 +232,15 @@ export default function LiveSessionPage() {
       });
 
       if (response.ok) {
+        const data = await response.json();
         setHasJoined(true);
+        // Refresh session data to get updated status
+        fetchSession();
+        // If Google Meet link is provided, optionally open it
+        if (data.data?.googleMeetLink) {
+          // You can uncomment this to auto-open Google Meet
+          // window.open(data.data.googleMeetLink, '_blank');
+        }
       } else {
         const data = await response.json();
         setError(data.error || 'Failed to join session');
@@ -280,8 +289,38 @@ export default function LiveSessionPage() {
     const now = new Date();
     const start = new Date(session.scheduledStartTime);
     const end = new Date(session.scheduledEndTime);
-    return now >= start && now <= end && (session.status === 'live' || session.status === 'scheduled');
+
+    // Can join if:
+    // 1. Current time is within session window
+    // 2. Session is live or scheduled (not cancelled or completed)
+    return now >= start && now <= end &&
+      (session.status === 'live' || session.status === 'scheduled');
   };
+
+  const getSessionStatusDisplay = () => {
+    if (!session) return 'Unknown';
+
+    const now = new Date();
+    const start = new Date(session.scheduledStartTime);
+    const end = new Date(session.scheduledEndTime);
+
+    // If session is marked as live or if we're within the time window and it's scheduled
+    if (session.status === 'live' || (session.status === 'scheduled' && now >= start && now <= end)) {
+      return 'live';
+    }
+
+    if (now < start) {
+      return 'scheduled';
+    }
+
+    if (now > end) {
+      return 'completed';
+    }
+
+    return session.status;
+  };
+
+  const sessionDisplayStatus = getSessionStatusDisplay();
 
   if (loading) {
     return (
@@ -336,7 +375,7 @@ export default function LiveSessionPage() {
               <span>Back to Sessions</span>
             </button>
           </div>
-          
+
           <div className="relative overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-3xl p-8">
             <div className="absolute inset-0 bg-black opacity-10"></div>
             <div className="relative">
@@ -344,12 +383,14 @@ export default function LiveSessionPage() {
                 <div className="flex-1">
                   <div className="flex items-center space-x-3 mb-2">
                     <h1 className="text-4xl font-bold text-white">{session.title}</h1>
-                    <span className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold ${
-                      session.status === 'live' ? 'bg-green-100 text-green-800 animate-pulse' :
-                      session.status === 'scheduled' ? 'bg-blue-100 text-blue-800' :
-                      'bg-gray-100 text-gray-800'
-                    }`}>
-                      {session.status === 'live' ? '🔴 LIVE NOW' : `📅 ${session.status.toUpperCase()}`}
+                    <span className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold ${sessionDisplayStatus === 'live' ? 'bg-green-100 text-green-800 animate-pulse' :
+                        sessionDisplayStatus === 'scheduled' ? 'bg-blue-100 text-blue-800' :
+                          sessionDisplayStatus === 'completed' ? 'bg-gray-100 text-gray-800' :
+                            'bg-gray-100 text-gray-800'
+                      }`}>
+                      {sessionDisplayStatus === 'live' ? '🔴 LIVE NOW' :
+                        sessionDisplayStatus === 'completed' ? '✅ COMPLETED' :
+                          `📅 ${sessionDisplayStatus.toUpperCase()}`}
                     </span>
                   </div>
                   <p className="text-xl text-indigo-100 mb-4">{session.description}</p>
@@ -376,7 +417,7 @@ export default function LiveSessionPage() {
                       📹 Join Google Meet
                     </a>
                   )}
-                  
+
                   {!hasJoined && canJoinSession() && userRole === 'student' && (
                     <button
                       onClick={joinSession}
@@ -388,15 +429,40 @@ export default function LiveSessionPage() {
                 </div>
               </div>
             </div>
-            
+
             {/* Floating Elements */}
             <div className="absolute top-4 right-20 w-16 h-16 bg-yellow-400 rounded-full opacity-20 animate-bounce"></div>
             <div className="absolute bottom-4 left-20 w-12 h-12 bg-pink-400 rounded-full opacity-20 animate-pulse"></div>
           </div>
+
+          {/* Mobile Action Buttons */}
+          <div className="lg:hidden mt-6 flex flex-col space-y-3">
+            {session.googleMeetLink && (sessionDisplayStatus === 'live' || canJoinSession()) && (
+              <a
+                href={session.googleMeetLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-4 rounded-2xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl text-center flex items-center justify-center space-x-2"
+              >
+                <span>📹</span>
+                <span>Join Google Meet</span>
+              </a>
+            )}
+
+            {!hasJoined && canJoinSession() && userRole === 'student' && (
+              <button
+                onClick={joinSession}
+                className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-4 rounded-2xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+              >
+                <span>🚀</span>
+                <span>Join Session</span>
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Main Content */}
-        {hasJoined || userRole === 'mentor' ? (
+        {(hasJoined && userRole === 'student') || userRole === 'mentor' ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Session Info */}
             <div className="lg:col-span-1">
@@ -409,28 +475,30 @@ export default function LiveSessionPage() {
                     <h3 className="text-xl font-bold text-white">Session Info</h3>
                   </div>
                 </div>
-                
+
                 <div className="p-6 space-y-4">
                   <div className="bg-gradient-to-r from-gray-50 to-indigo-50 rounded-xl p-4">
                     <div className="flex items-center justify-between">
                       <span className="font-semibold text-gray-700">Status:</span>
-                      <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                        session.status === 'live' ? 'bg-green-100 text-green-800 animate-pulse' :
-                        session.status === 'scheduled' ? 'bg-blue-100 text-blue-800' :
-                        'bg-gray-100 text-gray-800'
-                      }`}>
-                        {session.status === 'live' ? '🔴 LIVE' : session.status.toUpperCase()}
+                      <span className={`px-3 py-1 rounded-full text-sm font-semibold ${sessionDisplayStatus === 'live' ? 'bg-green-100 text-green-800 animate-pulse' :
+                          sessionDisplayStatus === 'scheduled' ? 'bg-blue-100 text-blue-800' :
+                            sessionDisplayStatus === 'completed' ? 'bg-gray-100 text-gray-800' :
+                              'bg-gray-100 text-gray-800'
+                        }`}>
+                        {sessionDisplayStatus === 'live' ? '🔴 LIVE' :
+                          sessionDisplayStatus === 'completed' ? '✅ COMPLETED' :
+                            sessionDisplayStatus.toUpperCase()}
                       </span>
                     </div>
                   </div>
-                  
+
                   <div className="bg-gradient-to-r from-gray-50 to-purple-50 rounded-xl p-4">
                     <div className="flex items-center justify-between">
                       <span className="font-semibold text-gray-700">Max Participants:</span>
                       <span className="text-gray-900 font-bold">{session.maxParticipants}</span>
                     </div>
                   </div>
-                  
+
                   <div className="bg-gradient-to-r from-gray-50 to-green-50 rounded-xl p-4">
                     <span className="font-semibold text-gray-700 block mb-3">Interactive Features:</span>
                     <div className="space-y-2">
@@ -473,11 +541,10 @@ export default function LiveSessionPage() {
                     {session.chatEnabled && (
                       <button
                         onClick={() => setActiveTab('chat')}
-                        className={`py-4 px-6 font-semibold text-sm rounded-t-xl transition-all duration-200 ${
-                          activeTab === 'chat'
+                        className={`py-4 px-6 font-semibold text-sm rounded-t-xl transition-all duration-200 ${activeTab === 'chat'
                             ? 'bg-white text-indigo-600 shadow-lg'
                             : 'text-white/80 hover:text-white hover:bg-white/10'
-                        }`}
+                          }`}
                       >
                         💬 Chat
                       </button>
@@ -485,11 +552,10 @@ export default function LiveSessionPage() {
                     {session.qaEnabled && (
                       <button
                         onClick={() => setActiveTab('qa')}
-                        className={`py-4 px-6 font-semibold text-sm rounded-t-xl transition-all duration-200 ${
-                          activeTab === 'qa'
+                        className={`py-4 px-6 font-semibold text-sm rounded-t-xl transition-all duration-200 ${activeTab === 'qa'
                             ? 'bg-white text-indigo-600 shadow-lg'
                             : 'text-white/80 hover:text-white hover:bg-white/10'
-                        }`}
+                          }`}
                       >
                         ❓ Q&A
                       </button>
@@ -497,11 +563,10 @@ export default function LiveSessionPage() {
                     {session.pollingEnabled && (
                       <button
                         onClick={() => setActiveTab('polls')}
-                        className={`py-4 px-6 font-semibold text-sm rounded-t-xl transition-all duration-200 ${
-                          activeTab === 'polls'
+                        className={`py-4 px-6 font-semibold text-sm rounded-t-xl transition-all duration-200 ${activeTab === 'polls'
                             ? 'bg-white text-indigo-600 shadow-lg'
                             : 'text-white/80 hover:text-white hover:bg-white/10'
-                        }`}
+                          }`}
                       >
                         📊 Polls
                       </button>
@@ -537,7 +602,7 @@ export default function LiveSessionPage() {
                         ))}
                         <div ref={messagesEndRef} />
                       </div>
-                      
+
                       <div className="flex space-x-2">
                         <input
                           type="text"
@@ -609,11 +674,10 @@ export default function LiveSessionPage() {
                                   </div>
                                 )}
                               </div>
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                qa.status === 'answered' ? 'bg-green-100 text-green-800' :
-                                qa.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                                'bg-gray-100 text-gray-800'
-                              }`}>
+                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${qa.status === 'answered' ? 'bg-green-100 text-green-800' :
+                                  qa.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                                    'bg-gray-100 text-gray-800'
+                                }`}>
                                 {qa.status}
                               </span>
                             </div>
@@ -661,12 +725,51 @@ export default function LiveSessionPage() {
           </div>
         ) : (
           <div className="text-center py-12">
-            <p className="text-gray-600 mb-4">
-              {canJoinSession() 
-                ? 'Click "Join Session" to participate in the live session'
-                : 'This session is not currently available for joining'
-              }
-            </p>
+            <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 max-w-md mx-auto">
+              {sessionDisplayStatus === 'live' && canJoinSession() ? (
+                <div>
+                  <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">🔴</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Session is Live!</h3>
+                  <p className="text-gray-600 mb-6">Click "Join Session" to participate in the live session</p>
+                  <button
+                    onClick={joinSession}
+                    className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-200 shadow-lg hover:shadow-xl font-semibold"
+                  >
+                    🚀 Join Session
+                  </button>
+                </div>
+              ) : sessionDisplayStatus === 'scheduled' ? (
+                <div>
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">📅</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Session Scheduled</h3>
+                  <p className="text-gray-600 mb-2">This session will start at:</p>
+                  <p className="text-lg font-semibold text-indigo-600 mb-4">
+                    {new Date(session.scheduledStartTime).toLocaleString()}
+                  </p>
+                  <p className="text-sm text-gray-500">Come back when the session starts to join!</p>
+                </div>
+              ) : sessionDisplayStatus === 'completed' ? (
+                <div>
+                  <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">✅</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Session Completed</h3>
+                  <p className="text-gray-600">This session has already ended.</p>
+                </div>
+              ) : (
+                <div>
+                  <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">❌</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Session Unavailable</h3>
+                  <p className="text-gray-600">This session is not currently available for joining.</p>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>

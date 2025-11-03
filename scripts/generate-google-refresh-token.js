@@ -1,5 +1,9 @@
 const { google } = require('googleapis');
 const readline = require('readline');
+const path = require('path');
+
+// Load environment variables from .env.local
+require('dotenv').config({ path: path.join(__dirname, '../.env.local') });
 
 // Required scopes for Google Calendar and Meet
 const SCOPES = [
