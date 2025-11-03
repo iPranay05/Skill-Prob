@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, FileText, Linkedin, Clock, Users, ArrowRight } from 'lucide-react';
+import { X, FileText, Linkedin, Clock, Users, ArrowRight, Star, Zap, Target, Award } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 interface FormData {
@@ -32,6 +32,8 @@ export default function CareerServices() {
       title: 'Resume Review',
       icon: <FileText className="w-6 h-6" />,
       shortDesc: 'Get expert feedback on your resume',
+      image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=300&fit=crop&crop=faces',
+      bgGradient: 'from-blue-500 to-purple-600',
       content: {
         title: 'Professional Resume Review Service',
         benefits: [
@@ -45,9 +47,11 @@ export default function CareerServices() {
     },
     {
       id: 'linkedin-optimization',
-      title: 'LinkedIn Optimization',
+      title: 'LinkedIn Boost',
       icon: <Linkedin className="w-6 h-6" />,
       shortDesc: 'Transform your LinkedIn profile',
+      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop&crop=center',
+      bgGradient: 'from-indigo-500 to-blue-600',
       content: {
         title: 'LinkedIn Profile Optimization Service',
         benefits: [
@@ -61,9 +65,11 @@ export default function CareerServices() {
     },
     {
       id: 'interview-prep',
-      title: 'Last Minute Interview Preparation',
+      title: 'Interview Prep',
       icon: <Clock className="w-6 h-6" />,
       shortDesc: 'Quick interview preparation',
+      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=300&fit=crop&crop=faces',
+      bgGradient: 'from-green-500 to-teal-600',
       content: {
         title: 'Last-Minute Interview Preparation Service',
         benefits: [
@@ -77,9 +83,11 @@ export default function CareerServices() {
     },
     {
       id: 'counseling',
-      title: 'One on One Counseling',
+      title: 'Counseling',
       icon: <Users className="w-6 h-6" />,
       shortDesc: 'Personalized career guidance',
+      image: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop&crop=faces',
+      bgGradient: 'from-purple-500 to-pink-600',
       content: {
         title: 'One-on-One Career Mentorship Program',
         benefits: [
@@ -189,46 +197,126 @@ export default function CareerServices() {
   };
 
   return (
-    <section className="py-16 px-6 bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-20 px-6 bg-gradient-to-br from-gray-50 via-white to-purple-50 relative overflow-hidden">
+      {/* Background Decorations */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-[#5e17eb]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+      
+      <div className="max-w-7xl mx-auto relative">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center px-4 py-2 bg-[#5e17eb]/10 rounded-full text-[#5e17eb] font-medium text-sm mb-6">
+            🚀 Career Services
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-semibold text-gray-700 mb-6 leading-tight">
             Accelerate Your Career Growth
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Get personalized career services from industry experts to land your dream job faster
           </p>
+        </motion.div>
+
+        {/* Service Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, index) => (
+              <motion.button
+                key={service.id}
+                onClick={() => setActiveService(service.id)}
+                whileHover={{ scale: 1.05, y: -8 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100 hover:border-[#5e17eb]/30 hover:shadow-2xl transition-all duration-500 text-left group relative"
+              >
+                {/* Image Section */}
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    className="w-full h-full object-cover"
+                  />
+                  
+                  {/* Floating Icon with Pulse Effect */}
+                  <div className="absolute top-4 right-4 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center text-white border border-white/30 group-hover:scale-110 transition-transform duration-300">
+                    {service.icon}
+                    <div className="absolute inset-0 bg-white/10 rounded-2xl animate-pulse"></div>
+                  </div>
+
+
+
+                  {/* Overlay Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                </div>
+
+                {/* Content Section */}
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-700 mb-2 group-hover:text-[#5e17eb] transition-colors duration-300">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                    {service.shortDesc}
+                  </p>
+                  
+                  {/* CTA Button */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-[#5e17eb] font-semibold text-sm group-hover:text-[#4a12c4] transition-colors duration-300">
+                      Learn more
+                    </span>
+                    <div className="w-8 h-8 bg-[#5e17eb]/10 rounded-full flex items-center justify-center group-hover:bg-[#5e17eb] transition-all duration-300">
+                      <ArrowRight className="w-4 h-4 text-[#5e17eb] group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Hover Effect Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#5e17eb]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+              </motion.button>
+            ))}
         </div>
 
-        {/* Service Buttons */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service) => (
-            <motion.button
-              key={service.id}
-              onClick={() => setActiveService(service.id)}
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 hover:border-[#5e17eb] hover:shadow-xl transition-all duration-300 text-left group relative"
-            >
-              <div className="w-12 h-12 bg-[#5e17eb]/10 rounded-xl flex items-center justify-center text-[#5e17eb] mb-4 group-hover:bg-[#5e17eb] group-hover:text-white transition-colors duration-300">
-                {service.icon}
+        {/* Stats Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mt-16 bg-white/60 backdrop-blur-sm rounded-3xl p-8 border border-white/20 shadow-xl"
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-[#5e17eb]/10 rounded-2xl flex items-center justify-center text-[#5e17eb] mx-auto mb-3">
+                <Target className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#5e17eb] transition-colors duration-300">
-                {service.title}
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                {service.shortDesc}
-              </p>
-              <div className="flex items-center justify-between">
-                <span className="text-[#5e17eb] font-medium text-sm group-hover:text-[#4a12c4] transition-colors duration-300">
-                  Learn More
-                </span>
-                <ArrowRight className="w-4 h-4 text-[#5e17eb] group-hover:text-[#4a12c4] group-hover:translate-x-1 transition-all duration-300" />
+              <div className="text-2xl font-semibold text-gray-700 mb-1">95%</div>
+              <div className="text-sm text-gray-600">Success Rate</div>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-[#5e17eb]/10 rounded-2xl flex items-center justify-center text-[#5e17eb] mx-auto mb-3">
+                <Users className="w-6 h-6" />
               </div>
-            </motion.button>
-          ))}
-        </div>
+              <div className="text-2xl font-semibold text-gray-700 mb-1">2,500+</div>
+              <div className="text-sm text-gray-600">Students Helped</div>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-[#5e17eb]/10 rounded-2xl flex items-center justify-center text-[#5e17eb] mx-auto mb-3">
+                <Zap className="w-6 h-6" />
+              </div>
+              <div className="text-2xl font-semibold text-gray-700 mb-1">24hrs</div>
+              <div className="text-sm text-gray-600">Quick Response</div>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-[#5e17eb]/10 rounded-2xl flex items-center justify-center text-[#5e17eb] mx-auto mb-3">
+                <Award className="w-6 h-6" />
+              </div>
+              <div className="text-2xl font-semibold text-gray-700 mb-1">Expert</div>
+              <div className="text-sm text-gray-600">Industry Pros</div>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Modal */}
         <AnimatePresence>
@@ -244,7 +332,7 @@ export default function CareerServices() {
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+                className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-100"
                 onClick={(e) => e.stopPropagation()}
               >
                 {(() => {
@@ -253,115 +341,142 @@ export default function CareerServices() {
 
                   return (
                     <div className="p-8">
-                      {/* Header */}
-                      <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 bg-[#5e17eb]/10 rounded-lg flex items-center justify-center text-[#5e17eb]">
-                            {service.icon}
+                      {/* Header with Background */}
+                      <div className="relative mb-8">
+                        <div className={`absolute inset-0 bg-gradient-to-r ${service.bgGradient} rounded-t-3xl`}></div>
+                        <div className="relative p-8 text-white">
+                          <button
+                            onClick={closeModal}
+                            className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors duration-200 border border-white/30"
+                          >
+                            <X className="w-5 h-5" />
+                          </button>
+                          
+                          <div className="flex items-center space-x-4 mb-4">
+                            <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center text-white border border-white/30">
+                              {service.icon}
+                            </div>
+                            <div>
+                              <h3 className="text-3xl font-semibold mb-2">
+                                {service.content.title}
+                              </h3>
+                              <div className="flex items-center space-x-2">
+                                <Star className="w-4 h-4 text-yellow-300 fill-current" />
+                                <span className="text-white/90 text-sm">Expert Service</span>
+                              </div>
+                            </div>
                           </div>
-                          <h3 className="text-2xl font-bold text-gray-900">
-                            {service.content.title}
-                          </h3>
                         </div>
-                        <button
-                          onClick={closeModal}
-                          className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors duration-200"
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
                       </div>
 
                       {/* Content */}
-                      <div className="mb-8">
-                        <h4 className="text-lg font-semibold text-gray-900 mb-4">What You Get:</h4>
-                        <ul className="space-y-3">
+                      <div className="px-8 mb-8">
+                        <h4 className="text-xl font-semibold text-gray-700 mb-6 flex items-center">
+                          <Award className="w-5 h-5 text-[#5e17eb] mr-2" />
+                          What You Get:
+                        </h4>
+                        <div className="space-y-4">
                           {service.content.benefits.map((benefit, index) => (
-                            <li key={index} className="flex items-start space-x-3">
-                              <div className="w-2 h-2 bg-[#5e17eb] rounded-full mt-2 flex-shrink-0"></div>
-                              <span className="text-gray-700">{benefit}</span>
-                            </li>
+                            <motion.div 
+                              key={index}
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: index * 0.1 }}
+                              className="flex items-start space-x-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 hover:border-[#5e17eb]/30 transition-colors duration-300"
+                            >
+                              <div className="w-6 h-6 bg-[#5e17eb] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <div className="w-2 h-2 bg-white rounded-full"></div>
+                              </div>
+                              <span className="text-gray-700 leading-relaxed">{benefit}</span>
+                            </motion.div>
                           ))}
-                        </ul>
+                        </div>
                       </div>
 
                       {/* Form */}
-                      <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="px-8">
+                        <div className="bg-gradient-to-r from-[#5e17eb]/5 to-blue-500/5 rounded-2xl p-6 mb-6">
+                          <h4 className="text-lg font-medium text-gray-700 mb-2">Ready to Get Started?</h4>
+                          <p className="text-gray-600 text-sm">Fill out the form below and we'll get back to you within 24 hours!</p>
+                        </div>
+                        
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                              <label className="block text-sm font-semibold text-gray-700 mb-3">
+                                Full Name *
+                              </label>
+                              <input
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleInputChange}
+                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                placeholder="Enter your full name"
+                                required
+                              />
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-semibold text-gray-700 mb-3">
+                                Phone Number *
+                              </label>
+                              <input
+                                type="tel"
+                                name="phone"
+                                value={formData.phone}
+                                onChange={handleInputChange}
+                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                placeholder="Enter your phone number"
+                                required
+                              />
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-semibold text-gray-700 mb-3">
+                                Email Address *
+                              </label>
+                              <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                placeholder="Enter your email address"
+                                required
+                              />
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-semibold text-gray-700 mb-3">
+                                City *
+                              </label>
+                              <input
+                                type="text"
+                                name="city"
+                                value={formData.city}
+                                onChange={handleInputChange}
+                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                placeholder="Enter your city"
+                                required
+                              />
+                            </div>
+                          </div>
+
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                              Full Name *
+                            <label className="block text-sm font-semibold text-gray-700 mb-3">
+                              College Name *
                             </label>
                             <input
                               type="text"
-                              name="name"
-                              value={formData.name}
+                              name="collegeName"
+                              value={formData.collegeName}
                               onChange={handleInputChange}
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-900"
-                              placeholder="Enter your full name"
+                              className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                              placeholder="Enter your college name"
                               required
                             />
                           </div>
-
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                              Phone Number *
-                            </label>
-                            <input
-                              type="tel"
-                              name="phone"
-                              value={formData.phone}
-                              onChange={handleInputChange}
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-900"
-                              placeholder="Enter your phone number"
-                              required
-                            />
-                          </div>
-
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                              Email Address *
-                            </label>
-                            <input
-                              type="email"
-                              name="email"
-                              value={formData.email}
-                              onChange={handleInputChange}
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-900"
-                              placeholder="Enter your email address"
-                              required
-                            />
-                          </div>
-
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                              City *
-                            </label>
-                            <input
-                              type="text"
-                              name="city"
-                              value={formData.city}
-                              onChange={handleInputChange}
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-900"
-                              placeholder="Enter your city"
-                              required
-                            />
-                          </div>
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            College Name *
-                          </label>
-                          <input
-                            type="text"
-                            name="collegeName"
-                            value={formData.collegeName}
-                            onChange={handleInputChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-900"
-                            placeholder="Enter your college name"
-                            required
-                          />
-                        </div>
 
                         {/* Error Message */}
                         {error && (
@@ -377,22 +492,28 @@ export default function CareerServices() {
                           </div>
                         )}
 
-                        {/* Submit Button */}
-                        <button
-                          type="submit"
-                          disabled={loading}
-                          className="w-full py-3 px-4 bg-[#5e17eb] text-white font-semibold rounded-lg hover:bg-[#4a12c4] focus:outline-none focus:ring-2 focus:ring-[#5e17eb] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
-                        >
-                          {loading ? (
-                            <div className="flex items-center justify-center">
-                              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                              Submitting...
-                            </div>
-                          ) : (
-                            `Request ${service.title}`
-                          )}
-                        </button>
-                      </form>
+                          {/* Submit Button */}
+                          <motion.button
+                            type="submit"
+                            disabled={loading}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className={`w-full py-4 px-6 bg-gradient-to-r ${service.bgGradient} text-white font-bold rounded-xl hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#5e17eb] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center space-x-2`}
+                          >
+                            {loading ? (
+                              <>
+                                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                <span>Submitting...</span>
+                              </>
+                            ) : (
+                              <>
+                                <span>Request {service.title}</span>
+                                <ArrowRight className="w-5 h-5" />
+                              </>
+                            )}
+                          </motion.button>
+                        </form>
+                      </div>
                     </div>
                   );
                 })()}

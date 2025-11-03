@@ -39,7 +39,7 @@ export default function HomePage() {
                   initial={{ y: 50, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                  className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-gray-900"
+                  className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-gray-700"
                 >
                   <span className="block">Transform Your</span>
                   <span className="block">Skills, Transform</span>
@@ -131,7 +131,7 @@ export default function HomePage() {
                         </svg>
                       </div>
                       <div>
-                        <div className="text-2xl font-black text-grey-900">50k</div>
+                        <div className="text-2xl font-bold text-gray-700">50k</div>
                         <div className="text-sm font-semibold text-gray-600">Active Learners</div>
                       </div>
                     </div>
@@ -152,7 +152,7 @@ export default function HomePage() {
                         </svg>
                       </div>
                       <div>
-                        <div className="text-2xl font-black text-gray-900">10K+</div>
+                        <div className="text-2xl font-bold text-gray-700">10K+</div>
                         <div className="text-sm font-semibold text-gray-600">Certifications</div>
                       </div>
                     </div>
@@ -182,13 +182,13 @@ export default function HomePage() {
             {/* Tag */}
             <div className="inline-flex items-center gap-2 px-5 py-3 bg-white rounded-full border-2 border-black mb-8">
               <div className="w-4 h-4 rounded-full bg-[#5e17eb]"></div>
-              <span className="text-sm font-black text-[#5e17eb]">
+              <span className="text-sm font-semibold text-[#5e17eb]">
                 CAMPUS AMBASSADOR PROGRAM
               </span>
             </div>
 
             {/* Main Heading */}
-            <h2 className="text-6xl lg:text-7xl font-black leading-tight mb-8 text-black">
+            <h2 className="text-6xl lg:text-7xl font-semibold leading-tight mb-8 text-gray-700">
               <span className="block">Earn Money Online</span>
               <span className="block text-[#5e17eb]">
                 While You Learn
@@ -196,7 +196,7 @@ export default function HomePage() {
             </h2>
 
             {/* Subheading */}
-            <p className="text-2xl leading-relaxed font-black max-w-4xl mx-auto text-black">
+            <p className="text-2xl leading-relaxed font-medium max-w-4xl mx-auto text-gray-700">
               Become a Skill Probe Campus Ambassador and earn up to ₹500 per referral. Share courses, grow your network, and convert points to real money.
             </p>
           </div>
@@ -212,8 +212,8 @@ export default function HomePage() {
                     <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-black mb-2 text-black">50 Points</h3>
-                <p className="font-semibold text-sm text-black">Per Registration</p>
+                <h3 className="text-2xl font-bold mb-2 text-gray-700">50 Points</h3>
+                <p className="font-semibold text-sm text-gray-700">Per Registration</p>
               </div>
             </div>
 
@@ -225,8 +225,8 @@ export default function HomePage() {
                     <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-black mb-2 text-black">500 Points</h3>
-                <p className="font-semibold text-sm text-black">Per Course Purchase</p>
+                <h3 className="text-2xl font-bold mb-2 text-gray-700">500 Points</h3>
+                <p className="font-semibold text-sm text-gray-700">Per Course Purchase</p>
               </div>
             </div>
 
@@ -238,8 +238,8 @@ export default function HomePage() {
                     <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4h3v4h2v-7.5c0-1.1.9-2 2-2s2 .9 2 2V18h2v-4h3v4h4v2H0v-2h4z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-black mb-2 text-black">₹100 + 10%</h3>
-                <p className="font-semibold text-sm text-black">Ambassador Referral</p>
+                <h3 className="text-2xl font-bold mb-2 text-gray-700">₹100 + 10%</h3>
+                <p className="font-semibold text-sm text-gray-700">Ambassador Referral</p>
               </div>
             </div>
 
@@ -251,15 +251,15 @@ export default function HomePage() {
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-black mb-2 text-black">100 = ₹100</h3>
-                <p className="font-semibold text-sm text-black">Point Conversion</p>
+                <h3 className="text-2xl font-bold mb-2 text-gray-700">100 = ₹100</h3>
+                <p className="font-semibold text-sm text-gray-700">Point Conversion</p>
               </div>
             </div>
           </div>
 
           {/* Milestone Bonuses */}
           <div className="mb-16">
-            <h3 className="text-3xl font-black text-center mb-12 text-black">Milestone Bonuses</h3>
+            <h3 className="text-3xl font-semibold text-center mb-12 text-gray-700">Milestone Bonuses</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 { referrals: '10', bonus: '₹500' },
@@ -269,10 +269,10 @@ export default function HomePage() {
               ].map((milestone, idx: number) => (
                 <div key={idx} className="bg-white border-2 border-black rounded-2xl p-6 text-center">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 bg-[#5e17eb]">
-                    <span className="font-black text-lg text-white">{milestone.referrals}</span>
+                    <span className="font-semibold text-lg text-white">{milestone.referrals}</span>
                   </div>
-                  <h4 className="text-xl font-black mb-1 text-black">{milestone.bonus}</h4>
-                  <p className="font-semibold text-sm text-black">{milestone.referrals} Successful Referrals</p>
+                  <h4 className="text-xl font-bold mb-1 text-gray-700">{milestone.bonus}</h4>
+                  <p className="font-semibold text-sm text-gray-700">{milestone.referrals} Successful Referrals</p>
                 </div>
               ))}
             </div>
@@ -281,10 +281,10 @@ export default function HomePage() {
           {/* CTA Section */}
           <div className="text-center">
             <div className="bg-white border-2 border-black rounded-3xl p-12">
-              <h3 className="text-3xl font-black mb-4 text-black">
+              <h3 className="text-3xl font-semibold mb-4 text-gray-700">
                 Ready to Become an Ambassador?
               </h3>
-              <p className="text-lg mb-8 text-black">
+              <p className="text-lg mb-8 text-gray-700">
                 Join our Campus Ambassador Program and start earning money while you learn!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -321,13 +321,13 @@ export default function HomePage() {
               {/* Tag */}
               <div className="inline-flex items-center gap-2 px-5 py-3 bg-white/40 backdrop-blur-lg rounded-full border-2 border-white/60">
                 <div className="w-4 h-4 rounded-full bg-[#5e17eb]"></div>
-                <span className="text-sm font-black text-[#5e17eb]">
+                <span className="text-sm font-semibold text-[#5e17eb]">
                   HOW IT WORKS
                 </span>
               </div>
 
               {/* Main Heading */}
-              <h2 className="text-6xl lg:text-7xl font-black leading-tight text-gray-900">
+              <h2 className="text-6xl lg:text-7xl font-semibold leading-tight text-gray-700">
                 <span className="block">Start Your</span>
                 <span className="block text-[#5e17eb]">
                   Learning Journey
@@ -335,7 +335,7 @@ export default function HomePage() {
               </h2>
 
               {/* Subheading */}
-              <p className="text-2xl text-gray-900 leading-relaxed font-black max-w-lg mx-auto">
+              <p className="text-2xl text-gray-700 leading-relaxed font-medium max-w-lg mx-auto">
                 Master new skills in just 3 simple steps
               </p>
             </div>
@@ -383,7 +383,7 @@ export default function HomePage() {
                 <div className="min-h-[400px] p-8 rounded-2xl transition-all duration-300 bg-white border-4 border-[#5e17eb] shadow-2xl hover:shadow-3xl hover:-translate-y-2 hover:border-[#4a12c4] hover:scale-105 hover:bg-[#5e17eb]/5">
 
                   {/* Number */}
-                  <div className="text-6xl font-black text-[#5e17eb] mb-4">
+                  <div className="text-6xl font-bold text-[#5e17eb] mb-4">
                     {step.num}
                   </div>
 
@@ -393,13 +393,13 @@ export default function HomePage() {
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-2xl font-black mb-3 text-gray-900">{step.title}</h3>
+                  <h3 className="text-2xl font-semibold mb-3 text-gray-700">{step.title}</h3>
                   <p className="text-base leading-relaxed font-semibold text-gray-600 mb-4">
                     {step.description}
                   </p>
 
                   {/* Arrow */}
-                  <div className="flex items-center gap-2 font-black mt-6 text-[#5e17eb] hover:text-[#4a12c4] transition-colors duration-300">
+                  <div className="flex items-center gap-2 font-semibold mt-6 text-[#5e17eb] hover:text-[#4a12c4] transition-colors duration-300">
                     <span>Learn More</span>
                     <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -430,13 +430,13 @@ export default function HomePage() {
               {/* Tag */}
               <div className="inline-flex items-center gap-2 px-5 py-3 bg-white/40 backdrop-blur-lg rounded-full border-2 border-white/60">
                 <div className="w-4 h-4 rounded-full bg-[#5e17eb]"></div>
-                <span className="text-sm font-black text-[#5e17eb]">
+                <span className="text-sm font-semibold text-[#5e17eb]">
                   SUCCESS STORIES
                 </span>
               </div>
 
               {/* Main Heading */}
-              <h2 className="text-5xl lg:text-6xl font-black leading-tight text-gray-900">
+              <h2 className="text-5xl lg:text-6xl font-semibold leading-tight text-gray-700">
                 <span className="block">Real Stories,</span>
                 <span className="block text-[#5e17eb]">
                   Real Success
@@ -444,23 +444,23 @@ export default function HomePage() {
               </h2>
 
               {/* Subheading */}
-              <p className="text-xl text-gray-900 leading-relaxed font-semibold">
+              <p className="text-xl text-gray-700 leading-relaxed font-semibold">
                 Join 50,000+ learners who transformed their careers with Skill Probe. From beginners to industry experts.
               </p>
 
               {/* Stats */}
               <div className="grid grid-cols-3 gap-6 pt-8">
                 <div className="text-center">
-                  <div className="text-3xl font-black text-black mb-2">50K+</div>
-                  <div className="text-sm font-semibold text-black">Students</div>
+                  <div className="text-3xl font-bold text-gray-700 mb-2">50K+</div>
+                  <div className="text-sm font-semibold text-gray-700">Students</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-black text-black mb-2">95%</div>
-                  <div className="text-sm font-semibold text-black">Success Rate</div>
+                  <div className="text-3xl font-bold text-gray-700 mb-2">95%</div>
+                  <div className="text-sm font-semibold text-gray-700">Success Rate</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-black text-black mb-2">₹8L+</div>
-                  <div className="text-sm font-semibold text-black">Avg Package</div>
+                  <div className="text-3xl font-bold text-gray-700 mb-2">₹8L+</div>
+                  <div className="text-sm font-semibold text-gray-700">Avg Package</div>
                 </div>
               </div>
             </div>
@@ -476,17 +476,17 @@ export default function HomePage() {
                 </div>
 
                 {/* Quote */}
-                <p className="text-xl text-gray-900 font-semibold leading-relaxed mb-8 italic">
+                <p className="text-xl text-gray-700 font-semibold leading-relaxed mb-8 italic">
                   "Skill Probe completely transformed my career. From a confused college student to landing my dream job at Google - this platform made it possible!"
                 </p>
 
                 {/* Author */}
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 bg-[#5e17eb] rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-black text-xl">AS</span>
+                    <span className="text-white font-semibold text-xl">AS</span>
                   </div>
                   <div>
-                    <h4 className="text-xl font-black text-gray-900">Arjun Singh</h4>
+                    <h4 className="text-xl font-semibold text-gray-700">Arjun Singh</h4>
                     <p className="text-[#5e17eb] font-semibold">Software Engineer @ Google</p>
                     <div className="flex items-center gap-1 mt-1">
                       {[...Array(5)].map((_, i) => (
@@ -507,7 +507,7 @@ export default function HomePage() {
 
           {/* Testimonials Carousel Style */}
           <div className="space-y-8">
-            <h3 className="text-3xl font-black text-center text-gray-900 mb-12">More Success Stories</h3>
+            <h3 className="text-3xl font-semibold text-center text-gray-700 mb-12">More Success Stories</h3>
 
             <div className="grid md:grid-cols-2 gap-8">
               {[
@@ -531,7 +531,7 @@ export default function HomePage() {
                 <div key={idx} className="bg-white/15 backdrop-blur-lg border border-white/20 rounded-2xl p-6 hover:bg-white/25 transition-all duration-300 hover:scale-105">
 
                   {/* Quote */}
-                  <p className="text-gray-900 font-semibold mb-6 italic">
+                  <p className="text-gray-700 font-semibold mb-6 italic">
                     "{testimonial.quote}"
                   </p>
 
@@ -539,10 +539,10 @@ export default function HomePage() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-[#5e17eb] rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-white font-black text-sm">{testimonial.initials}</span>
+                        <span className="text-white font-semibold text-sm">{testimonial.initials}</span>
                       </div>
                       <div>
-                        <h4 className="font-black text-gray-900">{testimonial.name}</h4>
+                        <h4 className="font-semibold text-gray-700">{testimonial.name}</h4>
                         <p className="text-sm text-[#5e17eb] font-semibold">{testimonial.role} @ {testimonial.company}</p>
                       </div>
                     </div>
@@ -577,13 +577,13 @@ export default function HomePage() {
               {/* Tag */}
               <div className="inline-flex items-center gap-2 px-5 py-3 bg-white/40 backdrop-blur-lg rounded-full border-2 border-white/60">
                 <div className="w-4 h-4 rounded-full bg-[#5e17eb]"></div>
-                <span className="text-sm font-black text-[#5e17eb]0">
+                <span className="text-sm font-semibold text-[#5e17eb]">
                   FEATURED CATEGORIES
                 </span>
               </div>
 
               {/* Main Heading */}
-              <h2 className="text-6xl lg:text-7xl font-black leading-tight text-gray-900">
+              <h2 className="text-6xl lg:text-7xl font-semibold leading-tight text-gray-700">
                 <span className="block">Explore</span>
                 <span className="block text-[#5e17eb]">
                   In-Demand Skills
@@ -591,7 +591,7 @@ export default function HomePage() {
               </h2>
 
               {/* Subheading */}
-              <p className="text-2xl text-gray-900 leading-relaxed font-black max-w-lg mx-auto">
+              <p className="text-2xl text-gray-700 leading-relaxed font-medium max-w-lg mx-auto">
                 Choose from our most popular skill categories and start your learning journey today
               </p>
             </div>
@@ -683,7 +683,7 @@ export default function HomePage() {
 
               const getTextStyle = (style: string) => {
                 return {
-                  title: "text-xl font-bold text-gray-900 mb-3 group-hover:text-[#5e17eb] transition-colors duration-300",
+                  title: "text-xl font-bold text-gray-700 mb-3 group-hover:text-[#5e17eb] transition-colors duration-300",
                   desc: "text-gray-600 text-sm leading-relaxed mb-4",
                   skill: "text-gray-500 text-xs font-medium"
                 };
@@ -776,7 +776,7 @@ export default function HomePage() {
 
               {/* Main Headline */}
               <div className="space-y-6">
-                <h2 className="text-4xl lg:text-6xl font-black leading-tight text-gray-900">
+                <h2 className="text-4xl lg:text-6xl font-semibold leading-tight text-gray-700">
                   <span className="block">Ready to Master</span>
                   <span className="block text-[#5e17eb]">New Skills?</span>
                 </h2>
@@ -840,7 +840,7 @@ export default function HomePage() {
                 <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-[#5e17eb] mx-auto mb-4">
                   {item.icon}
                 </div>
-                <div className="text-2xl font-black text-gray-900 mb-2">{item.number}</div>
+                <div className="text-2xl font-bold text-gray-700 mb-2">{item.number}</div>
                 <div className="text-gray-600 font-semibold text-sm">{item.label}</div>
               </div>
             ))}

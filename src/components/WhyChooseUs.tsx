@@ -82,7 +82,7 @@ export default function WhyChooseUs() {
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-4xl lg:text-5xl font-bold leading-tight text-gray-900 mb-6"
+            className="text-4xl lg:text-5xl font-bold leading-tight text-gray-700 mb-6"
           >
             Empowering Every Stakeholder in the
             <span className="block text-[#5e17eb]">Education Ecosystem</span>
@@ -117,7 +117,7 @@ export default function WhyChooseUs() {
               </div>
 
               {/* Title */}
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              <h3 className="text-lg font-semibold text-gray-700 mb-3">
                 {userType.title}
               </h3>
 
@@ -147,7 +147,7 @@ export default function WhyChooseUs() {
             transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
             className="text-center"
           >
-            <div className="text-3xl font-bold text-gray-900 mb-2">10K+</div>
+            <div className="text-3xl font-bold text-gray-700 mb-2">10K+</div>
             <p className="text-gray-600">Active Learners</p>
           </motion.div>
 
@@ -157,7 +157,7 @@ export default function WhyChooseUs() {
             transition={{ duration: 0.6, delay: 0.9, ease: "easeOut" }}
             className="text-center"
           >
-            <div className="text-3xl font-bold text-gray-900 mb-2">500+</div>
+            <div className="text-3xl font-bold text-gray-700 mb-2">500+</div>
             <p className="text-gray-600">Partner Companies</p>
           </motion.div>
 
@@ -167,7 +167,7 @@ export default function WhyChooseUs() {
             transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
             className="text-center"
           >
-            <div className="text-3xl font-bold text-gray-900 mb-2">200+</div>
+            <div className="text-3xl font-bold text-gray-700 mb-2">200+</div>
             <p className="text-gray-600">Educational Institutions</p>
           </motion.div>
         </div>
