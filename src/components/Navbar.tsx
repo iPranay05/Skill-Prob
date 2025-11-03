@@ -137,11 +137,41 @@ export default function Navbar() {
                   initial={{ y: -20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.8, duration: 0.4 }}
+                  className="relative"
                 >
-                  <Link href="/live-sessions/create" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
-                    <span className="relative z-10">Create Meet</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
-                  </Link>
+                  <div className="relative group">
+                    <button className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 flex items-center space-x-1">
+                      <span className="relative z-10">Live Sessions</span>
+                      <svg className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                      <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    </button>
+                    
+                    {/* Dropdown Menu */}
+                    <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                      <div className="py-2">
+                        <Link
+                          href="/live-sessions/create"
+                          className="block px-4 py-3 text-gray-700 hover:bg-[#5e17eb]/5 hover:text-[#5e17eb] transition-colors duration-200 flex items-center space-x-3"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                          </svg>
+                          <span>Create Session</span>
+                        </Link>
+                        <Link
+                          href="/live-sessions"
+                          className="block px-4 py-3 text-gray-700 hover:bg-[#5e17eb]/5 hover:text-[#5e17eb] transition-colors duration-200 flex items-center space-x-3"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          </svg>
+                          <span>View Sessions</span>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 </motion.div>
               </>
             ) : user && user.role === 'student' ? (
@@ -162,7 +192,7 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.4 }}
                 >
-                  <Link href="/courses" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/courses/browse" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
                     <span className="relative z-10">Browse Courses</span>
                     <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
                   </Link>
@@ -216,7 +246,7 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.4 }}
                 >
-                  <Link href="/courses" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/courses/browse" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
                     <span className="relative z-10">Courses</span>
                     <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
                   </Link>
@@ -408,7 +438,7 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.6, duration: 0.4 }}
                 >
-                  <Link href="/courses" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/courses/browse" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
                     <span className="relative z-10">Courses</span>
                     <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
                   </Link>
@@ -573,7 +603,14 @@ export default function Navbar() {
                     className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
                     onClick={() => setShowMobileMenu(false)}
                   >
-                    Create Meet
+                    Create Session
+                  </Link>
+                  <Link
+                    href="/live-sessions"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    View Sessions
                   </Link>
                 </>
               ) : user && user.role === 'student' ? (
@@ -587,7 +624,7 @@ export default function Navbar() {
                     Dashboard
                   </Link>
                   <Link
-                    href="/courses"
+                    href="/courses/browse"
                     className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
                     onClick={() => setShowMobileMenu(false)}
                   >
@@ -626,7 +663,7 @@ export default function Navbar() {
                     Dashboard
                   </Link>
                   <Link
-                    href="/courses"
+                    href="/courses/browse"
                     className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
                     onClick={() => setShowMobileMenu(false)}
                   >
@@ -764,7 +801,7 @@ export default function Navbar() {
                     About Us
                   </Link>
                   <Link
-                    href="/courses"
+                    href="/courses/browse"
                     className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
                     onClick={() => setShowMobileMenu(false)}
                   >

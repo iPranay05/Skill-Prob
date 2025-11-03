@@ -362,7 +362,7 @@ export default function ForStudents() {
                 Register Now
               </Link>
               <Link
-                href="/courses"
+                href="/courses/browse"
                 className="px-10 py-4 border-2 font-bold text-lg rounded-xl transition-all duration-300 hover:bg-gray-50"
                 style={{ borderColor: '#000000', color: '#000000' }}
               >

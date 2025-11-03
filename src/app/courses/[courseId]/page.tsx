@@ -62,30 +62,28 @@ export default function CourseDetailPage({ params }: CourseDetailPageProps) {
 
     setEnrolling(true);
     try {
-      const response = await fetch('/api/enrollments', {
+      const response = await fetch(`/api/courses/${courseId}/enroll`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-        },
-        body: JSON.stringify({
-          courseId: courseId,
-          paymentMethod: 'stripe' // Default to Stripe
-        })
+        }
       });
 
       if (!response.ok) {
-        throw new Error('Enrollment failed');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Enrollment failed');
       }
 
       const data = await response.json();
       
-      // Redirect to payment if needed
-      if (data.paymentUrl) {
-        window.location.href = data.paymentUrl;
+      if (data.success) {
+        // Show success message
+        alert(data.data.message || 'Successfully enrolled in course!');
+        // Redirect to student dashboard
+        router.push('/student/dashboard');
       } else {
-        // Direct enrollment success
-        router.push('/student/courses');
+        throw new Error(data.error || 'Enrollment failed');
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Enrollment failed');

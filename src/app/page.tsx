@@ -72,7 +72,7 @@ export default function HomePage() {
                       Start Learning Free
                     </motion.button>
                   </Link>
-                  <Link href="/courses">
+                  <Link href="/courses/browse">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -742,7 +742,7 @@ export default function HomePage() {
 
           {/* View All Categories Button */}
           <div className="text-center mt-12">
-            <Link href="/courses" className="inline-flex items-center px-8 py-4 bg-[#5e17eb] text-white font-semibold rounded-xl hover:bg-[#4a12c4] hover:shadow-lg transition-all duration-300">
+            <Link href="/courses/browse" className="inline-flex items-center px-8 py-4 bg-[#5e17eb] text-white font-semibold rounded-xl hover:bg-[#4a12c4] hover:shadow-lg transition-all duration-300">
               View All Categories
               <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />

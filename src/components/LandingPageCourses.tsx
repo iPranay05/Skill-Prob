@@ -567,7 +567,7 @@ export default function LandingPageCourses() {
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
-                href="/courses"
+                href="/courses/browse"
                 className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300 hover:shadow-lg"
                 style={{ backgroundColor: '#5e17eb', color: '#ffffff' }}
               >

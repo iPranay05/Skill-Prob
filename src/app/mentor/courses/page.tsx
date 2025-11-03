@@ -38,7 +38,7 @@ export default function MentorCourses() {
       }
 
       const result = await response.json();
-      setCourses(result.data);
+      setCourses(result.data.courses || []);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
@@ -204,7 +204,7 @@ export default function MentorCourses() {
               <div key={course.id} className="bg-white rounded-lg shadow-md overflow-hidden">
                 {/* Course Thumbnail */}
                 <div className="h-48 bg-gray-200 relative">
-                  {course.media.thumbnail ? (
+                  {course.media?.thumbnail ? (
                     <img
                       src={course.media.thumbnail}
                       alt={course.title}
@@ -237,17 +237,17 @@ export default function MentorCourses() {
                       <span className="font-medium">Category:</span> {course.category}
                     </div>
                     <div className="text-lg font-bold text-blue-600">
-                      ₹{course.pricing.amount}
+                      ₹{course.pricing.amount || 0}
                     </div>
                   </div>
 
                   <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                     <div>
-                      <span className="font-medium">Enrolled:</span> {course.enrollment.currentEnrollment}
-                      {course.enrollment.maxStudents && ` / ${course.enrollment.maxStudents}`}
+                      <span className="font-medium">Enrolled:</span> {course.enrollment?.currentEnrollment || 0}
+                      {course.enrollment?.maxStudents && ` / ${course.enrollment.maxStudents}`}
                     </div>
                     <div>
-                      <span className="font-medium">Rating:</span> {course.ratings.average.toFixed(1)} ⭐
+                      <span className="font-medium">Rating:</span> {course.ratings?.average?.toFixed(1) || 'N/A'} ⭐
                     </div>
                   </div>
 
