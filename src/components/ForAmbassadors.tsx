@@ -1,9 +1,16 @@
 'use client';
 import Footer from './Footer';
 import Link from 'next/link';
-import { CheckCircle, DollarSign, Users, BarChart3, Share2, Award, Gift, Target, TrendingUp, Star, MessageCircle, Smartphone } from 'lucide-react';
+import { useState } from 'react';
+import { CheckCircle, DollarSign, Users, BarChart3, Share2, Award, Gift, Target, TrendingUp, Star, MessageCircle, Smartphone, ChevronDown, ChevronUp } from 'lucide-react';
 
 export default function ForAmbassadors() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
   const benefits = [
     'Minimum Payout: ₹500 (very achievable!)',
     'Fast Payouts: Weekly or monthly processing',
@@ -153,30 +160,53 @@ export default function ForAmbassadors() {
       {/* Hero Section */}
       <section className="relative py-24 px-6 overflow-visible bg-white">
         {/* Animated background elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#5e17eb]/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#5e17eb]/20 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
         
-        <div className="relative z-10 max-w-7xl mx-auto text-center">
-          {/* Tag */}
-          {/* <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-black mb-8">
-            <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-            <span className="text-sm font-bold uppercase tracking-wide" style={{ color: '#5e17eb' }}>
-              Campus Ambassador Program
-            </span>
-          </div> */}
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            
+            {/* Left Side - Text Content */}
+            <div className="space-y-6">
+              {/* Main Heading */}
+              <h1 className="text-5xl lg:text-6xl font-black leading-tight text-gray-700">
+                <span className="block">Earn While You Learn -</span>
+                <span className="block" style={{ color: '#5e17eb' }}>Become a Skill Probe Ambassador</span>
+              </h1>
 
-          {/* Main Heading */}
-          <h1 className="text-5xl lg:text-6xl font-black leading-tight mb-6 text-gray-700">
-            <span className="block">Earn While You Learn -</span>
-            <span className="block" style={{ color: '#5e17eb' }}>Become a Skill Probe Ambassador</span>
-          </h1>
+              {/* Description */}
+              <div className="space-y-4">
+                <h2 className="text-2xl font-black text-gray-700">What is the Campus Ambassador Program?</h2>
+                <p className="text-xl leading-relaxed text-gray-600">
+                  The Skill Probe Campus Ambassador Program is a unique opportunity for students and young professionals to earn money by promoting quality education in their networks. Share courses, refer students, and earn rewards—all while building valuable skills and connections.
+                </p>
+              </div>
 
-          {/* Description */}
-          <div className="max-w-4xl mx-auto mb-12">
-            <h2 className="text-2xl font-black mb-4 text-gray-700">What is the Campus Ambassador Program?</h2>
-            <p className="text-xl leading-relaxed" style={{ color: '#000000' }}>
-              The Skill Probe Campus Ambassador Program is a unique opportunity for students and young professionals to earn money by promoting quality education in their networks. Share courses, refer students, and earn rewards—all while building valuable skills and connections.
-            </p>
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Link href="/ambassador/signup">
+                  <button className="px-8 py-4 bg-[#5e17eb] text-white font-semibold text-lg rounded-xl hover:bg-[#4a12c4] transition-all duration-300 w-full sm:w-auto">
+                    Apply Now
+                  </button>
+                </Link>
+                <Link href="/ambassador-guide">
+                  <button className="px-8 py-4 border-2 border-[#5e17eb] text-[#5e17eb] font-semibold text-lg rounded-xl hover:bg-[#5e17eb] hover:text-white transition-all duration-300 w-full sm:w-auto">
+                    Learn More
+                  </button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Side - Hero Image */}
+            <div className="relative">
+              <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&h=400&fit=crop"
+                  alt="Campus ambassador networking and promoting education - representing student leadership and earning opportunities"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -463,11 +493,29 @@ export default function ForAmbassadors() {
             <h2 className="text-4xl font-black mb-4 text-gray-700">Frequently Asked Questions</h2>
           </div>
           
-          <div className="space-y-6">
+          <div className="space-y-4">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-8 border-2 border-black">
-                <h3 className="text-xl font-black mb-4" style={{ color: '#5e17eb' }}>{faq.question}</h3>
-                <p className="leading-relaxed" style={{ color: '#000000' }}>{faq.answer}</p>
+              <div key={idx} className="bg-white rounded-2xl border-2 border-gray-200 overflow-hidden">
+                <button
+                  onClick={() => toggleFaq(idx)}
+                  className="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
+                >
+                  <h3 className="text-lg font-semibold text-gray-700">{faq.question}</h3>
+                  <div className="flex-shrink-0 ml-4">
+                    {openFaq === idx ? (
+                      <ChevronUp className="w-5 h-5 text-[#5e17eb]" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-gray-400" />
+                    )}
+                  </div>
+                </button>
+                {openFaq === idx && (
+                  <div className="px-8 pb-6">
+                    <div className="pt-4 border-t border-gray-100">
+                      <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
