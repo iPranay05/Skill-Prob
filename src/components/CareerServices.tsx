@@ -10,7 +10,7 @@ interface FormData {
   phone: string;
   email: string;
   city: string;
-  collegeName: string;
+  linkedinUrl: string;
 }
 
 export default function CareerServices() {
@@ -20,7 +20,7 @@ export default function CareerServices() {
     phone: '',
     email: '',
     city: '',
-    collegeName: ''
+    linkedinUrl: ''
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState('');
@@ -115,7 +115,7 @@ export default function CareerServices() {
     setSuccess('');
 
     // Validate required fields
-    if (!formData.name || !formData.phone || !formData.email || !formData.city || !formData.collegeName) {
+    if (!formData.name || !formData.phone || !formData.email || !formData.city || !formData.linkedinUrl) {
       setError('Please fill in all required fields');
       setLoading(false);
       return;
@@ -145,7 +145,7 @@ export default function CareerServices() {
           applicant_email: formData.email,
           applicant_phone: formData.phone,
           applicant_city: formData.city,
-          college_name: formData.collegeName,
+          linkedin_url: formData.linkedinUrl,
           submission_date: new Date().toLocaleString(),
           service_description: services.find(s => s.id === activeService)?.shortDesc || '',
           
@@ -167,7 +167,7 @@ export default function CareerServices() {
         phone: '',
         email: '',
         city: '',
-        collegeName: ''
+        linkedinUrl: ''
       });
 
       // Close modal after success
@@ -192,7 +192,7 @@ export default function CareerServices() {
       phone: '',
       email: '',
       city: '',
-      collegeName: ''
+      linkedinUrl: ''
     });
   };
 
@@ -465,15 +465,15 @@ export default function CareerServices() {
 
                           <div>
                             <label className="block text-sm font-semibold text-gray-700 mb-3">
-                              College Name *
+                              LinkedIn URL *
                             </label>
                             <input
-                              type="text"
-                              name="collegeName"
-                              value={formData.collegeName}
+                              type="url"
+                              name="linkedinUrl"
+                              value={formData.linkedinUrl}
                               onChange={handleInputChange}
                               className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
-                              placeholder="Enter your college name"
+                              placeholder="https://linkedin.com/in/yourprofile"
                               required
                             />
                           </div>

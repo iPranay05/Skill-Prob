@@ -1,5 +1,5 @@
 'use client';
-
+import Footer from './Footer';
 import Link from 'next/link';
 import { CheckCircle, DollarSign, Users, BarChart3, Share2, Award, Gift, Target, TrendingUp, Star, MessageCircle, Smartphone } from 'lucide-react';
 
@@ -158,12 +158,12 @@ export default function ForAmbassadors() {
         
         <div className="relative z-10 max-w-7xl mx-auto text-center">
           {/* Tag */}
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-black mb-8">
+          {/* <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-black mb-8">
             <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
             <span className="text-sm font-bold uppercase tracking-wide" style={{ color: '#5e17eb' }}>
               Campus Ambassador Program
             </span>
-          </div>
+          </div> */}
 
           {/* Main Heading */}
           <h1 className="text-5xl lg:text-6xl font-black leading-tight mb-6 text-gray-700">
@@ -509,6 +509,7 @@ export default function ForAmbassadors() {
           </div>
         </div>
       </section>
+      <Footer></Footer>
     </div>
   );
 }

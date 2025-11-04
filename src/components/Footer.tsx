@@ -42,11 +42,11 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-3">
-              <li>
+              {/* <li>
                 <Link href="/courses/browse" className="text-gray-400 hover:text-white transition-colors duration-300">
                   Browse Courses
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/live-sessions" className="text-gray-400 hover:text-white transition-colors duration-300">
                   Live Sessions

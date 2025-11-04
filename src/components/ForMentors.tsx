@@ -1,4 +1,5 @@
 'use client';
+import Footer from './Footer';
 
 import Link from 'next/link';
 import { CheckCircle, DollarSign, Users, BarChart3, Calendar, Video, FileText, MessageCircle, Award, Clock, Globe, Shield } from 'lucide-react';
@@ -140,21 +141,21 @@ export default function ForMentors() {
 
   return (
     <div className="min-h-screen bg-white" style={{ fontFamily: 'Arial, sans-serif' }}>
-      
+
       {/* Hero Section */}
       <section className="relative py-24 px-6 overflow-visible bg-white">
         {/* Animated background elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
-        
+
         <div className="relative z-10 max-w-7xl mx-auto text-center">
           {/* Tag */}
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-black mb-8">
+          {/* <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-black mb-8">
             <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
             <span className="text-sm font-bold uppercase tracking-wide" style={{ color: '#5e17eb' }}>
               For Mentors
             </span>
-          </div>
+          </div> */}
 
           {/* Main Heading */}
           <h1 className="text-5xl lg:text-6xl font-black leading-tight mb-6 text-gray-700">
@@ -181,7 +182,7 @@ export default function ForMentors() {
               Create your own courses, set your pricing, and reach thousands of eager learners. We handle the platform, payments, and support—you focus on teaching.
             </p>
           </div>
-          
+
           {/* Teaching Options */}
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             <div className="bg-white rounded-2xl p-8 border-2 border-black text-center">
@@ -217,7 +218,7 @@ export default function ForMentors() {
               <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
                 <FileText className="w-8 h-8" style={{ color: '#ffffff' }} />
               </div>
-              <h3 className="text-2xl font-black mb-4 text-gray-700">Recorded Courses</h3>
+              <h3 className="text-2xl font-black mb-4 text-gray-700">Create your own courses</h3>
               <div className="space-y-2 text-left">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
@@ -247,9 +248,28 @@ export default function ForMentors() {
                 <Globe className="w-8 h-8" style={{ color: '#ffffff' }} />
               </div>
               <h3 className="text-2xl font-black mb-4 text-gray-700">Hybrid Approach</h3>
-              <p className="leading-relaxed" style={{ color: '#000000' }}>
-                Combine both live and recorded content for maximum impact and revenue.
-              </p>
+              <div className="space-y-2 text-left">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <span style={{ color: '#000000' }}>Combine live and recorded content</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <span style={{ color: '#000000' }}>Maximize student engagement</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <span style={{ color: '#000000' }}>Flexible teaching schedule</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <span style={{ color: '#000000' }}>Multiple revenue streams</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <span style={{ color: '#000000' }}>Best of both teaching methods</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -257,7 +277,7 @@ export default function ForMentors() {
           <div className="text-center mb-8">
             <h3 className="text-3xl font-black mb-8 text-gray-700">What You Get</h3>
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-6">
             {benefits.map((benefit, idx) => (
               <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-xl border-2 border-gray-100">
@@ -272,7 +292,7 @@ export default function ForMentors() {
       </section>
 
       {/* Mentor Dashboard Features */}
-      <section className="py-20 px-6 bg-white">
+      {/* <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black mb-4 text-gray-700">Mentor Dashboard Features</h2>
@@ -294,7 +314,7 @@ export default function ForMentors() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* How to Become a Mentor */}
       <section className="py-20 px-6 bg-gray-50">
@@ -302,7 +322,7 @@ export default function ForMentors() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black mb-4 text-gray-700">How to Become a Mentor</h2>
           </div>
-          
+
           <div className="grid md:grid-cols-5 gap-8">
             {steps.map((step, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100">
@@ -323,7 +343,7 @@ export default function ForMentors() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black mb-4 text-gray-700">Mentor Success Stories</h2>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-8 border-2 border-black">
@@ -376,7 +396,7 @@ export default function ForMentors() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black mb-4 text-gray-700">Support & Resources</h2>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white rounded-2xl p-8 border-2 border-black">
               <h3 className="text-2xl font-black mb-4" style={{ color: '#5e17eb' }}>Mentor Training</h3>
@@ -386,7 +406,7 @@ export default function ForMentors() {
                   'Creating engaging course content',
                   'Best practices for live teaching',
                   'Student engagement techniques',
-                  'Marketing your courses'
+
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
@@ -400,7 +420,7 @@ export default function ForMentors() {
               <h3 className="text-2xl font-black mb-4" style={{ color: '#5e17eb' }}>Technical Support</h3>
               <div className="space-y-2">
                 {[
-                  'Live chat support during business hours',
+
                   'Email support 24/7',
                   'Detailed documentation and guides',
                   'Regular webinars and training sessions'
@@ -439,7 +459,7 @@ export default function ForMentors() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black mb-4 text-gray-700">Frequently Asked Questions</h2>
           </div>
-          
+
           <div className="space-y-6">
             {faqs.map((faq, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-8 border-2 border-black">
@@ -459,7 +479,7 @@ export default function ForMentors() {
             <p className="text-lg mb-12 max-w-3xl mx-auto" style={{ color: '#000000' }}>
               Join 200+ mentors who are already building successful teaching businesses on Skill Probe.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
                 href="/apply-mentor"
@@ -468,13 +488,13 @@ export default function ForMentors() {
               >
                 Apply to Become a Mentor
               </Link>
-              <Link
+              {/* <Link
                 href="/mentor-guide"
                 className="px-10 py-4 border-2 font-bold text-lg rounded-xl transition-all duration-300 hover:bg-gray-50"
                 style={{ borderColor: '#000000', color: '#000000' }}
               >
                 View Mentor Guide
-              </Link>
+              </Link> */}
               <Link
                 href="/contact"
                 className="px-10 py-4 border-2 font-bold text-lg rounded-xl transition-all duration-300 hover:bg-gray-50"
@@ -486,6 +506,7 @@ export default function ForMentors() {
           </div>
         </div>
       </section>
+      <Footer></Footer>
     </div>
   );
 }

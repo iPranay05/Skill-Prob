@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { CheckCircle } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import Footer from './Footer';
 
 export default function AboutUs() {
   // Refs for scroll animations
@@ -445,13 +446,13 @@ export default function AboutUs() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link
+              {/* <Link
                 href="/courses/browse"
                 className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300 hover:shadow-lg"
                 style={{ backgroundColor: '#5e17eb', color: '#ffffff' }}
               >
                 Explore Courses
-              </Link>
+              </Link> */}
               <Link
                 href="/for-mentors"
                 className="px-10 py-4 border-2 font-bold text-lg rounded-xl transition-all duration-300 hover:bg-gray-50"
@@ -470,6 +471,7 @@ export default function AboutUs() {
           </div>
         </div>
       </section>
+      <Footer></Footer>
     </div>
   );
 }
