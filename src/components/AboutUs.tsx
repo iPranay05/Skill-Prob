@@ -17,10 +17,8 @@ export default function AboutUs() {
   const isDifferentiatorInView = useInView(differentiatorRef, { once: true, margin: "-100px" });
 
   const stats = [
-    { number: '50,000+', label: 'Active Learners' },
-    { number: '500+', label: 'Skill Development Courses' },
+    { number: '10,000+', label: 'Active Learners' },
     { number: '200+', label: 'Expert Mentors' },
-    { number: '5,000+', label: 'Certifications Issued' },
     { number: '1,000+', label: 'Internship Placements' },
     { number: '300+', label: 'Active Campus Ambassadors' }
   ];
@@ -85,46 +83,250 @@ export default function AboutUs() {
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#5e17eb]/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#5e17eb]/20 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
         
-        <div className="relative z-10 max-w-7xl mx-auto text-center">
-          {/* Tag */}
-          <motion.div 
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-black mb-8"
-          >
-            <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-            <span className="text-sm font-bold uppercase tracking-wide" style={{ color: '#5e17eb' }}>
-              About Skill Probe
-            </span>
-          </motion.div>
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            
+            {/* Left Side - Text Content */}
+            <motion.div 
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="space-y-6"
+            >
+              {/* Main Heading */}
+              <motion.h1 
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                className="text-5xl lg:text-6xl font-black leading-tight text-gray-700"
+              >
+                <span className="block">Empowering Learners,</span>
+                <span className="block" style={{ color: '#5e17eb' }}>Building Careers</span>
+              </motion.h1>
+            </motion.div>
 
-          {/* Main Heading */}
-          <motion.h1 
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-5xl lg:text-6xl font-black leading-tight mb-6 text-gray-700"
-          >
-            <span className="block">Empowering Learners,</span>
-            <span className="block" style={{ color: '#5e17eb' }}>Building Careers</span>
-          </motion.h1>
+            {/* Right Side - Hero Image */}
+            <motion.div 
+              initial={{ x: 50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+              className="relative"
+            >
+              <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=600&h=400&fit=crop"
+                  alt="Professional woman working on laptop - representing career growth and skill development"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
-          {/* Our Mission */}
-          <motion.div 
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-            className="max-w-4xl mx-auto"
-          >
-            <h2 className="text-3xl font-black mb-6 text-gray-700">Our Mission</h2>
-            <p className="text-lg leading-relaxed mb-6" style={{ color: '#000000' }}>
-              Skill Probe is India's leading skill training and certification platform dedicated to bridging the gap between education and employment. We believe that quality education should be accessible, affordable, and outcome-driven.
+      {/* Who's Using Skill Probe Section */}
+      <section className="py-20 px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-black mb-8">
+              <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+              <span className="text-sm font-bold uppercase tracking-wide" style={{ color: '#5e17eb' }}>
+                WHO'S USING SKILL PROBE?
+              </span>
+            </div>
+            
+            <h2 className="text-4xl lg:text-5xl font-black leading-tight mb-6 text-gray-700">
+              <span className="block">Empowering Every Stakeholder in the</span>
+              <span className="block" style={{ color: '#5e17eb' }}>Education Ecosystem</span>
+            </h2>
+            
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              From students to corporations to educational institutions - we provide tailored solutions for everyone
             </p>
-            <p className="text-lg leading-relaxed" style={{ color: '#000000' }}>
-              Founded with a vision to democratize skill development, we combine the best of live interactive learning with flexible recorded content, ensuring every learner can master in-demand skills at their own pace.
-            </p>
-          </motion.div>
+          </div>
+
+          {/* Three Column Layout */}
+          <div className="grid md:grid-cols-3 gap-8">
+            
+            {/* Students and Professionals */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-100">
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#3b82f6' }}>
+                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                </svg>
+              </div>
+              
+              <h3 className="text-xl font-black mb-4 text-gray-700">Students and Professionals</h3>
+              <p className="text-sm text-gray-600 mb-6 leading-relaxed">
+                Unlock Your Potential, Compete, Build Resume, Grow and get Hired!
+              </p>
+              
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#3b82f6' }}></div>
+                  <span className="text-sm text-gray-700">Live interactive classes with industry experts</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#3b82f6' }}></div>
+                  <span className="text-sm text-gray-700">Industry-recognized certifications</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#3b82f6' }}></div>
+                  <span className="text-sm text-gray-700">Real internship and job opportunities</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#3b82f6' }}></div>
+                  <span className="text-sm text-gray-700">Expert mentorship and career guidance</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#3b82f6' }}></div>
+                  <span className="text-sm text-gray-700">Self-paced learning with lifetime access</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Companies and Recruiters */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-100">
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
+                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z" />
+                </svg>
+              </div>
+              
+              <h3 className="text-xl font-black mb-4 text-gray-700">Companies and Recruiters</h3>
+              <p className="text-sm text-gray-600 mb-6 leading-relaxed">
+                Discover Right Talent, Hire, Engage, and Build Like Never Before!
+              </p>
+              
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <span className="text-sm text-gray-700">Access to skilled and certified professionals</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <span className="text-sm text-gray-700">Direct recruitment from our talent pool</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <span className="text-sm text-gray-700">Custom training programs for employees</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <span className="text-sm text-gray-700">Campus hiring and internship programs</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <span className="text-sm text-gray-700">Employer branding and visibility</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Colleges */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-100">
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#f97316' }}>
+                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z" />
+                </svg>
+              </div>
+              
+              <h3 className="text-xl font-black mb-4 text-gray-700">Colleges</h3>
+              <p className="text-sm text-gray-600 mb-6 leading-relaxed">
+                Bridge Academia and Industry, Empower Students with Real World Experience!
+              </p>
+              
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#f97316' }}></div>
+                  <span className="text-sm text-gray-700">Industry-aligned curriculum integration</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#f97316' }}></div>
+                  <span className="text-sm text-gray-700">Campus ambassador programs</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#f97316' }}></div>
+                  <span className="text-sm text-gray-700">Student placement assistance</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#f97316' }}></div>
+                  <span className="text-sm text-gray-700">Faculty development programs</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#f97316' }}></div>
+                  <span className="text-sm text-gray-700">Industry partnerships and collaborations</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Vision Section */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* Mission - Text Left, Image Right */}
+          <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+            <motion.div 
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="space-y-6"
+            >
+              <h2 className="text-4xl font-black mb-6 text-gray-700">Our Mission</h2>
+              <p className="text-lg leading-relaxed" style={{ color: '#000000' }}>
+                Skill Probe is India's leading skill training and certification platform dedicated to bridging the gap between education and employment. We believe that quality education should be accessible, affordable, and outcome-driven.
+              </p>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ x: 50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              className="relative"
+            >
+              <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop"
+                  alt="Students learning together - representing bridging education and employment gap"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Vision - Image Left, Text Right */}
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div 
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+              className="relative order-2 lg:order-1"
+            >
+              <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop"
+                  alt="Online learning and skill development - representing democratized education"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ x: 50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+              className="space-y-6 order-1 lg:order-2"
+            >
+              <h2 className="text-4xl font-black mb-6 text-gray-700">Our Vision</h2>
+              <p className="text-lg leading-relaxed" style={{ color: '#000000' }}>
+                Founded with a vision to democratize skill development, we combine the best of live interactive learning with flexible recorded content, ensuring every learner can master in-demand skills at their own pace.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -135,7 +337,7 @@ export default function AboutUs() {
             <h2 className="text-4xl font-black mb-4 text-gray-700">Our Impact</h2>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
             {stats.map((stat, idx) => (
               <motion.div 
                 key={idx} 

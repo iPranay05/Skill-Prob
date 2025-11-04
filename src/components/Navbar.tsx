@@ -519,9 +519,6 @@ export default function Navbar() {
                 <Link href="/auth/login" className="text-[#5e17eb] hover:text-white font-medium px-4 py-2 border-2 border-[#5e17eb] hover:bg-[#5e17eb] rounded-lg transition-all duration-300">
                   Sign In
                 </Link>
-                <Link href="/auth/register" className="bg-[#5e17eb] hover:bg-[#4a12c4] text-white px-4 py-2 rounded-lg font-medium transition-colors duration-300">
-                  Get Started
-                </Link>
               </>
             )}
           </div>
@@ -818,13 +815,6 @@ export default function Navbar() {
                     onClick={() => setShowMobileMenu(false)}
                   >
                     Sign In
-                  </Link>
-                  <Link
-                    href="/auth/register"
-                    className="block bg-[#5e17eb] hover:bg-[#4a12c4] text-white px-4 py-2 rounded-lg font-medium text-center transition-colors duration-300"
-                    onClick={() => setShowMobileMenu(false)}
-                  >
-                    Get Started
                   </Link>
                 </div>
               )}
