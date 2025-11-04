@@ -69,16 +69,7 @@ export default function HomePage() {
                       whileTap={{ scale: 0.95 }}
                       className="px-6 md:px-8 py-3 md:py-4 bg-[#5e17eb] text-white font-semibold text-sm md:text-base rounded-xl hover:bg-[#4a12c4] transition-all duration-300 w-full sm:w-auto"
                     >
-                      Start Learning Free
-                    </motion.button>
-                  </Link>
-                  <Link href="/courses/browse">
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="px-6 md:px-8 py-3 md:py-4 border border-gray-300 text-gray-700 font-semibold text-sm md:text-base rounded-xl hover:bg-gray-50 transition-all duration-300 w-full sm:w-auto"
-                    >
-                      Explore Courses
+                      Find a Mentor
                     </motion.button>
                   </Link>
                   <Link href="/mentor/signup">
@@ -117,7 +108,7 @@ export default function HomePage() {
                   </motion.div>
 
                   {/* 50K+ Active Learners - Bottom Left Corner */}
-                  <motion.div
+                  {/* <motion.div
                     initial={{ y: 50, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
@@ -135,10 +126,10 @@ export default function HomePage() {
                         <div className="text-sm font-semibold text-gray-600">Active Learners</div>
                       </div>
                     </div>
-                  </motion.div>
+                  </motion.div> */}
 
                   {/* 10K+ Certifications - Top Right Corner */}
-                  <motion.div
+                  {/* <motion.div
                     initial={{ y: -50, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
@@ -156,7 +147,7 @@ export default function HomePage() {
                         <div className="text-sm font-semibold text-gray-600">Certifications</div>
                       </div>
                     </div>
-                  </motion.div>
+                  </motion.div> */}
                 </div>
               </motion.div>
             </div>
@@ -201,82 +192,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Earning Structure */}
-          <div className="grid lg:grid-cols-4 gap-4 mb-10">
 
-            {/* Registration Points */}
-            <div className="bg-white border-2 border-black rounded-2xl p-4">
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 bg-[#5e17eb]">
-                  <svg className="w-6 h-6" fill="#ffffff" viewBox="0 0 24 24">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold mb-1 text-gray-700">50 Points</h3>
-                <p className="font-semibold text-xs text-gray-700">Per Registration</p>
-              </div>
-            </div>
-
-            {/* Purchase Points */}
-            <div className="bg-white border-2 border-black rounded-2xl p-4">
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 bg-[#5e17eb]">
-                  <svg className="w-6 h-6" fill="#ffffff" viewBox="0 0 24 24">
-                    <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold mb-1 text-gray-700">500 Points</h3>
-                <p className="font-semibold text-xs text-gray-700">Per Course Purchase</p>
-              </div>
-            </div>
-
-            {/* Ambassador Referral */}
-            <div className="bg-white border-2 border-black rounded-2xl p-4">
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 bg-[#5e17eb]">
-                  <svg className="w-6 h-6" fill="#ffffff" viewBox="0 0 24 24">
-                    <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4h3v4h2v-7.5c0-1.1.9-2 2-2s2 .9 2 2V18h2v-4h3v4h4v2H0v-2h4z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold mb-1 text-gray-700">₹100 + 10%</h3>
-                <p className="font-semibold text-xs text-gray-700">Ambassador Referral</p>
-              </div>
-            </div>
-
-            {/* Point Conversion */}
-            <div className="bg-white border-2 border-black rounded-2xl p-4">
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 bg-[#5e17eb]">
-                  <svg className="w-6 h-6" fill="#ffffff" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold mb-1 text-gray-700">100 = ₹100</h3>
-                <p className="font-semibold text-xs text-gray-700">Point Conversion</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Milestone Bonuses */}
-          <div className="mb-10">
-            <h3 className="text-2xl font-semibold text-left mb-6 text-gray-700">Milestone Bonuses</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {[
-                { referrals: '10', bonus: '₹500' },
-                { referrals: '25', bonus: '₹1,500' },
-                { referrals: '50', bonus: '₹5,000' },
-                { referrals: '100', bonus: '₹15,000' }
-              ].map((milestone, idx: number) => (
-                <div key={idx} className="bg-white border-2 border-black rounded-xl p-4 text-center">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3 bg-[#5e17eb]">
-                    <span className="font-semibold text-sm text-white">{milestone.referrals}</span>
-                  </div>
-                  <h4 className="text-lg font-bold mb-1 text-gray-700">{milestone.bonus}</h4>
-                  <p className="font-semibold text-xs text-gray-700">{milestone.referrals} Successful Referrals</p>
-                </div>
-              ))}
-            </div>
-          </div>
 
           {/* CTA Section */}
           <div className="text-left">
@@ -289,7 +205,7 @@ export default function HomePage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="/ambassador/signup"
+                  href="/for-ambassadors"
                   className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300 bg-[#5e17eb] text-white"
                 >
                   Get Started Free
@@ -1066,20 +982,20 @@ export default function HomePage() {
 
         <div className="relative z-10 max-w-6xl mx-auto">
 
-          {/* Main CTA Card */}
+          {/* Main CTA Card
           <div className="bg-white rounded-3xl p-12 lg:p-16 shadow-2xl border-2 border-gray-100 mb-16">
-            <div className="text-center space-y-8">
+            <div className="text-center space-y-8"> */}
 
-              {/* Tag */}
-              <div className="inline-flex items-center gap-2 px-6 py-3 bg-[#5e17eb]/10 rounded-full border-2 border-[#5e17eb]/20">
+          {/* Tag */}
+          {/* <div className="inline-flex items-center gap-2 px-6 py-3 bg-[#5e17eb]/10 rounded-full border-2 border-[#5e17eb]/20">
                 <div className="w-3 h-3 rounded-full bg-[#5e17eb]"></div>
                 <span className="text-sm font-bold text-[#5e17eb] uppercase tracking-wide">
                   Get Started Today
                 </span>
-              </div>
+              </div> */}
 
-              {/* Main Headline */}
-              <div className="space-y-6">
+          {/* Main Headline */}
+          {/* <div className="space-y-6">
                 <h2 className="text-4xl lg:text-6xl font-semibold leading-tight text-gray-700">
                   <span className="block">Ready to Master</span>
                   <span className="block text-[#5e17eb]">New Skills?</span>
@@ -1088,10 +1004,10 @@ export default function HomePage() {
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                   Join thousands of learners who are already advancing their careers with Skill Probe. Start with a free trial today!
                 </p>
-              </div>
+              </div> */}
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+          {/* CTA Buttons */}
+          {/* <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                 <Link
                   href="/ambassador/signup"
                   className="group px-10 py-4 bg-[#5e17eb] text-white font-bold text-lg rounded-xl hover:bg-purple-700 hover:shadow-lg transition-all duration-300 hover:scale-105"
@@ -1104,11 +1020,11 @@ export default function HomePage() {
                   </span>
                 </Link>
 
-              </div>
-            </div>
-          </div>
+              </div> */}
+          {/* </div>
+          </div> */}
 
-          {/* Trust Indicators */}
+
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {

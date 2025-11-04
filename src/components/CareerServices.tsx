@@ -35,7 +35,7 @@ export default function CareerServices() {
       image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=300&fit=crop&crop=faces',
       bgGradient: 'from-blue-500 to-purple-600',
       content: {
-        title: 'Professional Resume Review Service',
+        title: 'Professional Resume Review',
         benefits: [
           'Expert feedback from hiring professionals who understand what recruiters look for',
           'ATS-optimized formatting to ensure your resume passes through applicant tracking systems',
@@ -53,7 +53,7 @@ export default function CareerServices() {
       image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop&crop=center',
       bgGradient: 'from-indigo-500 to-blue-600',
       content: {
-        title: 'LinkedIn Profile Optimization Service',
+        title: 'LinkedIn Profile Optimization ',
         benefits: [
           'Professional profile makeover with clean, attention-grabbing design',
           'Strategic keyword optimization for maximum recruiter visibility',
@@ -71,7 +71,7 @@ export default function CareerServices() {
       image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=300&fit=crop&crop=faces',
       bgGradient: 'from-green-500 to-teal-600',
       content: {
-        title: 'Last-Minute Interview Preparation Service',
+        title: 'Last-Minute Interview Preparation ',
         benefits: [
           'Rapid confidence building techniques to manage interview nerves',
           'Strategic answer frameworks for handling challenging questions',
@@ -83,7 +83,7 @@ export default function CareerServices() {
     },
     {
       id: 'counseling',
-      title: 'Counseling',
+      title: '1:1 Career Guidance',
       icon: <Users className="w-6 h-6" />,
       shortDesc: 'Personalized career guidance',
       image: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop&crop=faces',

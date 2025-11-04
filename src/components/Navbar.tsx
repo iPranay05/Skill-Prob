@@ -11,9 +11,7 @@ export default function Navbar() {
   const { user, loading, logout } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [showRolesDropdown, setShowRolesDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const rolesDropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   // Close dropdown when clicking outside
@@ -21,9 +19,6 @@ export default function Navbar() {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setShowDropdown(false);
-      }
-      if (rolesDropdownRef.current && !rolesDropdownRef.current.contains(event.target as Node)) {
-        setShowRolesDropdown(false);
       }
     }
 
@@ -420,22 +415,10 @@ export default function Navbar() {
             ) : (
               // Default Navigation
               <>
-                {pathname !== '/' && (
-                  <motion.div
-                    initial={{ y: -20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.4, duration: 0.4 }}
-                  >
-                    <Link href="/" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
-                      <span className="relative z-10">Homepage</span>
-                      <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
-                    </Link>
-                  </motion.div>
-                )}
                 <motion.div
                   initial={{ y: -20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.5, duration: 0.4 }}
+                  transition={{ delay: 0.4, duration: 0.4 }}
                 >
                   <Link href="/about" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
                     <span className="relative z-10">About Us</span>
@@ -445,69 +428,22 @@ export default function Navbar() {
                 <motion.div
                   initial={{ y: -20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.6, duration: 0.4 }}
+                  transition={{ delay: 0.5, duration: 0.4 }}
                 >
-                  <Link href="/courses" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
-                    <span className="relative z-10">Courses</span>
+                  <Link href="/for-mentors" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Mentorship</span>
                     <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
                   initial={{ y: -20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.7, duration: 0.4 }}
-                  className="relative"
-                  ref={rolesDropdownRef}
+                  transition={{ delay: 0.6, duration: 0.4 }}
                 >
-                  <div className="relative group">
-                    <button
-                      onClick={() => setShowRolesDropdown(!showRolesDropdown)}
-                      className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 flex items-center space-x-1"
-                    >
-                      <span className="relative z-10">Roles</span>
-                      <svg className={`w-4 h-4 transition-transform duration-200 ${showRolesDropdown ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                      <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
-                    </button>
-
-                    {/* Dropdown Menu */}
-                    {showRolesDropdown && (
-                      <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50">
-                        <Link
-                          href="/for-students"
-                          className="block px-4 py-3 text-gray-700 hover:bg-[#5e17eb]/5 hover:text-[#5e17eb] transition-colors duration-200 flex items-center space-x-3"
-                          onClick={() => setShowRolesDropdown(false)}
-                        >
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                          </svg>
-                          <span>For Students</span>
-                        </Link>
-                        <Link
-                          href="/for-mentors"
-                          className="block px-4 py-3 text-gray-700 hover:bg-[#5e17eb]/5 hover:text-[#5e17eb] transition-colors duration-200 flex items-center space-x-3"
-                          onClick={() => setShowRolesDropdown(false)}
-                        >
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg>
-                          <span>For Mentors</span>
-                        </Link>
-                        <Link
-                          href="/for-ambassadors"
-                          className="block px-4 py-3 text-gray-700 hover:bg-[#5e17eb]/5 hover:text-[#5e17eb] transition-colors duration-200 flex items-center space-x-3"
-                          onClick={() => setShowRolesDropdown(false)}
-                        >
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                          </svg>
-                          <span>For Ambassadors</span>
-                        </Link>
-                      </div>
-                    )}
-                  </div>
+                  <Link href="/for-ambassadors" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                    <span className="relative z-10">Campus Ambassador</span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                  </Link>
                 </motion.div>
               </>
             )}
@@ -822,15 +758,6 @@ export default function Navbar() {
               ) : (
                 // Default Mobile Navigation
                 <>
-                  {pathname !== '/' && (
-                    <Link
-                      href="/"
-                      className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
-                      onClick={() => setShowMobileMenu(false)}
-                    >
-                      Homepage
-                    </Link>
-                  )}
                   <Link
                     href="/about"
                     className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
@@ -839,38 +766,19 @@ export default function Navbar() {
                     About Us
                   </Link>
                   <Link
-                    href="/courses"
+                    href="/for-mentors"
                     className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
                     onClick={() => setShowMobileMenu(false)}
                   >
-                    Courses
+                    Mentorship
                   </Link>
-                  <div className="py-2">
-                    <p className="text-sm font-semibold text-gray-500 mb-2">Roles</p>
-                    <div className="pl-4 space-y-2">
-                      <Link
-                        href="/for-students"
-                        className="block text-gray-600 hover:text-gray-900 font-medium py-1 transition-colors"
-                        onClick={() => setShowMobileMenu(false)}
-                      >
-                        For Students
-                      </Link>
-                      <Link
-                        href="/for-mentors"
-                        className="block text-gray-600 hover:text-gray-900 font-medium py-1 transition-colors"
-                        onClick={() => setShowMobileMenu(false)}
-                      >
-                        For Mentors
-                      </Link>
-                      <Link
-                        href="/for-ambassadors"
-                        className="block text-gray-600 hover:text-gray-900 font-medium py-1 transition-colors"
-                        onClick={() => setShowMobileMenu(false)}
-                      >
-                        For Ambassadors
-                      </Link>
-                    </div>
-                  </div>
+                  <Link
+                    href="/for-ambassadors"
+                    className="block text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Campus Ambassador
+                  </Link>
                 </>
               )}
 

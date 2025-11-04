@@ -166,14 +166,14 @@ export default function ForAmbassadors() {
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-5xl lg:text-6xl font-black leading-tight mb-6" style={{ color: '#000000' }}>
+          <h1 className="text-5xl lg:text-6xl font-black leading-tight mb-6 text-gray-700">
             <span className="block">Earn While You Learn -</span>
             <span className="block" style={{ color: '#5e17eb' }}>Become a Skill Probe Ambassador</span>
           </h1>
 
           {/* Description */}
           <div className="max-w-4xl mx-auto mb-12">
-            <h2 className="text-2xl font-black mb-4" style={{ color: '#000000' }}>What is the Campus Ambassador Program?</h2>
+            <h2 className="text-2xl font-black mb-4 text-gray-700">What is the Campus Ambassador Program?</h2>
             <p className="text-xl leading-relaxed" style={{ color: '#000000' }}>
               The Skill Probe Campus Ambassador Program is a unique opportunity for students and young professionals to earn money by promoting quality education in their networks. Share courses, refer students, and earn rewards—all while building valuable skills and connections.
             </p>
@@ -185,7 +185,7 @@ export default function ForAmbassadors() {
       <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Why Become an Ambassador?</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">Why Become an Ambassador?</h2>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -194,7 +194,7 @@ export default function ForAmbassadors() {
                 <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
                   <div style={{ color: '#ffffff' }}>{reason.icon}</div>
                 </div>
-                <h3 className="text-xl font-black mb-4" style={{ color: '#000000' }}>{reason.title}</h3>
+                <h3 className="text-xl font-black mb-4 text-gray-700">{reason.title}</h3>
                 <p className="leading-relaxed" style={{ color: '#000000' }}>{reason.description}</p>
               </div>
             ))}
@@ -206,7 +206,7 @@ export default function ForAmbassadors() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>How It Works</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">How It Works</h2>
           </div>
           
           <div className="grid md:grid-cols-5 gap-8">
@@ -215,7 +215,7 @@ export default function ForAmbassadors() {
                 <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
                   <span className="text-2xl font-black" style={{ color: '#ffffff' }}>{idx + 1}</span>
                 </div>
-                <h3 className="text-lg font-black mb-4" style={{ color: '#000000' }}>{step.step}</h3>
+                <h3 className="text-lg font-black mb-4 text-gray-700">{step.step}</h3>
                 <p className="leading-relaxed text-sm" style={{ color: '#000000' }}>{step.description}</p>
               </div>
             ))}
@@ -227,7 +227,7 @@ export default function ForAmbassadors() {
       <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Earning Structure</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">Earning Structure</h2>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
@@ -235,7 +235,7 @@ export default function ForAmbassadors() {
               <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
                 <Users className="w-6 h-6" style={{ color: '#ffffff' }} />
               </div>
-              <h3 className="text-2xl font-black mb-2" style={{ color: '#000000' }}>50</h3>
+              <h3 className="text-2xl font-black mb-2 text-gray-700">50</h3>
               <p className="font-semibold text-sm" style={{ color: '#000000' }}>Registration Points</p>
             </div>
 
@@ -243,7 +243,7 @@ export default function ForAmbassadors() {
               <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
                 <DollarSign className="w-6 h-6" style={{ color: '#ffffff' }} />
               </div>
-              <h3 className="text-2xl font-black mb-2" style={{ color: '#000000' }}>500</h3>
+              <h3 className="text-2xl font-black mb-2 text-gray-700">500</h3>
               <p className="font-semibold text-sm" style={{ color: '#000000' }}>Purchase Points</p>
             </div>
 
@@ -251,7 +251,7 @@ export default function ForAmbassadors() {
               <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
                 <Share2 className="w-6 h-6" style={{ color: '#ffffff' }} />
               </div>
-              <h3 className="text-2xl font-black mb-2" style={{ color: '#000000' }}>₹100</h3>
+              <h3 className="text-2xl font-black mb-2 text-gray-700">₹100</h3>
               <p className="font-semibold text-sm" style={{ color: '#000000' }}>Ambassador Referral</p>
             </div>
 
@@ -259,21 +259,21 @@ export default function ForAmbassadors() {
               <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
                 <CheckCircle className="w-6 h-6" style={{ color: '#ffffff' }} />
               </div>
-              <h3 className="text-2xl font-black mb-2" style={{ color: '#000000' }}>100 = ₹100</h3>
+              <h3 className="text-2xl font-black mb-2 text-gray-700">100 = ₹100</h3>
               <p className="font-semibold text-sm" style={{ color: '#000000' }}>Point Conversion</p>
             </div>
           </div>
 
           {/* Milestone Bonuses */}
           <div className="mb-16">
-            <h3 className="text-3xl font-black text-center mb-12" style={{ color: '#000000' }}>Milestone Bonuses</h3>
+            <h3 className="text-3xl font-black text-center mb-12 text-gray-700">Milestone Bonuses</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {milestones.map((milestone, idx) => (
                 <div key={idx} className="bg-white rounded-2xl p-6 text-center border-2 border-black">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
                     <span className="font-black text-lg" style={{ color: '#ffffff' }}>{milestone.referrals}</span>
                   </div>
-                  <h4 className="text-xl font-black mb-1" style={{ color: '#000000' }}>{milestone.bonus}</h4>
+                  <h4 className="text-xl font-black mb-1 text-gray-700">{milestone.bonus}</h4>
                   <p className="font-semibold text-sm" style={{ color: '#000000' }}>{milestone.referrals} Successful Referrals</p>
                 </div>
               ))}
@@ -286,7 +286,7 @@ export default function ForAmbassadors() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Ambassador Benefits</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">Ambassador Benefits</h2>
           </div>
           
           <div className="grid md:grid-cols-2 gap-6">
@@ -306,7 +306,7 @@ export default function ForAmbassadors() {
       <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Ambassador Dashboard</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">Ambassador Dashboard</h2>
             <p className="text-lg" style={{ color: '#000000' }}>Your personal command center includes:</p>
           </div>
           
@@ -387,7 +387,7 @@ export default function ForAmbassadors() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-3xl font-black mb-8" style={{ color: '#000000' }}>Who Can Become an Ambassador?</h2>
+              <h2 className="text-3xl font-black mb-8 text-gray-700">Who Can Become an Ambassador?</h2>
               <div className="space-y-4">
                 {eligibility.map((item, idx) => (
                   <div key={idx} className="flex items-start gap-4 p-4 bg-white rounded-xl border-2 border-gray-100">
@@ -401,7 +401,7 @@ export default function ForAmbassadors() {
             </div>
 
             <div>
-              <h2 className="text-3xl font-black mb-8" style={{ color: '#000000' }}>Application Requirements</h2>
+              <h2 className="text-3xl font-black mb-8 text-gray-700">Application Requirements</h2>
               <div className="space-y-4">
                 {requirements.map((requirement, idx) => (
                   <div key={idx} className="flex items-center gap-2">
@@ -419,7 +419,7 @@ export default function ForAmbassadors() {
       <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Success Stories</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">Success Stories</h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -439,7 +439,7 @@ export default function ForAmbassadors() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Tips for Success</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">Tips for Success</h2>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -448,7 +448,7 @@ export default function ForAmbassadors() {
                 <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
                   <span className="text-2xl font-black" style={{ color: '#ffffff' }}>{idx + 1}</span>
                 </div>
-                <h3 className="text-xl font-black mb-4" style={{ color: '#000000' }}>{tip.title}</h3>
+                <h3 className="text-xl font-black mb-4 text-gray-700">{tip.title}</h3>
                 <p className="leading-relaxed" style={{ color: '#000000' }}>{tip.description}</p>
               </div>
             ))}
@@ -460,7 +460,7 @@ export default function ForAmbassadors() {
       <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Frequently Asked Questions</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">Frequently Asked Questions</h2>
           </div>
           
           <div className="space-y-6">
@@ -478,14 +478,14 @@ export default function ForAmbassadors() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="bg-white rounded-3xl p-12 shadow-2xl border-2 border-black text-center">
-            <h2 className="text-4xl font-black mb-6" style={{ color: '#000000' }}>Ready to Become an Ambassador?</h2>
+            <h2 className="text-4xl font-black mb-6 text-gray-700">Ready to Become an Ambassador?</h2>
             <p className="text-lg mb-12 max-w-3xl mx-auto" style={{ color: '#000000' }}>
               Join our Campus Ambassador Program and start earning money while you learn!
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
-                href="/apply-ambassador"
+                href="/ambassador/signup"
                 className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300 hover:shadow-lg"
                 style={{ backgroundColor: '#5e17eb', color: '#ffffff' }}
               >

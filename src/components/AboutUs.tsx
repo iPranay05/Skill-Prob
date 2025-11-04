@@ -104,8 +104,7 @@ export default function AboutUs() {
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-5xl lg:text-6xl font-black leading-tight mb-6" 
-            style={{ color: '#000000' }}
+            className="text-5xl lg:text-6xl font-black leading-tight mb-6 text-gray-700"
           >
             <span className="block">Empowering Learners,</span>
             <span className="block" style={{ color: '#5e17eb' }}>Building Careers</span>
@@ -118,7 +117,7 @@ export default function AboutUs() {
             transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl font-black mb-6" style={{ color: '#000000' }}>Our Mission</h2>
+            <h2 className="text-3xl font-black mb-6 text-gray-700">Our Mission</h2>
             <p className="text-lg leading-relaxed mb-6" style={{ color: '#000000' }}>
               Skill Probe is India's leading skill training and certification platform dedicated to bridging the gap between education and employment. We believe that quality education should be accessible, affordable, and outcome-driven.
             </p>
@@ -133,7 +132,7 @@ export default function AboutUs() {
       <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Our Impact</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">Our Impact</h2>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -158,7 +157,7 @@ export default function AboutUs() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>What Makes Us Different</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">What Makes Us Different</h2>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8">
@@ -180,8 +179,7 @@ export default function AboutUs() {
               initial={{ y: 50, opacity: 0 }}
               animate={isValuesInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-4xl font-black mb-4" 
-              style={{ color: '#000000' }}
+              className="text-4xl font-black mb-4 text-gray-700"
             >
               Our Values
             </motion.h2>
@@ -209,7 +207,7 @@ export default function AboutUs() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>The Skill Probe Advantage</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">The Skill Probe Advantage</h2>
           </div>
           
           <div className="grid md:grid-cols-2 gap-6">
@@ -228,7 +226,7 @@ export default function AboutUs() {
       {/* Vision for the Future */}
       <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-black mb-8" style={{ color: '#000000' }}>Our Vision for the Future</h2>
+          <h2 className="text-4xl font-black mb-8 text-gray-700">Our Vision for the Future</h2>
           <p className="text-lg leading-relaxed mb-8" style={{ color: '#000000' }}>
             We're building more than just a learning platform—we're creating an ecosystem where skill development, mentorship, and career opportunities converge. Our goal is to become India's most trusted partner for professional skill development, helping millions of learners achieve their career aspirations.
           </p>
@@ -239,7 +237,7 @@ export default function AboutUs() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="bg-white rounded-3xl p-12 shadow-2xl border-2 border-black text-center">
-            <h2 className="text-4xl font-black mb-6" style={{ color: '#000000' }}>Join Our Journey</h2>
+            <h2 className="text-4xl font-black mb-6 text-gray-700">Join Our Journey</h2>
             <p className="text-lg mb-12 max-w-3xl mx-auto" style={{ color: '#000000' }}>
               Whether you're a learner seeking to upskill, a professional wanting to mentor, or a company looking for skilled talent, Skill Probe is your partner in growth.
             </p>

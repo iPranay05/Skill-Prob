@@ -76,7 +76,7 @@ export default function Footer() {
           </div>
 
           {/* Categories */}
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold mb-4">Popular Categories</h3>
             <ul className="space-y-3">
               <li>
@@ -110,7 +110,7 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Contact Info */}
           <div>

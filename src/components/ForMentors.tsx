@@ -157,14 +157,14 @@ export default function ForMentors() {
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-5xl lg:text-6xl font-black leading-tight mb-6" style={{ color: '#000000' }}>
+          <h1 className="text-5xl lg:text-6xl font-black leading-tight mb-6 text-gray-700">
             <span className="block">Share Your Expertise,</span>
             <span className="block" style={{ color: '#5e17eb' }}>Inspire Learners, Earn Revenue</span>
           </h1>
 
           {/* Description */}
           <div className="max-w-4xl mx-auto mb-12">
-            <h2 className="text-2xl font-black mb-4" style={{ color: '#000000' }}>Why Teach on Skill Probe?</h2>
+            <h2 className="text-2xl font-black mb-4 text-gray-700">Why Teach on Skill Probe?</h2>
             <p className="text-xl leading-relaxed" style={{ color: '#000000' }}>
               Join India's fastest-growing online learning platform and monetize your knowledge. Whether you want to conduct live interactive classes or create comprehensive recorded courses, we provide everything you need to succeed as an online mentor.
             </p>
@@ -176,7 +176,7 @@ export default function ForMentors() {
       <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Build Your Teaching Business</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">Build Your Teaching Business</h2>
             <p className="text-lg" style={{ color: '#000000' }}>
               Create your own courses, set your pricing, and reach thousands of eager learners. We handle the platform, payments, and support—you focus on teaching.
             </p>
@@ -188,7 +188,7 @@ export default function ForMentors() {
               <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
                 <Video className="w-8 h-8" style={{ color: '#ffffff' }} />
               </div>
-              <h3 className="text-2xl font-black mb-4" style={{ color: '#000000' }}>Live Classes</h3>
+              <h3 className="text-2xl font-black mb-4 text-gray-700">Live Classes</h3>
               <div className="space-y-2 text-left">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
@@ -217,7 +217,7 @@ export default function ForMentors() {
               <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
                 <FileText className="w-8 h-8" style={{ color: '#ffffff' }} />
               </div>
-              <h3 className="text-2xl font-black mb-4" style={{ color: '#000000' }}>Recorded Courses</h3>
+              <h3 className="text-2xl font-black mb-4 text-gray-700">Recorded Courses</h3>
               <div className="space-y-2 text-left">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
@@ -246,7 +246,7 @@ export default function ForMentors() {
               <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
                 <Globe className="w-8 h-8" style={{ color: '#ffffff' }} />
               </div>
-              <h3 className="text-2xl font-black mb-4" style={{ color: '#000000' }}>Hybrid Approach</h3>
+              <h3 className="text-2xl font-black mb-4 text-gray-700">Hybrid Approach</h3>
               <p className="leading-relaxed" style={{ color: '#000000' }}>
                 Combine both live and recorded content for maximum impact and revenue.
               </p>
@@ -255,7 +255,7 @@ export default function ForMentors() {
 
           {/* What You Get */}
           <div className="text-center mb-8">
-            <h3 className="text-3xl font-black mb-8" style={{ color: '#000000' }}>What You Get</h3>
+            <h3 className="text-3xl font-black mb-8 text-gray-700">What You Get</h3>
           </div>
           
           <div className="grid md:grid-cols-2 gap-6">
@@ -275,7 +275,7 @@ export default function ForMentors() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Mentor Dashboard Features</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">Mentor Dashboard Features</h2>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8">
@@ -300,7 +300,7 @@ export default function ForMentors() {
       <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>How to Become a Mentor</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">How to Become a Mentor</h2>
           </div>
           
           <div className="grid md:grid-cols-5 gap-8">
@@ -309,7 +309,7 @@ export default function ForMentors() {
                 <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
                   <span className="text-2xl font-black" style={{ color: '#ffffff' }}>{idx + 1}</span>
                 </div>
-                <h3 className="text-lg font-black mb-4" style={{ color: '#000000' }}>{step.step}</h3>
+                <h3 className="text-lg font-black mb-4 text-gray-700">{step.step}</h3>
                 <p className="leading-relaxed text-sm" style={{ color: '#000000' }}>{step.description}</p>
               </div>
             ))}
@@ -321,7 +321,7 @@ export default function ForMentors() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Mentor Success Stories</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">Mentor Success Stories</h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -342,7 +342,7 @@ export default function ForMentors() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-3xl font-black mb-8" style={{ color: '#000000' }}>Who Can Become a Mentor?</h2>
+              <h2 className="text-3xl font-black mb-8 text-gray-700">Who Can Become a Mentor?</h2>
               <div className="space-y-4">
                 {eligibility.map((item, idx) => (
                   <div key={idx} className="flex items-start gap-4 p-4 bg-white rounded-xl border-2 border-gray-100">
@@ -356,7 +356,7 @@ export default function ForMentors() {
             </div>
 
             <div>
-              <h2 className="text-3xl font-black mb-8" style={{ color: '#000000' }}>Mentor Requirements</h2>
+              <h2 className="text-3xl font-black mb-8 text-gray-700">Mentor Requirements</h2>
               <div className="space-y-4">
                 {requirements.map((requirement, idx) => (
                   <div key={idx} className="flex items-center gap-2">
@@ -374,7 +374,7 @@ export default function ForMentors() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Support & Resources</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">Support & Resources</h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -437,7 +437,7 @@ export default function ForMentors() {
       <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4" style={{ color: '#000000' }}>Frequently Asked Questions</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-700">Frequently Asked Questions</h2>
           </div>
           
           <div className="space-y-6">
@@ -455,7 +455,7 @@ export default function ForMentors() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="bg-white rounded-3xl p-12 shadow-2xl border-2 border-black text-center">
-            <h2 className="text-4xl font-black mb-6" style={{ color: '#000000' }}>Ready to Start Teaching?</h2>
+            <h2 className="text-4xl font-black mb-6 text-gray-700">Ready to Start Teaching?</h2>
             <p className="text-lg mb-12 max-w-3xl mx-auto" style={{ color: '#000000' }}>
               Join 200+ mentors who are already building successful teaching businesses on Skill Probe.
             </p>
