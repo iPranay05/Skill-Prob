@@ -92,15 +92,15 @@ export default function ForMentors() {
   const testimonials = [
     {
       text: 'I\'ve been teaching web development on Skill Probe for 8 months and have already trained 500+ students. The platform is intuitive and support is excellent!',
-      author: 'Rajesh Kumar, Web Development Mentor'
+      author: 'R. Kumar, Web Development Mentor'
     },
     {
       text: 'As a working professional, I conduct live classes on weekends. It\'s a great way to share knowledge and earn extra income.',
-      author: 'Priyanka Sharma, Data Science Mentor'
+      author: 'P. Sharma, Data Science Mentor'
     },
     {
       text: 'My recorded courses generate passive income while I focus on my day job. Best decision I ever made!',
-      author: 'Amit Verma, Digital Marketing Mentor'
+      author: 'A. Verma, Digital Marketing Mentor'
     }
   ];
 

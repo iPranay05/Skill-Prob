@@ -100,15 +100,15 @@ export default function ForAmbassadors() {
   const testimonials = [
     {
       text: 'I\'ve earned ₹45,000 in 6 months as a campus ambassador while completing my engineering degree. It\'s the best part-time opportunity!',
-      author: 'Rohan Mehta, IIT Delhi'
+      author: 'R. Mehta, IIT Delhi'
     },
     {
       text: 'Started with 5 referrals in my first month. Now I consistently earn ₹8,000-12,000 monthly. Highly recommend!',
-      author: 'Anjali Gupta, Mumbai University'
+      author: 'A. Gupta, Mumbai University'
     },
     {
       text: 'The ambassador program helped me develop marketing skills while earning. It\'s now a key highlight on my resume!',
-      author: 'Karthik Reddy, Christ University'
+      author: 'K. Reddy, Christ University'
     }
   ];
 

@@ -220,7 +220,7 @@ function RegisterContent() {
                     "Skill Probe transformed my career. From a confused student to landing my dream job at Google!"
                   </p>
                   <div className="text-white/70 text-xs">
-                    <span className="font-semibold">Arjun Singh</span> - Software Engineer @ Google
+                    <span className="font-semibold">A. Singh</span> - Software Engineer @ Google
                   </div>
                 </div>
               </div>

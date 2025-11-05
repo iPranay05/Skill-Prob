@@ -176,7 +176,7 @@ function LoginContent() {
                     </svg>
                   </div>
                   <div>
-                    <div className="text-white font-semibold text-sm">Resume Learning</div>
+                    <div className="text-white font-semibold text-sm">Resume Building</div>
                     <div className="text-white/70 text-xs">Pick up where you left off</div>
                   </div>
                 </div>
@@ -194,7 +194,7 @@ function LoginContent() {
                     "The personalized learning path helped me transition from marketing to tech in just 6 months!"
                   </p>
                   <div className="text-white/70 text-xs">
-                    <span className="font-semibold">Priya Sharma</span> - Product Manager @ Microsoft
+                    <span className="font-semibold">P. Sharma</span> - Product Manager @ Microsoft
                   </div>
                 </div>
               </div>

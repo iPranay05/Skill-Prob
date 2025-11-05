@@ -402,7 +402,7 @@ export default function HomePage() {
                     <span className="text-white font-semibold text-xl">AS</span>
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold text-gray-700">Arjun Singh</h4>
+                    <h4 className="text-xl font-semibold text-gray-700">A. Singh</h4>
                     <p className="text-[#5e17eb] font-semibold">Software Engineer @ Google</p>
                     <div className="flex items-center gap-1 mt-1">
                       {[...Array(5)].map((_, i) => (
@@ -429,7 +429,7 @@ export default function HomePage() {
               {[
                 {
                   quote: "Live classes made learning web development so much easier. I landed my first internship within 2 months!",
-                  name: "Priya Sharma",
+                  name: "P. Sharma",
                   role: "Full Stack Developer",
                   company: "Flipkart",
                   rating: 5,
@@ -437,7 +437,7 @@ export default function HomePage() {
                 },
                 {
                   quote: "The campus ambassador program is amazing! I've already earned ₹15,000 while helping friends discover quality courses.",
-                  name: "Rahul Verma",
+                  name: "R. Verma",
                   role: "Campus Ambassador",
                   company: "Skill Probe",
                   rating: 5,
