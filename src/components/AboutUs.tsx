@@ -27,23 +27,48 @@ export default function AboutUs() {
   const values = [
     {
       title: 'Accessibility',
-      description: 'Quality education should be available to everyone, everywhere.'
+      description: 'Quality education should be available to everyone, everywhere.',
+      icon: (
+        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      )
     },
     {
       title: 'Excellence',
-      description: 'We maintain the highest standards in course content, mentorship, and student support.'
+      description: 'We maintain the highest standards in course content, mentorship, and student support.',
+      icon: (
+        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+        </svg>
+      )
     },
     {
       title: 'Innovation',
-      description: 'We continuously evolve our platform with the latest learning technologies and methodologies.'
+      description: 'We continuously evolve our platform with the latest learning technologies and methodologies.',
+      icon: (
+        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg>
+      )
     },
     {
       title: 'Integrity',
-      description: 'Transparent pricing, honest communication, and genuine care for student success.'
+      description: 'Transparent pricing, honest communication, and genuine care for student success.',
+      icon: (
+        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      )
     },
     {
       title: 'Community',
-      description: 'Building a supportive ecosystem where learners, mentors, and ambassadors grow together.'
+      description: 'Building a supportive ecosystem where learners, mentors, and ambassadors grow together.',
+      icon: (
+        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+      )
     }
   ];
 
@@ -104,6 +129,16 @@ export default function AboutUs() {
                 <span className="block">Empowering Learners,</span>
                 <span className="block" style={{ color: '#5e17eb' }}>Building Careers</span>
               </motion.h1>
+
+              {/* Sub-hero Text */}
+              <motion.p
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+                className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl"
+              >
+                We're on a mission to democratize quality education and make skill development accessible to everyone, everywhere.
+              </motion.p>
             </motion.div>
 
             {/* Right Side - Hero Image */}
@@ -152,7 +187,7 @@ export default function AboutUs() {
           <div className="grid md:grid-cols-3 gap-8">
 
             {/* Students and Professionals */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-100">
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
               <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#3b82f6' }}>
                 <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
@@ -189,7 +224,7 @@ export default function AboutUs() {
             </div>
 
             {/* Companies and Recruiters */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-100">
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
               <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
                 <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z" />
@@ -226,7 +261,7 @@ export default function AboutUs() {
             </div>
 
             {/* Colleges */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-100">
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
               <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#f97316' }}>
                 <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z" />
@@ -266,7 +301,7 @@ export default function AboutUs() {
       </section>
 
       {/* Mission & Vision Section */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-20 px-6 bg-gradient-to-br from-purple-50/30 via-white to-blue-50/30">
         <div className="max-w-7xl mx-auto">
 
           {/* Mission - Text Left, Image Right */}
@@ -278,7 +313,7 @@ export default function AboutUs() {
               className="space-y-6"
             >
               <h2 className="text-4xl font-black mb-6 text-gray-700">Our Mission</h2>
-              <p className="text-lg leading-relaxed" style={{ color: '#000000' }}>
+              <p className="text-lg leading-relaxed text-gray-600">
                 Skill Probe is India's leading skill training and certification platform dedicated to bridging the gap between education and employment. We believe that quality education should be accessible, affordable, and outcome-driven.
               </p>
             </motion.div>
@@ -289,7 +324,7 @@ export default function AboutUs() {
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
               className="relative"
             >
-              <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative w-full h-72 rounded-3xl overflow-hidden shadow-2xl">
                 <img
                   src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop"
                   alt="Students learning together - representing bridging education and employment gap"
@@ -307,7 +342,7 @@ export default function AboutUs() {
               transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
               className="relative order-2 lg:order-1"
             >
-              <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative w-full h-72 rounded-3xl overflow-hidden shadow-2xl">
                 <img
                   src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop"
                   alt="Online learning and skill development - representing democratized education"
@@ -323,7 +358,7 @@ export default function AboutUs() {
               className="space-y-6 order-1 lg:order-2"
             >
               <h2 className="text-4xl font-black mb-6 text-gray-700">Our Vision</h2>
-              <p className="text-lg leading-relaxed" style={{ color: '#000000' }}>
+              <p className="text-lg leading-relaxed text-gray-600">
                 Founded with a vision to democratize skill development, we combine the best of live interactive learning with flexible recorded content, ensuring every learner can master in-demand skills at their own pace.
               </p>
             </motion.div>
@@ -349,7 +384,7 @@ export default function AboutUs() {
                 className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100"
               >
                 <div className="text-4xl font-black mb-2" style={{ color: '#5e17eb' }}>{stat.number}</div>
-                <p className="font-bold" style={{ color: '#000000' }}>{stat.label}</p>
+                <p className="font-bold text-gray-600">{stat.label}</p>
               </motion.div>
             ))}
           </div>
@@ -365,9 +400,9 @@ export default function AboutUs() {
 
           <div className="grid md:grid-cols-2 gap-8">
             {differentiators.map((item, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-8 border-2 border-black">
+              <div key={idx} className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
                 <h3 className="text-2xl font-black mb-4" style={{ color: '#5e17eb' }}>{item.title}</h3>
-                <p className="leading-relaxed" style={{ color: '#000000' }}>{item.description}</p>
+                <p className="leading-relaxed text-gray-600">{item.description}</p>
               </div>
             ))}
           </div>
@@ -375,34 +410,37 @@ export default function AboutUs() {
       </section>
 
       {/* Our Values */}
-      <section ref={valuesRef} className="py-20 px-6 bg-gray-50">
+      <section ref={valuesRef} className="py-16 px-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <motion.h2
               initial={{ y: 50, opacity: 0 }}
               animate={isValuesInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-4xl font-black mb-4 text-gray-700"
+              className="text-3xl font-black mb-2 text-white"
             >
               Our Values
             </motion.h2>
+            <p className="text-slate-300 text-sm">The principles that guide everything we do</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
             {values.map((value, idx) => (
               <motion.div
                 key={idx}
                 initial={{ y: 50, opacity: 0 }}
                 animate={isValuesInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
-                whileHover={{ scale: 1.05, y: -8 }}
-                className="bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-100 hover:border-[#5e17eb]/30 hover:shadow-xl transition-all duration-300 text-center group"
+                whileHover={{ y: -5 }}
+                className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 transition-all duration-300 group"
               >
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6 bg-[#5e17eb]/10 group-hover:bg-[#5e17eb] transition-colors duration-300">
-                  <div className="w-8 h-8 rounded-full bg-[#5e17eb] group-hover:bg-white transition-colors duration-300"></div>
+                <div className="flex flex-col items-center text-center space-y-3">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    {value.icon}
+                  </div>
+                  <h3 className="text-base font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">{value.title}</h3>
+                  <p className="text-xs leading-relaxed text-slate-300 group-hover:text-white transition-colors duration-300">{value.description}</p>
                 </div>
-                <h3 className="text-xl font-black mb-4 text-gray-700 group-hover:text-[#5e17eb] transition-colors duration-300">{value.title}</h3>
-                <p className="leading-relaxed text-gray-600">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -418,11 +456,11 @@ export default function AboutUs() {
 
           <div className="grid md:grid-cols-2 gap-6">
             {advantages.map((advantage, idx) => (
-              <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-xl border-2 border-gray-100">
+              <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
                 <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: '#5e17eb' }}>
                   <CheckCircle className="w-4 h-4" style={{ color: '#ffffff' }} />
                 </div>
-                <p className="font-semibold" style={{ color: '#000000' }}>{advantage}</p>
+                <p className="font-semibold text-gray-600">{advantage}</p>
               </div>
             ))}
           </div>
@@ -442,10 +480,10 @@ export default function AboutUs() {
             <div className="space-y-8">
               <div className="space-y-6">
                 <div className="inline-flex items-center px-4 py-2 bg-[#5e17eb]/10 rounded-full text-[#5e17eb] font-medium text-sm">
-                  🚀 Future Vision
+                  🚀 Future Goals
                 </div>
                 <h2 className="text-4xl lg:text-5xl font-black text-gray-700 leading-tight">
-                  Our Vision for the Future
+                  Our Roadmap to 2030
                 </h2>
                 <p className="text-xl leading-relaxed text-gray-600">
                   We're building more than just a learning platform—we're creating an ecosystem where skill development, mentorship, and career opportunities converge.
@@ -510,28 +548,166 @@ export default function AboutUs() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              {/* <Link
-                href="/courses/browse"
-                className="px-10 py-4 bg-[#5e17eb] text-white font-bold text-lg rounded-xl hover:bg-[#4a12c4] hover:shadow-lg transition-all duration-300"
-              >
-                Explore Courses
-              </Link> */}
               <Link
-                href="/for-mentors"
+                href="/mentor/signup"
                 className="px-10 py-4 bg-[#5e17eb] text-white font-bold text-lg rounded-xl hover:bg-[#4a12c4] hover:shadow-lg transition-all duration-300"
               >
                 Become a Mentor
               </Link>
-              <Link
-                href="/contact"
+              <button
+                onClick={() => document.getElementById('hiring-form-modal')?.classList.remove('hidden')}
                 className="px-10 py-4 border-2 border-gray-700 text-gray-700 font-bold text-lg rounded-xl hover:bg-gray-700 hover:text-white transition-all duration-300"
               >
                 Hire Talent
-              </Link>
+              </button>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Hiring Form Modal */}
+      <div id="hiring-form-modal" className="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+          <div className="p-8">
+
+            {/* Header */}
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h3 className="text-2xl font-semibold text-gray-700 mb-2">
+                  Partner with SkillProbe for Hiring
+                </h3>
+                <p className="text-gray-600">
+                  Tell us about your hiring needs and we'll connect you with the right talent
+                </p>
+              </div>
+              <button
+                onClick={() => document.getElementById('hiring-form-modal')?.classList.add('hidden')}
+                className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors duration-200"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Form */}
+            <form className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    Company Name *
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                    placeholder="Enter your company name"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    Your Name *
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                    placeholder="Enter your full name"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                    placeholder="Enter your email address"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    Phone Number *
+                  </label>
+                  <input
+                    type="tel"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                    placeholder="Enter your phone number"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    Job Title/Position *
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                    placeholder="e.g., HR Manager, Talent Acquisition"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    Company Size
+                  </label>
+                  <select className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700">
+                    <option value="">Select company size</option>
+                    <option value="1-10">1-10 employees</option>
+                    <option value="11-50">11-50 employees</option>
+                    <option value="51-200">51-200 employees</option>
+                    <option value="201-500">201-500 employees</option>
+                    <option value="500+">500+ employees</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                  Skills/Roles You're Looking For *
+                </label>
+                <textarea
+                  rows={3}
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                  placeholder="e.g., Full Stack Developers, Data Scientists, Digital Marketers..."
+                  required
+                ></textarea>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                  Additional Requirements (Optional)
+                </label>
+                <textarea
+                  rows={3}
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                  placeholder="Any specific requirements, experience level, location preferences, etc."
+                ></textarea>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full py-3 px-6 bg-[#5e17eb] text-white font-semibold rounded-lg hover:bg-[#4a12c4] hover:shadow-lg transition-all duration-300"
+              >
+                Submit Request
+              </button>
+            </form>
+
+            <p className="text-xs text-gray-500 mt-4 text-center">
+              Our team will review your request and get back to you within 24 hours
+            </p>
+
+          </div>
+        </div>
+      </div>
+
       <Footer></Footer>
     </div>
   );

@@ -9,8 +9,16 @@ interface FormData {
   name: string;
   phone: string;
   email: string;
-  city: string;
+  userType: string;
+  college: string;
+  organization: string;
   linkedinUrl: string;
+  currentRole: string;
+  yearsOfExperience: string;
+  interviewDate: string;
+  companyName: string;
+  careerGoals: string;
+  resume: File | null;
 }
 
 export default function CareerServices() {
@@ -19,8 +27,16 @@ export default function CareerServices() {
     name: '',
     phone: '',
     email: '',
-    city: '',
-    linkedinUrl: ''
+    userType: '',
+    college: '',
+    organization: '',
+    linkedinUrl: '',
+    currentRole: '',
+    yearsOfExperience: '',
+    interviewDate: '',
+    companyName: '',
+    careerGoals: '',
+    resume: null
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState('');
@@ -101,11 +117,20 @@ export default function CareerServices() {
     }
   ];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFormData({
+        ...formData,
+        resume: e.target.files[0]
+      });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -114,9 +139,22 @@ export default function CareerServices() {
     setError('');
     setSuccess('');
 
-    // Validate required fields
-    if (!formData.name || !formData.phone || !formData.email || !formData.city || !formData.linkedinUrl) {
+    // Validate required fields based on service type
+    if (!formData.name || !formData.phone || !formData.email) {
       setError('Please fill in all required fields');
+      setLoading(false);
+      return;
+    }
+
+    // Service-specific validation
+    if (activeService === 'resume-review' && !formData.resume) {
+      setError('Please upload your resume');
+      setLoading(false);
+      return;
+    }
+
+    if (activeService === 'linkedin-optimization' && !formData.linkedinUrl) {
+      setError('Please provide your LinkedIn URL');
       setLoading(false);
       return;
     }
@@ -166,9 +204,21 @@ export default function CareerServices() {
         name: '',
         phone: '',
         email: '',
-        city: '',
-        linkedinUrl: ''
+        userType: '',
+        college: '',
+        organization: '',
+        linkedinUrl: '',
+        currentRole: '',
+        yearsOfExperience: '',
+        interviewDate: '',
+        companyName: '',
+        careerGoals: '',
+        resume: null
       });
+
+      // Reset file input
+      const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+      if (fileInput) fileInput.value = '';
 
       // Close modal after success
       setTimeout(() => {
@@ -401,6 +451,7 @@ export default function CareerServices() {
                         </div>
                         
                         <form onSubmit={handleSubmit} className="space-y-6">
+                          {/* Common Fields for All Services */}
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                               <label className="block text-sm font-semibold text-gray-700 mb-3">
@@ -449,34 +500,192 @@ export default function CareerServices() {
 
                             <div>
                               <label className="block text-sm font-semibold text-gray-700 mb-3">
-                                City *
+                                I am a *
                               </label>
-                              <input
-                                type="text"
-                                name="city"
-                                value={formData.city}
+                              <select
+                                name="userType"
+                                value={formData.userType}
                                 onChange={handleInputChange}
                                 className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
-                                placeholder="Enter your city"
                                 required
-                              />
+                              >
+                                <option value="">Select...</option>
+                                <option value="student">Student</option>
+                                <option value="professional">Professional</option>
+                              </select>
                             </div>
                           </div>
 
-                          <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-3">
-                              LinkedIn URL *
-                            </label>
-                            <input
-                              type="url"
-                              name="linkedinUrl"
-                              value={formData.linkedinUrl}
-                              onChange={handleInputChange}
-                              className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
-                              placeholder="https://linkedin.com/in/yourprofile"
-                              required
-                            />
-                          </div>
+                          {/* Conditional College/Organization Field */}
+                          {formData.userType === 'student' && (
+                            <div>
+                              <label className="block text-sm font-semibold text-gray-700 mb-3">
+                                College Name *
+                              </label>
+                              <input
+                                type="text"
+                                name="college"
+                                value={formData.college}
+                                onChange={handleInputChange}
+                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                placeholder="Enter your college name"
+                                required
+                              />
+                            </div>
+                          )}
+
+                          {formData.userType === 'professional' && (
+                            <div>
+                              <label className="block text-sm font-semibold text-gray-700 mb-3">
+                                Organization *
+                              </label>
+                              <input
+                                type="text"
+                                name="organization"
+                                value={formData.organization}
+                                onChange={handleInputChange}
+                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                placeholder="Enter your organization name"
+                                required
+                              />
+                            </div>
+                          )}
+
+                          {/* Resume Review Specific Fields */}
+                          {activeService === 'resume-review' && (
+                            <div>
+                              <label className="block text-sm font-semibold text-gray-700 mb-3">
+                                Upload Resume *
+                              </label>
+                              <input
+                                type="file"
+                                accept=".pdf,.doc,.docx"
+                                onChange={handleFileChange}
+                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#5e17eb] file:text-white hover:file:bg-[#4a12c4] file:cursor-pointer"
+                                required
+                              />
+                              <p className="text-xs text-gray-500 mt-2">Accepted formats: PDF, DOC, DOCX (Max 5MB)</p>
+                            </div>
+                          )}
+
+                          {/* LinkedIn Optimization Specific Fields */}
+                          {activeService === 'linkedin-optimization' && (
+                            <>
+                              <div>
+                                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                                  LinkedIn Profile URL *
+                                </label>
+                                <input
+                                  type="url"
+                                  name="linkedinUrl"
+                                  value={formData.linkedinUrl}
+                                  onChange={handleInputChange}
+                                  className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                  placeholder="https://linkedin.com/in/yourprofile"
+                                  required
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                                  Current Role/Title
+                                </label>
+                                <input
+                                  type="text"
+                                  name="currentRole"
+                                  value={formData.currentRole}
+                                  onChange={handleInputChange}
+                                  className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                  placeholder="e.g., Software Engineer, Marketing Manager"
+                                />
+                              </div>
+                            </>
+                          )}
+
+                          {/* Interview Prep Specific Fields */}
+                          {activeService === 'interview-prep' && (
+                            <>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                  <label className="block text-sm font-semibold text-gray-700 mb-3">
+                                    Interview Date *
+                                  </label>
+                                  <input
+                                    type="date"
+                                    name="interviewDate"
+                                    value={formData.interviewDate}
+                                    onChange={handleInputChange}
+                                    className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                    required
+                                  />
+                                </div>
+                                <div>
+                                  <label className="block text-sm font-semibold text-gray-700 mb-3">
+                                    Company Name *
+                                  </label>
+                                  <input
+                                    type="text"
+                                    name="companyName"
+                                    value={formData.companyName}
+                                    onChange={handleInputChange}
+                                    className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                    placeholder="Company you're interviewing with"
+                                    required
+                                  />
+                                </div>
+                              </div>
+                              <div>
+                                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                                  Role/Position Applying For *
+                                </label>
+                                <input
+                                  type="text"
+                                  name="currentRole"
+                                  value={formData.currentRole}
+                                  onChange={handleInputChange}
+                                  className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                  placeholder="e.g., Senior Developer, Product Manager"
+                                  required
+                                />
+                              </div>
+                            </>
+                          )}
+
+                          {/* Career Counseling Specific Fields */}
+                          {activeService === 'counseling' && (
+                            <>
+                              <div>
+                                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                                  Years of Experience
+                                </label>
+                                <select
+                                  name="yearsOfExperience"
+                                  value={formData.yearsOfExperience}
+                                  onChange={handleInputChange}
+                                  className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                >
+                                  <option value="">Select...</option>
+                                  <option value="0-1">0-1 years</option>
+                                  <option value="1-3">1-3 years</option>
+                                  <option value="3-5">3-5 years</option>
+                                  <option value="5-10">5-10 years</option>
+                                  <option value="10+">10+ years</option>
+                                </select>
+                              </div>
+                              <div>
+                                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                                  Career Goals
+                                </label>
+                                <textarea
+                                  name="careerGoals"
+                                  value={formData.careerGoals}
+                                  onChange={handleInputChange}
+                                  rows={4}
+                                  className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                  placeholder="Tell us about your career aspirations and what you'd like to achieve..."
+                                />
+                              </div>
+                            </>
+                          )}
 
                         {/* Error Message */}
                         {error && (

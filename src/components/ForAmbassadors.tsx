@@ -52,23 +52,23 @@ export default function ForAmbassadors() {
 
   const howItWorks = [
     {
-      step: '1. Become an Ambassador',
+      step: 'Become an Ambassador',
       description: 'Apply directly or get referred by existing ambassadors for faster approval.'
     },
     {
-      step: '2. Get Your Unique Code',
+      step: 'Get Your Unique Code',
       description: 'Receive your personalized referral code and access to ambassador dashboard.'
     },
     {
-      step: '3. Share & Promote',
+      step: 'Share & Promote',
       description: 'Share across WhatsApp, social media, and college communities with our materials.'
     },
     {
-      step: '4. Track Your Referrals',
+      step: 'Track Your Referrals',
       description: 'Monitor clicks, registrations, purchases, and earnings in real-time.'
     },
     {
-      step: '5. Earn & Get Paid',
+      step: 'Earn & Get Paid',
       description: 'Convert points to cash and request payouts directly to your bank account.'
     }
   ];
@@ -169,16 +169,16 @@ export default function ForAmbassadors() {
             {/* Left Side - Text Content */}
             <div className="space-y-6">
               {/* Main Heading */}
-              <h1 className="text-5xl lg:text-6xl font-black leading-tight text-gray-700">
-                <span className="block">Earn While You Learn -</span>
-                <span className="block" style={{ color: '#5e17eb' }}>Become a Skill Probe Ambassador</span>
+              <h1 className="text-4xl lg:text-5xl font-black leading-tight text-gray-700">
+                <span className="block">Earn While You Learn</span>
+                <span className="block" style={{ color: '#5e17eb' }}>Campus Ambassador</span>
               </h1>
 
               {/* Description */}
               <div className="space-y-4">
                 <h2 className="text-2xl font-black text-gray-700">What is the Campus Ambassador Program?</h2>
                 <p className="text-xl leading-relaxed text-gray-600">
-                  The Skill Probe Campus Ambassador Program is a unique opportunity for students and young professionals to earn money by promoting quality education in their networks. Share courses, refer students, and earn rewards—all while building valuable skills and connections.
+                  Earn money by promoting quality education in your network. Share courses, refer students, and earn rewards.
                 </p>
               </div>
 
@@ -225,7 +225,7 @@ export default function ForAmbassadors() {
                   <div style={{ color: '#ffffff' }}>{reason.icon}</div>
                 </div>
                 <h3 className="text-xl font-black mb-4 text-gray-700">{reason.title}</h3>
-                <p className="leading-relaxed" style={{ color: '#000000' }}>{reason.description}</p>
+                <p className="leading-relaxed text-gray-600">{reason.description}</p>
               </div>
             ))}
           </div>
@@ -246,7 +246,7 @@ export default function ForAmbassadors() {
                   <span className="text-2xl font-black" style={{ color: '#ffffff' }}>{idx + 1}</span>
                 </div>
                 <h3 className="text-lg font-black mb-4 text-gray-700">{step.step}</h3>
-                <p className="leading-relaxed text-sm" style={{ color: '#000000' }}>{step.description}</p>
+                <p className="leading-relaxed text-sm text-gray-600">{step.description}</p>
               </div>
             ))}
           </div>
@@ -260,37 +260,37 @@ export default function ForAmbassadors() {
             <h2 className="text-4xl font-black mb-4 text-gray-700">Earning Structure</h2>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            <div className="bg-white rounded-2xl p-6 text-center border-2 border-black">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
-                <Users className="w-6 h-6" style={{ color: '#ffffff' }} />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: '#5e17eb' }}>
+                <Users className="w-5 h-5" style={{ color: '#ffffff' }} />
               </div>
-              <h3 className="text-2xl font-black mb-2 text-gray-700">50</h3>
-              <p className="font-semibold text-sm" style={{ color: '#000000' }}>Registration Points</p>
+              <h3 className="text-xl font-black mb-1 text-gray-700">50</h3>
+              <p className="font-semibold text-xs text-gray-600">Registration Points</p>
             </div>
 
-            <div className="bg-white rounded-2xl p-6 text-center border-2 border-black">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
-                <DollarSign className="w-6 h-6" style={{ color: '#ffffff' }} />
+            <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: '#5e17eb' }}>
+                <DollarSign className="w-5 h-5" style={{ color: '#ffffff' }} />
               </div>
-              <h3 className="text-2xl font-black mb-2 text-gray-700">500</h3>
-              <p className="font-semibold text-sm" style={{ color: '#000000' }}>Purchase Points</p>
+              <h3 className="text-xl font-black mb-1 text-gray-700">500</h3>
+              <p className="font-semibold text-xs text-gray-600">Purchase Points</p>
             </div>
 
-            <div className="bg-white rounded-2xl p-6 text-center border-2 border-black">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
-                <Share2 className="w-6 h-6" style={{ color: '#ffffff' }} />
+            <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: '#5e17eb' }}>
+                <Share2 className="w-5 h-5" style={{ color: '#ffffff' }} />
               </div>
-              <h3 className="text-2xl font-black mb-2 text-gray-700">₹100</h3>
-              <p className="font-semibold text-sm" style={{ color: '#000000' }}>Ambassador Referral</p>
+              <h3 className="text-xl font-black mb-1 text-gray-700">₹100</h3>
+              <p className="font-semibold text-xs text-gray-600">Ambassador Referral</p>
             </div>
 
-            <div className="bg-white rounded-2xl p-6 text-center border-2 border-black">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
-                <CheckCircle className="w-6 h-6" style={{ color: '#ffffff' }} />
+            <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: '#5e17eb' }}>
+                <CheckCircle className="w-5 h-5" style={{ color: '#ffffff' }} />
               </div>
-              <h3 className="text-2xl font-black mb-2 text-gray-700">100 = ₹100</h3>
-              <p className="font-semibold text-sm" style={{ color: '#000000' }}>Point Conversion</p>
+              <h3 className="text-xl font-black mb-1 text-gray-700">100 = ₹100</h3>
+              <p className="font-semibold text-xs text-gray-600">Point Conversion</p>
             </div>
           </div>
 
@@ -299,12 +299,12 @@ export default function ForAmbassadors() {
             <h3 className="text-3xl font-black text-center mb-12 text-gray-700">Milestone Bonuses</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {milestones.map((milestone, idx) => (
-                <div key={idx} className="bg-white rounded-2xl p-6 text-center border-2 border-black">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#5e17eb' }}>
-                    <span className="font-black text-lg" style={{ color: '#ffffff' }}>{milestone.referrals}</span>
+                <div key={idx} className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: '#5e17eb' }}>
+                    <span className="font-black text-base" style={{ color: '#ffffff' }}>{milestone.referrals}</span>
                   </div>
-                  <h4 className="text-xl font-black mb-1 text-gray-700">{milestone.bonus}</h4>
-                  <p className="font-semibold text-sm" style={{ color: '#000000' }}>{milestone.referrals} Successful Referrals</p>
+                  <h4 className="text-lg font-black mb-1 text-gray-700">{milestone.bonus}</h4>
+                  <p className="font-semibold text-xs text-gray-600">{milestone.referrals} Successful Referrals</p>
                 </div>
               ))}
             </div>
@@ -325,7 +325,7 @@ export default function ForAmbassadors() {
                 <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: '#5e17eb' }}>
                   <CheckCircle className="w-4 h-4" style={{ color: '#ffffff' }} />
                 </div>
-                <p className="font-semibold" style={{ color: '#000000' }}>{benefit}</p>
+                <p className="font-semibold text-gray-600">{benefit}</p>
               </div>
             ))}
           </div>
@@ -337,12 +337,12 @@ export default function ForAmbassadors() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black mb-4 text-gray-700">Ambassador Dashboard</h2>
-            <p className="text-lg" style={{ color: '#000000' }}>Your personal command center includes:</p>
+            <p className="text-lg text-gray-600">Your personal command center includes:</p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-2xl p-8 border-2 border-black">
-              <h3 className="text-2xl font-black mb-4" style={{ color: '#5e17eb' }}>Performance Overview</h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-white rounded-xl p-6 border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <h3 className="text-xl font-black mb-4" style={{ color: '#5e17eb' }}>Performance Overview</h3>
               <div className="space-y-2">
                 {[
                   'Total referrals (clicks, registrations, purchases)',
@@ -352,14 +352,14 @@ export default function ForAmbassadors() {
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                    <span style={{ color: '#000000' }}>{item}</span>
+                    <span className="text-sm text-gray-600">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 border-2 border-black">
-              <h3 className="text-2xl font-black mb-4" style={{ color: '#5e17eb' }}>Referral Management</h3>
+            <div className="bg-white rounded-xl p-6 border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <h3 className="text-xl font-black mb-4" style={{ color: '#5e17eb' }}>Referral Management</h3>
               <div className="space-y-2">
                 {[
                   'Generate custom referral links',
@@ -369,14 +369,14 @@ export default function ForAmbassadors() {
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                    <span style={{ color: '#000000' }}>{item}</span>
+                    <span className="text-sm text-gray-600">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 border-2 border-black">
-              <h3 className="text-2xl font-black mb-4" style={{ color: '#5e17eb' }}>Earnings & Payouts</h3>
+            <div className="bg-white rounded-xl p-6 border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <h3 className="text-xl font-black mb-4" style={{ color: '#5e17eb' }}>Earnings & Payouts</h3>
               <div className="space-y-2">
                 {[
                   'Points ledger with transaction history',
@@ -386,14 +386,14 @@ export default function ForAmbassadors() {
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                    <span style={{ color: '#000000' }}>{item}</span>
+                    <span className="text-sm text-gray-600">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 border-2 border-black">
-              <h3 className="text-2xl font-black mb-4" style={{ color: '#5e17eb' }}>Ambassador Tools</h3>
+            <div className="bg-white rounded-xl p-6 border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <h3 className="text-xl font-black mb-4" style={{ color: '#5e17eb' }}>Ambassador Tools</h3>
               <div className="space-y-2">
                 {[
                   'Pre-designed social media posts',
@@ -403,7 +403,7 @@ export default function ForAmbassadors() {
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                    <span style={{ color: '#000000' }}>{item}</span>
+                    <span className="text-sm text-gray-600">{item}</span>
                   </div>
                 ))}
               </div>
@@ -413,35 +413,49 @@ export default function ForAmbassadors() {
       </section>
 
       {/* Who Can Become an Ambassador */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-20 px-6 bg-gradient-to-br from-gray-50 via-white to-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-3xl font-black mb-8 text-gray-700">Who Can Become an Ambassador?</h2>
-              <div className="space-y-4">
-                {eligibility.map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-4 p-4 bg-white rounded-xl border-2 border-gray-100">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: '#5e17eb' }}>
-                      <CheckCircle className="w-4 h-4" style={{ color: '#ffffff' }} />
-                    </div>
-                    <p className="font-semibold" style={{ color: '#000000' }}>{item}</p>
-                  </div>
-                ))}
-              </div>
+          
+          {/* Who Can Become an Ambassador */}
+          <div className="mb-16">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-black mb-4 text-gray-700">Who Can Become an Ambassador?</h2>
+              <p className="text-lg text-gray-600">Join our community of passionate education advocates</p>
             </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {eligibility.map((item, idx) => (
+                <div key={idx} className="group bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-lg hover:border-[#5e17eb]/30 transition-all duration-300">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#5e17eb] to-[#7c3aed] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <CheckCircle className="w-6 h-6 text-white" />
+                    </div>
+                    <p className="font-semibold text-gray-700 leading-relaxed pt-2">{item}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-            <div>
-              <h2 className="text-3xl font-black mb-8 text-gray-700">Application Requirements</h2>
-              <div className="space-y-4">
+          {/* Application Requirements */}
+          <div>
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-black mb-4 text-gray-700">Application Requirements</h2>
+              <p className="text-lg text-gray-600">Simple criteria to get started</p>
+            </div>
+            <div className="max-w-4xl mx-auto bg-white rounded-2xl p-8 md:p-12 border border-gray-200 shadow-lg">
+              <div className="grid md:grid-cols-2 gap-6">
                 {requirements.map((requirement, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                    <span style={{ color: '#000000' }}>{requirement}</span>
+                  <div key={idx} className="flex items-start gap-4 p-4 bg-gradient-to-r from-[#5e17eb]/5 to-transparent rounded-xl hover:from-[#5e17eb]/10 transition-colors duration-300">
+                    <div className="w-6 h-6 rounded-full bg-[#5e17eb] flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                    </div>
+                    <span className="text-gray-700 font-medium leading-relaxed">{requirement}</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
+
         </div>
       </section>
 
@@ -454,8 +468,8 @@ export default function ForAmbassadors() {
           
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-8 border-2 border-black">
-                <p className="text-lg mb-6 leading-relaxed" style={{ color: '#000000' }}>
+              <div key={idx} className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <p className="text-lg mb-6 leading-relaxed text-gray-600 italic">
                   "{testimonial.text}"
                 </p>
                 <p className="font-bold" style={{ color: '#5e17eb' }}>- {testimonial.author}</p>
@@ -479,7 +493,7 @@ export default function ForAmbassadors() {
                   <span className="text-2xl font-black" style={{ color: '#ffffff' }}>{idx + 1}</span>
                 </div>
                 <h3 className="text-xl font-black mb-4 text-gray-700">{tip.title}</h3>
-                <p className="leading-relaxed" style={{ color: '#000000' }}>{tip.description}</p>
+                <p className="leading-relaxed text-gray-600">{tip.description}</p>
               </div>
             ))}
           </div>
@@ -525,33 +539,19 @@ export default function ForAmbassadors() {
       {/* CTA Section */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="bg-white rounded-3xl p-12 shadow-2xl border-2 border-black text-center">
+          <div className="bg-white rounded-3xl p-12 shadow-lg border border-gray-200 text-center">
             <h2 className="text-4xl font-black mb-6 text-gray-700">Ready to Become an Ambassador?</h2>
-            <p className="text-lg mb-12 max-w-3xl mx-auto" style={{ color: '#000000' }}>
+            <p className="text-lg mb-12 max-w-3xl mx-auto text-gray-600">
               Join our Campus Ambassador Program and start earning money while you learn!
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <div className="flex justify-center">
               <Link
                 href="/ambassador/signup"
                 className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300 hover:shadow-lg"
                 style={{ backgroundColor: '#5e17eb', color: '#ffffff' }}
               >
                 Apply Now
-              </Link>
-              <Link
-                href="/ambassador-guide"
-                className="px-10 py-4 border-2 font-bold text-lg rounded-xl transition-all duration-300 hover:bg-gray-50"
-                style={{ borderColor: '#000000', color: '#000000' }}
-              >
-                Learn More
-              </Link>
-              <Link
-                href="/contact"
-                className="px-10 py-4 border-2 font-bold text-lg rounded-xl transition-all duration-300 hover:bg-gray-50"
-                style={{ borderColor: '#000000', color: '#000000' }}
-              >
-                Contact Us
               </Link>
             </div>
           </div>

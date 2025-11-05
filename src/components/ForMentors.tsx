@@ -161,7 +161,7 @@ export default function ForMentors() {
             {/* Left Side - Text Content */}
             <div className="space-y-6">
               {/* Main Heading */}
-              <h1 className="text-5xl lg:text-6xl font-black leading-tight text-gray-700">
+              <h1 className="text-4xl lg:text-5xl font-black leading-tight text-gray-700">
                 <span className="block">Share Your Expertise,</span>
                 <span className="block" style={{ color: '#5e17eb' }}>Inspire Learners, Earn Revenue</span>
               </h1>
@@ -170,7 +170,7 @@ export default function ForMentors() {
               <div className="space-y-4">
                 <h2 className="text-2xl font-black text-gray-700">Why Teach on Skill Probe?</h2>
                 <p className="text-xl leading-relaxed text-gray-600">
-                  Join India's fastest-growing online learning platform and monetize your knowledge. Whether you want to conduct live interactive classes or create comprehensive recorded courses, we provide everything you need to succeed as an online mentor.
+                  Join India's fastest-growing online learning platform and monetize your knowledge with live classes or recorded courses.
                 </p>
               </div>
 
@@ -208,14 +208,14 @@ export default function ForMentors() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black mb-4 text-gray-700">Build Your Teaching Business</h2>
-            <p className="text-lg" style={{ color: '#000000' }}>
+            <p className="text-lg text-gray-600">
               Create your own courses, set your pricing, and reach thousands of eager learners. We handle the platform, payments, and support—you focus on teaching.
             </p>
           </div>
 
           {/* Teaching Options */}
           <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <div className="bg-white rounded-2xl p-8 border-2 border-black text-center">
+            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 text-center">
               <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
                 <Video className="w-8 h-8" style={{ color: '#ffffff' }} />
               </div>
@@ -223,81 +223,81 @@ export default function ForMentors() {
               <div className="space-y-2 text-left">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span style={{ color: '#000000' }}>Conduct scheduled Google Meet sessions</span>
+                  <span className="text-gray-600">Conduct scheduled Google Meet sessions</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span style={{ color: '#000000' }}>Interact with students in real-time</span>
+                  <span className="text-gray-600">Interact with students in real-time</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span style={{ color: '#000000' }}>Host Q&A sessions and discussions</span>
+                  <span className="text-gray-600">Host Q&A sessions and discussions</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span style={{ color: '#000000' }}>Build a loyal student community</span>
+                  <span className="text-gray-600">Build a loyal student community</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span style={{ color: '#000000' }}>Higher revenue potential</span>
+                  <span className="text-gray-600">Higher revenue potential</span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 border-2 border-black text-center">
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
+            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 text-center">
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#3b82f6' }}>
                 <FileText className="w-8 h-8" style={{ color: '#ffffff' }} />
               </div>
               <h3 className="text-2xl font-black mb-4 text-gray-700">Create your own courses</h3>
               <div className="space-y-2 text-left">
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span style={{ color: '#000000' }}>Create self-paced video content</span>
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#3b82f6' }}></div>
+                  <span className="text-gray-600">Create self-paced video content</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span style={{ color: '#000000' }}>Organize content chapter-wise</span>
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#3b82f6' }}></div>
+                  <span className="text-gray-600">Organize content chapter-wise</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span style={{ color: '#000000' }}>Upload resources and materials</span>
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#3b82f6' }}></div>
+                  <span className="text-gray-600">Upload resources and materials</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span style={{ color: '#000000' }}>Passive income opportunity</span>
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#3b82f6' }}></div>
+                  <span className="text-gray-600">Passive income opportunity</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span style={{ color: '#000000' }}>Reach more students globally</span>
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#3b82f6' }}></div>
+                  <span className="text-gray-600">Reach more students globally</span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 border-2 border-black text-center">
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
+            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 text-center">
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#10b981' }}>
                 <Globe className="w-8 h-8" style={{ color: '#ffffff' }} />
               </div>
               <h3 className="text-2xl font-black mb-4 text-gray-700">Hybrid Approach</h3>
               <div className="space-y-2 text-left">
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span style={{ color: '#000000' }}>Combine live and recorded content</span>
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#10b981' }}></div>
+                  <span className="text-gray-600">Combine live and recorded content</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span style={{ color: '#000000' }}>Maximize student engagement</span>
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#10b981' }}></div>
+                  <span className="text-gray-600">Maximize student engagement</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span style={{ color: '#000000' }}>Flexible teaching schedule</span>
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#10b981' }}></div>
+                  <span className="text-gray-600">Flexible teaching schedule</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span style={{ color: '#000000' }}>Multiple revenue streams</span>
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#10b981' }}></div>
+                  <span className="text-gray-600">Multiple revenue streams</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                  <span style={{ color: '#000000' }}>Best of both teaching methods</span>
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#10b981' }}></div>
+                  <span className="text-gray-600">Best of both teaching methods</span>
                 </div>
               </div>
             </div>
@@ -314,7 +314,7 @@ export default function ForMentors() {
                 <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: '#5e17eb' }}>
                   <CheckCircle className="w-4 h-4" style={{ color: '#ffffff' }} />
                 </div>
-                <p className="font-semibold" style={{ color: '#000000' }}>{benefit}</p>
+                <p className="font-semibold text-gray-600">{benefit}</p>
               </div>
             ))}
           </div>
@@ -336,7 +336,7 @@ export default function ForMentors() {
                   {feature.points.map((point, pointIdx) => (
                     <div key={pointIdx} className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                      <span style={{ color: '#000000' }}>{point}</span>
+                      <span className="text-gray-600">{point}</span>
                     </div>
                   ))}
                 </div>
@@ -360,7 +360,7 @@ export default function ForMentors() {
                   <span className="text-2xl font-black" style={{ color: '#ffffff' }}>{idx + 1}</span>
                 </div>
                 <h3 className="text-lg font-black mb-4 text-gray-700">{step.step}</h3>
-                <p className="leading-relaxed text-sm" style={{ color: '#000000' }}>{step.description}</p>
+                <p className="leading-relaxed text-sm text-gray-600">{step.description}</p>
               </div>
             ))}
           </div>
@@ -376,8 +376,8 @@ export default function ForMentors() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-8 border-2 border-black">
-                <p className="text-lg mb-6 leading-relaxed" style={{ color: '#000000' }}>
+              <div key={idx} className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <p className="text-lg mb-6 leading-relaxed text-gray-600 italic">
                   "{testimonial.text}"
                 </p>
                 <p className="font-bold" style={{ color: '#5e17eb' }}>- {testimonial.author}</p>
@@ -390,33 +390,43 @@ export default function ForMentors() {
       {/* Who Can Become a Mentor & Requirements */}
       <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-3xl font-black mb-8 text-gray-700">Who Can Become a Mentor?</h2>
-              <div className="space-y-4">
-                {eligibility.map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-4 p-4 bg-white rounded-xl border-2 border-gray-100">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: '#5e17eb' }}>
-                      <CheckCircle className="w-4 h-4" style={{ color: '#ffffff' }} />
-                    </div>
-                    <p className="font-semibold" style={{ color: '#000000' }}>{item}</p>
-                  </div>
-                ))}
-              </div>
+          
+          {/* Who Can Become a Mentor */}
+          <div className="mb-16">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-black mb-4 text-gray-700">Who Can Become a Mentor?</h2>
+              <p className="text-lg text-gray-600">Join our community of expert educators from diverse backgrounds</p>
             </div>
-
-            <div>
-              <h2 className="text-3xl font-black mb-8 text-gray-700">Mentor Requirements</h2>
-              <div className="space-y-4">
-                {requirements.map((requirement, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                    <span style={{ color: '#000000' }}>{requirement}</span>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {eligibility.map((item, idx) => (
+                <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 hover:border-purple-200">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#5e17eb' }}>
+                    <CheckCircle className="w-5 h-5" style={{ color: '#ffffff' }} />
                   </div>
-                ))}
-              </div>
+                  <p className="font-semibold text-gray-700 leading-relaxed">{item}</p>
+                </div>
+              ))}
             </div>
           </div>
+
+          {/* Mentor Requirements */}
+          <div>
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-black mb-4 text-gray-700">Mentor Requirements</h2>
+              <p className="text-lg text-gray-600">Essential qualifications to ensure quality teaching</p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {requirements.map((requirement, idx) => (
+                <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 hover:border-purple-200">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#3b82f6' }}>
+                    <CheckCircle className="w-5 h-5" style={{ color: '#ffffff' }} />
+                  </div>
+                  <p className="font-semibold text-gray-700 leading-relaxed">{requirement}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -428,9 +438,9 @@ export default function ForMentors() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-8 border-2 border-black">
+            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
               <h3 className="text-2xl font-black mb-4" style={{ color: '#5e17eb' }}>Mentor Training</h3>
-              <p className="mb-4" style={{ color: '#000000' }}>Free onboarding program covering:</p>
+              <p className="mb-4 text-gray-600">Free onboarding program covering:</p>
               <div className="space-y-2">
                 {[
                   'Creating engaging course content',
@@ -440,13 +450,13 @@ export default function ForMentors() {
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                    <span style={{ color: '#000000' }}>{item}</span>
+                    <span className="text-gray-600">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 border-2 border-black">
+            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
               <h3 className="text-2xl font-black mb-4" style={{ color: '#5e17eb' }}>Technical Support</h3>
               <div className="space-y-2">
                 {[
@@ -457,13 +467,13 @@ export default function ForMentors() {
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                    <span style={{ color: '#000000' }}>{item}</span>
+                    <span className="text-gray-600">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 border-2 border-black">
+            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
               <h3 className="text-2xl font-black mb-4" style={{ color: '#5e17eb' }}>Marketing Assistance</h3>
               <div className="space-y-2">
                 {[
@@ -474,7 +484,7 @@ export default function ForMentors() {
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
-                    <span style={{ color: '#000000' }}>{item}</span>
+                    <span className="text-gray-600">{item}</span>
                   </div>
                 ))}
               </div>
@@ -522,33 +532,19 @@ export default function ForMentors() {
       {/* CTA Section */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="bg-white rounded-3xl p-12 shadow-2xl border-2 border-black text-center">
+          <div className="bg-white rounded-3xl p-12 shadow-md border border-gray-100 text-center">
             <h2 className="text-4xl font-black mb-6 text-gray-700">Ready to Start Teaching?</h2>
-            <p className="text-lg mb-12 max-w-3xl mx-auto" style={{ color: '#000000' }}>
+            <p className="text-lg mb-12 max-w-3xl mx-auto text-gray-600">
               Join 200+ mentors who are already building successful teaching businesses on Skill Probe.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <div className="flex justify-center">
               <Link
-                href="/apply-mentor"
+                href="/mentor/signup"
                 className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300 hover:shadow-lg"
                 style={{ backgroundColor: '#5e17eb', color: '#ffffff' }}
               >
                 Apply to Become a Mentor
-              </Link>
-              {/* <Link
-                href="/mentor-guide"
-                className="px-10 py-4 border-2 font-bold text-lg rounded-xl transition-all duration-300 hover:bg-gray-50"
-                style={{ borderColor: '#000000', color: '#000000' }}
-              >
-                View Mentor Guide
-              </Link> */}
-              <Link
-                href="/contact"
-                className="px-10 py-4 border-2 font-bold text-lg rounded-xl transition-all duration-300 hover:bg-gray-50"
-                style={{ borderColor: '#000000', color: '#000000' }}
-              >
-                Contact Us
               </Link>
             </div>
           </div>
