@@ -9,6 +9,7 @@ interface FormData {
   name: string;
   phone: string;
   email: string;
+  city: string;
   userType: string;
   college: string;
   organization: string;
@@ -27,6 +28,7 @@ export default function CareerServices() {
     name: '',
     phone: '',
     email: '',
+    city: '',
     userType: '',
     college: '',
     organization: '',
@@ -204,6 +206,7 @@ export default function CareerServices() {
         name: '',
         phone: '',
         email: '',
+        city: '',
         userType: '',
         college: '',
         organization: '',
@@ -242,7 +245,16 @@ export default function CareerServices() {
       phone: '',
       email: '',
       city: '',
-      linkedinUrl: ''
+      userType: '',
+      college: '',
+      organization: '',
+      linkedinUrl: '',
+      currentRole: '',
+      yearsOfExperience: '',
+      interviewDate: '',
+      companyName: '',
+      careerGoals: '',
+      resume: null
     });
   };
 
