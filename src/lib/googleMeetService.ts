@@ -1,11 +1,18 @@
 import { google } from 'googleapis';
 import { OAuth2Client } from 'google-auth-library';
+import { createClient } from '@supabase/supabase-js';
 
-interface GoogleMeetConfig {
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+
+interface MentorOAuthConfig {
   clientId: string;
   clientSecret: string;
-  redirectUri: string;
+  accessToken: string;
   refreshToken: string;
+  expiresAt: Date;
 }
 
 interface MeetingDetails {
@@ -25,19 +32,48 @@ interface CreatedMeeting {
 export class GoogleMeetService {
   private oauth2Client: OAuth2Client;
   private calendar: any;
+  private mentorId: string;
 
-  constructor(config: GoogleMeetConfig) {
+  constructor(config: MentorOAuthConfig, mentorId: string) {
+    this.mentorId = mentorId;
     this.oauth2Client = new google.auth.OAuth2(
       config.clientId,
       config.clientSecret,
-      config.redirectUri
+      `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/mentor/oauth/callback`
     );
 
     this.oauth2Client.setCredentials({
+      access_token: config.accessToken,
       refresh_token: config.refreshToken,
+      expiry_date: config.expiresAt.getTime(),
     });
 
     this.calendar = google.calendar({ version: 'v3', auth: this.oauth2Client });
+
+    // Set up token refresh handler
+    this.oauth2Client.on('tokens', async (tokens) => {
+      if (tokens.refresh_token) {
+        // Update tokens in database
+        await this.updateMentorTokens(tokens);
+      }
+    });
+  }
+
+  private async updateMentorTokens(tokens: any) {
+    try {
+      const expiresAt = new Date();
+      expiresAt.setSeconds(expiresAt.getSeconds() + (tokens.expiry_date ? tokens.expiry_date / 1000 : 3600));
+
+      await supabase
+        .from('users')
+        .update({
+          google_access_token: tokens.access_token,
+          google_token_expires_at: expiresAt.toISOString()
+        })
+        .eq('id', this.mentorId);
+    } catch (error) {
+      console.error('Error updating mentor tokens:', error);
+    }
   }
 
   /**
@@ -186,18 +222,43 @@ export class GoogleMeetService {
   }
 }
 
-// Factory function to create GoogleMeetService instance
-export function createGoogleMeetService(): GoogleMeetService {
-  const config: GoogleMeetConfig = {
-    clientId: process.env.GOOGLE_CLIENT_ID!,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    redirectUri: process.env.GOOGLE_REDIRECT_URI!,
-    refreshToken: process.env.GOOGLE_REFRESH_TOKEN!,
-  };
+// Factory function to create GoogleMeetService instance for a specific mentor
+export async function createGoogleMeetService(mentorUserId: string): Promise<GoogleMeetService> {
+  // Get mentor's OAuth credentials from database
+  const { data: mentor, error } = await supabase
+    .from('users')
+    .select('google_client_id, google_client_secret, google_access_token, google_refresh_token, google_token_expires_at')
+    .eq('id', mentorUserId)
+    .eq('role', 'mentor')
+    .single();
 
-  if (!config.clientId || !config.clientSecret || !config.refreshToken) {
-    throw new Error('Missing required Google API configuration');
+  if (error || !mentor) {
+    throw new Error('Mentor not found or OAuth not configured');
   }
 
-  return new GoogleMeetService(config);
+  if (!mentor.google_client_id || !mentor.google_client_secret || !mentor.google_refresh_token) {
+    throw new Error('Mentor OAuth credentials incomplete');
+  }
+
+  const config: MentorOAuthConfig = {
+    clientId: mentor.google_client_id,
+    clientSecret: mentor.google_client_secret,
+    accessToken: mentor.google_access_token,
+    refreshToken: mentor.google_refresh_token,
+    expiresAt: new Date(mentor.google_token_expires_at)
+  };
+
+  return new GoogleMeetService(config, mentorUserId);
+}
+
+// Helper function to check if mentor has OAuth setup
+export async function checkMentorOAuthSetup(mentorUserId: string): Promise<boolean> {
+  const { data: mentor, error } = await supabase
+    .from('users')
+    .select('oauth_setup_completed')
+    .eq('id', mentorUserId)
+    .eq('role', 'mentor')
+    .single();
+
+  return !error && mentor?.oauth_setup_completed === true;
 }

@@ -1,5 +1,5 @@
 import { supabase } from './database';
-import { createGoogleMeetService } from './googleMeetService';
+import { createGoogleMeetService, checkMentorOAuthSetup } from './googleMeetService';
 import {
   LiveSession,
   SessionAttendance,
@@ -19,7 +19,6 @@ import {
 import { APIError } from './errors';
 
 export class LiveSessionService {
-  private googleMeetService = createGoogleMeetService();
 
   /**
    * Create a new live session with Google Meet integration
@@ -41,8 +40,17 @@ export class LiveSessionService {
         throw new APIError('Course not found or access denied', 403);
       }
 
+      // Check if mentor has OAuth setup
+      const hasOAuth = await checkMentorOAuthSetup(mentorId);
+      if (!hasOAuth) {
+        throw new APIError('Google OAuth setup required. Please complete OAuth setup first.', 400);
+      }
+
+      // Create Google Meet service for this mentor
+      const googleMeetService = await createGoogleMeetService(mentorId);
+
       // Create Google Meet meeting
-      const meetingDetails = await this.googleMeetService.createMeeting({
+      const meetingDetails = await googleMeetService.createMeeting({
         title: sessionData.title,
         description: sessionData.description,
         startTime: sessionData.scheduledStartTime,
@@ -72,7 +80,7 @@ export class LiveSessionService {
       if (error) {
         // Cleanup Google Meet if database insert fails
         try {
-          await this.googleMeetService.cancelMeeting(meetingDetails.eventId);
+          await googleMeetService.cancelMeeting(meetingDetails.eventId);
         } catch (cleanupError) {
           console.error('Failed to cleanup Google Meet:', cleanupError);
         }
@@ -110,7 +118,8 @@ export class LiveSessionService {
 
       // Update Google Meet if time changes
       if (updateData.scheduledStartTime || updateData.scheduledEndTime || updateData.title) {
-        await this.googleMeetService.updateMeeting(existingSession.google_event_id, {
+        const googleMeetService = await createGoogleMeetService(mentorId);
+        await googleMeetService.updateMeeting(existingSession.google_event_id, {
           title: updateData.title,
           startTime: updateData.scheduledStartTime,
           endTime: updateData.scheduledEndTime,
