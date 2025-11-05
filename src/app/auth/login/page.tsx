@@ -184,7 +184,7 @@ function LoginContent() {
             </div>
 
             {/* Bottom Quote */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+            {/* <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
               <div className="flex items-start space-x-3">
                 <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-sm">PS</span>
@@ -198,7 +198,7 @@ function LoginContent() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 

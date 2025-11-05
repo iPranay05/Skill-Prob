@@ -209,22 +209,8 @@ function RegisterContent() {
               </div>
             </div>
 
-            {/* Bottom Quote */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-lg">AS</span>
-                </div>
-                <div>
-                  <p className="text-white/90 text-sm italic mb-2">
-                    "Skill Probe transformed my career. From a confused student to landing my dream job at Google!"
-                  </p>
-                  <div className="text-white/70 text-xs">
-                    <span className="font-semibold">A. Singh</span> - Software Engineer @ Google
-                  </div>
-                </div>
-              </div>
-            </div>
+            
+          
           </div>
         </div>
 

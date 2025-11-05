@@ -68,23 +68,23 @@ export default function ForMentors() {
 
   const steps = [
     {
-      step: 'Step 1: Apply',
+      step: 'Apply',
       description: 'Fill out our mentor application form with your credentials, expertise areas, and teaching experience.'
     },
     {
-      step: 'Step 2: Verification',
+      step: 'Verification',
       description: 'Our team reviews your application and verifies your qualifications. Approval typically takes 2-3 business days.'
     },
     {
-      step: 'Step 3: Profile Setup',
+      step: 'Profile Setup',
       description: 'Create your mentor profile, add bio, qualifications, social links, and profile picture.'
     },
     {
-      step: 'Step 4: Create Your First Course',
+      step: 'Create Your First Course',
       description: 'Use our course builder to create engaging content. Upload videos, add resources, and set pricing.'
     },
     {
-      step: 'Step 5: Launch & Earn',
+      step: 'Launch & Earn',
       description: 'Publish your course and start enrolling students. Receive payouts directly to your bank account.'
     }
   ];
