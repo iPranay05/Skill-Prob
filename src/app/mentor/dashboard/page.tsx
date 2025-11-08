@@ -138,7 +138,7 @@ export default function MentorDashboardPage() {
       <div className="min-h-screen bg-white" style={{ fontFamily: 'Arial, sans-serif' }}>
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
-            <div className="w-8 h-8 border-2 border-gray-300 border-t-violet-600 rounded-full animate-spin mx-auto" style={{ className="border-t-primary" }}></div>
+            <div className="w-8 h-8 border-2 border-gray-300 border-t-primary rounded-full animate-spin mx-auto"></div>
             <p className="mt-4 text-black">Loading dashboard...</p>
           </div>
         </div>
@@ -196,7 +196,7 @@ export default function MentorDashboardPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
-              <span className="text-xs font-semibold text-white px-2 py-1 rounded-md" style={{ className="bg-primary" }}>+2</span>
+              <span className="text-xs font-semibold text-white px-2 py-1 rounded-md bg-primary">+2</span>
             </div>
             <div className="text-3xl font-bold text-black mb-1">{stats.totalCourses}</div>
             <div className="text-sm font-medium text-gray-600">Total Courses</div>
@@ -209,7 +209,7 @@ export default function MentorDashboardPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
-              <span className="text-xs font-semibold text-white px-2 py-1 rounded-md" style={{ className="bg-primary" }}>+15</span>
+              <span className="text-xs font-semibold text-white px-2 py-1 rounded-md bg-primary">+15</span>
             </div>
             <div className="text-3xl font-bold text-black mb-1">{stats.totalStudents}</div>
             <div className="text-sm font-medium text-gray-600">Total Students</div>
@@ -222,7 +222,7 @@ export default function MentorDashboardPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
               </div>
-              <span className="text-xs font-semibold text-white px-2 py-1 rounded-md" style={{ className="bg-primary" }}>Live</span>
+              <span className="text-xs font-semibold text-white px-2 py-1 rounded-md bg-primary">Live</span>
             </div>
             <div className="text-3xl font-bold text-black mb-1">{stats.activeSessions}</div>
             <div className="text-sm font-medium text-gray-600">Active Sessions</div>
@@ -235,7 +235,7 @@ export default function MentorDashboardPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <span className="text-xs font-semibold text-white px-2 py-1 rounded-md" style={{ className="bg-primary" }}>+12%</span>
+              <span className="text-xs font-semibold text-white px-2 py-1 rounded-md bg-primary">+12%</span>
             </div>
             <div className="text-2xl font-bold text-black mb-1">{formatCurrency(stats.monthlyRevenue)}</div>
             <div className="text-sm font-medium text-gray-600">Monthly Revenue</div>
@@ -253,8 +253,7 @@ export default function MentorDashboardPage() {
                 </div>
                 <Link
                   href="/mentor/courses/create"
-                  className="text-white px-4 py-2.5 text-sm font-semibold rounded-lg transition-all duration-200 hover:shadow-md"
-                  style={{ className="bg-primary" }}
+                  className="text-white px-4 py-2.5 text-sm font-semibold rounded-lg transition-all duration-200 hover:shadow-md bg-primary"
                   onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#4c14c7'}
                   onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#5e17eb'}
                 >
@@ -326,8 +325,7 @@ export default function MentorDashboardPage() {
                   </div>
                   <Link
                     href="/live-sessions/create"
-                    className="text-white px-4 py-2.5 text-sm font-semibold rounded-lg transition-all duration-200 hover:shadow-md"
-                    style={{ className="bg-primary" }}
+                    className="text-white px-4 py-2.5 text-sm font-semibold rounded-lg transition-all duration-200 hover:shadow-md bg-primary"
                     onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#4c14c7'}
                     onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#5e17eb'}
                   >
@@ -349,8 +347,7 @@ export default function MentorDashboardPage() {
                   </p>
                   <Link
                     href="/live-sessions/create"
-                    className="text-white px-6 py-3 font-semibold rounded-lg transition-all duration-200 hover:shadow-md inline-block"
-                    style={{ className="bg-primary" }}
+                    className="text-white px-6 py-3 font-semibold rounded-lg transition-all duration-200 hover:shadow-md inline-block bg-primary"
                     onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#4c14c7'}
                     onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#5e17eb'}
                   >
@@ -471,7 +468,7 @@ export default function MentorDashboardPage() {
               <div className="space-y-4">
                 {recentActivity.map((activity, index) => (
                   <div key={activity.id} className="flex items-start gap-3">
-                    <div className={`w-2 h-2 rounded-full mt-2`} style={{ className="bg-primary" }}></div>
+                    <div className="w-2 h-2 rounded-full mt-2 bg-primary"></div>
                     <div className="flex-1">
                       <p className="text-sm text-black leading-relaxed">{activity.description}</p>
                       <p className="text-xs text-gray-600 mt-1">

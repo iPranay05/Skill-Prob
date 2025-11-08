@@ -221,7 +221,7 @@ export default function ForAmbassadors() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {whyBecome.map((reason, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ className="bg-primary" }}>
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" className="bg-primary">
                   <div style={{ color: '#ffffff' }}>{reason.icon}</div>
                 </div>
                 <h3 className="text-xl font-black mb-4 text-gray-700">{reason.title}</h3>
@@ -242,7 +242,7 @@ export default function ForAmbassadors() {
           <div className="grid md:grid-cols-5 gap-8">
             {howItWorks.map((step, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ className="bg-primary" }}>
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" className="bg-primary">
                   <span className="text-2xl font-black" style={{ color: '#ffffff' }}>{idx + 1}</span>
                 </div>
                 <h3 className="text-lg font-black mb-4 text-gray-700">{step.step}</h3>
@@ -262,7 +262,7 @@ export default function ForAmbassadors() {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ className="bg-primary" }}>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" className="bg-primary">
                 <Users className="w-5 h-5" style={{ color: '#ffffff' }} />
               </div>
               <h3 className="text-xl font-black mb-1 text-gray-700">50</h3>
@@ -270,7 +270,7 @@ export default function ForAmbassadors() {
             </div>
 
             <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ className="bg-primary" }}>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" className="bg-primary">
                 <DollarSign className="w-5 h-5" style={{ color: '#ffffff' }} />
               </div>
               <h3 className="text-xl font-black mb-1 text-gray-700">500</h3>
@@ -278,7 +278,7 @@ export default function ForAmbassadors() {
             </div>
 
             <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ className="bg-primary" }}>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" className="bg-primary">
                 <Share2 className="w-5 h-5" style={{ color: '#ffffff' }} />
               </div>
               <h3 className="text-xl font-black mb-1 text-gray-700">₹100</h3>
@@ -286,7 +286,7 @@ export default function ForAmbassadors() {
             </div>
 
             <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ className="bg-primary" }}>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" className="bg-primary">
                 <CheckCircle className="w-5 h-5" style={{ color: '#ffffff' }} />
               </div>
               <h3 className="text-xl font-black mb-1 text-gray-700">100 = ₹100</h3>
@@ -300,7 +300,7 @@ export default function ForAmbassadors() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {milestones.map((milestone, idx) => (
                 <div key={idx} className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ className="bg-primary" }}>
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" className="bg-primary">
                     <span className="font-black text-base" style={{ color: '#ffffff' }}>{milestone.referrals}</span>
                   </div>
                   <h4 className="text-lg font-black mb-1 text-gray-700">{milestone.bonus}</h4>
@@ -322,7 +322,7 @@ export default function ForAmbassadors() {
           <div className="grid md:grid-cols-2 gap-6">
             {benefits.map((benefit, idx) => (
               <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-xl border-2 border-gray-100">
-                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ className="bg-primary" }}>
+                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" className="bg-primary">
                   <CheckCircle className="w-4 h-4" style={{ color: '#ffffff' }} />
                 </div>
                 <p className="font-semibold text-gray-600">{benefit}</p>
@@ -351,7 +351,7 @@ export default function ForAmbassadors() {
                   'Total earnings to date'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
+                    <div className="w-2 h-2 rounded-full" className="bg-primary"></div>
                     <span className="text-sm text-gray-600">{item}</span>
                   </div>
                 ))}
@@ -368,7 +368,7 @@ export default function ForAmbassadors() {
                   'Track individual referral status'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
+                    <div className="w-2 h-2 rounded-full" className="bg-primary"></div>
                     <span className="text-sm text-gray-600">{item}</span>
                   </div>
                 ))}
@@ -385,7 +385,7 @@ export default function ForAmbassadors() {
                   'Download payment receipts'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
+                    <div className="w-2 h-2 rounded-full" className="bg-primary"></div>
                     <span className="text-sm text-gray-600">{item}</span>
                   </div>
                 ))}
@@ -402,7 +402,7 @@ export default function ForAmbassadors() {
                   'Promotional banners and graphics'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
+                    <div className="w-2 h-2 rounded-full" className="bg-primary"></div>
                     <span className="text-sm text-gray-600">{item}</span>
                   </div>
                 ))}
@@ -489,7 +489,7 @@ export default function ForAmbassadors() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {tips.map((tip, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ className="bg-primary" }}>
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" className="bg-primary">
                   <span className="text-2xl font-black" style={{ color: '#ffffff' }}>{idx + 1}</span>
                 </div>
                 <h3 className="text-xl font-black mb-4 text-gray-700">{tip.title}</h3>
@@ -548,8 +548,8 @@ export default function ForAmbassadors() {
             <div className="flex justify-center">
               <Link
                 href="/ambassador/signup"
-                className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300 hover:shadow-lg"
-                style={{ className="bg-primary", color: '#ffffff' }}
+                className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300 hover:shadow-lg bg-primary"
+                style={{ color: '#ffffff' }}
               >
                 Apply Now
               </Link>

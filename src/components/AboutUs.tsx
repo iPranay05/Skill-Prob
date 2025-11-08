@@ -167,7 +167,7 @@ export default function AboutUs() {
           {/* Header */}
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-black mb-8">
-              <div className="w-4 h-4 rounded-full" style={{ className="bg-primary" }}></div>
+              <div className="w-4 h-4 rounded-full" className="bg-primary"></div>
               <span className="text-sm font-bold uppercase tracking-wide" style={{ color: '#5e17eb' }}>
                 WHO'S USING SKILL PROBE?
               </span>
@@ -225,7 +225,7 @@ export default function AboutUs() {
 
             {/* Companies and Recruiters */}
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ className="bg-primary" }}>
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" className="bg-primary">
                 <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z" />
                 </svg>
@@ -238,23 +238,23 @@ export default function AboutUs() {
 
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full mt-2" style={{ className="bg-primary" }}></div>
+                  <div className="w-2 h-2 rounded-full mt-2" className="bg-primary"></div>
                   <span className="text-sm text-gray-700">Access to skilled and certified professionals</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full mt-2" style={{ className="bg-primary" }}></div>
+                  <div className="w-2 h-2 rounded-full mt-2" className="bg-primary"></div>
                   <span className="text-sm text-gray-700">Direct recruitment from our talent pool</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full mt-2" style={{ className="bg-primary" }}></div>
+                  <div className="w-2 h-2 rounded-full mt-2" className="bg-primary"></div>
                   <span className="text-sm text-gray-700">Custom training programs for employees</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full mt-2" style={{ className="bg-primary" }}></div>
+                  <div className="w-2 h-2 rounded-full mt-2" className="bg-primary"></div>
                   <span className="text-sm text-gray-700">Campus hiring and internship programs</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full mt-2" style={{ className="bg-primary" }}></div>
+                  <div className="w-2 h-2 rounded-full mt-2" className="bg-primary"></div>
                   <span className="text-sm text-gray-700">Employer branding and visibility</span>
                 </div>
               </div>
@@ -457,7 +457,7 @@ export default function AboutUs() {
           <div className="grid md:grid-cols-2 gap-6">
             {advantages.map((advantage, idx) => (
               <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
-                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ className="bg-primary" }}>
+                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" className="bg-primary">
                   <CheckCircle className="w-4 h-4" style={{ color: '#ffffff' }} />
                 </div>
                 <p className="font-semibold text-gray-600">{advantage}</p>

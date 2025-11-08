@@ -125,7 +125,7 @@ export default function DashboardPage() {
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <div className="relative">
-              <div className="w-20 h-20 border-4 border-gray-200 rounded-full animate-spin mx-auto" style={{ className="border-t-primary" }}></div>
+              <div className="w-20 h-20 border-4 border-gray-200 border-t-primary rounded-full animate-spin mx-auto"></div>
             </div>
             <p className="mt-6 text-xl font-semibold text-black">Loading your dashboard...</p>
             <p className="mt-2 text-gray-600">Preparing your learning journey</p>
@@ -139,7 +139,7 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-white" style={{ fontFamily: 'Arial, sans-serif' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Header */}
-        <div className="relative overflow-hidden rounded-3xl mb-8 p-8" style={{ className="bg-primary" }}>
+        <div className="relative overflow-hidden rounded-3xl mb-8 p-8 bg-primary">
           <div className="relative">
             <div className="flex items-center justify-between">
               <div>
@@ -170,10 +170,10 @@ export default function DashboardPage() {
         {/* Modern Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 border border-gray-200 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-20 h-20 rounded-full -mr-10 -mt-10 opacity-10" style={{ className="bg-primary" }}></div>
+            <div className="absolute top-0 right-0 w-20 h-20 rounded-full -mr-10 -mt-10 opacity-10" className="bg-primary"></div>
             <div className="relative">
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg" style={{ className="bg-primary" }}>
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg" className="bg-primary">
                   <span className="text-white text-xl">📚</span>
                 </div>
                 <div className="text-right">

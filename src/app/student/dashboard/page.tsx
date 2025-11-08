@@ -135,7 +135,7 @@ export default function StudentDashboard() {
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <div className="relative">
-              <div className="w-20 h-20 border-4 border-gray-200 rounded-full animate-spin mx-auto" style={{ className="border-t-primary" }}></div>
+              <div className="w-20 h-20 border-4 border-gray-200 rounded-full animate-spin mx-auto" className="border-t-primary"></div>
             </div>
             <p className="mt-6 text-xl font-semibold text-black">Loading your dashboard...</p>
           </div>
@@ -158,7 +158,7 @@ export default function StudentDashboard() {
               <Link
                 href="/courses"
                 className="px-6 py-3 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
-                style={{ className="bg-primary" }}
+                className="bg-primary"
               >
                 Browse Courses
               </Link>

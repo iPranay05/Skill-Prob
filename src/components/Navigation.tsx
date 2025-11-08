@@ -210,7 +210,7 @@ export default function Navigation() {
             <div className="flex items-center">
               <Link href="/" className="flex-shrink-0 flex items-center group">
                 <div className="relative">
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105" style={{ className="bg-primary" }}>
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105" className="bg-primary">
                     <span className="text-white text-xl font-bold">SP</span>
                   </div>
                 </div>
@@ -236,7 +236,7 @@ export default function Navigation() {
               <Link
                 href="/auth/register"
                 className="text-white px-6 py-2 rounded-xl text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
-                style={{ className="bg-primary" }}
+                className="bg-primary"
                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#4c14c7'}
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#5e17eb'}
               >
@@ -256,7 +256,7 @@ export default function Navigation() {
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0 flex items-center group">
               <div className="relative">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105" style={{ className="bg-primary" }}>
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105" className="bg-primary">
                   <span className="text-white text-xl font-bold">SP</span>
                 </div>
               </div>
@@ -317,7 +317,7 @@ export default function Navigation() {
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f3f0ff'}
               >
                 <div className="relative">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg" style={{ className="bg-primary" }}>
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg" className="bg-primary">
                     <span className="text-white text-sm font-bold">
                       {user.profile?.firstName?.[0] || user.email[0].toUpperCase()}
                     </span>

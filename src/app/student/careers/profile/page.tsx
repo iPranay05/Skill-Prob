@@ -282,7 +282,7 @@ export default function StudentProfilePage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-20 h-20 border-4 border-gray-200 rounded-full animate-spin mx-auto" style={{ className="border-t-primary" }}></div>
+          <div className="w-20 h-20 border-4 border-gray-200 border-t-primary rounded-full animate-spin mx-auto"></div>
           <p className="mt-6 text-xl font-semibold text-black">Loading profile...</p>
         </div>
       </div>
