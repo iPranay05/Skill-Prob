@@ -34,46 +34,41 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right Side - Image with Gradient Background */}
+          {/* Right Side - Image */}
           <div className="relative">
-            {/* Gradient Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-pink-300 via-pink-400 to-pink-600 rounded-3xl transform rotate-3"></div>
+            {/* Single Image Container */}
+            <img
+              src="/SkillProbe/HomePage/Hero/hero img.png"
+              alt="Student learning"
+              className="w-full h-auto object-cover rounded-3xl"
+            />
             
-            {/* Image Container */}
-            <div className="relative rounded-3xl overflow-hidden">
+            {/* Floating Icons */}
+            {/* Idea Bulb - Top Center (slightly right) */}
+            <div className="absolute top-8 left-[52%] transform -translate-x-1/2 w-14 h-14 opacity-80">
               <img
-                src="/SkillProbe/HomePage/Hero/hero img.png"
-                alt="Student learning"
-                className="w-full h-auto object-cover"
+                src="/SkillProbe/HomePage/Hero/idea-bulb.png"
+                alt="Idea"
+                className="w-full h-full object-contain"
               />
-              
-              {/* Floating Icons */}
-              {/* Idea Bulb - Top Center */}
-              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-16 h-16 flex items-center justify-center">
-                <img
-                  src="/SkillProbe/HomePage/Hero/idea-bulb.png"
-                  alt="Idea"
-                  className="w-full h-full object-contain drop-shadow-lg"
-                />
-              </div>
-              
-              {/* Hourglass - Left Side */}
-              <div className="absolute top-1/2 left-8 transform -translate-y-1/2 w-14 h-14 flex items-center justify-center">
-                <img
-                  src="/SkillProbe/HomePage/Hero/hourglass.png"
-                  alt="Time"
-                  className="w-full h-full object-contain drop-shadow-lg"
-                />
-              </div>
-              
-              {/* LinkedIn - Bottom Right */}
-              <div className="absolute bottom-8 right-8 w-16 h-16 flex items-center justify-center">
-                <img
-                  src="/SkillProbe/HomePage/Hero/linkedin.png"
-                  alt="LinkedIn"
-                  className="w-full h-full object-contain drop-shadow-lg"
-                />
-              </div>
+            </div>
+            
+            {/* Hourglass - Left Side Middle (closer to lady) */}
+            <div className="absolute top-[45%] left-[35%] transform -translate-y-1/2 w-12 h-12 opacity-80">
+              <img
+                src="/SkillProbe/HomePage/Hero/hourglass.png"
+                alt="Time"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            
+            {/* LinkedIn - Bottom Right */}
+            <div className="absolute bottom-12 right-12 w-16 h-16 opacity-90">
+              <img
+                src="/SkillProbe/HomePage/Hero/linkedin.png"
+                alt="LinkedIn"
+                className="w-full h-full object-contain"
+              />
             </div>
           </div>
         </div>
