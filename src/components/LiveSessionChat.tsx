@@ -355,3 +355,5 @@ export function LiveSessionChat({ sessionId, userRole, userId, userName }: LiveS
     </div>
   );
 }
+
+

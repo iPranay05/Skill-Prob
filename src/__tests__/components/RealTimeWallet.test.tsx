@@ -241,3 +241,5 @@ describe('RealTimeWallet', () => {
     expect(screen.queryByText('Transaction 11')).not.toBeInTheDocument();
   });
 });
+
+

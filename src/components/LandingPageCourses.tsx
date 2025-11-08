@@ -201,7 +201,7 @@ export default function LandingPageCourses() {
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 mb-8"
             style={{ backgroundColor: '#ffffff', borderColor: '#000000' }}
           >
-            <div className="w-4 h-4 rounded-full" className="bg-primary"></div>
+            <div className="w-4 h-4 rounded-full bg-primary"></div>
             <span className="text-sm font-bold uppercase tracking-wide" style={{ color: '#5e17eb' }}>
               Explore Our Courses
             </span>
@@ -394,7 +394,7 @@ export default function LandingPageCourses() {
                   <h4 className="font-bold" style={{ color: '#000000' }}>Featured Courses:</h4>
                   {category.courses.map((course, courseIdx) => (
                     <div key={courseIdx} className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full" className="bg-primary"></div>
+                      <div className="w-2 h-2 rounded-full bg-primary"></div>
                       <span style={{ color: '#000000' }}>{course}</span>
                     </div>
                   ))}
@@ -415,7 +415,7 @@ export default function LandingPageCourses() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" className="bg-primary">
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6 bg-primary">
                   <CheckCircle className="w-8 h-8" style={{ color: '#ffffff' }} />
                 </div>
                 <h3 className="text-xl font-black mb-4" style={{ color: '#000000' }}>{feature.title}</h3>
@@ -587,3 +587,5 @@ export default function LandingPageCourses() {
     </div>
   );
 }
+
+

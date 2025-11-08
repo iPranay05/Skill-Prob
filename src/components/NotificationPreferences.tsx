@@ -339,3 +339,5 @@ export default function NotificationPreferences({ token }: NotificationPreferenc
     </div>
   );
 }
+
+

@@ -337,3 +337,5 @@ describe('LiveSessionChat', () => {
     expect(mockSendMessage).toHaveBeenCalledWith('Test message', 'text');
   });
 });
+
+

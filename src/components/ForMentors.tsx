@@ -216,29 +216,29 @@ export default function ForMentors() {
           {/* Teaching Options */}
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 text-center">
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" className="bg-primary">
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6 bg-primary">
                 <Video className="w-8 h-8" style={{ color: '#ffffff' }} />
               </div>
               <h3 className="text-2xl font-black mb-4 text-gray-700">Live Classes</h3>
               <div className="space-y-2 text-left">
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" className="bg-primary"></div>
+                  <div className="w-2 h-2 rounded-full bg-primary"></div>
                   <span className="text-gray-600">Conduct scheduled Google Meet sessions</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" className="bg-primary"></div>
+                  <div className="w-2 h-2 rounded-full bg-primary"></div>
                   <span className="text-gray-600">Interact with students in real-time</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" className="bg-primary"></div>
+                  <div className="w-2 h-2 rounded-full bg-primary"></div>
                   <span className="text-gray-600">Host Q&A sessions and discussions</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" className="bg-primary"></div>
+                  <div className="w-2 h-2 rounded-full bg-primary"></div>
                   <span className="text-gray-600">Build a loyal student community</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" className="bg-primary"></div>
+                  <div className="w-2 h-2 rounded-full bg-primary"></div>
                   <span className="text-gray-600">Higher revenue potential</span>
                 </div>
               </div>
@@ -311,7 +311,7 @@ export default function ForMentors() {
           <div className="grid md:grid-cols-2 gap-6">
             {benefits.map((benefit, idx) => (
               <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-xl border-2 border-gray-100">
-                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" className="bg-primary">
+                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1 bg-primary">
                   <CheckCircle className="w-4 h-4" style={{ color: '#ffffff' }} />
                 </div>
                 <p className="font-semibold text-gray-600">{benefit}</p>
@@ -335,7 +335,7 @@ export default function ForMentors() {
                 <div className="space-y-2">
                   {feature.points.map((point, pointIdx) => (
                     <div key={pointIdx} className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full" className="bg-primary"></div>
+                      <div className="w-2 h-2 rounded-full" bg-primary"></div>
                       <span className="text-gray-600">{point}</span>
                     </div>
                   ))}
@@ -356,7 +356,7 @@ export default function ForMentors() {
           <div className="grid md:grid-cols-5 gap-8">
             {steps.map((step, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" className="bg-primary">
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6 bg-primary">
                   <span className="text-2xl font-black" style={{ color: '#ffffff' }}>{idx + 1}</span>
                 </div>
                 <h3 className="text-lg font-black mb-4 text-gray-700">{step.step}</h3>
@@ -400,7 +400,7 @@ export default function ForMentors() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {eligibility.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 hover:border-purple-200">
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" className="bg-primary">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-primary">
                     <CheckCircle className="w-5 h-5" style={{ color: '#ffffff' }} />
                   </div>
                   <p className="font-semibold text-gray-700 leading-relaxed">{item}</p>
@@ -449,7 +449,7 @@ export default function ForMentors() {
 
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" className="bg-primary"></div>
+                    <div className="w-2 h-2 rounded-full bg-primary"></div>
                     <span className="text-gray-600">{item}</span>
                   </div>
                 ))}
@@ -466,7 +466,7 @@ export default function ForMentors() {
                   'Regular webinars and training sessions'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" className="bg-primary"></div>
+                    <div className="w-2 h-2 rounded-full bg-primary"></div>
                     <span className="text-gray-600">{item}</span>
                   </div>
                 ))}
@@ -483,7 +483,7 @@ export default function ForMentors() {
                   'SEO optimization for your courses'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" className="bg-primary"></div>
+                    <div className="w-2 h-2 rounded-full bg-primary"></div>
                     <span className="text-gray-600">{item}</span>
                   </div>
                 ))}
@@ -554,3 +554,5 @@ export default function ForMentors() {
     </div>
   );
 }
+
+

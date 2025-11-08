@@ -170,10 +170,10 @@ export default function DashboardPage() {
         {/* Modern Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 border border-gray-200 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-20 h-20 rounded-full -mr-10 -mt-10 opacity-10" className="bg-primary"></div>
+            <div className="absolute top-0 right-0 w-20 h-20 rounded-full -mr-10 -mt-10 opacity-10 bg-primary"></div>
             <div className="relative">
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg" className="bg-primary">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg bg-primary">
                   <span className="text-white text-xl">📚</span>
                 </div>
                 <div className="text-right">
@@ -449,3 +449,5 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+

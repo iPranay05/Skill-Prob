@@ -180,7 +180,7 @@ export default function ForStudents() {
         <div className="relative z-10 max-w-7xl mx-auto text-center">
           {/* Tag */}
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-black mb-8">
-            <div className="w-4 h-4 rounded-full" className="bg-primary"></div>
+            <div className="w-4 h-4 rounded-full bg-primary"></div>
             <span className="text-sm font-bold uppercase tracking-wide" style={{ color: '#5e17eb' }}>
               Student Learning Portal
             </span>
@@ -217,7 +217,7 @@ export default function ForStudents() {
                   <div className="space-y-2">
                     {feature.points.map((point, pointIdx) => (
                       <div key={pointIdx} className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full" className="bg-primary"></div>
+                        <div className="w-2 h-2 rounded-full bg-primary"></div>
                         <span style={{ color: '#000000' }}>{point}</span>
                       </div>
                     ))}
@@ -239,7 +239,7 @@ export default function ForStudents() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {steps.map((step, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" className="bg-primary">
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6 bg-primary">
                   <span className="text-2xl font-black" style={{ color: '#ffffff' }}>{idx + 1}</span>
                 </div>
                 <h3 className="text-xl font-black mb-4" style={{ color: '#000000' }}>{step.step}</h3>
@@ -275,7 +275,7 @@ export default function ForStudents() {
                 whileHover={{ scale: 1.02, y: -3 }}
                 className="flex items-start gap-4 p-6 bg-white rounded-xl border-2 border-gray-100"
               >
-                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" className="bg-primary">
+                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1 bg-primary">
                   <CheckCircle className="w-4 h-4" style={{ color: '#ffffff' }} />
                 </div>
                 <p className="font-semibold" style={{ color: '#000000' }}>{benefit}</p>
@@ -315,7 +315,7 @@ export default function ForStudents() {
           <div className="grid md:grid-cols-3 gap-8">
             {offers.map((offer, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-8 text-center border-2 border-black">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" className="bg-primary">
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6 bg-primary">
                   <Gift className="w-8 h-8" style={{ color: '#ffffff' }} />
                 </div>
                 <h3 className="text-xl font-black mb-4" style={{ color: '#000000' }}>{offer.title}</h3>
@@ -382,3 +382,5 @@ export default function ForStudents() {
     </div>
   );
 }
+
+

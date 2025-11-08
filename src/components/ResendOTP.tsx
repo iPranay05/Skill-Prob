@@ -83,3 +83,5 @@ export default function ResendOTP({ email, type, onSuccess, onError }: ResendOTP
     </button>
   );
 }
+
+

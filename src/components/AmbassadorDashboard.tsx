@@ -488,3 +488,5 @@ export function AmbassadorDashboard({ ambassadorId, ambassadorProfile }: Ambassa
     </div>
   );
 }
+
+

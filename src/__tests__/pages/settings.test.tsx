@@ -78,3 +78,5 @@ describe('SettingsPage', () => {
     expect(screen.getByText('Profile Visibility')).toBeInTheDocument();
   });
 });
+
+
