@@ -24,7 +24,7 @@ export default function WhyChooseUs() {
       title: 'Companies and Recruiters',
       description: 'Discover Right Talent: Hire, Engage, and Build Like Never Before!',
       icon: <Building2 className="w-6 h-6 text-white" />,
-      bgColor: 'bg-[#5e17eb]',
+      bgColor: 'bg-primary',
       features: [
         'Access to skilled and certified professionals',
         'Direct recruitment from our talent pool',
@@ -57,7 +57,7 @@ export default function WhyChooseUs() {
       }}
     >
       {/* Animated background elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#5e17eb]/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
@@ -71,7 +71,7 @@ export default function WhyChooseUs() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full border-2 border-gray-200 mb-4 shadow-sm"
           >
-            <Sparkles className="w-4 h-4 text-[#5e17eb]" />
+            <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-bold text-gray-700 uppercase tracking-wide">
               Who's using Skill Probe?
             </span>
@@ -85,7 +85,7 @@ export default function WhyChooseUs() {
             className="text-3xl lg:text-4xl font-bold leading-tight text-gray-700 mb-4"
           >
             Empowering Every Stakeholder in the
-            <span className="block text-[#5e17eb]">Education Ecosystem</span>
+            <span className="block text-primary">Education Ecosystem</span>
           </motion.h1>
 
           {/* Subheading */}
