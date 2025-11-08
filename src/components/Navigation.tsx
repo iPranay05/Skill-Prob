@@ -210,7 +210,7 @@ export default function Navigation() {
             <div className="flex items-center">
               <Link href="/" className="flex-shrink-0 flex items-center group">
                 <div className="relative">
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105" bg-primary">
+                  <div className="bg-primary w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
                     <span className="text-white text-xl font-bold">SP</span>
                   </div>
                 </div>
@@ -235,7 +235,7 @@ export default function Navigation() {
               </Link>
               <Link
                 href="/auth/register"
-                className="text-white px-6 py-2 rounded-xl text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl" bg-primary"
+                className="bg-primary text-white px-6 py-2 rounded-xl text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#4c14c7'}
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#5e17eb'}
               >
@@ -255,7 +255,7 @@ export default function Navigation() {
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0 flex items-center group">
               <div className="relative">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105" bg-primary">
+                <div className="bg-primary w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
                   <span className="text-white text-xl font-bold">SP</span>
                 </div>
               </div>
@@ -279,7 +279,7 @@ export default function Navigation() {
                     ? 'text-white shadow-lg'
                     : 'text-black'
                 }`}
-                style={isActive(item.href) ? { className="bg-primary" } : {}}
+                style={isActive(item.href) ? { backgroundColor: '#5e17eb' } : {}}
                 onMouseEnter={(e) => {
                   if (!isActive(item.href)) {
                     e.currentTarget.style.backgroundColor = '#f3f0ff';
@@ -316,7 +316,7 @@ export default function Navigation() {
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f3f0ff'}
               >
                 <div className="relative">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg" bg-primary">
+                  <div className="bg-primary w-10 h-10 rounded-xl flex items-center justify-center shadow-lg">
                     <span className="text-white text-sm font-bold">
                       {user.profile?.firstName?.[0] || user.email[0].toUpperCase()}
                     </span>
@@ -439,7 +439,7 @@ export default function Navigation() {
                     ? 'text-white shadow-lg'
                     : 'text-black'
                 }`}
-                style={isActive(item.href) ? { className="bg-primary" } : {}}
+                style={isActive(item.href) ? { backgroundColor: '#5e17eb' } : {}}
                 onClick={() => setIsMenuOpen(false)}
                 onMouseEnter={(e) => {
                   if (!isActive(item.href)) {
