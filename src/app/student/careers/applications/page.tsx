@@ -136,12 +136,12 @@ export default function StudentApplicationsPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="text-red-600 text-xl mb-4">⚠️</div>
+          <div className="text-error text-xl mb-4">⚠️</div>
           <h2 className="text-xl font-semibold text-gray-900 mb-2">Error Loading Applications</h2>
           <p className="text-gray-600 mb-4">{error}</p>
           <button
             onClick={fetchApplications}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+            className="bg-info text-white px-4 py-2 rounded-md hover:bg-blue-700"
           >
             Try Again
           </button>
@@ -162,7 +162,7 @@ export default function StudentApplicationsPage() {
             </div>
             <Link
               href="/student/careers"
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+              className="bg-info text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
             >
               Browse Jobs
             </Link>
@@ -181,19 +181,19 @@ export default function StudentApplicationsPage() {
               <div className="text-sm text-gray-600">Pending</div>
             </div>
             <div className="bg-white p-4 rounded-lg shadow-sm">
-              <div className="text-2xl font-bold text-blue-600">{stats.reviewed}</div>
+              <div className="text-2xl font-bold text-info">{stats.reviewed}</div>
               <div className="text-sm text-gray-600">Reviewed</div>
             </div>
             <div className="bg-white p-4 rounded-lg shadow-sm">
-              <div className="text-2xl font-bold text-green-600">{stats.shortlisted}</div>
+              <div className="text-2xl font-bold text-secondary">{stats.shortlisted}</div>
               <div className="text-sm text-gray-600">Shortlisted</div>
             </div>
             <div className="bg-white p-4 rounded-lg shadow-sm">
-              <div className="text-2xl font-bold text-purple-600">{stats.interview_scheduled}</div>
+              <div className="text-2xl font-bold text-primary">{stats.interview_scheduled}</div>
               <div className="text-sm text-gray-600">Interviews</div>
             </div>
             <div className="bg-white p-4 rounded-lg shadow-sm">
-              <div className="text-2xl font-bold text-red-600">{stats.rejected}</div>
+              <div className="text-2xl font-bold text-error">{stats.rejected}</div>
               <div className="text-sm text-gray-600">Rejected</div>
             </div>
             <div className="bg-white p-4 rounded-lg shadow-sm">
@@ -224,7 +224,7 @@ export default function StudentApplicationsPage() {
                   onClick={() => setSelectedStatus(tab.key as ApplicationStatus | 'all')}
                   className={`py-2 px-1 border-b-2 font-medium text-sm ${
                     selectedStatus === tab.key
-                      ? 'border-blue-500 text-blue-600'
+                      ? 'border-blue-500 text-info'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
                 >
@@ -251,7 +251,7 @@ export default function StudentApplicationsPage() {
             {selectedStatus === 'all' && (
               <Link
                 href="/student/careers"
-                className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors"
+                className="bg-info text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors"
               >
                 Browse Opportunities
               </Link>
@@ -302,17 +302,17 @@ export default function StudentApplicationsPage() {
                     {application.interview_scheduled_at && (
                       <div className="bg-purple-50 border border-purple-200 rounded-md p-3 mb-4">
                         <div className="flex items-center gap-2">
-                          <span className="text-purple-600">📅</span>
+                          <span className="text-primary">📅</span>
                           <span className="font-medium text-purple-900">Interview Scheduled</span>
                         </div>
-                        <div className="text-sm text-purple-700 mt-1">
+                        <div className="text-sm text-primary-dark mt-1">
                           {new Date(application.interview_scheduled_at).toLocaleString()}
                           {application.interview_location && (
                             <span className="ml-2">at {application.interview_location}</span>
                           )}
                         </div>
                         {application.interview_notes && (
-                          <div className="text-sm text-purple-700 mt-2">
+                          <div className="text-sm text-primary-dark mt-2">
                             <strong>Notes:</strong> {application.interview_notes}
                           </div>
                         )}
@@ -322,7 +322,7 @@ export default function StudentApplicationsPage() {
                     {application.feedback && (
                       <div className="bg-blue-50 border border-blue-200 rounded-md p-3 mb-4">
                         <div className="flex items-center gap-2 mb-2">
-                          <span className="text-blue-600">💬</span>
+                          <span className="text-info">💬</span>
                           <span className="font-medium text-blue-900">Feedback</span>
                         </div>
                         <div className="text-sm text-blue-700">{application.feedback}</div>
@@ -333,7 +333,7 @@ export default function StudentApplicationsPage() {
                   <div className="flex flex-col gap-2 ml-4">
                     <Link
                       href={`/student/careers/applications/${application.id}`}
-                      className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                      className="text-info hover:text-blue-700 text-sm font-medium"
                     >
                       View Details
                     </Link>
@@ -343,7 +343,7 @@ export default function StudentApplicationsPage() {
                           // TODO: Implement withdraw application
                           console.log('Withdraw application:', application.id);
                         }}
-                        className="text-red-600 hover:text-red-700 text-sm font-medium"
+                        className="text-error hover:text-red-700 text-sm font-medium"
                       >
                         Withdraw
                       </button>

@@ -164,7 +164,7 @@ export default function AmbassadorReferralsPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-gray-600">Loading referral data...</p>
         </div>
       </div>
@@ -186,7 +186,7 @@ export default function AmbassadorReferralsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-700 text-sm font-medium">Total Referrals</p>
-                <p className="text-3xl font-bold text-blue-600">{stats?.totalReferrals || 0}</p>
+                <p className="text-3xl font-bold text-info">{stats?.totalReferrals || 0}</p>
               </div>
               <div className="text-4xl">👥</div>
             </div>
@@ -196,7 +196,7 @@ export default function AmbassadorReferralsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-700 text-sm font-medium">Conversions</p>
-                <p className="text-3xl font-bold text-green-600">{stats?.successfulConversions || 0}</p>
+                <p className="text-3xl font-bold text-secondary">{stats?.successfulConversions || 0}</p>
               </div>
               <div className="text-4xl">✅</div>
             </div>
@@ -206,7 +206,7 @@ export default function AmbassadorReferralsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-700 text-sm font-medium">Conversion Rate</p>
-                <p className="text-3xl font-bold text-purple-600">{stats?.conversionRate || 0}%</p>
+                <p className="text-3xl font-bold text-primary">{stats?.conversionRate || 0}%</p>
               </div>
               <div className="text-4xl">📈</div>
             </div>
@@ -226,7 +226,7 @@ export default function AmbassadorReferralsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-700 text-sm font-medium">Pending</p>
-                <p className="text-3xl font-bold text-orange-600">{stats?.pendingReferrals || 0}</p>
+                <p className="text-3xl font-bold text-accent">{stats?.pendingReferrals || 0}</p>
               </div>
               <div className="text-4xl">⏳</div>
             </div>
@@ -247,7 +247,7 @@ export default function AmbassadorReferralsPage() {
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${activeTab === tab.id
-                    ? 'border-purple-600 text-purple-600'
+                    ? 'border-primary text-primary'
                     : 'border-transparent text-gray-700 hover:text-gray-900'
                     }`}
                 >
@@ -269,7 +269,7 @@ export default function AmbassadorReferralsPage() {
                     </div>
                     <button
                       onClick={copyReferralCode}
-                      className="bg-white text-purple-600 px-6 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors"
+                      className="bg-white text-primary px-6 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors"
                     >
                       Copy Code
                     </button>
@@ -284,21 +284,21 @@ export default function AmbassadorReferralsPage() {
                     <h3 className="text-lg font-semibold mb-4 text-gray-900">How It Works</h3>
                     <div className="space-y-4">
                       <div className="flex items-start space-x-3">
-                        <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
+                        <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
                         <div>
                           <p className="font-medium text-gray-900">Share Your Code</p>
                           <p className="text-sm text-gray-700">Share your unique referral code with friends</p>
                         </div>
                       </div>
                       <div className="flex items-start space-x-3">
-                        <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                        <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">2</div>
                         <div>
                           <p className="font-medium text-gray-900">They Register</p>
                           <p className="text-sm text-gray-700">Friends sign up using your referral code</p>
                         </div>
                       </div>
                       <div className="flex items-start space-x-3">
-                        <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</div>
+                        <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">3</div>
                         <div>
                           <p className="font-medium text-gray-900">Earn Points</p>
                           <p className="text-sm text-gray-700">Get points when they make their first purchase</p>
@@ -324,7 +324,7 @@ export default function AmbassadorReferralsPage() {
                       </div>
                       <div className="flex justify-between border-t pt-3">
                         <span className="font-semibold text-gray-900">Minimum Payout</span>
-                        <span className="font-semibold text-purple-600">1,000 points</span>
+                        <span className="font-semibold text-primary">1,000 points</span>
                       </div>
                     </div>
                   </div>
@@ -352,7 +352,7 @@ export default function AmbassadorReferralsPage() {
                               {referral.status.charAt(0).toUpperCase() + referral.status.slice(1)}
                             </span>
                             <p className="text-sm text-gray-700 mt-2">
-                              Points: <span className="font-semibold text-purple-600">
+                              Points: <span className="font-semibold text-primary">
                                 {referral.conversionEvents?.reduce((total: number, event: any) => total + (event.pointsEarned || 0), 0) || 0}
                               </span>
                             </p>
@@ -367,7 +367,7 @@ export default function AmbassadorReferralsPage() {
                       <p className="text-gray-700 mb-6">Start sharing your referral code to see your referrals here!</p>
                       <button
                         onClick={() => setActiveTab('share')}
-                        className="bg-purple-600 text-white px-6 py-3 rounded-xl hover:bg-purple-700 transition-colors"
+                        className="bg-primary text-white px-6 py-3 rounded-xl hover:bg-primary-dark transition-colors"
                       >
                         Start Sharing
                       </button>
@@ -388,14 +388,14 @@ export default function AmbassadorReferralsPage() {
                       <div className="grid grid-cols-2 gap-4">
                         <button
                           onClick={() => shareReferralLink('whatsapp')}
-                          className="flex items-center justify-center space-x-2 bg-green-600 text-white p-3 rounded-xl hover:bg-green-700 transition-colors"
+                          className="flex items-center justify-center space-x-2 bg-secondary text-white p-3 rounded-xl hover:bg-green-700 transition-colors"
                         >
                           <span>📱</span>
                           <span>WhatsApp</span>
                         </button>
                         <button
                           onClick={() => shareReferralLink('twitter')}
-                          className="flex items-center justify-center space-x-2 bg-blue-500 text-white p-3 rounded-xl hover:bg-blue-600 transition-colors"
+                          className="flex items-center justify-center space-x-2 bg-info text-white p-3 rounded-xl hover:bg-info transition-colors"
                         >
                           <span>🐦</span>
                           <span>Twitter</span>
@@ -409,7 +409,7 @@ export default function AmbassadorReferralsPage() {
                         </button>
                         <button
                           onClick={() => shareReferralLink('facebook')}
-                          className="flex items-center justify-center space-x-2 bg-blue-600 text-white p-3 rounded-xl hover:bg-blue-700 transition-colors"
+                          className="flex items-center justify-center space-x-2 bg-info text-white p-3 rounded-xl hover:bg-blue-700 transition-colors"
                         >
                           <span>📘</span>
                           <span>Facebook</span>
@@ -429,7 +429,7 @@ export default function AmbassadorReferralsPage() {
                         <button
                           onClick={() => referralCode && navigator.clipboard.writeText(`${window.location.origin}/r/${referralCode}`)}
                           disabled={!referralCode}
-                          className="bg-purple-600 text-white px-4 py-2 rounded-xl hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="bg-primary text-white px-4 py-2 rounded-xl hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           Copy
                         </button>
@@ -444,19 +444,19 @@ export default function AmbassadorReferralsPage() {
                         <button className="w-full text-left p-3 bg-white rounded-xl hover:shadow-md transition-shadow">
                           <div className="flex items-center justify-between">
                             <span className="font-medium text-gray-900">Social Media Graphics</span>
-                            <span className="text-purple-600">Download</span>
+                            <span className="text-primary">Download</span>
                           </div>
                         </button>
                         <button className="w-full text-left p-3 bg-white rounded-xl hover:shadow-md transition-shadow">
                           <div className="flex items-center justify-between">
                             <span className="font-medium text-gray-900">Email Templates</span>
-                            <span className="text-purple-600">Download</span>
+                            <span className="text-primary">Download</span>
                           </div>
                         </button>
                         <button className="w-full text-left p-3 bg-white rounded-xl hover:shadow-md transition-shadow">
                           <div className="flex items-center justify-between">
                             <span className="font-medium text-gray-900">Course Information Sheets</span>
-                            <span className="text-purple-600">Download</span>
+                            <span className="text-primary">Download</span>
                           </div>
                         </button>
                       </div>
@@ -490,7 +490,7 @@ export default function AmbassadorReferralsPage() {
                         <span className="font-semibold text-gray-900">{stats?.totalReferrals || 0}</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div className="bg-blue-600 h-2 rounded-full" style={{ width: '100%' }}></div>
+                        <div className="bg-info h-2 rounded-full" style={{ width: '100%' }}></div>
                       </div>
 
                       <div className="flex justify-between items-center">
@@ -499,7 +499,7 @@ export default function AmbassadorReferralsPage() {
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
                         <div
-                          className="bg-green-600 h-2 rounded-full"
+                          className="bg-secondary h-2 rounded-full"
                           style={{
                             width: `${stats?.totalReferrals ? (stats.successfulConversions / stats.totalReferrals) * 100 : 0}%`
                           }}
@@ -512,7 +512,7 @@ export default function AmbassadorReferralsPage() {
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
                         <div
-                          className="bg-orange-600 h-2 rounded-full"
+                          className="bg-accent h-2 rounded-full"
                           style={{
                             width: `${stats?.totalReferrals ? (stats.pendingReferrals / stats.totalReferrals) * 100 : 0}%`
                           }}
@@ -533,7 +533,7 @@ export default function AmbassadorReferralsPage() {
                           <p className="font-semibold text-gray-900">{stats?.conversionRate?.toFixed(1) || 0}%</p>
                           <div className="w-20 bg-gray-200 rounded-full h-2 mt-1">
                             <div
-                              className="bg-purple-600 h-2 rounded-full"
+                              className="bg-primary h-2 rounded-full"
                               style={{ width: `${Math.min(stats?.conversionRate || 0, 100)}%` }}
                             ></div>
                           </div>

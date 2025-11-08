@@ -93,7 +93,7 @@ describe('LiveSessionChat', () => {
     render(<LiveSessionChat {...mockProps} />);
     
     // Should show green dot for connected status
-    const statusIndicator = document.querySelector('.bg-green-500');
+    const statusIndicator = document.querySelector('.bg-secondary-light');
     expect(statusIndicator).toBeInTheDocument();
   });
 
@@ -116,7 +116,7 @@ describe('LiveSessionChat', () => {
     render(<LiveSessionChat {...mockProps} />);
     
     // Should show red dot for disconnected status
-    const statusIndicator = document.querySelector('.bg-red-500');
+    const statusIndicator = document.querySelector('.bg-error');
     expect(statusIndicator).toBeInTheDocument();
   });
 

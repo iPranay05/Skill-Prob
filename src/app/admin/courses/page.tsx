@@ -223,7 +223,7 @@ export default function AdminCoursesPage() {
                 onClick={() => setFilter(key)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap ${
                   filter === key
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-info text-white'
                     : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
                 }`}
               >
@@ -332,7 +332,7 @@ export default function AdminCoursesPage() {
                           setSelectedCourse(course);
                           setShowCourseModal(true);
                         }}
-                        className="flex-1 bg-blue-600 text-white px-3 py-2 rounded text-sm hover:bg-blue-700"
+                        className="flex-1 bg-info text-white px-3 py-2 rounded text-sm hover:bg-blue-700"
                       >
                         View Details
                       </button>
@@ -341,13 +341,13 @@ export default function AdminCoursesPage() {
                         <>
                           <button
                             onClick={() => handleCourseAction(course.id, 'approve')}
-                            className="bg-green-600 text-white px-3 py-2 rounded text-sm hover:bg-green-700"
+                            className="bg-secondary text-white px-3 py-2 rounded text-sm hover:bg-green-700"
                           >
                             Approve
                           </button>
                           <button
                             onClick={() => handleCourseAction(course.id, 'reject')}
-                            className="bg-red-600 text-white px-3 py-2 rounded text-sm hover:bg-red-700"
+                            className="bg-error text-white px-3 py-2 rounded text-sm hover:bg-red-700"
                           >
                             Reject
                           </button>
@@ -502,7 +502,7 @@ export default function AdminCoursesPage() {
                             handleCourseAction(selectedCourse.id, 'approve');
                             setShowCourseModal(false);
                           }}
-                          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+                          className="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-green-700"
                         >
                           Approve Course
                         </button>
@@ -511,7 +511,7 @@ export default function AdminCoursesPage() {
                             handleCourseAction(selectedCourse.id, 'reject');
                             setShowCourseModal(false);
                           }}
-                          className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+                          className="bg-error text-white px-4 py-2 rounded-lg hover:bg-red-700"
                         >
                           Reject Course
                         </button>

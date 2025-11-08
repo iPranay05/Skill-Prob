@@ -125,7 +125,7 @@ export default function DashboardPage() {
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <div className="relative">
-              <div className="w-20 h-20 border-4 border-gray-200 rounded-full animate-spin mx-auto" style={{ borderTopColor: '#5e17eb' }}></div>
+              <div className="w-20 h-20 border-4 border-gray-200 rounded-full animate-spin mx-auto" style={{ className="border-t-primary" }}></div>
             </div>
             <p className="mt-6 text-xl font-semibold text-black">Loading your dashboard...</p>
             <p className="mt-2 text-gray-600">Preparing your learning journey</p>
@@ -139,7 +139,7 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-white" style={{ fontFamily: 'Arial, sans-serif' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Header */}
-        <div className="relative overflow-hidden rounded-3xl mb-8 p-8" style={{ backgroundColor: '#5e17eb' }}>
+        <div className="relative overflow-hidden rounded-3xl mb-8 p-8" style={{ className="bg-primary" }}>
           <div className="relative">
             <div className="flex items-center justify-between">
               <div>
@@ -170,10 +170,10 @@ export default function DashboardPage() {
         {/* Modern Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 border border-gray-200 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-20 h-20 rounded-full -mr-10 -mt-10 opacity-10" style={{ backgroundColor: '#5e17eb' }}></div>
+            <div className="absolute top-0 right-0 w-20 h-20 rounded-full -mr-10 -mt-10 opacity-10" style={{ className="bg-primary" }}></div>
             <div className="relative">
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg" style={{ backgroundColor: '#5e17eb' }}>
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg" style={{ className="bg-primary" }}>
                   <span className="text-white text-xl">📚</span>
                 </div>
                 <div className="text-right">
@@ -197,7 +197,7 @@ export default function DashboardPage() {
                   <p className="text-3xl font-bold text-gray-900">{stats.activeSessions}</p>
                   <div className="flex items-center justify-end">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse mr-1"></div>
-                    <p className="text-sm text-green-600 font-semibold">Live now</p>
+                    <p className="text-sm text-secondary font-semibold">Live now</p>
                   </div>
                 </div>
               </div>
@@ -215,7 +215,7 @@ export default function DashboardPage() {
                 </div>
                 <div className="text-right">
                   <p className="text-3xl font-bold text-gray-900">{stats.upcomingSessions}</p>
-                  <p className="text-sm text-orange-600 font-semibold">Next in 2h</p>
+                  <p className="text-sm text-accent font-semibold">Next in 2h</p>
                 </div>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-1">Upcoming Sessions</h3>
@@ -232,7 +232,7 @@ export default function DashboardPage() {
                 </div>
                 <div className="text-right">
                   <p className="text-3xl font-bold text-gray-900">{stats.completedSessions}</p>
-                  <p className="text-sm text-purple-600 font-semibold">85% completion</p>
+                  <p className="text-sm text-primary font-semibold">85% completion</p>
                 </div>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-1">Completed Sessions</h3>
@@ -298,8 +298,8 @@ export default function DashboardPage() {
                               <span className="text-gray-700 font-medium">{formatDateTime(session.scheduledStartTime)}</span>
                             </div>
                             <div className="flex items-center space-x-2">
-                              <span className="text-orange-500">⏰</span>
-                              <span className="text-orange-600 font-semibold">
+                              <span className="text-accent-light">⏰</span>
+                              <span className="text-accent font-semibold">
                                 {getTimeUntilSession(session.scheduledStartTime)}
                               </span>
                             </div>
@@ -345,10 +345,10 @@ export default function DashboardPage() {
                     <span className="text-white text-xl">🎥</span>
                   </div>
                   <div className="ml-4 flex-1">
-                    <p className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">Join Live Session</p>
+                    <p className="text-lg font-bold text-gray-900 group-hover:text-info transition-colors">Join Live Session</p>
                     <p className="text-sm text-gray-600">Access your live classes</p>
                   </div>
-                  <span className="text-blue-500 group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="text-info group-hover:translate-x-1 transition-transform">→</span>
                 </Link>
 
                 <Link
@@ -359,10 +359,10 @@ export default function DashboardPage() {
                     <span className="text-white text-xl">📚</span>
                   </div>
                   <div className="ml-4 flex-1">
-                    <p className="text-lg font-bold text-gray-900 group-hover:text-green-600 transition-colors">Browse Courses</p>
+                    <p className="text-lg font-bold text-gray-900 group-hover:text-secondary transition-colors">Browse Courses</p>
                     <p className="text-sm text-gray-600">Explore available courses</p>
                   </div>
-                  <span className="text-green-500 group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="text-secondary-light group-hover:translate-x-1 transition-transform">→</span>
                 </Link>
 
                 {userRole === 'mentor' && (
@@ -374,10 +374,10 @@ export default function DashboardPage() {
                       <span className="text-white text-xl">➕</span>
                     </div>
                     <div className="ml-4 flex-1">
-                      <p className="text-lg font-bold text-gray-900 group-hover:text-purple-600 transition-colors">Create Session</p>
+                      <p className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">Create Session</p>
                       <p className="text-sm text-gray-600">Schedule a new live session</p>
                     </div>
-                    <span className="text-purple-500 group-hover:translate-x-1 transition-transform">→</span>
+                    <span className="text-primary-light group-hover:translate-x-1 transition-transform">→</span>
                   </Link>
                 )}
 

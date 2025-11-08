@@ -160,8 +160,8 @@ export default function ForAmbassadors() {
       {/* Hero Section */}
       <section className="relative py-24 px-6 overflow-visible bg-white">
         {/* Animated background elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#5e17eb]/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#5e17eb]/20 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/20 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
         
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -185,12 +185,12 @@ export default function ForAmbassadors() {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Link href="/ambassador/signup">
-                  <button className="px-8 py-4 bg-[#5e17eb] text-white font-semibold text-lg rounded-xl hover:bg-[#4a12c4] transition-all duration-300 w-full sm:w-auto">
+                  <button className="px-8 py-4 bg-primary text-white font-semibold text-lg rounded-xl hover:bg-primary-dark transition-all duration-300 w-full sm:w-auto">
                     Apply Now
                   </button>
                 </Link>
                 <Link href="/ambassador-guide">
-                  <button className="px-8 py-4 border-2 border-[#5e17eb] text-[#5e17eb] font-semibold text-lg rounded-xl hover:bg-[#5e17eb] hover:text-white transition-all duration-300 w-full sm:w-auto">
+                  <button className="px-8 py-4 border-2 border-primary text-primary font-semibold text-lg rounded-xl hover:bg-primary hover:text-white transition-all duration-300 w-full sm:w-auto">
                     Learn More
                   </button>
                 </Link>
@@ -221,7 +221,7 @@ export default function ForAmbassadors() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {whyBecome.map((reason, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ className="bg-primary" }}>
                   <div style={{ color: '#ffffff' }}>{reason.icon}</div>
                 </div>
                 <h3 className="text-xl font-black mb-4 text-gray-700">{reason.title}</h3>
@@ -242,7 +242,7 @@ export default function ForAmbassadors() {
           <div className="grid md:grid-cols-5 gap-8">
             {howItWorks.map((step, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ className="bg-primary" }}>
                   <span className="text-2xl font-black" style={{ color: '#ffffff' }}>{idx + 1}</span>
                 </div>
                 <h3 className="text-lg font-black mb-4 text-gray-700">{step.step}</h3>
@@ -262,7 +262,7 @@ export default function ForAmbassadors() {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: '#5e17eb' }}>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ className="bg-primary" }}>
                 <Users className="w-5 h-5" style={{ color: '#ffffff' }} />
               </div>
               <h3 className="text-xl font-black mb-1 text-gray-700">50</h3>
@@ -270,7 +270,7 @@ export default function ForAmbassadors() {
             </div>
 
             <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: '#5e17eb' }}>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ className="bg-primary" }}>
                 <DollarSign className="w-5 h-5" style={{ color: '#ffffff' }} />
               </div>
               <h3 className="text-xl font-black mb-1 text-gray-700">500</h3>
@@ -278,7 +278,7 @@ export default function ForAmbassadors() {
             </div>
 
             <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: '#5e17eb' }}>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ className="bg-primary" }}>
                 <Share2 className="w-5 h-5" style={{ color: '#ffffff' }} />
               </div>
               <h3 className="text-xl font-black mb-1 text-gray-700">₹100</h3>
@@ -286,7 +286,7 @@ export default function ForAmbassadors() {
             </div>
 
             <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: '#5e17eb' }}>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ className="bg-primary" }}>
                 <CheckCircle className="w-5 h-5" style={{ color: '#ffffff' }} />
               </div>
               <h3 className="text-xl font-black mb-1 text-gray-700">100 = ₹100</h3>
@@ -300,7 +300,7 @@ export default function ForAmbassadors() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {milestones.map((milestone, idx) => (
                 <div key={idx} className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: '#5e17eb' }}>
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style={{ className="bg-primary" }}>
                     <span className="font-black text-base" style={{ color: '#ffffff' }}>{milestone.referrals}</span>
                   </div>
                   <h4 className="text-lg font-black mb-1 text-gray-700">{milestone.bonus}</h4>
@@ -322,7 +322,7 @@ export default function ForAmbassadors() {
           <div className="grid md:grid-cols-2 gap-6">
             {benefits.map((benefit, idx) => (
               <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-xl border-2 border-gray-100">
-                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: '#5e17eb' }}>
+                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ className="bg-primary" }}>
                   <CheckCircle className="w-4 h-4" style={{ color: '#ffffff' }} />
                 </div>
                 <p className="font-semibold text-gray-600">{benefit}</p>
@@ -351,7 +351,7 @@ export default function ForAmbassadors() {
                   'Total earnings to date'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                    <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
                     <span className="text-sm text-gray-600">{item}</span>
                   </div>
                 ))}
@@ -368,7 +368,7 @@ export default function ForAmbassadors() {
                   'Track individual referral status'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                    <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
                     <span className="text-sm text-gray-600">{item}</span>
                   </div>
                 ))}
@@ -385,7 +385,7 @@ export default function ForAmbassadors() {
                   'Download payment receipts'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                    <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
                     <span className="text-sm text-gray-600">{item}</span>
                   </div>
                 ))}
@@ -402,7 +402,7 @@ export default function ForAmbassadors() {
                   'Promotional banners and graphics'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                    <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
                     <span className="text-sm text-gray-600">{item}</span>
                   </div>
                 ))}
@@ -424,7 +424,7 @@ export default function ForAmbassadors() {
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {eligibility.map((item, idx) => (
-                <div key={idx} className="group bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-lg hover:border-[#5e17eb]/30 transition-all duration-300">
+                <div key={idx} className="group bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-lg hover:border-primary/30 transition-all duration-300">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#5e17eb] to-[#7c3aed] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                       <CheckCircle className="w-6 h-6 text-white" />
@@ -446,7 +446,7 @@ export default function ForAmbassadors() {
               <div className="grid md:grid-cols-2 gap-6">
                 {requirements.map((requirement, idx) => (
                   <div key={idx} className="flex items-start gap-4 p-4 bg-gradient-to-r from-[#5e17eb]/5 to-transparent rounded-xl hover:from-[#5e17eb]/10 transition-colors duration-300">
-                    <div className="w-6 h-6 rounded-full bg-[#5e17eb] flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
                       <div className="w-2 h-2 bg-white rounded-full"></div>
                     </div>
                     <span className="text-gray-700 font-medium leading-relaxed">{requirement}</span>
@@ -489,7 +489,7 @@ export default function ForAmbassadors() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {tips.map((tip, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ className="bg-primary" }}>
                   <span className="text-2xl font-black" style={{ color: '#ffffff' }}>{idx + 1}</span>
                 </div>
                 <h3 className="text-xl font-black mb-4 text-gray-700">{tip.title}</h3>
@@ -517,7 +517,7 @@ export default function ForAmbassadors() {
                   <h3 className="text-lg font-semibold text-gray-700">{faq.question}</h3>
                   <div className="flex-shrink-0 ml-4">
                     {openFaq === idx ? (
-                      <ChevronUp className="w-5 h-5 text-[#5e17eb]" />
+                      <ChevronUp className="w-5 h-5 text-primary" />
                     ) : (
                       <ChevronDown className="w-5 h-5 text-gray-400" />
                     )}
@@ -549,7 +549,7 @@ export default function ForAmbassadors() {
               <Link
                 href="/ambassador/signup"
                 className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300 hover:shadow-lg"
-                style={{ backgroundColor: '#5e17eb', color: '#ffffff' }}
+                style={{ className="bg-primary", color: '#ffffff' }}
               >
                 Apply Now
               </Link>

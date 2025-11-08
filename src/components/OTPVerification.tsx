@@ -231,7 +231,7 @@ export function OTPVerification({
         {/* Error Message */}
         {error && (
           <div className="text-center">
-            <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg p-3">
+            <p className="text-sm text-error bg-red-50 border border-red-200 rounded-lg p-3">
               {error}
             </p>
           </div>
@@ -240,7 +240,7 @@ export function OTPVerification({
         {/* Success Message */}
         {success && (
           <div className="text-center">
-            <p className="text-sm text-green-600 bg-green-50 border border-green-200 rounded-lg p-3">
+            <p className="text-sm text-secondary bg-green-50 border border-green-200 rounded-lg p-3">
               ✅ Verification successful!
             </p>
           </div>
@@ -253,7 +253,7 @@ export function OTPVerification({
         <button
           onClick={() => handleVerifyOTP()}
           disabled={loading || otpCode.join('').length !== 6}
-          className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="w-full px-4 py-3 bg-info text-white rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {loading ? (
             <div className="flex items-center justify-center">
@@ -302,7 +302,7 @@ export function OTPVerification({
       <div className="text-center">
         <p className="text-xs text-gray-500">
           Having trouble? Check your {type === 'email' ? 'email inbox and spam folder' : 'SMS messages'} or{' '}
-          <button className="text-blue-600 hover:text-blue-800 underline">
+          <button className="text-info hover:text-blue-800 underline">
             contact support
           </button>
         </p>

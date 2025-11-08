@@ -94,11 +94,11 @@ function RegisterContent() {
   return (
     <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: '#ffffff', fontFamily: 'Arial, sans-serif' }}>
       {/* Animated gradient background */}
-      <div className="absolute inset-0 opacity-10" style={{ backgroundColor: '#5e17eb' }}></div>
+      <div className="absolute inset-0 opacity-10" style={{ className="bg-primary" }}></div>
 
       {/* Floating gradient blobs */}
-      <div className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-pulse" style={{ backgroundColor: '#5e17eb' }}></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-pulse" style={{ backgroundColor: '#5e17eb', animationDelay: '2s' }}></div>
+      <div className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-pulse" style={{ className="bg-primary" }}></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-pulse" style={{ className="bg-primary", animationDelay: '2s' }}></div>
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 min-h-screen">
         {/* Left Side - Modern Design */}
@@ -406,7 +406,7 @@ function RegisterContent() {
                 type="submit"
                 disabled={loading}
                 className="w-full py-3 px-4 font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
-                style={{ backgroundColor: '#5e17eb', color: '#ffffff' }}
+                style={{ className="bg-primary", color: '#ffffff' }}
               >
                 {loading ? (
                   <div className="flex items-center justify-center">
@@ -445,7 +445,7 @@ function LoadingFallback() {
   return (
     <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#ffffff', fontFamily: 'Arial, sans-serif' }}>
       <div className="text-center">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center shadow-lg" style={{ backgroundColor: '#5e17eb' }}>
+        <div className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center shadow-lg" style={{ className="bg-primary" }}>
           <span className="text-2xl font-bold" style={{ color: '#ffffff' }}>SP</span>
         </div>
         <div className="animate-spin rounded-full h-8 w-8 border-4 mx-auto mb-4" style={{ borderColor: '#5e17eb', borderTopColor: '#ffffff' }}></div>

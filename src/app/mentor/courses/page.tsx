@@ -133,10 +133,10 @@ export default function MentorCourses() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-red-600 mb-4">{error}</p>
+          <p className="text-error mb-4">{error}</p>
           <button 
             onClick={fetchCourses}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="bg-info text-white px-4 py-2 rounded hover:bg-blue-700"
           >
             Retry
           </button>
@@ -156,7 +156,7 @@ export default function MentorCourses() {
           </div>
           <Link
             href="/mentor/courses/create"
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-medium"
+            className="bg-info text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-medium"
           >
             Create New Course
           </Link>
@@ -171,7 +171,7 @@ export default function MentorCourses() {
                 onClick={() => setFilter(status as any)}
                 className={`px-4 py-2 rounded-lg font-medium ${
                   filter === status
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-info text-white'
                     : 'bg-white text-gray-700 hover:bg-gray-50'
                 }`}
               >
@@ -192,7 +192,7 @@ export default function MentorCourses() {
             <div className="mt-6">
               <Link
                 href="/mentor/courses/create"
-                className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-info hover:bg-blue-700"
               >
                 Create Course
               </Link>
@@ -236,7 +236,7 @@ export default function MentorCourses() {
                     <div className="text-sm text-gray-500">
                       <span className="font-medium">Category:</span> {course.category}
                     </div>
-                    <div className="text-lg font-bold text-blue-600">
+                    <div className="text-lg font-bold text-info">
                       ₹{course.pricing.amount || 0}
                     </div>
                   </div>
@@ -263,7 +263,7 @@ export default function MentorCourses() {
                     {course.status === CourseStatus.DRAFT && (
                       <button
                         onClick={() => handlePublishCourse(course.id!)}
-                        className="flex-1 bg-green-600 text-white py-2 px-3 rounded-md hover:bg-green-700 text-sm font-medium"
+                        className="flex-1 bg-secondary text-white py-2 px-3 rounded-md hover:bg-green-700 text-sm font-medium"
                       >
                         Publish
                       </button>
@@ -272,7 +272,7 @@ export default function MentorCourses() {
                     {course.status === CourseStatus.PUBLISHED && (
                       <button
                         onClick={() => handleArchiveCourse(course.id!)}
-                        className="flex-1 bg-red-600 text-white py-2 px-3 rounded-md hover:bg-red-700 text-sm font-medium"
+                        className="flex-1 bg-error text-white py-2 px-3 rounded-md hover:bg-red-700 text-sm font-medium"
                       >
                         Archive
                       </button>
@@ -280,7 +280,7 @@ export default function MentorCourses() {
 
                     <Link
                       href={`/mentor/courses/${course.id}/analytics`}
-                      className="flex-1 bg-blue-600 text-white text-center py-2 px-3 rounded-md hover:bg-blue-700 text-sm font-medium"
+                      className="flex-1 bg-info text-white text-center py-2 px-3 rounded-md hover:bg-blue-700 text-sm font-medium"
                     >
                       Analytics
                     </Link>

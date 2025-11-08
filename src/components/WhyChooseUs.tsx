@@ -10,7 +10,7 @@ export default function WhyChooseUs() {
       title: 'Students and Professionals',
       description: 'Unlock Your Potential: Compete, Build Resume, Grow and get Hired!',
       icon: <GraduationCap className="w-6 h-6 text-white" />,
-      bgColor: 'bg-blue-500',
+      bgColor: 'bg-info',
       features: [
         'Live interactive classes with industry experts',
         'Industry-recognized certifications',
@@ -38,7 +38,7 @@ export default function WhyChooseUs() {
       title: 'Colleges',
       description: 'Bridge Academia and Industry: Empower Students with Real-World Opportunities!',
       icon: <School className="w-6 h-6 text-white" />,
-      bgColor: 'bg-orange-500',
+      bgColor: 'bg-accent-light',
       features: [
         'Industry-aligned curriculum integration',
         'Campus ambassador programs',

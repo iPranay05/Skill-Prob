@@ -258,7 +258,7 @@ export function AdminPanel({ adminId, adminProfile }: AdminPanelProps) {
           <div className="text-xs text-gray-500">Students</div>
         </div>
         <div className="text-center">
-          <div className="text-lg font-semibold text-green-600">₹{course.revenue.toLocaleString()}</div>
+          <div className="text-lg font-semibold text-secondary">₹{course.revenue.toLocaleString()}</div>
           <div className="text-xs text-gray-500">Revenue</div>
         </div>
       </div>
@@ -322,10 +322,10 @@ export function AdminPanel({ adminId, adminProfile }: AdminPanelProps) {
               <div>
                 <p className="text-sm text-gray-600">Total Users</p>
                 <p className="text-2xl font-bold text-gray-900">{totalUsers}</p>
-                <p className="text-xs text-green-600">{activeUsers} active</p>
+                <p className="text-xs text-secondary">{activeUsers} active</p>
               </div>
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                <span className="text-blue-600 text-xl">👥</span>
+                <span className="text-info text-xl">👥</span>
               </div>
             </div>
           </div>
@@ -335,10 +335,10 @@ export function AdminPanel({ adminId, adminProfile }: AdminPanelProps) {
               <div>
                 <p className="text-sm text-gray-600">Total Courses</p>
                 <p className="text-2xl font-bold text-gray-900">{totalCourses}</p>
-                <p className="text-xs text-green-600">{publishedCourses} published</p>
+                <p className="text-xs text-secondary">{publishedCourses} published</p>
               </div>
               <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                <span className="text-green-600 text-xl">📚</span>
+                <span className="text-secondary text-xl">📚</span>
               </div>
             </div>
           </div>
@@ -350,7 +350,7 @@ export function AdminPanel({ adminId, adminProfile }: AdminPanelProps) {
                 <p className="text-2xl font-bold text-gray-900">₹{totalRevenue.toLocaleString()}</p>
               </div>
               <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                <span className="text-purple-600 text-xl">💰</span>
+                <span className="text-primary text-xl">💰</span>
               </div>
             </div>
           </div>
@@ -362,7 +362,7 @@ export function AdminPanel({ adminId, adminProfile }: AdminPanelProps) {
                 <p className="text-2xl font-bold text-gray-900">{pendingPayouts}</p>
               </div>
               <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
-                <span className="text-orange-600 text-xl">⏳</span>
+                <span className="text-accent text-xl">⏳</span>
               </div>
             </div>
           </div>
@@ -565,7 +565,7 @@ export function AdminPanel({ adminId, adminProfile }: AdminPanelProps) {
                 type="checkbox"
                 checked={systemConfig.autoApprovePayouts}
                 onChange={(e) => handleConfigUpdate({ autoApprovePayouts: e.target.checked })}
-                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                className="rounded border-gray-300 text-info focus:ring-blue-500"
               />
               <label className="ml-2 text-sm text-gray-700">Auto-approve payouts</label>
             </div>
@@ -575,7 +575,7 @@ export function AdminPanel({ adminId, adminProfile }: AdminPanelProps) {
                 type="checkbox"
                 checked={systemConfig.maintenanceMode}
                 onChange={(e) => handleConfigUpdate({ maintenanceMode: e.target.checked })}
-                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                className="rounded border-gray-300 text-info focus:ring-blue-500"
               />
               <label className="ml-2 text-sm text-gray-700">Maintenance mode</label>
             </div>
@@ -621,7 +621,7 @@ export function AdminPanel({ adminId, adminProfile }: AdminPanelProps) {
               onClick={() => setActiveTab(tab.id as any)}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${
                 activeTab === tab.id
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-info text-white'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >

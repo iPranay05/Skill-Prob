@@ -189,7 +189,7 @@ export default function AuditLogsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#5e17eb]"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -212,7 +212,7 @@ export default function AuditLogsPage() {
                 onClick={() => setActiveTab('audit')}
                 className={`py-2 px-1 border-b-2 font-medium text-sm ${
                   activeTab === 'audit'
-                    ? 'border-[#5e17eb] text-[#5e17eb]'
+                    ? 'border-primary text-primary'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -222,7 +222,7 @@ export default function AuditLogsPage() {
                 onClick={() => setActiveTab('security')}
                 className={`py-2 px-1 border-b-2 font-medium text-sm ${
                   activeTab === 'security'
-                    ? 'border-[#5e17eb] text-[#5e17eb]'
+                    ? 'border-primary text-primary'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -248,33 +248,33 @@ export default function AuditLogsPage() {
                   placeholder="Filter by action"
                   value={filters.action}
                   onChange={(e) => setFilters(prev => ({ ...prev, action: e.target.value }))}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#5e17eb] focus:border-[#5e17eb] sm:text-sm"
+                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                 />
                 <input
                   type="text"
                   placeholder="Filter by resource"
                   value={filters.resource}
                   onChange={(e) => setFilters(prev => ({ ...prev, resource: e.target.value }))}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#5e17eb] focus:border-[#5e17eb] sm:text-sm"
+                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                 />
                 <input
                   type="text"
                   placeholder="Filter by user"
                   value={filters.userId}
                   onChange={(e) => setFilters(prev => ({ ...prev, userId: e.target.value }))}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#5e17eb] focus:border-[#5e17eb] sm:text-sm"
+                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                 />
                 <input
                   type="date"
                   value={filters.dateFrom}
                   onChange={(e) => setFilters(prev => ({ ...prev, dateFrom: e.target.value }))}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#5e17eb] focus:border-[#5e17eb] sm:text-sm"
+                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                 />
                 <input
                   type="date"
                   value={filters.dateTo}
                   onChange={(e) => setFilters(prev => ({ ...prev, dateTo: e.target.value }))}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#5e17eb] focus:border-[#5e17eb] sm:text-sm"
+                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                 />
               </div>
             </div>
@@ -374,7 +374,7 @@ export default function AuditLogsPage() {
                       {!event.resolved && (
                         <button
                           onClick={() => resolveSecurityEvent(event.id)}
-                          className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-[#5e17eb] hover:bg-[#4a12c4] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5e17eb]"
+                          className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                         >
                           Mark Resolved
                         </button>

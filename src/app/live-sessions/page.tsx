@@ -269,14 +269,14 @@ export default function LiveSessionsPage() {
             <div className="flex items-start space-x-3">
               <div className="flex-shrink-0">
                 <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-                  <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
               </div>
               <div>
                 <p className="text-red-800 font-semibold">Something went wrong</p>
-                <p className="text-red-600 text-sm mt-1">{error}</p>
+                <p className="text-error text-sm mt-1">{error}</p>
               </div>
             </div>
           </div>
@@ -358,7 +358,7 @@ export default function LiveSessionsPage() {
                               </span>
                               {isSessionLive(session) && (
                                 <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-red-50 text-red-700 border border-red-200 animate-pulse">
-                                  <div className="w-2 h-2 bg-red-500 rounded-full mr-1.5 animate-pulse"></div>
+                                  <div className="w-2 h-2 bg-error rounded-full mr-1.5 animate-pulse"></div>
                                   LIVE NOW
                                 </span>
                               )}
@@ -372,7 +372,7 @@ export default function LiveSessionsPage() {
                         <div className="ml-16 space-y-3">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
                             <div className="flex items-center space-x-2">
-                              <svg className="w-4 h-4 text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="w-4 h-4 text-info flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V6a2 2 0 012-2h4a2 2 0 012 2v1m-6 0h8m-8 0H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V9a2 2 0 00-2-2h-2" />
                               </svg>
                               <span className="text-slate-700 font-medium">
@@ -405,7 +405,7 @@ export default function LiveSessionsPage() {
                               </span>
                             )}
                             {session.pollingEnabled && (
-                              <span className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-purple-50 text-purple-700 border border-purple-200 text-xs font-medium">
+                              <span className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-purple-50 text-primary-dark border border-purple-200 text-xs font-medium">
                                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                                 </svg>

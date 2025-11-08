@@ -72,13 +72,13 @@ export function RealTimeWallet({
   const getTransactionColor = (type: string) => {
     switch (type) {
       case 'credit':
-        return 'text-green-600';
+        return 'text-secondary';
       case 'debit':
-        return 'text-red-600';
+        return 'text-error';
       case 'conversion':
-        return 'text-blue-600';
+        return 'text-info';
       case 'payout':
-        return 'text-purple-600';
+        return 'text-primary';
       default:
         return 'text-gray-600';
     }
@@ -104,17 +104,17 @@ export function RealTimeWallet({
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-              <span className="text-green-600 text-sm">💰</span>
+              <span className="text-secondary text-sm">💰</span>
             </div>
             <div>
               <p className="text-sm text-gray-600">Wallet Balance</p>
-              <p className={`text-lg font-semibold ${balanceAnimation ? 'animate-pulse text-green-600' : 'text-gray-900'}`}>
+              <p className={`text-lg font-semibold ${balanceAnimation ? 'animate-pulse text-secondary' : 'text-gray-900'}`}>
                 ₹{displayBalance.toLocaleString()}
               </p>
             </div>
           </div>
           {recentTransactions.length > 0 && (
-            <div className="text-xs text-green-600 bg-green-50 px-2 py-1 rounded-full">
+            <div className="text-xs text-secondary bg-green-50 px-2 py-1 rounded-full">
               +{recentTransactions.length} new
             </div>
           )}
@@ -130,7 +130,7 @@ export function RealTimeWallet({
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-lg font-semibold text-gray-900">Wallet Balance</h3>
-            <p className={`text-3xl font-bold mt-2 ${balanceAnimation ? 'animate-pulse text-green-600' : 'text-gray-900'}`}>
+            <p className={`text-3xl font-bold mt-2 ${balanceAnimation ? 'animate-pulse text-secondary' : 'text-gray-900'}`}>
               ₹{displayBalance.toLocaleString()}
             </p>
           </div>
@@ -140,7 +140,7 @@ export function RealTimeWallet({
         </div>
         
         {balanceAnimation && (
-          <div className="mt-2 text-sm text-green-600 flex items-center">
+          <div className="mt-2 text-sm text-secondary flex items-center">
             <span className="animate-bounce mr-1">📈</span>
             Balance updated!
           </div>
@@ -201,7 +201,7 @@ export function RealTimeWallet({
 
           {transactions.length > 0 && (
             <div className="mt-4 text-center">
-              <button className="text-sm text-blue-600 hover:text-blue-800 font-medium">
+              <button className="text-sm text-info hover:text-blue-800 font-medium">
                 View all transactions
               </button>
             </div>

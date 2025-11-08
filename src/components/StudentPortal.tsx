@@ -158,7 +158,7 @@ export function StudentPortal({ userId, userProfile }: StudentPortalProps) {
                     ) : (
                         <button
                             onClick={() => handleEnroll(course.id)}
-                            className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                            className="px-4 py-2 bg-info text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
                         >
                             Enroll Now
                         </button>
@@ -263,7 +263,7 @@ export function StudentPortal({ userId, userProfile }: StudentPortalProps) {
                     <p className="text-gray-600 mb-4">Start learning by enrolling in a course</p>
                     <button
                         onClick={() => setActiveTab('discover')}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                        className="px-4 py-2 bg-info text-white rounded-lg hover:bg-blue-700 transition-colors"
                     >
                         Browse Courses
                     </button>
@@ -311,7 +311,7 @@ export function StudentPortal({ userId, userProfile }: StudentPortalProps) {
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id as any)}
                             className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === tab.id
-                                ? 'bg-blue-600 text-white'
+                                ? 'bg-info text-white'
                                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                                 }`}
                         >

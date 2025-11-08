@@ -113,7 +113,7 @@ export default function StudentProfilePage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#5e17eb]"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -127,7 +127,7 @@ export default function StudentProfilePage() {
           <p className="text-gray-600 mb-4">Failed to fetch profile</p>
           <button
             onClick={() => window.location.reload()}
-            className="bg-[#5e17eb] text-white px-4 py-2 rounded-lg hover:bg-[#4a12c4] transition-colors"
+            className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors"
           >
             Try Again
           </button>
@@ -153,7 +153,7 @@ export default function StudentProfilePage() {
               <h2 className="text-lg font-medium text-gray-900">Profile Information</h2>
               <button
                 onClick={() => editing ? updateProfile() : setEditing(true)}
-                className="bg-[#5e17eb] text-white px-4 py-2 rounded-lg hover:bg-[#4a12c4] transition-colors"
+                className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors"
               >
                 {editing ? 'Save Changes' : 'Edit Profile'}
               </button>
@@ -202,7 +202,7 @@ export default function StudentProfilePage() {
                     type="text"
                     value={formData.firstName}
                     onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#5e17eb] focus:border-[#5e17eb]"
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                   />
                 ) : (
                   <p className="text-gray-900">{profile.profile.firstName || 'Not provided'}</p>
@@ -218,7 +218,7 @@ export default function StudentProfilePage() {
                     type="text"
                     value={formData.lastName}
                     onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#5e17eb] focus:border-[#5e17eb]"
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                   />
                 ) : (
                   <p className="text-gray-900">{profile.profile.lastName || 'Not provided'}</p>
@@ -242,7 +242,7 @@ export default function StudentProfilePage() {
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#5e17eb] focus:border-[#5e17eb]"
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                   />
                 ) : (
                   <p className="text-gray-900">{profile.phone || 'Not provided'}</p>
@@ -258,7 +258,7 @@ export default function StudentProfilePage() {
                     rows={4}
                     value={formData.bio}
                     onChange={(e) => setFormData(prev => ({ ...prev, bio: e.target.value }))}
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#5e17eb] focus:border-[#5e17eb]"
+                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                     placeholder="Tell us about yourself..."
                   />
                 ) : (
@@ -285,7 +285,7 @@ export default function StudentProfilePage() {
                 </button>
                 <button
                   onClick={updateProfile}
-                  className="px-4 py-2 bg-[#5e17eb] text-white rounded-md hover:bg-[#4a12c4] transition-colors"
+                  className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors"
                 >
                   Save Changes
                 </button>

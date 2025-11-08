@@ -205,7 +205,7 @@ export default function SystemConfigPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#5e17eb]"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -228,7 +228,7 @@ export default function SystemConfigPage() {
                 onClick={() => setActiveTab('configs')}
                 className={`py-2 px-1 border-b-2 font-medium text-sm ${
                   activeTab === 'configs'
-                    ? 'border-[#5e17eb] text-[#5e17eb]'
+                    ? 'border-primary text-primary'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -238,7 +238,7 @@ export default function SystemConfigPage() {
                 onClick={() => setActiveTab('features')}
                 className={`py-2 px-1 border-b-2 font-medium text-sm ${
                   activeTab === 'features'
-                    ? 'border-[#5e17eb] text-[#5e17eb]'
+                    ? 'border-primary text-primary'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -276,7 +276,7 @@ export default function SystemConfigPage() {
                         type="text"
                         value={config.value}
                         onChange={(e) => updateConfig(config.id, e.target.value)}
-                        className="block w-32 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#5e17eb] focus:border-[#5e17eb] sm:text-sm"
+                        className="block w-32 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                       />
                     </div>
                   </div>
@@ -330,8 +330,8 @@ export default function SystemConfigPage() {
                       </div>
                       <button
                         onClick={() => toggleFeatureFlag(flag.id)}
-                        className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#5e17eb] focus:ring-offset-2 ${
-                          flag.enabled ? 'bg-[#5e17eb]' : 'bg-gray-200'
+                        className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                          flag.enabled ? 'bg-primary' : 'bg-gray-200'
                         }`}
                       >
                         <span
@@ -357,21 +357,21 @@ export default function SystemConfigPage() {
             {systemStatus ? (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">{systemStatus.uptime}</div>
+                  <div className="text-2xl font-bold text-secondary">{systemStatus.uptime}</div>
                   <div className="text-sm text-gray-500">Uptime</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">{systemStatus.avgResponseTime}</div>
+                  <div className="text-2xl font-bold text-info">{systemStatus.avgResponseTime}</div>
                   <div className="text-sm text-gray-500">Avg Response Time</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-600">{systemStatus.storageUsed}</div>
+                  <div className="text-2xl font-bold text-primary">{systemStatus.storageUsed}</div>
                   <div className="text-sm text-gray-500">Storage Used</div>
                 </div>
               </div>
             ) : (
               <div className="flex justify-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#5e17eb]"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
               </div>
             )}
           </div>

@@ -236,7 +236,7 @@ export default function AmbassadorApplication() {
                       <button
                         type="button"
                         onClick={() => removeSocialMediaProfile(index)}
-                        className="text-red-600 hover:text-red-800"
+                        className="text-error hover:text-red-800"
                       >
                         Remove
                       </button>
@@ -247,7 +247,7 @@ export default function AmbassadorApplication() {
               <button
                 type="button"
                 onClick={addSocialMediaProfile}
-                className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                className="text-info hover:text-blue-800 text-sm font-medium"
               >
                 + Add Another Profile
               </button>
@@ -291,31 +291,31 @@ export default function AmbassadorApplication() {
               <h3 className="text-lg font-medium text-blue-900 mb-3">Ambassador Program Benefits</h3>
               <ul className="space-y-2 text-sm text-blue-800">
                 <li className="flex items-center">
-                  <svg className="w-4 h-4 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-info mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   Earn 10 points for each successful registration
                 </li>
                 <li className="flex items-center">
-                  <svg className="w-4 h-4 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-info mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   Earn 50 points for each first purchase by referred users
                 </li>
                 <li className="flex items-center">
-                  <svg className="w-4 h-4 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-info mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   Convert points to cash (1 point = ₹1)
                 </li>
                 <li className="flex items-center">
-                  <svg className="w-4 h-4 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-info mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   Access to exclusive promotional materials
                 </li>
                 <li className="flex items-center">
-                  <svg className="w-4 h-4 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-info mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   Performance analytics and tracking dashboard
@@ -328,7 +328,7 @@ export default function AmbassadorApplication() {
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 font-medium"
+                className="bg-info text-white px-8 py-3 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 font-medium"
               >
                 {loading ? 'Submitting...' : 'Submit Application'}
               </button>

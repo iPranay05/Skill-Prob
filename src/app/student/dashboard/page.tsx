@@ -123,10 +123,10 @@ export default function StudentDashboard() {
   };
 
   const getProgressColor = (percentage: number) => {
-    if (percentage >= 80) return 'bg-green-500';
-    if (percentage >= 60) return 'bg-blue-500';
+    if (percentage >= 80) return 'bg-secondary-light';
+    if (percentage >= 60) return 'bg-info';
     if (percentage >= 40) return 'bg-yellow-500';
-    return 'bg-red-500';
+    return 'bg-error';
   };
 
   if (loading) {
@@ -135,7 +135,7 @@ export default function StudentDashboard() {
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <div className="relative">
-              <div className="w-20 h-20 border-4 border-gray-200 rounded-full animate-spin mx-auto" style={{ borderTopColor: '#5e17eb' }}></div>
+              <div className="w-20 h-20 border-4 border-gray-200 rounded-full animate-spin mx-auto" style={{ className="border-t-primary" }}></div>
             </div>
             <p className="mt-6 text-xl font-semibold text-black">Loading your dashboard...</p>
           </div>
@@ -158,7 +158,7 @@ export default function StudentDashboard() {
               <Link
                 href="/courses"
                 className="px-6 py-3 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
-                style={{ backgroundColor: '#5e17eb' }}
+                style={{ className="bg-primary" }}
               >
                 Browse Courses
               </Link>
@@ -459,7 +459,7 @@ export default function StudentDashboard() {
                               </p>
                             </div>
                           </div>
-                          <button className="text-gray-400 hover:text-red-600">
+                          <button className="text-gray-400 hover:text-error">
                             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>

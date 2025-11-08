@@ -125,7 +125,7 @@ export default function JobsPage() {
               </div>
               <button
                 type="submit"
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500"
+                className="px-6 py-2 bg-info text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500"
               >
                 Search
               </button>
@@ -259,10 +259,10 @@ export default function JobsPage() {
                   )}
                 </div>
                 <div className="flex gap-2">
-                  <button className="px-4 py-2 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
+                  <button className="px-4 py-2 text-info border border-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
                     View Details
                   </button>
-                  <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                  <button className="px-4 py-2 bg-info text-white rounded-lg hover:bg-blue-700 transition-colors">
                     Apply Now
                   </button>
                 </div>
@@ -270,7 +270,7 @@ export default function JobsPage() {
 
               {job.application_deadline && (
                 <div className="mt-4 pt-4 border-t border-gray-100">
-                  <p className="text-sm text-orange-600">
+                  <p className="text-sm text-accent">
                     Application deadline: {formatDate(job.application_deadline)}
                   </p>
                 </div>

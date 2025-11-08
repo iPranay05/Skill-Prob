@@ -101,11 +101,11 @@ export function RealTimeAnalytics({ initialData = {}, userRole = 'admin' }: Real
   }) => {
     const isUpdated = fieldKey && updatedFields.has(fieldKey);
     const colorClasses = {
-      blue: 'bg-blue-500',
-      green: 'bg-green-500',
-      purple: 'bg-purple-500',
-      orange: 'bg-orange-500',
-      red: 'bg-red-500',
+      blue: 'bg-info',
+      green: 'bg-secondary-light',
+      purple: 'bg-primary-light',
+      orange: 'bg-accent-light',
+      red: 'bg-error',
     };
 
     return (
@@ -125,7 +125,7 @@ export function RealTimeAnalytics({ initialData = {}, userRole = 'admin' }: Real
           </div>
         </div>
         {isUpdated && (
-          <div className="mt-2 text-xs text-blue-600 flex items-center">
+          <div className="mt-2 text-xs text-info flex items-center">
             <span className="animate-bounce mr-1">📈</span>
             Updated now
           </div>
@@ -287,7 +287,7 @@ export function RealTimeAnalytics({ initialData = {}, userRole = 'admin' }: Real
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-gray-900">Recent Activity</h3>
           <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            <div className="w-2 h-2 bg-secondary-light rounded-full animate-pulse"></div>
             <span className="text-sm text-gray-600">Live</span>
           </div>
         </div>
@@ -320,7 +320,7 @@ export function RealTimeAnalytics({ initialData = {}, userRole = 'admin' }: Real
                   </div>
                 </div>
                 {activity.value && (
-                  <div className="text-sm font-semibold text-green-600">
+                  <div className="text-sm font-semibold text-secondary">
                     +₹{activity.value.toLocaleString()}
                   </div>
                 )}

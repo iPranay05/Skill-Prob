@@ -144,7 +144,7 @@ export default function MentorSignupPage() {
             <div className="max-w-2xl mx-auto px-6 py-12">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <div className="mx-auto h-16 w-16 bg-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                    <div className="mx-auto h-16 w-16 bg-primary rounded-2xl flex items-center justify-center mb-6">
                         <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
@@ -200,7 +200,7 @@ export default function MentorSignupPage() {
                             }
                         ].map((benefit, index) => (
                             <div key={index} className="flex items-start space-x-4">
-                                <div className="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600">
+                                <div className="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-primary">
                                     {benefit.icon}
                                 </div>
                                 <div>
@@ -451,14 +451,14 @@ export default function MentorSignupPage() {
                                                     type="checkbox"
                                                     checked={formData.skills.includes(skill)}
                                                     onChange={() => handleSkillToggle(skill)}
-                                                    className="rounded border-gray-300 text-purple-600 focus:ring-purple-500"
+                                                    className="rounded border-gray-300 text-primary focus:ring-purple-500"
                                                 />
                                                 <span className="text-sm text-gray-700">{skill}</span>
                                             </label>
                                         ))}
                                     </div>
                                     {formData.skills.length === 0 && (
-                                        <p className="text-red-500 text-sm mt-1">Please select at least one skill</p>
+                                        <p className="text-error text-sm mt-1">Please select at least one skill</p>
                                     )}
                                 </div>
 
@@ -523,7 +523,7 @@ export default function MentorSignupPage() {
                                         </svg>
                                     </div>
                                     <div className="ml-3">
-                                        <p className="text-sm text-red-600">{error}</p>
+                                        <p className="text-sm text-error">{error}</p>
                                     </div>
                                 </div>
                             </div>
@@ -539,7 +539,7 @@ export default function MentorSignupPage() {
                                         </svg>
                                     </div>
                                     <div className="ml-3">
-                                        <p className="text-sm text-green-600">{success}</p>
+                                        <p className="text-sm text-secondary">{success}</p>
                                     </div>
                                 </div>
                             </div>
@@ -550,7 +550,7 @@ export default function MentorSignupPage() {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                             >
                                 {loading ? (
                                     <div className="flex items-center">
@@ -566,11 +566,11 @@ export default function MentorSignupPage() {
                         {/* Terms */}
                         <div className="text-center text-sm text-gray-600">
                             By submitting this application, you agree to our{' '}
-                            <Link href="/terms" className="text-purple-600 hover:text-purple-500">
+                            <Link href="/terms" className="text-primary hover:text-primary-light">
                                 Terms of Service
                             </Link>{' '}
                             and{' '}
-                            <Link href="/privacy" className="text-purple-600 hover:text-purple-500">
+                            <Link href="/privacy" className="text-primary hover:text-primary-light">
                                 Privacy Policy
                             </Link>
                         </div>
@@ -581,7 +581,7 @@ export default function MentorSignupPage() {
                 <div className="text-center mt-8">
                     <p className="text-gray-600">
                         Already have a mentor account?{' '}
-                        <Link href="/auth/login" className="text-purple-600 hover:text-purple-500 font-medium">
+                        <Link href="/auth/login" className="text-primary hover:text-primary-light font-medium">
                             Sign in here
                         </Link>
                     </p>

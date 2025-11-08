@@ -116,28 +116,28 @@ export default function AdminDashboard() {
         <div className="mb-8 grid grid-cols-1 md:grid-cols-4 gap-4">
           <button
             onClick={() => router.push('/admin/users')}
-            className="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700 text-left"
+            className="bg-info text-white p-4 rounded-lg hover:bg-blue-700 text-left"
           >
             <h3 className="font-semibold">Manage Users</h3>
             <p className="text-sm opacity-90">View and manage all users</p>
           </button>
           <button
             onClick={() => router.push('/admin/courses')}
-            className="bg-green-600 text-white p-4 rounded-lg hover:bg-green-700 text-left"
+            className="bg-secondary text-white p-4 rounded-lg hover:bg-green-700 text-left"
           >
             <h3 className="font-semibold">Manage Courses</h3>
             <p className="text-sm opacity-90">Review and approve courses</p>
           </button>
           <button
             onClick={() => router.push('/admin/kyc')}
-            className="bg-purple-600 text-white p-4 rounded-lg hover:bg-purple-700 text-left"
+            className="bg-primary text-white p-4 rounded-lg hover:bg-primary-dark text-left"
           >
             <h3 className="font-semibold">KYC Reviews</h3>
             <p className="text-sm opacity-90">Review KYC submissions</p>
           </button>
           <button
             onClick={() => router.push('/admin/analytics')}
-            className="bg-orange-600 text-white p-4 rounded-lg hover:bg-orange-700 text-left"
+            className="bg-accent text-white p-4 rounded-lg hover:bg-orange-700 text-left"
           >
             <h3 className="font-semibold">Analytics</h3>
             <p className="text-sm opacity-90">View detailed analytics</p>
@@ -158,7 +158,7 @@ export default function AdminDashboard() {
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                      <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-info" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
                       </svg>
                     </div>
@@ -166,7 +166,7 @@ export default function AdminDashboard() {
                   <div className="ml-4">
                     <p className="text-sm font-medium text-gray-500">Total Users</p>
                     <p className="text-2xl font-semibold text-gray-900">{stats.users.total.toLocaleString()}</p>
-                    <p className="text-sm text-green-600">+{stats.users.newThisMonth} this month</p>
+                    <p className="text-sm text-secondary">+{stats.users.newThisMonth} this month</p>
                   </div>
                 </div>
               </div>
@@ -176,7 +176,7 @@ export default function AdminDashboard() {
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                      <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                       </svg>
                     </div>
@@ -202,7 +202,7 @@ export default function AdminDashboard() {
                   <div className="ml-4">
                     <p className="text-sm font-medium text-gray-500">Total Revenue</p>
                     <p className="text-2xl font-semibold text-gray-900">₹{stats.revenue.totalRevenue.toLocaleString()}</p>
-                    <p className="text-sm text-green-600">₹{stats.revenue.monthlyRevenue.toLocaleString()} this month</p>
+                    <p className="text-sm text-secondary">₹{stats.revenue.monthlyRevenue.toLocaleString()} this month</p>
                   </div>
                 </div>
               </div>
@@ -212,7 +212,7 @@ export default function AdminDashboard() {
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                      <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                       </svg>
                     </div>
@@ -257,11 +257,11 @@ export default function AdminDashboard() {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-600">Monthly Revenue</span>
-                    <span className="font-semibold text-green-600">₹{stats.revenue.monthlyRevenue.toLocaleString()}</span>
+                    <span className="font-semibold text-secondary">₹{stats.revenue.monthlyRevenue.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-600">Pending Payouts</span>
-                    <span className="font-semibold text-orange-600">₹{stats.revenue.pendingPayouts.toLocaleString()}</span>
+                    <span className="font-semibold text-accent">₹{stats.revenue.pendingPayouts.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-600">Completed Payouts</span>
@@ -276,11 +276,11 @@ export default function AdminDashboard() {
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
                     <span className="text-gray-600">Published Courses</span>
-                    <span className="font-semibold text-green-600">{stats.courses.published}</span>
+                    <span className="font-semibold text-secondary">{stats.courses.published}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-600">Draft Courses</span>
-                    <span className="font-semibold text-orange-600">{stats.courses.draft}</span>
+                    <span className="font-semibold text-accent">{stats.courses.draft}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-600">Total Enrollments</span>
@@ -299,15 +299,15 @@ export default function AdminDashboard() {
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
                     <span className="text-gray-600">Active Live Sessions</span>
-                    <span className="font-semibold text-green-600">{stats.activity.activeSessions}</span>
+                    <span className="font-semibold text-secondary">{stats.activity.activeSessions}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-600">Support Tickets</span>
-                    <span className="font-semibold text-orange-600">{stats.activity.supportTickets}</span>
+                    <span className="font-semibold text-accent">{stats.activity.supportTickets}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-600">System Status</span>
-                    <span className="font-semibold text-green-600">🟢 Operational</span>
+                    <span className="font-semibold text-secondary">🟢 Operational</span>
                   </div>
                 </div>
               </div>
@@ -318,7 +318,7 @@ export default function AdminDashboard() {
             <p className="text-gray-500">Failed to load dashboard data</p>
             <button
               onClick={fetchDashboardStats}
-              className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+              className="mt-4 bg-info text-white px-4 py-2 rounded-lg hover:bg-blue-700"
             >
               Retry
             </button>

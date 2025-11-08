@@ -106,8 +106,8 @@ export default function AboutUs() {
       {/* Hero Section */}
       <section className="relative py-24 px-6 overflow-visible bg-white">
         {/* Animated background elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#5e17eb]/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#5e17eb]/20 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/20 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
 
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -167,7 +167,7 @@ export default function AboutUs() {
           {/* Header */}
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border-2 border-black mb-8">
-              <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+              <div className="w-4 h-4 rounded-full" style={{ className="bg-primary" }}></div>
               <span className="text-sm font-bold uppercase tracking-wide" style={{ color: '#5e17eb' }}>
                 WHO'S USING SKILL PROBE?
               </span>
@@ -225,7 +225,7 @@ export default function AboutUs() {
 
             {/* Companies and Recruiters */}
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ className="bg-primary" }}>
                 <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z" />
                 </svg>
@@ -238,23 +238,23 @@ export default function AboutUs() {
 
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ className="bg-primary" }}></div>
                   <span className="text-sm text-gray-700">Access to skilled and certified professionals</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ className="bg-primary" }}></div>
                   <span className="text-sm text-gray-700">Direct recruitment from our talent pool</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ className="bg-primary" }}></div>
                   <span className="text-sm text-gray-700">Custom training programs for employees</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ className="bg-primary" }}></div>
                   <span className="text-sm text-gray-700">Campus hiring and internship programs</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full mt-2" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <div className="w-2 h-2 rounded-full mt-2" style={{ className="bg-primary" }}></div>
                   <span className="text-sm text-gray-700">Employer branding and visibility</span>
                 </div>
               </div>
@@ -457,7 +457,7 @@ export default function AboutUs() {
           <div className="grid md:grid-cols-2 gap-6">
             {advantages.map((advantage, idx) => (
               <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
-                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: '#5e17eb' }}>
+                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ className="bg-primary" }}>
                   <CheckCircle className="w-4 h-4" style={{ color: '#ffffff' }} />
                 </div>
                 <p className="font-semibold text-gray-600">{advantage}</p>
@@ -470,8 +470,8 @@ export default function AboutUs() {
       {/* Vision for the Future */}
       <section className="py-20 px-6 bg-gray-50 relative overflow-hidden">
         {/* Background Elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#5e17eb]/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-info/5 rounded-full blur-3xl"></div>
 
         <div className="max-w-7xl mx-auto relative">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -479,7 +479,7 @@ export default function AboutUs() {
             {/* Left Side - Content */}
             <div className="space-y-8">
               <div className="space-y-6">
-                <div className="inline-flex items-center px-4 py-2 bg-[#5e17eb]/10 rounded-full text-[#5e17eb] font-medium text-sm">
+                <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm">
                   🚀 Future Goals
                 </div>
                 <h2 className="text-4xl lg:text-5xl font-black text-gray-700 leading-tight">
@@ -499,7 +499,7 @@ export default function AboutUs() {
                   "Create sustainable earning opportunities for educators and students"
                 ].map((point, index) => (
                   <div key={index} className="flex items-start gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-white/20">
-                    <div className="w-6 h-6 bg-[#5e17eb] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                       <div className="w-2 h-2 bg-white rounded-full"></div>
                     </div>
                     <span className="text-gray-700 leading-relaxed font-medium">{point}</span>
@@ -522,14 +522,14 @@ export default function AboutUs() {
               {/* Floating Stats */}
               <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl border border-gray-100">
                 <div className="text-center">
-                  <div className="text-3xl font-black text-[#5e17eb] mb-1">1M+</div>
+                  <div className="text-3xl font-black text-primary mb-1">1M+</div>
                   <div className="text-sm font-semibold text-gray-600">Future Learners</div>
                 </div>
               </div>
 
               <div className="absolute -top-6 -right-6 bg-white rounded-2xl p-6 shadow-xl border border-gray-100">
                 <div className="text-center">
-                  <div className="text-3xl font-black text-[#5e17eb] mb-1">2030</div>
+                  <div className="text-3xl font-black text-primary mb-1">2030</div>
                   <div className="text-sm font-semibold text-gray-600">Vision Goal</div>
                 </div>
               </div>
@@ -550,7 +550,7 @@ export default function AboutUs() {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
                 href="/mentor/signup"
-                className="px-10 py-4 bg-[#5e17eb] text-white font-bold text-lg rounded-xl hover:bg-[#4a12c4] hover:shadow-lg transition-all duration-300"
+                className="px-10 py-4 bg-primary text-white font-bold text-lg rounded-xl hover:bg-primary-dark hover:shadow-lg transition-all duration-300"
               >
                 Become a Mentor
               </Link>
@@ -599,7 +599,7 @@ export default function AboutUs() {
                   </label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700"
                     placeholder="Enter your company name"
                     required
                   />
@@ -611,7 +611,7 @@ export default function AboutUs() {
                   </label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700"
                     placeholder="Enter your full name"
                     required
                   />
@@ -623,7 +623,7 @@ export default function AboutUs() {
                   </label>
                   <input
                     type="email"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700"
                     placeholder="Enter your email address"
                     required
                   />
@@ -635,7 +635,7 @@ export default function AboutUs() {
                   </label>
                   <input
                     type="tel"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700"
                     placeholder="Enter your phone number"
                     required
                   />
@@ -647,7 +647,7 @@ export default function AboutUs() {
                   </label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700"
                     placeholder="e.g., HR Manager, Talent Acquisition"
                     required
                   />
@@ -657,7 +657,7 @@ export default function AboutUs() {
                   <label className="block text-sm font-semibold text-gray-700 mb-3">
                     Company Size
                   </label>
-                  <select className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700">
+                  <select className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700">
                     <option value="">Select company size</option>
                     <option value="1-10">1-10 employees</option>
                     <option value="11-50">11-50 employees</option>
@@ -674,7 +674,7 @@ export default function AboutUs() {
                 </label>
                 <textarea
                   rows={3}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700"
                   placeholder="e.g., Full Stack Developers, Data Scientists, Digital Marketers..."
                   required
                 ></textarea>
@@ -686,7 +686,7 @@ export default function AboutUs() {
                 </label>
                 <textarea
                   rows={3}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700"
                   placeholder="Any specific requirements, experience level, location preferences, etc."
                 ></textarea>
               </div>
@@ -694,7 +694,7 @@ export default function AboutUs() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-3 px-6 bg-[#5e17eb] text-white font-semibold rounded-lg hover:bg-[#4a12c4] hover:shadow-lg transition-all duration-300"
+                className="w-full py-3 px-6 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark hover:shadow-lg transition-all duration-300"
               >
                 Submit Request
               </button>

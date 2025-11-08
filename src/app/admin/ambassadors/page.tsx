@@ -186,10 +186,10 @@ export default function AdminAmbassadors() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-red-600 mb-4">{error}</p>
+          <p className="text-error mb-4">{error}</p>
           <button 
             onClick={fetchAmbassadors}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="bg-info text-white px-4 py-2 rounded hover:bg-blue-700"
           >
             Retry
           </button>
@@ -280,7 +280,7 @@ export default function AdminAmbassadors() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <button
                         onClick={() => openModal(ambassador)}
-                        className="text-blue-600 hover:text-blue-900 mr-4"
+                        className="text-info hover:text-blue-900 mr-4"
                       >
                         Review
                       </button>
@@ -416,14 +416,14 @@ export default function AdminAmbassadors() {
                     <button
                       onClick={() => handleReject(selectedAmbassador.id)}
                       disabled={actionLoading}
-                      className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 disabled:bg-gray-400"
+                      className="bg-error text-white px-4 py-2 rounded hover:bg-red-700 disabled:bg-gray-400"
                     >
                       {actionLoading ? 'Processing...' : 'Reject'}
                     </button>
                     <button
                       onClick={() => handleApprove(selectedAmbassador.id)}
                       disabled={actionLoading}
-                      className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 disabled:bg-gray-400"
+                      className="bg-secondary text-white px-4 py-2 rounded hover:bg-green-700 disabled:bg-gray-400"
                     >
                       {actionLoading ? 'Processing...' : 'Approve'}
                     </button>

@@ -261,8 +261,8 @@ export default function CareerServices() {
   return (
     <section className="py-20 px-6 bg-gradient-to-br from-gray-50 via-white to-purple-50 relative overflow-hidden">
       {/* Background Decorations */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-[#5e17eb]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+      <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-info/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
       
       <div className="max-w-7xl mx-auto relative">
         {/* Header */}
@@ -271,7 +271,7 @@ export default function CareerServices() {
           animate={{ opacity: 1, y: 0 }}
           className="text-left mb-10"
         >
-          <div className="inline-flex items-center px-3 py-1 bg-[#5e17eb]/10 rounded-full text-[#5e17eb] font-medium text-sm mb-4">
+          <div className="inline-flex items-center px-3 py-1 bg-primary/10 rounded-full text-primary font-medium text-sm mb-4">
             🚀 Career Services
           </div>
           <h2 className="text-3xl lg:text-4xl font-semibold text-gray-700 mb-4 leading-tight">
@@ -293,7 +293,7 @@ export default function CareerServices() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:border-[#5e17eb]/30 hover:shadow-xl transition-all duration-500 text-left group relative"
+                className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:border-primary/30 hover:shadow-xl transition-all duration-500 text-left group relative"
               >
                 {/* Image Section */}
                 <div className="relative h-36 overflow-hidden">
@@ -317,7 +317,7 @@ export default function CareerServices() {
 
                 {/* Content Section */}
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold text-gray-700 mb-2 group-hover:text-[#5e17eb] transition-colors duration-300">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-2 group-hover:text-primary transition-colors duration-300">
                     {service.title}
                   </h3>
                   <p className="text-gray-600 text-xs mb-3 leading-relaxed">
@@ -326,11 +326,11 @@ export default function CareerServices() {
                   
                   {/* CTA Button */}
                   <div className="flex items-center justify-between">
-                    <span className="text-[#5e17eb] font-semibold text-sm group-hover:text-[#4a12c4] transition-colors duration-300">
+                    <span className="text-primary font-semibold text-sm group-hover:text-primary-dark transition-colors duration-300">
                       Learn more
                     </span>
-                    <div className="w-8 h-8 bg-[#5e17eb]/10 rounded-full flex items-center justify-center group-hover:bg-[#5e17eb] transition-all duration-300">
-                      <ArrowRight className="w-4 h-4 text-[#5e17eb] group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
+                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary transition-all duration-300">
+                      <ArrowRight className="w-4 h-4 text-primary group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
                     </div>
                   </div>
                 </div>
@@ -350,28 +350,28 @@ export default function CareerServices() {
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="w-12 h-12 bg-[#5e17eb]/10 rounded-2xl flex items-center justify-center text-[#5e17eb] mx-auto mb-3">
+              <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mx-auto mb-3">
                 <Target className="w-6 h-6" />
               </div>
               <div className="text-2xl font-semibold text-gray-700 mb-1">95%</div>
               <div className="text-sm text-gray-600">Success Rate</div>
             </div>
             <div className="text-center">
-              <div className="w-12 h-12 bg-[#5e17eb]/10 rounded-2xl flex items-center justify-center text-[#5e17eb] mx-auto mb-3">
+              <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mx-auto mb-3">
                 <Users className="w-6 h-6" />
               </div>
               <div className="text-2xl font-semibold text-gray-700 mb-1">2,500+</div>
               <div className="text-sm text-gray-600">Students Helped</div>
             </div>
             <div className="text-center">
-              <div className="w-12 h-12 bg-[#5e17eb]/10 rounded-2xl flex items-center justify-center text-[#5e17eb] mx-auto mb-3">
+              <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mx-auto mb-3">
                 <Zap className="w-6 h-6" />
               </div>
               <div className="text-2xl font-semibold text-gray-700 mb-1">24hrs</div>
               <div className="text-sm text-gray-600">Quick Response</div>
             </div>
             <div className="text-center">
-              <div className="w-12 h-12 bg-[#5e17eb]/10 rounded-2xl flex items-center justify-center text-[#5e17eb] mx-auto mb-3">
+              <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mx-auto mb-3">
                 <Award className="w-6 h-6" />
               </div>
               <div className="text-2xl font-semibold text-gray-700 mb-1">Expert</div>
@@ -434,7 +434,7 @@ export default function CareerServices() {
                       {/* Content */}
                       <div className="px-8 mb-8">
                         <h4 className="text-xl font-semibold text-gray-700 mb-6 flex items-center">
-                          <Award className="w-5 h-5 text-[#5e17eb] mr-2" />
+                          <Award className="w-5 h-5 text-primary mr-2" />
                           What You Get:
                         </h4>
                         <div className="space-y-4">
@@ -444,9 +444,9 @@ export default function CareerServices() {
                               initial={{ opacity: 0, x: -20 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: index * 0.1 }}
-                              className="flex items-start space-x-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 hover:border-[#5e17eb]/30 transition-colors duration-300"
+                              className="flex items-start space-x-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 hover:border-primary/30 transition-colors duration-300"
                             >
-                              <div className="w-6 h-6 bg-[#5e17eb] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                                 <div className="w-2 h-2 bg-white rounded-full"></div>
                               </div>
                               <span className="text-gray-700 leading-relaxed">{benefit}</span>
@@ -474,7 +474,7 @@ export default function CareerServices() {
                                 name="name"
                                 value={formData.name}
                                 onChange={handleInputChange}
-                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
                                 placeholder="Enter your full name"
                                 required
                               />
@@ -489,7 +489,7 @@ export default function CareerServices() {
                                 name="phone"
                                 value={formData.phone}
                                 onChange={handleInputChange}
-                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
                                 placeholder="Enter your phone number"
                                 required
                               />
@@ -504,7 +504,7 @@ export default function CareerServices() {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleInputChange}
-                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
                                 placeholder="Enter your email address"
                                 required
                               />
@@ -518,7 +518,7 @@ export default function CareerServices() {
                                 name="userType"
                                 value={formData.userType}
                                 onChange={handleInputChange}
-                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
                                 required
                               >
                                 <option value="">Select...</option>
@@ -539,7 +539,7 @@ export default function CareerServices() {
                                 name="college"
                                 value={formData.college}
                                 onChange={handleInputChange}
-                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
                                 placeholder="Enter your college name"
                                 required
                               />
@@ -556,7 +556,7 @@ export default function CareerServices() {
                                 name="organization"
                                 value={formData.organization}
                                 onChange={handleInputChange}
-                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
                                 placeholder="Enter your organization name"
                                 required
                               />
@@ -573,7 +573,7 @@ export default function CareerServices() {
                                 type="file"
                                 accept=".pdf,.doc,.docx"
                                 onChange={handleFileChange}
-                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#5e17eb] file:text-white hover:file:bg-[#4a12c4] file:cursor-pointer"
+                                className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary-dark file:cursor-pointer"
                                 required
                               />
                               <p className="text-xs text-gray-500 mt-2">Accepted formats: PDF, DOC, DOCX (Max 5MB)</p>
@@ -592,7 +592,7 @@ export default function CareerServices() {
                                   name="linkedinUrl"
                                   value={formData.linkedinUrl}
                                   onChange={handleInputChange}
-                                  className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                  className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
                                   placeholder="https://linkedin.com/in/yourprofile"
                                   required
                                 />
@@ -606,7 +606,7 @@ export default function CareerServices() {
                                   name="currentRole"
                                   value={formData.currentRole}
                                   onChange={handleInputChange}
-                                  className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                  className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
                                   placeholder="e.g., Software Engineer, Marketing Manager"
                                 />
                               </div>
@@ -626,7 +626,7 @@ export default function CareerServices() {
                                     name="interviewDate"
                                     value={formData.interviewDate}
                                     onChange={handleInputChange}
-                                    className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                    className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
                                     required
                                   />
                                 </div>
@@ -639,7 +639,7 @@ export default function CareerServices() {
                                     name="companyName"
                                     value={formData.companyName}
                                     onChange={handleInputChange}
-                                    className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                    className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
                                     placeholder="Company you're interviewing with"
                                     required
                                   />
@@ -654,7 +654,7 @@ export default function CareerServices() {
                                   name="currentRole"
                                   value={formData.currentRole}
                                   onChange={handleInputChange}
-                                  className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                  className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
                                   placeholder="e.g., Senior Developer, Product Manager"
                                   required
                                 />
@@ -673,7 +673,7 @@ export default function CareerServices() {
                                   name="yearsOfExperience"
                                   value={formData.yearsOfExperience}
                                   onChange={handleInputChange}
-                                  className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                  className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
                                 >
                                   <option value="">Select...</option>
                                   <option value="0-1">0-1 years</option>
@@ -692,7 +692,7 @@ export default function CareerServices() {
                                   value={formData.careerGoals}
                                   onChange={handleInputChange}
                                   rows={4}
-                                  className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
+                                  className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700 bg-gray-50 hover:bg-white transition-colors duration-200"
                                   placeholder="Tell us about your career aspirations and what you'd like to achieve..."
                                 />
                               </div>
@@ -702,14 +702,14 @@ export default function CareerServices() {
                         {/* Error Message */}
                         {error && (
                           <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-                            <p className="text-red-600 text-sm">{error}</p>
+                            <p className="text-error text-sm">{error}</p>
                           </div>
                         )}
 
                         {/* Success Message */}
                         {success && (
                           <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                            <p className="text-green-600 text-sm">{success}</p>
+                            <p className="text-secondary text-sm">{success}</p>
                           </div>
                         )}
 
@@ -719,7 +719,7 @@ export default function CareerServices() {
                             disabled={loading}
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className={`w-full py-4 px-6 bg-gradient-to-r ${service.bgGradient} text-white font-bold rounded-xl hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#5e17eb] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center space-x-2`}
+                            className={`w-full py-4 px-6 bg-gradient-to-r ${service.bgGradient} text-white font-bold rounded-xl hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center space-x-2`}
                           >
                             {loading ? (
                               <>

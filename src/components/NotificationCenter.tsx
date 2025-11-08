@@ -142,7 +142,7 @@ export default function NotificationCenter({ userId, token }: NotificationCenter
           />
         </svg>
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+          <span className="absolute -top-1 -right-1 bg-error text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
             {unreadCount > 99 ? '99+' : unreadCount}
           </span>
         )}
@@ -196,7 +196,7 @@ export default function NotificationCenter({ userId, token }: NotificationCenter
                             {notification.title}
                           </p>
                           {!notification.is_read && (
-                            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                            <div className="w-2 h-2 bg-info rounded-full"></div>
                           )}
                         </div>
                         <p className="text-sm text-gray-600 mt-1">
@@ -215,7 +215,7 @@ export default function NotificationCenter({ userId, token }: NotificationCenter
                     <button
                       onClick={loadMore}
                       disabled={loading}
-                      className="text-blue-600 hover:text-blue-800 text-sm font-medium disabled:opacity-50"
+                      className="text-info hover:text-blue-800 text-sm font-medium disabled:opacity-50"
                     >
                       {loading ? 'Loading...' : 'Load more'}
                     </button>

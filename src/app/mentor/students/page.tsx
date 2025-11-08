@@ -100,9 +100,9 @@ export default function MentorStudentsPage() {
     };
 
     const getProgressColor = (progress: number) => {
-        if (progress >= 80) return 'bg-green-500';
+        if (progress >= 80) return 'bg-secondary-light';
         if (progress >= 50) return 'bg-yellow-500';
-        return 'bg-red-500';
+        return 'bg-error';
     };
 
     const filteredStudents = students.filter(student => {
@@ -115,7 +115,7 @@ export default function MentorStudentsPage() {
     if (loading) {
         return (
             <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-                <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#5e17eb]"></div>
+                <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
             </div>
         );
     }
@@ -135,7 +135,7 @@ export default function MentorStudentsPage() {
                     <div className="bg-white rounded-lg shadow p-6">
                         <div className="flex items-center">
                             <div className="flex-shrink-0">
-                                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                <div className="w-8 h-8 bg-info rounded-full flex items-center justify-center">
                                     <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
@@ -151,7 +151,7 @@ export default function MentorStudentsPage() {
                     <div className="bg-white rounded-lg shadow p-6">
                         <div className="flex items-center">
                             <div className="flex-shrink-0">
-                                <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                                <div className="w-8 h-8 bg-secondary-light rounded-full flex items-center justify-center">
                                     <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
                                     </svg>
@@ -169,7 +169,7 @@ export default function MentorStudentsPage() {
                     <div className="bg-white rounded-lg shadow p-6">
                         <div className="flex items-center">
                             <div className="flex-shrink-0">
-                                <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                                <div className="w-8 h-8 bg-primary-light rounded-full flex items-center justify-center">
                                     <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
@@ -213,14 +213,14 @@ export default function MentorStudentsPage() {
                                     placeholder="Search students by name or email..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#5e17eb] focus:border-[#5e17eb]"
+                                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                                 />
                             </div>
                             <div>
                                 <select
                                     value={filterStatus}
                                     onChange={(e) => setFilterStatus(e.target.value as any)}
-                                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#5e17eb] focus:border-[#5e17eb]"
+                                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                                 >
                                     <option value="all">All Students</option>
                                     <option value="active">Active</option>
@@ -262,14 +262,14 @@ export default function MentorStudentsPage() {
                                 Students ({studentsLoading ? '...' : filteredStudents.length})
                             </h2>
                             {studentsLoading && (
-                                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-[#5e17eb]"></div>
+                                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
                             )}
                         </div>
                     </div>
 
                     {studentsLoading ? (
                         <div className="p-12 text-center">
-                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#5e17eb] mx-auto mb-4"></div>
+                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
                             <p className="text-gray-500">Loading students...</p>
                         </div>
                     ) : (

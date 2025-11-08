@@ -282,7 +282,7 @@ export default function StudentProfilePage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-20 h-20 border-4 border-gray-200 rounded-full animate-spin mx-auto" style={{ borderTopColor: '#5e17eb' }}></div>
+          <div className="w-20 h-20 border-4 border-gray-200 rounded-full animate-spin mx-auto" style={{ className="border-t-primary" }}></div>
           <p className="mt-6 text-xl font-semibold text-black">Loading profile...</p>
         </div>
       </div>
@@ -324,7 +324,7 @@ export default function StudentProfilePage() {
                 <div className="flex items-center space-x-2">
                   <div className="w-24 bg-gray-200 rounded-full h-2">
                     <div
-                      className="bg-green-500 h-2 rounded-full"
+                      className="bg-secondary-light h-2 rounded-full"
                       style={{ width: `${profile.profile_completion_percentage || 0}%` }}
                     ></div>
                   </div>
@@ -511,7 +511,7 @@ export default function StudentProfilePage() {
                               href={profile.resume_url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                              className="px-4 py-2 bg-info text-white rounded-md hover:bg-blue-700"
                             >
                               View Resume
                             </a>
@@ -567,7 +567,7 @@ export default function StudentProfilePage() {
                         <h3 className="text-lg font-medium text-gray-900">Education #{index + 1}</h3>
                         <button
                           onClick={() => removeEducation(index)}
-                          className="text-red-600 hover:text-red-800"
+                          className="text-error hover:text-red-800"
                         >
                           Remove
                         </button>
@@ -672,7 +672,7 @@ export default function StudentProfilePage() {
                         <h3 className="text-lg font-medium text-gray-900">Experience #{index + 1}</h3>
                         <button
                           onClick={() => removeWorkExperience(index)}
-                          className="text-red-600 hover:text-red-800"
+                          className="text-error hover:text-red-800"
                         >
                           Remove
                         </button>
@@ -778,7 +778,7 @@ export default function StudentProfilePage() {
                         <h3 className="text-lg font-medium text-gray-900">Project #{index + 1}</h3>
                         <button
                           onClick={() => removeProject(index)}
-                          className="text-red-600 hover:text-red-800"
+                          className="text-error hover:text-red-800"
                         >
                           Remove
                         </button>
@@ -982,7 +982,7 @@ export default function StudentProfilePage() {
                           onChange={(e) => setProfile({ ...profile, is_profile_public: e.target.checked })}
                           className="sr-only peer"
                         />
-                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-info"></div>
                       </label>
                     </div>
 
@@ -998,7 +998,7 @@ export default function StudentProfilePage() {
                           onChange={(e) => setProfile({ ...profile, is_available_for_hire: e.target.checked })}
                           className="sr-only peer"
                         />
-                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-info"></div>
                       </label>
                     </div>
                   </div>

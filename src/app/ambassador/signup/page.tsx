@@ -202,7 +202,7 @@ export default function AmbassadorSignupPage() {
                             }
                         ].map((benefit, index) => (
                             <div key={index} className="flex items-start space-x-4">
-                                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-purple-100 to-blue-100 rounded-lg flex items-center justify-center text-purple-600">
+                                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-purple-100 to-blue-100 rounded-lg flex items-center justify-center text-primary">
                                     {benefit.icon}
                                 </div>
                                 <div>
@@ -625,7 +625,7 @@ export default function AmbassadorSignupPage() {
                                         </svg>
                                     </div>
                                     <div className="ml-3">
-                                        <p className="text-sm text-red-600">{error}</p>
+                                        <p className="text-sm text-error">{error}</p>
                                     </div>
                                 </div>
                             </div>
@@ -641,7 +641,7 @@ export default function AmbassadorSignupPage() {
                                         </svg>
                                     </div>
                                     <div className="ml-3">
-                                        <p className="text-sm text-green-600">{success}</p>
+                                        <p className="text-sm text-secondary">{success}</p>
                                     </div>
                                 </div>
                             </div>
@@ -668,11 +668,11 @@ export default function AmbassadorSignupPage() {
                         {/* Terms */}
                         <div className="text-center text-sm text-gray-600">
                             By submitting this application, you agree to our{' '}
-                            <Link href="/terms" className="text-purple-600 hover:text-purple-500">
+                            <Link href="/terms" className="text-primary hover:text-primary-light">
                                 Terms of Service
                             </Link>{' '}
                             and{' '}
-                            <Link href="/privacy" className="text-purple-600 hover:text-purple-500">
+                            <Link href="/privacy" className="text-primary hover:text-primary-light">
                                 Privacy Policy
                             </Link>
                         </div>
@@ -683,7 +683,7 @@ export default function AmbassadorSignupPage() {
                 <div className="text-center mt-8">
                     <p className="text-gray-600">
                         Already have an ambassador account?{' '}
-                        <Link href="/auth/login" className="text-purple-600 hover:text-purple-500 font-medium">
+                        <Link href="/auth/login" className="text-primary hover:text-primary-light font-medium">
                             Sign in here
                         </Link>
                     </p>

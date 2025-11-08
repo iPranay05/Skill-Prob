@@ -100,9 +100,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.4 }}
                 >
-                  <Link href="/mentor/dashboard" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/mentor/dashboard" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Dashboard</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -110,9 +110,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.4 }}
                 >
-                  <Link href="/mentor/courses" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/mentor/courses" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">My Courses</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -120,9 +120,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.6, duration: 0.4 }}
                 >
-                  <Link href="/mentor/students" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/mentor/students" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Students</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -130,9 +130,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.7, duration: 0.4 }}
                 >
-                  <Link href="/mentor/analytics" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/mentor/analytics" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Analytics</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -142,12 +142,12 @@ export default function Navbar() {
                   className="relative"
                 >
                   <div className="relative group">
-                    <button className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 flex items-center space-x-1">
+                    <button className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 flex items-center space-x-1">
                       <span className="relative z-10">Live Sessions</span>
                       <svg className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
-                      <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                      <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                     </button>
 
                     {/* Dropdown Menu */}
@@ -155,7 +155,7 @@ export default function Navbar() {
                       <div className="py-2">
                         <Link
                           href="/live-sessions/create"
-                          className="block px-4 py-3 text-gray-700 hover:bg-[#5e17eb]/5 hover:text-[#5e17eb] transition-colors duration-200 flex items-center space-x-3"
+                          className="block px-4 py-3 text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors duration-200 flex items-center space-x-3"
                         >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -164,7 +164,7 @@ export default function Navbar() {
                         </Link>
                         <Link
                           href="/live-sessions"
-                          className="block px-4 py-3 text-gray-700 hover:bg-[#5e17eb]/5 hover:text-[#5e17eb] transition-colors duration-200 flex items-center space-x-3"
+                          className="block px-4 py-3 text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors duration-200 flex items-center space-x-3"
                         >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -184,9 +184,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.4 }}
                 >
-                  <Link href="/student/dashboard" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/student/dashboard" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Dashboard</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -194,9 +194,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.4 }}
                 >
-                  <Link href="/courses/browse" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/courses/browse" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Browse Courses</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -204,9 +204,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.6, duration: 0.4 }}
                 >
-                  <Link href="/student/courses" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/student/courses" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">My Courses</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -214,9 +214,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.7, duration: 0.4 }}
                 >
-                  <Link href="/live-sessions" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/live-sessions" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Live Sessions</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -224,9 +224,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.8, duration: 0.4 }}
                 >
-                  <Link href="/jobs" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/jobs" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Jobs</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
               </>
@@ -238,9 +238,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.4 }}
                 >
-                  <Link href="/ambassador/dashboard" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/ambassador/dashboard" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Dashboard</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -248,9 +248,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.4 }}
                 >
-                  <Link href="/courses/browse" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/courses/browse" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Courses</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -258,9 +258,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.6, duration: 0.4 }}
                 >
-                  <Link href="/live-sessions" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/live-sessions" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Live Sessions</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -268,9 +268,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.7, duration: 0.4 }}
                 >
-                  <Link href="/ambassador/referrals" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/ambassador/referrals" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Referrals</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -278,9 +278,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.8, duration: 0.4 }}
                 >
-                  <Link href="/ambassador/earnings" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/ambassador/earnings" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Earnings</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
               </>
@@ -292,9 +292,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.4 }}
                 >
-                  <Link href="/admin/dashboard" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/admin/dashboard" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Dashboard</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -302,9 +302,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.4 }}
                 >
-                  <Link href="/admin/users" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/admin/users" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Manage Users</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -312,9 +312,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.6, duration: 0.4 }}
                 >
-                  <Link href="/admin/courses" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/admin/courses" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Manage Courses</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -322,9 +322,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.7, duration: 0.4 }}
                 >
-                  <Link href="/admin/kyc" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/admin/kyc" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">KYC Reviews</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -332,9 +332,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.8, duration: 0.4 }}
                 >
-                  <Link href="/admin/analytics" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/admin/analytics" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Analytics</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
               </>
@@ -346,9 +346,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.4 }}
                 >
-                  <Link href="/admin/dashboard" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/admin/dashboard" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Dashboard</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -356,9 +356,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.4 }}
                 >
-                  <Link href="/admin/users" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/admin/users" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Manage Users</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -366,9 +366,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.6, duration: 0.4 }}
                 >
-                  <Link href="/admin/courses" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/admin/courses" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Manage Courses</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -376,9 +376,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.7, duration: 0.4 }}
                 >
-                  <Link href="/admin/kyc" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/admin/kyc" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">KYC Reviews</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -386,9 +386,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.8, duration: 0.4 }}
                 >
-                  <Link href="/admin/analytics" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/admin/analytics" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Analytics</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -396,9 +396,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.9, duration: 0.4 }}
                 >
-                  <Link href="/admin/system" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/admin/system" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">System Config</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -406,9 +406,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 1.0, duration: 0.4 }}
                 >
-                  <Link href="/admin/audit" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/admin/audit" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Audit Logs</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
               </>
@@ -420,9 +420,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.4 }}
                 >
-                  <Link href="/about" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/about" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">About Us</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -430,9 +430,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.4 }}
                 >
-                  <Link href="/for-mentors" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/for-mentors" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Mentorship</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
                 <motion.div
@@ -440,9 +440,9 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.6, duration: 0.4 }}
                 >
-                  <Link href="/for-ambassadors" className="relative text-gray-600 hover:text-[#5e17eb] font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-[#5e17eb]/5 group">
+                  <Link href="/for-ambassadors" className="relative text-gray-600 hover:text-primary font-medium transition-all duration-300 px-3 py-2 rounded-lg hover:bg-primary/5 group">
                     <span className="relative z-10">Campus Ambassador</span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#5e17eb] transition-all duration-300 group-hover:w-full"></div>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
                   </Link>
                 </motion.div>
               </>
@@ -507,7 +507,7 @@ export default function Navbar() {
                     <hr className="my-1" />
                     <button
                       onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-50 transition-colors"
+                      className="block w-full text-left px-4 py-2 text-sm text-error hover:bg-gray-50 transition-colors"
                     >
                       Sign Out
                     </button>
@@ -516,7 +516,7 @@ export default function Navbar() {
               </div>
             ) : (
               <>
-                <Link href="/auth/login" className="text-[#5e17eb] hover:text-white font-medium px-4 py-2 border-2 border-[#5e17eb] hover:bg-[#5e17eb] rounded-lg transition-all duration-300">
+                <Link href="/auth/login" className="text-primary hover:text-white font-medium px-4 py-2 border-2 border-primary hover:bg-primary rounded-lg transition-all duration-300">
                   Sign In
                 </Link>
               </>
@@ -802,7 +802,7 @@ export default function Navbar() {
                       handleLogout();
                       setShowMobileMenu(false);
                     }}
-                    className="block w-full text-left font-medium text-red-600 py-2"
+                    className="block w-full text-left font-medium text-error py-2"
                   >
                     Sign Out
                   </button>
@@ -811,7 +811,7 @@ export default function Navbar() {
                 <div className="pt-4 border-t border-gray-200 space-y-4">
                   <Link
                     href="/auth/login"
-                    className="block text-[#5e17eb] hover:text-white font-medium py-2 px-4 border-2 border-[#5e17eb] hover:bg-[#5e17eb] rounded-lg transition-all duration-300 text-center"
+                    className="block text-primary hover:text-white font-medium py-2 px-4 border-2 border-primary hover:bg-primary rounded-lg transition-all duration-300 text-center"
                     onClick={() => setShowMobileMenu(false)}
                   >
                     Sign In

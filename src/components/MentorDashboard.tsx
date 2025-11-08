@@ -121,13 +121,13 @@ export function MentorDashboard({ mentorId, mentorProfile }: MentorDashboardProp
           <div className="text-xs text-gray-500">Price</div>
         </div>
         <div className="text-center">
-          <div className="text-lg font-semibold text-green-600">₹{course.revenue.toLocaleString()}</div>
+          <div className="text-lg font-semibold text-secondary">₹{course.revenue.toLocaleString()}</div>
           <div className="text-xs text-gray-500">Revenue</div>
         </div>
       </div>
       
       <div className="flex space-x-2">
-        <button className="flex-1 px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+        <button className="flex-1 px-3 py-2 text-sm bg-info text-white rounded-lg hover:bg-blue-700 transition-colors">
           Edit Course
         </button>
         <button className="flex-1 px-3 py-2 text-sm border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
@@ -166,12 +166,12 @@ export function MentorDashboard({ mentorId, mentorProfile }: MentorDashboardProp
       
       <div className="flex space-x-2">
         {session.status === 'scheduled' && (
-          <button className="flex-1 px-3 py-2 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+          <button className="flex-1 px-3 py-2 text-sm bg-secondary text-white rounded-lg hover:bg-green-700 transition-colors">
             Start Session
           </button>
         )}
         {session.status === 'live' && (
-          <button className="flex-1 px-3 py-2 text-sm bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+          <button className="flex-1 px-3 py-2 text-sm bg-error text-white rounded-lg hover:bg-red-700 transition-colors">
             End Session
           </button>
         )}
@@ -199,7 +199,7 @@ export function MentorDashboard({ mentorId, mentorProfile }: MentorDashboardProp
                 <p className="text-2xl font-bold text-gray-900">{totalStudents}</p>
               </div>
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                <span className="text-blue-600 text-xl">👥</span>
+                <span className="text-info text-xl">👥</span>
               </div>
             </div>
           </div>
@@ -211,7 +211,7 @@ export function MentorDashboard({ mentorId, mentorProfile }: MentorDashboardProp
                 <p className="text-2xl font-bold text-gray-900">{activeCourses}</p>
               </div>
               <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                <span className="text-green-600 text-xl">📚</span>
+                <span className="text-secondary text-xl">📚</span>
               </div>
             </div>
           </div>
@@ -223,7 +223,7 @@ export function MentorDashboard({ mentorId, mentorProfile }: MentorDashboardProp
                 <p className="text-2xl font-bold text-gray-900">₹{totalRevenue.toLocaleString()}</p>
               </div>
               <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                <span className="text-purple-600 text-xl">💰</span>
+                <span className="text-primary text-xl">💰</span>
               </div>
             </div>
           </div>
@@ -235,7 +235,7 @@ export function MentorDashboard({ mentorId, mentorProfile }: MentorDashboardProp
                 <p className="text-2xl font-bold text-gray-900">{upcomingSessions}</p>
               </div>
               <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
-                <span className="text-orange-600 text-xl">🎥</span>
+                <span className="text-accent text-xl">🎥</span>
               </div>
             </div>
           </div>
@@ -291,7 +291,7 @@ export function MentorDashboard({ mentorId, mentorProfile }: MentorDashboardProp
             <h3 className="text-lg font-semibold text-gray-900">Recent Courses</h3>
             <button
               onClick={() => setActiveTab('courses')}
-              className="text-sm text-blue-600 hover:text-blue-800"
+              className="text-sm text-info hover:text-blue-800"
             >
               View All
             </button>
@@ -306,7 +306,7 @@ export function MentorDashboard({ mentorId, mentorProfile }: MentorDashboardProp
               <p className="text-gray-600 mb-4">Create your first course to start teaching</p>
               <button
                 onClick={handleCreateCourse}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="px-4 py-2 bg-info text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Create Course
               </button>
@@ -329,7 +329,7 @@ export function MentorDashboard({ mentorId, mentorProfile }: MentorDashboardProp
         <h2 className="text-xl font-semibold text-gray-900">My Courses</h2>
         <button
           onClick={handleCreateCourse}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="px-4 py-2 bg-info text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
           Create New Course
         </button>
@@ -344,7 +344,7 @@ export function MentorDashboard({ mentorId, mentorProfile }: MentorDashboardProp
           <p className="text-gray-600 mb-4">Create your first course to start teaching</p>
           <button
             onClick={handleCreateCourse}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="px-4 py-2 bg-info text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             Create Course
           </button>
@@ -365,7 +365,7 @@ export function MentorDashboard({ mentorId, mentorProfile }: MentorDashboardProp
         <h2 className="text-xl font-semibold text-gray-900">Live Sessions</h2>
         <button
           onClick={handleScheduleSession}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="px-4 py-2 bg-info text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
           Schedule Session
         </button>
@@ -380,7 +380,7 @@ export function MentorDashboard({ mentorId, mentorProfile }: MentorDashboardProp
           <p className="text-gray-600 mb-4">Schedule your first live session</p>
           <button
             onClick={handleScheduleSession}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="px-4 py-2 bg-info text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             Schedule Session
           </button>
@@ -429,7 +429,7 @@ export function MentorDashboard({ mentorId, mentorProfile }: MentorDashboardProp
               onClick={() => setActiveTab(tab.id as any)}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${
                 activeTab === tab.id
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-info text-white'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >

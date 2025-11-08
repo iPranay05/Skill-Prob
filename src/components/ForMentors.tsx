@@ -152,8 +152,8 @@ export default function ForMentors() {
       {/* Hero Section */}
       <section className="relative py-24 px-6 overflow-visible bg-white">
         {/* Animated background elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#5e17eb]/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#5e17eb]/20 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/20 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse pointer-events-none"></div>
 
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -177,12 +177,12 @@ export default function ForMentors() {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Link href="/mentor/signup">
-                  <button className="px-8 py-4 bg-[#5e17eb] text-white font-semibold text-lg rounded-xl hover:bg-[#4a12c4] transition-all duration-300 w-full sm:w-auto">
+                  <button className="px-8 py-4 bg-primary text-white font-semibold text-lg rounded-xl hover:bg-primary-dark transition-all duration-300 w-full sm:w-auto">
                     Start Teaching Today
                   </button>
                 </Link>
                 <Link href="/mentor-guide">
-                  <button className="px-8 py-4 border-2 border-[#5e17eb] text-[#5e17eb] font-semibold text-lg rounded-xl hover:bg-[#5e17eb] hover:text-white transition-all duration-300 w-full sm:w-auto">
+                  <button className="px-8 py-4 border-2 border-primary text-primary font-semibold text-lg rounded-xl hover:bg-primary hover:text-white transition-all duration-300 w-full sm:w-auto">
                     Learn More
                   </button>
                 </Link>
@@ -216,29 +216,29 @@ export default function ForMentors() {
           {/* Teaching Options */}
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 text-center">
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ className="bg-primary" }}>
                 <Video className="w-8 h-8" style={{ color: '#ffffff' }} />
               </div>
               <h3 className="text-2xl font-black mb-4 text-gray-700">Live Classes</h3>
               <div className="space-y-2 text-left">
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
                   <span className="text-gray-600">Conduct scheduled Google Meet sessions</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
                   <span className="text-gray-600">Interact with students in real-time</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
                   <span className="text-gray-600">Host Q&A sessions and discussions</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
                   <span className="text-gray-600">Build a loyal student community</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                  <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
                   <span className="text-gray-600">Higher revenue potential</span>
                 </div>
               </div>
@@ -311,7 +311,7 @@ export default function ForMentors() {
           <div className="grid md:grid-cols-2 gap-6">
             {benefits.map((benefit, idx) => (
               <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-xl border-2 border-gray-100">
-                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: '#5e17eb' }}>
+                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ className="bg-primary" }}>
                   <CheckCircle className="w-4 h-4" style={{ color: '#ffffff' }} />
                 </div>
                 <p className="font-semibold text-gray-600">{benefit}</p>
@@ -335,7 +335,7 @@ export default function ForMentors() {
                 <div className="space-y-2">
                   {feature.points.map((point, pointIdx) => (
                     <div key={pointIdx} className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                      <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
                       <span className="text-gray-600">{point}</span>
                     </div>
                   ))}
@@ -356,7 +356,7 @@ export default function ForMentors() {
           <div className="grid md:grid-cols-5 gap-8">
             {steps.map((step, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#5e17eb' }}>
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6" style={{ className="bg-primary" }}>
                   <span className="text-2xl font-black" style={{ color: '#ffffff' }}>{idx + 1}</span>
                 </div>
                 <h3 className="text-lg font-black mb-4 text-gray-700">{step.step}</h3>
@@ -400,7 +400,7 @@ export default function ForMentors() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {eligibility.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 hover:border-purple-200">
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#5e17eb' }}>
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{ className="bg-primary" }}>
                     <CheckCircle className="w-5 h-5" style={{ color: '#ffffff' }} />
                   </div>
                   <p className="font-semibold text-gray-700 leading-relaxed">{item}</p>
@@ -449,7 +449,7 @@ export default function ForMentors() {
 
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                    <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
                     <span className="text-gray-600">{item}</span>
                   </div>
                 ))}
@@ -466,7 +466,7 @@ export default function ForMentors() {
                   'Regular webinars and training sessions'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                    <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
                     <span className="text-gray-600">{item}</span>
                   </div>
                 ))}
@@ -483,7 +483,7 @@ export default function ForMentors() {
                   'SEO optimization for your courses'
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#5e17eb' }}></div>
+                    <div className="w-2 h-2 rounded-full" style={{ className="bg-primary" }}></div>
                     <span className="text-gray-600">{item}</span>
                   </div>
                 ))}
@@ -510,7 +510,7 @@ export default function ForMentors() {
                   <h3 className="text-lg font-semibold text-gray-700">{faq.question}</h3>
                   <div className="flex-shrink-0 ml-4">
                     {openFaq === idx ? (
-                      <ChevronUp className="w-5 h-5 text-[#5e17eb]" />
+                      <ChevronUp className="w-5 h-5 text-primary" />
                     ) : (
                       <ChevronDown className="w-5 h-5 text-gray-400" />
                     )}
@@ -542,7 +542,7 @@ export default function ForMentors() {
               <Link
                 href="/mentor/signup"
                 className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300 hover:shadow-lg"
-                style={{ backgroundColor: '#5e17eb', color: '#ffffff' }}
+                style={{ className="bg-primary", color: '#ffffff' }}
               >
                 Apply to Become a Mentor
               </Link>

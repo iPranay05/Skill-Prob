@@ -190,7 +190,7 @@ export default function CurriculumBuilder({
           <button
             type="button"
             onClick={addSection}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+            className="bg-info text-white px-4 py-2 rounded-lg hover:bg-blue-700"
           >
             + Add Section
           </button>
@@ -225,7 +225,7 @@ export default function CurriculumBuilder({
                   <button
                     type="button"
                     onClick={() => deleteSection(section.id)}
-                    className="text-red-600 hover:text-red-800 ml-4"
+                    className="text-error hover:text-red-800 ml-4"
                   >
                     Delete Section
                   </button>
@@ -276,7 +276,7 @@ export default function CurriculumBuilder({
                                   <button
                                     type="button"
                                     onClick={() => updateLesson(section.id, lesson.id, { video_url: undefined, video_file: undefined })}
-                                    className="text-red-600 hover:text-red-800 text-sm"
+                                    className="text-error hover:text-red-800 text-sm"
                                   >
                                     Remove
                                   </button>
@@ -335,7 +335,7 @@ export default function CurriculumBuilder({
                         <button
                           type="button"
                           onClick={() => deleteLesson(section.id, lesson.id)}
-                          className="text-red-600 hover:text-red-800 ml-4"
+                          className="text-error hover:text-red-800 ml-4"
                         >
                           Delete
                         </button>

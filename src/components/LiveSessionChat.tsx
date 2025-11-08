@@ -96,9 +96,9 @@ export function LiveSessionChat({ sessionId, userRole, userId, userName }: LiveS
   const getRoleColor = (role: string) => {
     switch (role) {
       case 'mentor':
-        return 'text-purple-600';
+        return 'text-primary';
       case 'student':
-        return 'text-blue-600';
+        return 'text-info';
       default:
         return 'text-gray-600';
     }
@@ -142,7 +142,7 @@ export function LiveSessionChat({ sessionId, userRole, userId, userName }: LiveS
           </div>
           
           <div className="flex items-center space-x-2">
-            <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
+            <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-secondary-light' : 'bg-error'}`}></div>
             <span className="text-sm text-gray-600">
               {participants.length} participants
             </span>
@@ -194,7 +194,7 @@ export function LiveSessionChat({ sessionId, userRole, userId, userName }: LiveS
                             sendMessage(`@${message.userName} ${answer}`, 'answer');
                           }
                         }}
-                        className="text-xs text-blue-600 hover:text-blue-800 ml-2"
+                        className="text-xs text-info hover:text-blue-800 ml-2"
                       >
                         Answer
                       </button>
@@ -245,7 +245,7 @@ export function LiveSessionChat({ sessionId, userRole, userId, userName }: LiveS
               <button
                 type="submit"
                 disabled={!newMessage.trim() || !isConnected}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-info text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Send
               </button>
@@ -271,7 +271,7 @@ export function LiveSessionChat({ sessionId, userRole, userId, userName }: LiveS
                 <div key={qa.id} className="bg-gray-50 rounded-lg p-4">
                   <div className="mb-3">
                     <div className="flex items-center space-x-2 mb-2">
-                      <span className="text-sm font-medium text-blue-600">
+                      <span className="text-sm font-medium text-info">
                         {qa.isAnonymous ? 'Anonymous' : qa.studentName}
                       </span>
                       <span className="text-xs text-gray-500">
@@ -335,14 +335,14 @@ export function LiveSessionChat({ sessionId, userRole, userId, userName }: LiveS
                       type="checkbox"
                       checked={isAnonymous}
                       onChange={(e) => setIsAnonymous(e.target.checked)}
-                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      className="rounded border-gray-300 text-info focus:ring-blue-500"
                     />
                     <span className="text-sm text-gray-600">Ask anonymously</span>
                   </label>
                   <button
                     type="submit"
                     disabled={!newQuestion.trim() || !isConnected}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-4 py-2 bg-info text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Ask Question
                   </button>

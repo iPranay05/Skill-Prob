@@ -159,7 +159,7 @@ export function AmbassadorDashboard({ ambassadorId, ambassadorProfile }: Ambassa
         </div>
         <div className="flex justify-between">
           <span>Points Earned:</span>
-          <span className="font-medium text-green-600">{referral.pointsEarned}</span>
+          <span className="font-medium text-secondary">{referral.pointsEarned}</span>
         </div>
         {referral.coursePurchased && (
           <div className="flex justify-between">
@@ -213,7 +213,7 @@ export function AmbassadorDashboard({ ambassadorId, ambassadorProfile }: Ambassa
               <p className="text-2xl font-bold text-gray-900">{stats.totalReferrals}</p>
             </div>
             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-              <span className="text-blue-600 text-xl">👥</span>
+              <span className="text-info text-xl">👥</span>
             </div>
           </div>
         </div>
@@ -225,7 +225,7 @@ export function AmbassadorDashboard({ ambassadorId, ambassadorProfile }: Ambassa
               <p className="text-2xl font-bold text-gray-900">{stats.successfulConversions}</p>
             </div>
             <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-              <span className="text-green-600 text-xl">✅</span>
+              <span className="text-secondary text-xl">✅</span>
             </div>
           </div>
         </div>
@@ -237,7 +237,7 @@ export function AmbassadorDashboard({ ambassadorId, ambassadorProfile }: Ambassa
               <p className="text-2xl font-bold text-gray-900">{stats.conversionRate.toFixed(1)}%</p>
             </div>
             <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-              <span className="text-purple-600 text-xl">📈</span>
+              <span className="text-primary text-xl">📈</span>
             </div>
           </div>
         </div>
@@ -249,7 +249,7 @@ export function AmbassadorDashboard({ ambassadorId, ambassadorProfile }: Ambassa
               <p className="text-2xl font-bold text-gray-900">₹{stats.totalEarnings.toLocaleString()}</p>
             </div>
             <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
-              <span className="text-orange-600 text-xl">💰</span>
+              <span className="text-accent text-xl">💰</span>
             </div>
           </div>
         </div>
@@ -266,7 +266,7 @@ export function AmbassadorDashboard({ ambassadorId, ambassadorProfile }: Ambassa
           </div>
           <button
             onClick={copyReferralLink}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="px-4 py-2 bg-info text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             Copy Link
           </button>
@@ -288,7 +288,7 @@ export function AmbassadorDashboard({ ambassadorId, ambassadorProfile }: Ambassa
           <h3 className="text-lg font-semibold text-gray-900">Recent Referrals</h3>
           <button
             onClick={() => setActiveTab('referrals')}
-            className="text-sm text-blue-600 hover:text-blue-800"
+            className="text-sm text-info hover:text-blue-800"
           >
             View All
           </button>
@@ -348,7 +348,7 @@ export function AmbassadorDashboard({ ambassadorId, ambassadorProfile }: Ambassa
         <h2 className="text-xl font-semibold text-gray-900">Payout History</h2>
         <button
           onClick={() => setShowPayoutModal(true)}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="px-4 py-2 bg-info text-white rounded-lg hover:bg-blue-700 transition-colors"
           disabled={stats.currentPoints < 1000} // Minimum payout threshold
         >
           Request Payout
@@ -408,7 +408,7 @@ export function AmbassadorDashboard({ ambassadorId, ambassadorProfile }: Ambassa
               onClick={() => setActiveTab(tab.id as any)}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${
                 activeTab === tab.id
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-info text-white'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
@@ -476,7 +476,7 @@ export function AmbassadorDashboard({ ambassadorId, ambassadorProfile }: Ambassa
               </button>
               <button
                 onClick={handleRequestPayout}
-                className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="flex-1 px-4 py-2 bg-info text-white rounded-lg hover:bg-blue-700 transition-colors"
                 disabled={!payoutAmount || parseFloat(payoutAmount) < 1000}
               >
                 Request Payout

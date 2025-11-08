@@ -174,7 +174,7 @@ export default function NotificationPreferences({ token }: NotificationPreferenc
         <p className="text-gray-500">Failed to load notification preferences</p>
         <button
           onClick={fetchPreferences}
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          className="mt-4 px-4 py-2 bg-info text-white rounded-md hover:bg-blue-700"
         >
           Retry
         </button>
@@ -212,7 +212,7 @@ export default function NotificationPreferences({ token }: NotificationPreferenc
                     id={`global-${channel.key}`}
                     checked={preferences[`${channel.key}_enabled` as keyof UserNotificationPreferences] as boolean}
                     onChange={(e) => updateChannelPreference(channel.key, e.target.checked)}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-info focus:ring-blue-500 border-gray-300 rounded"
                   />
                   <label htmlFor={`global-${channel.key}`} className="flex items-center space-x-2">
                     <span>{channel.icon}</span>
@@ -242,7 +242,7 @@ export default function NotificationPreferences({ token }: NotificationPreferenc
                           checked={preferences.preferences[type.key]?.[channel.key] || false}
                           onChange={(e) => updateTypePreference(type.key, channel.key, e.target.checked)}
                           disabled={!(preferences[`${channel.key}_enabled` as keyof UserNotificationPreferences] as boolean)}
-                          className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded disabled:opacity-50"
+                          className="h-4 w-4 text-info focus:ring-blue-500 border-gray-300 rounded disabled:opacity-50"
                         />
                         <label
                           htmlFor={`${type.key}-${channel.key}`}
@@ -272,7 +272,7 @@ export default function NotificationPreferences({ token }: NotificationPreferenc
                   id="quiet-hours-enabled"
                   checked={preferences.quiet_hours_enabled}
                   onChange={(e) => updateQuietHours('quiet_hours_enabled', e.target.checked)}
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-info focus:ring-blue-500 border-gray-300 rounded"
                 />
                 <label htmlFor="quiet-hours-enabled" className="text-sm font-medium text-gray-700">
                   Enable quiet hours (no SMS or email notifications during this time)
@@ -329,7 +329,7 @@ export default function NotificationPreferences({ token }: NotificationPreferenc
             <button
               onClick={savePreferences}
               disabled={saving}
-              className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-2 bg-info text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {saving ? 'Saving...' : 'Save Preferences'}
             </button>

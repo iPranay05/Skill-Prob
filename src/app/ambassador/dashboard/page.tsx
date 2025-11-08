@@ -288,10 +288,10 @@ export default function AmbassadorDashboard() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-red-600 mb-4">{error}</p>
+          <p className="text-error mb-4">{error}</p>
           <button
             onClick={fetchDashboardData}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="bg-info text-white px-4 py-2 rounded hover:bg-blue-700"
           >
             Retry
           </button>
@@ -373,7 +373,7 @@ export default function AmbassadorDashboard() {
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key as any)}
                 className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === tab.key
-                    ? 'border-blue-500 text-blue-600'
+                    ? 'border-blue-500 text-info'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
               >
@@ -431,7 +431,7 @@ export default function AmbassadorDashboard() {
                       <div className="ml-4">
                         <button
                           onClick={() => window.location.href = '/ambassador/kyc'}
-                          className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700"
+                          className="bg-info text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700"
                         >
                           Start KYC
                         </button>
@@ -477,7 +477,7 @@ export default function AmbassadorDashboard() {
                       <div className="ml-4">
                         <button
                           onClick={() => window.location.href = '/ambassador/kyc'}
-                          className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-700"
+                          className="bg-error text-white px-4 py-2 rounded-lg text-sm hover:bg-red-700"
                         >
                           Resubmit KYC
                         </button>
@@ -499,7 +499,7 @@ export default function AmbassadorDashboard() {
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                      <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-info" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                       </svg>
                     </div>
@@ -515,7 +515,7 @@ export default function AmbassadorDashboard() {
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                      <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
@@ -547,7 +547,7 @@ export default function AmbassadorDashboard() {
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                      <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                       </svg>
                     </div>
@@ -580,7 +580,7 @@ export default function AmbassadorDashboard() {
                         </code>
                         <button
                           onClick={copyReferralLink}
-                          className="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 whitespace-nowrap"
+                          className="bg-info text-white px-3 py-2 rounded hover:bg-blue-700 whitespace-nowrap"
                         >
                           Copy Link
                         </button>
@@ -613,7 +613,7 @@ export default function AmbassadorDashboard() {
                     <button
                       onClick={handlePayoutRequest}
                       disabled={payoutLoading || !payoutAmount || parseInt(payoutAmount) < 100}
-                      className="w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 disabled:bg-gray-400"
+                      className="w-full bg-secondary text-white py-2 px-4 rounded hover:bg-green-700 disabled:bg-gray-400"
                     >
                       {payoutLoading ? 'Processing...' : 'Request Payout'}
                     </button>
@@ -680,7 +680,7 @@ export default function AmbassadorDashboard() {
                             </div>
                             <div className="text-right">
                               <p className={`font-medium ${transaction.type.includes('bonus') || transaction.type === 'credit'
-                                  ? 'text-green-600' : 'text-red-600'
+                                  ? 'text-secondary' : 'text-error'
                                 }`}>
                                 {transaction.type.includes('bonus') || transaction.type === 'credit' ? '+' : '-'}
                                 {transaction.points} points
@@ -781,7 +781,7 @@ export default function AmbassadorDashboard() {
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                      <svg className="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
                     </div>
@@ -865,21 +865,21 @@ export default function AmbassadorDashboard() {
               <h3 className="text-lg font-medium text-gray-900 mb-4">Performance Insights</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600">{analytics.totalReferrals}</div>
+                  <div className="text-3xl font-bold text-info">{analytics.totalReferrals}</div>
                   <div className="text-sm text-gray-500">Total Referrals</div>
                   <div className="text-xs text-gray-400 mt-1">
                     {analytics.monthlyReferrals > 0 ? '+' : ''}{analytics.monthlyReferrals} this month
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-green-600">{analytics.conversionRate.toFixed(1)}%</div>
+                  <div className="text-3xl font-bold text-secondary">{analytics.conversionRate.toFixed(1)}%</div>
                   <div className="text-sm text-gray-500">Conversion Rate</div>
                   <div className="text-xs text-gray-400 mt-1">
                     {analytics.conversionRate > 15 ? 'Excellent' : analytics.conversionRate > 10 ? 'Good' : 'Needs improvement'}
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-600">₹{analytics.totalEarnings.toFixed(0)}</div>
+                  <div className="text-3xl font-bold text-primary">₹{analytics.totalEarnings.toFixed(0)}</div>
                   <div className="text-sm text-gray-500">Total Earnings</div>
                   <div className="text-xs text-gray-400 mt-1">
                     ₹{(analytics.totalEarnings / Math.max(analytics.totalReferrals, 1)).toFixed(0)} per referral
@@ -927,7 +927,7 @@ export default function AmbassadorDashboard() {
                 <button
                   onClick={handleSendInvitations}
                   disabled={invitationLoading || !invitationForm.emails.trim()}
-                  className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
+                  className="bg-info text-white px-6 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
                 >
                   {invitationLoading ? 'Sending...' : 'Send Invitations'}
                 </button>
@@ -950,7 +950,7 @@ export default function AmbassadorDashboard() {
                             Sent: {new Date(invitation.sentAt).toLocaleDateString()}
                           </p>
                           {invitation.acceptedAt && (
-                            <p className="text-sm text-green-600">
+                            <p className="text-sm text-secondary">
                               Accepted: {new Date(invitation.acceptedAt).toLocaleDateString()}
                             </p>
                           )}
@@ -978,7 +978,7 @@ export default function AmbassadorDashboard() {
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                      <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-info" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                       </svg>
                     </div>
@@ -994,7 +994,7 @@ export default function AmbassadorDashboard() {
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                      <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
@@ -1039,7 +1039,7 @@ export default function AmbassadorDashboard() {
               <div className="bg-white rounded-lg shadow p-6">
                 <div className="flex items-center mb-4">
                   <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-info" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                   </div>
@@ -1048,7 +1048,7 @@ export default function AmbassadorDashboard() {
                 <p className="text-gray-600 text-sm mb-4">
                   High-quality banners and graphics for social media and websites
                 </p>
-                <p className="text-2xl font-bold text-blue-600">
+                <p className="text-2xl font-bold text-info">
                   {resources?.filter(r => r.type === 'banner').length || 0}
                 </p>
                 <p className="text-sm text-gray-500">Available resources</p>
@@ -1057,7 +1057,7 @@ export default function AmbassadorDashboard() {
               <div className="bg-white rounded-lg shadow p-6">
                 <div className="flex items-center mb-4">
                   <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                     </svg>
                   </div>
@@ -1066,7 +1066,7 @@ export default function AmbassadorDashboard() {
                 <p className="text-gray-600 text-sm mb-4">
                   Ready-to-use social media content and templates
                 </p>
-                <p className="text-2xl font-bold text-green-600">
+                <p className="text-2xl font-bold text-secondary">
                   {resources?.filter(r => r.type === 'social_post').length || 0}
                 </p>
                 <p className="text-sm text-gray-500">Available resources</p>
@@ -1075,7 +1075,7 @@ export default function AmbassadorDashboard() {
               <div className="bg-white rounded-lg shadow p-6">
                 <div className="flex items-center mb-4">
                   <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                   </div>
@@ -1084,7 +1084,7 @@ export default function AmbassadorDashboard() {
                 <p className="text-gray-600 text-sm mb-4">
                   Professional email templates for outreach
                 </p>
-                <p className="text-2xl font-bold text-purple-600">
+                <p className="text-2xl font-bold text-primary">
                   {resources?.filter(r => r.type === 'email_template').length || 0}
                 </p>
                 <p className="text-sm text-gray-500">Available resources</p>
@@ -1126,7 +1126,7 @@ export default function AmbassadorDashboard() {
                           </span>
                           <button
                             onClick={() => handleDownloadResource(resource.id, resource.title)}
-                            className="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700"
+                            className="bg-info text-white px-3 py-1 rounded text-sm hover:bg-blue-700"
                           >
                             Download
                           </button>

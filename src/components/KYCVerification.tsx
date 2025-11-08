@@ -186,14 +186,14 @@ export default function KYCVerification() {
         return (
             <div className="bg-green-50 border border-green-200 rounded-lg p-6">
                 <div className="flex items-center">
-                    <svg className="h-6 w-6 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="h-6 w-6 text-secondary mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div>
                         <h3 className="text-lg font-medium text-green-800">KYC Verified</h3>
                         <p className="text-green-700">Your KYC verification is complete. You can now request payouts.</p>
                         {kycStatus.verifiedAt && (
-                            <p className="text-sm text-green-600 mt-1">
+                            <p className="text-sm text-secondary mt-1">
                                 Verified on: {new Date(kycStatus.verifiedAt).toLocaleDateString()}
                             </p>
                         )}
@@ -228,14 +228,14 @@ export default function KYCVerification() {
         return (
             <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-6">
                 <div className="flex items-center">
-                    <svg className="h-6 w-6 text-red-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="h-6 w-6 text-error mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div>
                         <h3 className="text-lg font-medium text-red-800">KYC Rejected</h3>
                         <p className="text-red-700">Your KYC verification was rejected. Please resubmit with correct information.</p>
                         {kycStatus.rejectionReason && (
-                            <p className="text-sm text-red-600 mt-1">
+                            <p className="text-sm text-error mt-1">
                                 Reason: {kycStatus.rejectionReason}
                             </p>
                         )}
@@ -264,13 +264,13 @@ export default function KYCVerification() {
                     {[1, 2, 3, 4].map((step) => (
                         <div key={step} className="flex items-center">
                             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${currentStep >= step
-                                ? 'bg-blue-600 text-white'
+                                ? 'bg-info text-white'
                                 : 'bg-gray-200 text-gray-600'
                                 }`}>
                                 {step}
                             </div>
                             {step < 4 && (
-                                <div className={`w-16 h-1 ${currentStep > step ? 'bg-blue-600' : 'bg-gray-200'
+                                <div className={`w-16 h-1 ${currentStep > step ? 'bg-info' : 'bg-gray-200'
                                     }`}></div>
                             )}
                         </div>
@@ -506,7 +506,7 @@ export default function KYCVerification() {
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                                 {formData.documents[key as keyof typeof formData.documents] && (
-                                    <p className="text-sm text-green-600 mt-1">✓ File uploaded</p>
+                                    <p className="text-sm text-secondary mt-1">✓ File uploaded</p>
                                 )}
                             </div>
                         ))}
@@ -528,7 +528,7 @@ export default function KYCVerification() {
                     <button
                         onClick={() => setCurrentStep(currentStep + 1)}
                         disabled={!validateStep(currentStep)}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-4 py-2 bg-info text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         Next
                     </button>
@@ -536,7 +536,7 @@ export default function KYCVerification() {
                     <button
                         onClick={handleSubmit}
                         disabled={submitting || !validateStep(currentStep)}
-                        className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-6 py-2 bg-secondary text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {submitting ? 'Submitting...' : 'Submit KYC'}
                     </button>

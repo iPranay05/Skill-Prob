@@ -219,7 +219,7 @@ export default function CreateLiveSessionPage() {
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
             <div className="flex items-center space-x-4">
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
               </div>
@@ -236,17 +236,17 @@ export default function CreateLiveSessionPage() {
             <div className="flex items-center justify-between mt-6">
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2 bg-green-50 px-3 py-2 rounded-lg">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-secondary-light rounded-full"></div>
                   <span className="text-green-700 text-sm font-medium">Auto Google Meet</span>
                 </div>
                 <div className="flex items-center space-x-2 bg-blue-50 px-3 py-2 rounded-lg">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-info rounded-full"></div>
                   <span className="text-blue-700 text-sm font-medium">Interactive Features</span>
                 </div>
               </div>
               
               {oauthSetup ? (
-                <div className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg">
+                <div className="flex items-center space-x-2 bg-secondary text-white px-4 py-2 rounded-lg">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
@@ -255,7 +255,7 @@ export default function CreateLiveSessionPage() {
               ) : (
                 <Link
                   href="/mentor/oauth"
-                  className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
+                  className="flex items-center space-x-2 bg-error hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -415,7 +415,7 @@ export default function CreateLiveSessionPage() {
                       name="chatEnabled"
                       checked={formData.chatEnabled}
                       onChange={handleInputChange}
-                      className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded mt-1"
+                      className="h-4 w-4 text-primary focus:ring-purple-500 border-gray-300 rounded mt-1"
                     />
                     <div className="flex-1">
                       <label htmlFor="chatEnabled" className="block text-sm font-medium text-gray-900 mb-1">
@@ -434,7 +434,7 @@ export default function CreateLiveSessionPage() {
                       name="qaEnabled"
                       checked={formData.qaEnabled}
                       onChange={handleInputChange}
-                      className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded mt-1"
+                      className="h-4 w-4 text-primary focus:ring-purple-500 border-gray-300 rounded mt-1"
                     />
                     <div className="flex-1">
                       <label htmlFor="qaEnabled" className="block text-sm font-medium text-gray-900 mb-1">
@@ -453,7 +453,7 @@ export default function CreateLiveSessionPage() {
                       name="pollingEnabled"
                       checked={formData.pollingEnabled}
                       onChange={handleInputChange}
-                      className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded mt-1"
+                      className="h-4 w-4 text-primary focus:ring-purple-500 border-gray-300 rounded mt-1"
                     />
                     <div className="flex-1">
                       <label htmlFor="pollingEnabled" className="block text-sm font-medium text-gray-900 mb-1">
@@ -508,7 +508,7 @@ export default function CreateLiveSessionPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-6 py-2 bg-primary text-white rounded-md hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {loading ? (
                   <span className="flex items-center space-x-2">
@@ -527,7 +527,7 @@ export default function CreateLiveSessionPage() {
         <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-6">
           <div className="flex items-center space-x-3 mb-4">
             <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-              <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-info" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
@@ -535,19 +535,19 @@ export default function CreateLiveSessionPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex items-start space-x-3">
-              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+              <div className="w-2 h-2 bg-info rounded-full mt-2"></div>
               <p className="text-sm text-blue-800">A Google Meet link will be automatically created for your session</p>
             </div>
             <div className="flex items-start space-x-3">
-              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+              <div className="w-2 h-2 bg-info rounded-full mt-2"></div>
               <p className="text-sm text-blue-800">Students enrolled in the course will be able to see and join the session</p>
             </div>
             <div className="flex items-start space-x-3">
-              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+              <div className="w-2 h-2 bg-info rounded-full mt-2"></div>
               <p className="text-sm text-blue-800">You'll be able to manage the session from the sessions dashboard</p>
             </div>
             <div className="flex items-start space-x-3">
-              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+              <div className="w-2 h-2 bg-info rounded-full mt-2"></div>
               <p className="text-sm text-blue-800">All session activities (chat, Q&A, polls) will be recorded for later review</p>
             </div>
           </div>

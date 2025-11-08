@@ -353,7 +353,7 @@ export default function CreateCourse() {
           minLength={10}
         />
         {formData.description.length > 0 && formData.description.length < 10 && (
-          <p className="text-red-500 text-sm mt-1">
+          <p className="text-error text-sm mt-1">
             Description must be at least 10 characters long ({formData.description.length}/10)
           </p>
         )}
@@ -430,7 +430,7 @@ export default function CreateCourse() {
               <button
                 type="button"
                 onClick={() => removeArrayItem('content', 'syllabus', index)}
-                className="text-red-600 hover:text-red-800"
+                className="text-error hover:text-red-800"
               >
                 Remove
               </button>
@@ -440,7 +440,7 @@ export default function CreateCourse() {
         <button
           type="button"
           onClick={() => addArrayItem('content', 'syllabus')}
-          className="text-blue-600 hover:text-blue-800 text-sm"
+          className="text-info hover:text-blue-800 text-sm"
         >
           + Add Topic
         </button>
@@ -464,7 +464,7 @@ export default function CreateCourse() {
               <button
                 type="button"
                 onClick={() => removeArrayItem('content', 'prerequisites', index)}
-                className="text-red-600 hover:text-red-800"
+                className="text-error hover:text-red-800"
               >
                 Remove
               </button>
@@ -474,7 +474,7 @@ export default function CreateCourse() {
         <button
           type="button"
           onClick={() => addArrayItem('content', 'prerequisites')}
-          className="text-blue-600 hover:text-blue-800 text-sm"
+          className="text-info hover:text-blue-800 text-sm"
         >
           + Add Prerequisite
         </button>
@@ -498,7 +498,7 @@ export default function CreateCourse() {
               <button
                 type="button"
                 onClick={() => removeArrayItem('content', 'learningOutcomes', index)}
-                className="text-red-600 hover:text-red-800"
+                className="text-error hover:text-red-800"
               >
                 Remove
               </button>
@@ -508,7 +508,7 @@ export default function CreateCourse() {
         <button
           type="button"
           onClick={() => addArrayItem('content', 'learningOutcomes')}
-          className="text-blue-600 hover:text-blue-800 text-sm"
+          className="text-info hover:text-blue-800 text-sm"
         >
           + Add Learning Outcome
         </button>
@@ -602,7 +602,7 @@ export default function CreateCourse() {
               <button
                 type="button"
                 onClick={() => handleNestedInputChange('media', 'thumbnail', undefined)}
-                className="text-red-600 hover:text-red-800"
+                className="text-error hover:text-red-800"
               >
                 Remove Thumbnail
               </button>
@@ -651,7 +651,7 @@ export default function CreateCourse() {
               <button
                 type="button"
                 onClick={() => handleNestedInputChange('media', 'trailer', undefined)}
-                className="text-red-600 hover:text-red-800"
+                className="text-error hover:text-red-800"
               >
                 Remove Trailer
               </button>
@@ -730,12 +730,12 @@ export default function CreateCourse() {
             {[1, 2, 3, 4].map((step) => (
               <div key={step} className="flex items-center">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${step <= currentStep
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-info text-white'
                   : 'bg-gray-200 text-gray-600'
                   }`}>
                   {step}
                 </div>
-                <div className={`ml-2 text-sm font-medium ${step <= currentStep ? 'text-blue-600' : 'text-gray-500'
+                <div className={`ml-2 text-sm font-medium ${step <= currentStep ? 'text-info' : 'text-gray-500'
                   }`}>
                   {step === 1 && 'Basic Info'}
                   {step === 2 && 'Content'}
@@ -743,7 +743,7 @@ export default function CreateCourse() {
                   {step === 4 && 'Media & SEO'}
                 </div>
                 {step < 4 && (
-                  <div className={`ml-4 w-16 h-0.5 ${step < currentStep ? 'bg-blue-600' : 'bg-gray-200'
+                  <div className={`ml-4 w-16 h-0.5 ${step < currentStep ? 'bg-info' : 'bg-gray-200'
                     }`} />
                 )}
               </div>
@@ -789,7 +789,7 @@ export default function CreateCourse() {
               <button
                 type="button"
                 onClick={nextStep}
-                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+                className="bg-info text-white px-6 py-2 rounded-lg hover:bg-blue-700"
               >
                 Next
               </button>
@@ -797,7 +797,7 @@ export default function CreateCourse() {
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-secondary text-white px-6 py-2 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? 'Creating Course...' : 'Create Course'}
               </button>

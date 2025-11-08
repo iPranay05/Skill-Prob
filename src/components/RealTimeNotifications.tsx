@@ -76,7 +76,7 @@ export function RealTimeNotifications() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5h3V8h4v4h3l-5 5z" />
           </svg>
           {unreadCount > 0 && (
-            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+            <span className="absolute -top-1 -right-1 bg-error text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
               {unreadCount > 99 ? '99+' : unreadCount}
             </span>
           )}
@@ -91,7 +91,7 @@ export function RealTimeNotifications() {
                 {unreadCount > 0 && (
                   <button
                     onClick={markAllAsRead}
-                    className="text-sm text-blue-600 hover:text-blue-800"
+                    className="text-sm text-info hover:text-blue-800"
                   >
                     Mark all as read
                   </button>
@@ -129,7 +129,7 @@ export function RealTimeNotifications() {
                         </p>
                       </div>
                       {!notification.read && (
-                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <div className="w-2 h-2 bg-info rounded-full"></div>
                       )}
                     </div>
                   </div>
@@ -139,7 +139,7 @@ export function RealTimeNotifications() {
 
             {notifications.length > 10 && (
               <div className="p-4 border-t border-gray-200">
-                <button className="w-full text-center text-sm text-blue-600 hover:text-blue-800">
+                <button className="w-full text-center text-sm text-info hover:text-blue-800">
                   View all notifications
                 </button>
               </div>

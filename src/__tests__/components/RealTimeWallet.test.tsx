@@ -185,8 +185,8 @@ describe('RealTimeWallet', () => {
     const creditAmount = screen.getByText('+₹1,000');
     const debitAmount = screen.getByText('-₹500');
     
-    expect(creditAmount).toHaveClass('text-green-600');
-    expect(debitAmount).toHaveClass('text-red-600');
+    expect(creditAmount).toHaveClass('text-secondary');
+    expect(debitAmount).toHaveClass('text-error');
   });
 
   it('applies correct CSS classes for status badges', () => {

@@ -190,7 +190,7 @@ function StudentCareersContent() {
             </div>
             <Link
               href="/student/careers/applications"
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+              className="bg-info text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
             >
               My Applications
             </Link>
@@ -212,7 +212,7 @@ function StudentCareersContent() {
               </div>
               <button
                 type="submit"
-                className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                className="bg-info text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors"
               >
                 Search
               </button>
@@ -303,7 +303,7 @@ function StudentCareersContent() {
                       type="checkbox"
                       checked={filters.featured || false}
                       onChange={(e) => handleFilterChange('featured', e.target.checked || undefined)}
-                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      className="rounded border-gray-300 text-info focus:ring-blue-500"
                     />
                     <span className="ml-2 text-sm text-gray-700">Featured Only</span>
                   </label>
@@ -315,7 +315,7 @@ function StudentCareersContent() {
                       type="checkbox"
                       checked={filters.remote_friendly || false}
                       onChange={(e) => handleFilterChange('remote_friendly', e.target.checked || undefined)}
-                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      className="rounded border-gray-300 text-info focus:ring-blue-500"
                     />
                     <span className="ml-2 text-sm text-gray-700">Remote Friendly</span>
                   </label>
@@ -324,7 +324,7 @@ function StudentCareersContent() {
                 <div className="flex items-end">
                   <button
                     onClick={clearFilters}
-                    className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                    className="text-info hover:text-blue-700 text-sm font-medium"
                   >
                     Clear All Filters
                   </button>
@@ -348,12 +348,12 @@ function StudentCareersContent() {
           </div>
         ) : error ? (
           <div className="text-center py-12">
-            <div className="text-red-600 text-xl mb-4">⚠️</div>
+            <div className="text-error text-xl mb-4">⚠️</div>
             <h2 className="text-xl font-semibold text-gray-900 mb-2">Error Loading Jobs</h2>
             <p className="text-gray-600 mb-4">{error}</p>
             <button
               onClick={() => fetchJobs()}
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+              className="bg-info text-white px-4 py-2 rounded-md hover:bg-blue-700"
             >
               Try Again
             </button>
@@ -365,7 +365,7 @@ function StudentCareersContent() {
             <p className="text-gray-600 mb-6">Try adjusting your search criteria or filters.</p>
             <button
               onClick={clearFilters}
-              className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors"
+              className="bg-info text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors"
             >
               Clear Filters
             </button>
@@ -382,7 +382,7 @@ function StudentCareersContent() {
                         <h3 className="text-lg font-semibold text-gray-900">
                           <Link
                             href={`/student/careers/jobs/${job.id}`}
-                            className="hover:text-blue-600 transition-colors"
+                            className="hover:text-info transition-colors"
                           >
                             {job.title}
                           </Link>
@@ -435,7 +435,7 @@ function StudentCareersContent() {
                     <div className="flex flex-col gap-2 ml-4">
                       <Link
                         href={`/student/careers/jobs/${job.id}`}
-                        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-center"
+                        className="bg-info text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-center"
                       >
                         View Details
                       </Link>
@@ -474,7 +474,7 @@ function StudentCareersContent() {
                       key={page}
                       onClick={() => fetchJobs(filters, page)}
                       className={`px-3 py-2 border rounded-md ${page === pagination.page
-                          ? 'bg-blue-600 text-white border-blue-600'
+                          ? 'bg-info text-white border-blue-600'
                           : 'border-gray-300 hover:bg-gray-50'
                         }`}
                     >

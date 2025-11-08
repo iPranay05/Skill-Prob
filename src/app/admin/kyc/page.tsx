@@ -163,7 +163,7 @@ export default function AdminKYCPage() {
                 onClick={() => setFilter(key)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${
                   filter === key
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-info text-white'
                     : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
                 }`}
               >
@@ -215,7 +215,7 @@ export default function AdminKYCPage() {
                         Submitted: {new Date(submission.submittedAt).toLocaleDateString()}
                       </p>
                       {submission.rejectionReason && (
-                        <p className="text-sm text-red-600 mt-1">
+                        <p className="text-sm text-error mt-1">
                           Rejection reason: {submission.rejectionReason}
                         </p>
                       )}
@@ -224,7 +224,7 @@ export default function AdminKYCPage() {
                     <div className="flex space-x-2">
                       <button
                         onClick={() => setSelectedSubmission(submission)}
-                        className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700"
+                        className="bg-info text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700"
                       >
                         Review Details
                       </button>
@@ -340,7 +340,7 @@ export default function AdminKYCPage() {
                           <span className="font-medium text-gray-700 capitalize">
                             {key.replace(/([A-Z])/g, ' $1').trim()}:
                           </span>
-                          <span className="text-blue-600">{value as string}</span>
+                          <span className="text-info">{value as string}</span>
                         </div>
                       ))}
                     </div>
@@ -358,7 +358,7 @@ export default function AdminKYCPage() {
                           onClick={() => setReviewAction('approve')}
                           className={`px-4 py-2 rounded-lg text-sm font-medium ${
                             reviewAction === 'approve'
-                              ? 'bg-green-600 text-white'
+                              ? 'bg-secondary text-white'
                               : 'bg-green-100 text-green-800 hover:bg-green-200'
                           }`}
                         >
@@ -368,7 +368,7 @@ export default function AdminKYCPage() {
                           onClick={() => setReviewAction('reject')}
                           className={`px-4 py-2 rounded-lg text-sm font-medium ${
                             reviewAction === 'reject'
-                              ? 'bg-red-600 text-white'
+                              ? 'bg-error text-white'
                               : 'bg-red-100 text-red-800 hover:bg-red-200'
                           }`}
                         >
@@ -396,7 +396,7 @@ export default function AdminKYCPage() {
                           <button
                             onClick={handleReview}
                             disabled={processing || (reviewAction === 'reject' && !rejectionReason.trim())}
-                            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="bg-info text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                           >
                             {processing ? 'Processing...' : `Confirm ${reviewAction === 'approve' ? 'Approval' : 'Rejection'}`}
                           </button>

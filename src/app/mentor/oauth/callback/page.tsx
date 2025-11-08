@@ -32,7 +32,7 @@ export default function OAuthCallbackPage() {
       <div className="max-w-md w-full bg-white rounded-lg shadow-sm border border-gray-200 p-8">
         <div className="text-center mb-6">
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
@@ -68,7 +68,7 @@ export default function OAuthCallbackPage() {
                 />
                 <button
                   onClick={copyToClipboard}
-                  className="px-4 py-2 bg-purple-600 text-white rounded-r-md hover:bg-purple-700 text-sm"
+                  className="px-4 py-2 bg-primary text-white rounded-r-md hover:bg-primary-dark text-sm"
                 >
                   Copy
                 </button>
@@ -95,7 +95,7 @@ export default function OAuthCallbackPage() {
         <div className="mt-6 text-center">
           <Link
             href="/mentor/oauth"
-            className="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700"
+            className="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark"
           >
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

@@ -154,7 +154,7 @@ export default function AdminUsersPage() {
                 onClick={() => setFilter(key)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${
                   filter === key
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-info text-white'
                     : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
                 }`}
               >
@@ -294,21 +294,21 @@ export default function AdminUsersPage() {
                               setSelectedUser(user);
                               setShowUserModal(true);
                             }}
-                            className="text-blue-600 hover:text-blue-900"
+                            className="text-info hover:text-blue-900"
                           >
                             View
                           </button>
                           {user.status === 'active' ? (
                             <button
                               onClick={() => handleUserAction(user.id, 'suspend')}
-                              className="text-red-600 hover:text-red-900"
+                              className="text-error hover:text-red-900"
                             >
                               Suspend
                             </button>
                           ) : (
                             <button
                               onClick={() => handleUserAction(user.id, 'activate')}
-                              className="text-green-600 hover:text-green-900"
+                              className="text-secondary hover:text-green-900"
                             >
                               Activate
                             </button>
@@ -376,13 +376,13 @@ export default function AdminUsersPage() {
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <span className="font-medium text-gray-700">Email Verified:</span>
-                      <p className={`${selectedUser.verification.emailVerified ? 'text-green-600' : 'text-red-600'}`}>
+                      <p className={`${selectedUser.verification.emailVerified ? 'text-secondary' : 'text-error'}`}>
                         {selectedUser.verification.emailVerified ? '✅ Verified' : '❌ Not Verified'}
                       </p>
                     </div>
                     <div>
                       <span className="font-medium text-gray-700">Phone Verified:</span>
-                      <p className={`${selectedUser.verification.phoneVerified ? 'text-green-600' : 'text-red-600'}`}>
+                      <p className={`${selectedUser.verification.phoneVerified ? 'text-secondary' : 'text-error'}`}>
                         {selectedUser.verification.phoneVerified ? '✅ Verified' : '❌ Not Verified'}
                       </p>
                     </div>
@@ -416,7 +416,7 @@ export default function AdminUsersPage() {
                           handleUserAction(selectedUser.id, 'suspend');
                           setShowUserModal(false);
                         }}
-                        className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+                        className="bg-error text-white px-4 py-2 rounded-lg hover:bg-red-700"
                       >
                         Suspend User
                       </button>
@@ -426,7 +426,7 @@ export default function AdminUsersPage() {
                           handleUserAction(selectedUser.id, 'activate');
                           setShowUserModal(false);
                         }}
-                        className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+                        className="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-green-700"
                       >
                         Activate User
                       </button>

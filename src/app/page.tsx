@@ -19,7 +19,7 @@ export default function HomePage() {
 
         {/* Right Bottom Decoration */}
         <div className="absolute bottom-0 right-0 w-full h-1/2 pointer-events-none">
-          <div className="absolute bottom-0 right-0 w-3/4 h-full bg-[#5e17eb]/10 rounded-tl-[100px]"></div>
+          <div className="absolute bottom-0 right-0 w-3/4 h-full bg-primary/10 rounded-tl-[100px]"></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto">
@@ -68,7 +68,7 @@ export default function HomePage() {
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="px-6 md:px-8 py-3 md:py-4 bg-[#5e17eb] text-white font-semibold text-sm md:text-base rounded-xl hover:bg-[#4a12c4] transition-all duration-300 w-full sm:w-auto"
+                      className="px-6 md:px-8 py-3 md:py-4 bg-primary text-white font-semibold text-sm md:text-base rounded-xl hover:bg-primary-dark transition-all duration-300 w-full sm:w-auto"
                     >
                       Find a Mentor
                     </motion.button>
@@ -77,7 +77,7 @@ export default function HomePage() {
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="px-6 md:px-8 py-3 md:py-4 border-2 border-[#5e17eb] text-[#5e17eb] font-semibold text-sm md:text-base rounded-xl hover:bg-[#5e17eb] hover:text-white hover:shadow-lg transition-all duration-300 w-full sm:w-auto text-center"
+                      className="px-6 md:px-8 py-3 md:py-4 border-2 border-primary text-primary font-semibold text-sm md:text-base rounded-xl hover:bg-primary hover:text-white hover:shadow-lg transition-all duration-300 w-full sm:w-auto text-center"
                     >
                       Become a Mentor
                     </motion.button>
@@ -117,8 +117,8 @@ export default function HomePage() {
                     className="absolute bottom-4 left-4 bg-white rounded-2xl px-5 py-4 shadow-xl border border-gray-100"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-[#5e17eb]/10 rounded-full flex items-center justify-center">
-                        <svg className="w-7 h-7 text-[#5e17eb]" fill="currentColor" viewBox="0 0 24 24">
+                      <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                        <svg className="w-7 h-7 text-primary" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                         </svg>
                       </div>
@@ -138,8 +138,8 @@ export default function HomePage() {
                     className="absolute top-4 right-4 bg-white rounded-2xl px-5 py-4 shadow-xl border border-gray-100"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-[#5e17eb]/10 rounded-full flex items-center justify-center">
-                        <svg className="w-6 h-6 text-[#5e17eb]" fill="currentColor" viewBox="0 0 24 24">
+                      <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                        <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                         </svg>
                       </div>
@@ -173,8 +173,8 @@ export default function HomePage() {
           <div className="text-left mb-12">
             {/* Tag */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full border-2 border-black mb-4">
-              <div className="w-3 h-3 rounded-full bg-[#5e17eb]"></div>
-              <span className="text-sm font-semibold text-[#5e17eb]">
+              <div className="w-3 h-3 rounded-full bg-primary"></div>
+              <span className="text-sm font-semibold text-primary">
                 CAMPUS AMBASSADOR PROGRAM
               </span>
             </div>
@@ -182,7 +182,7 @@ export default function HomePage() {
             {/* Main Heading */}
             <h2 className="text-4xl lg:text-5xl font-semibold leading-tight mb-4 text-gray-700">
               <span className="block">Earn Money Online</span>
-              <span className="block text-[#5e17eb]">
+              <span className="block text-primary">
                 While You Learn
               </span>
             </h2>
@@ -207,7 +207,7 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/for-ambassadors"
-                  className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300 bg-[#5e17eb] text-white"
+                  className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300 bg-primary text-white"
                 >
                   Get Started Free
                 </Link>
@@ -237,8 +237,8 @@ export default function HomePage() {
 
               {/* Tag */}
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/40 backdrop-blur-lg rounded-full border-2 border-white/60">
-                <div className="w-3 h-3 rounded-full bg-[#5e17eb]"></div>
-                <span className="text-sm font-semibold text-[#5e17eb]">
+                <div className="w-3 h-3 rounded-full bg-primary"></div>
+                <span className="text-sm font-semibold text-primary">
                   HOW IT WORKS
                 </span>
               </div>
@@ -246,7 +246,7 @@ export default function HomePage() {
               {/* Main Heading */}
               <h2 className="text-4xl lg:text-5xl font-semibold leading-tight text-gray-700">
                 <span className="block">Start Your</span>
-                <span className="block text-[#5e17eb]">
+                <span className="block text-primary">
                   Learning Journey
                 </span>
               </h2>
@@ -297,15 +297,15 @@ export default function HomePage() {
                 className="group cursor-pointer"
               >
                 {/* Step Card */}
-                <div className="h-[280px] p-5 rounded-xl transition-all duration-300 bg-white border-2 border-[#5e17eb] shadow-lg hover:shadow-xl hover:-translate-y-1 hover:border-[#4a12c4] hover:scale-102 hover:bg-[#5e17eb]/5 flex flex-col">
+                <div className="h-[280px] p-5 rounded-xl transition-all duration-300 bg-white border-2 border-primary shadow-lg hover:shadow-xl hover:-translate-y-1 hover:border-[#4a12c4] hover:scale-102 hover:bg-primary/5 flex flex-col">
 
                   {/* Number */}
-                  <div className="text-3xl font-bold text-[#5e17eb] mb-2">
+                  <div className="text-3xl font-bold text-primary mb-2">
                     {step.num}
                   </div>
 
                   {/* Icon */}
-                  <div className="w-9 h-9 rounded-lg flex items-center justify-center mb-3 bg-[#5e17eb]/10 text-[#5e17eb]">
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center mb-3 bg-primary/10 text-primary">
                     {step.icon}
                   </div>
 
@@ -316,7 +316,7 @@ export default function HomePage() {
                   </p>
 
                   {/* Arrow */}
-                  <div className="flex items-center gap-2 font-semibold mt-auto text-[#5e17eb] hover:text-[#4a12c4] transition-colors duration-300">
+                  <div className="flex items-center gap-2 font-semibold mt-auto text-primary hover:text-primary-dark transition-colors duration-300">
                     <span>Learn More</span>
                     <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -346,8 +346,8 @@ export default function HomePage() {
             <div className="space-y-8">
               {/* Tag */}
               <div className="inline-flex items-center gap-2 px-5 py-3 bg-white/40 backdrop-blur-lg rounded-full border-2 border-white/60">
-                <div className="w-4 h-4 rounded-full bg-[#5e17eb]"></div>
-                <span className="text-sm font-semibold text-[#5e17eb]">
+                <div className="w-4 h-4 rounded-full bg-primary"></div>
+                <span className="text-sm font-semibold text-primary">
                   SUCCESS STORIES
                 </span>
               </div>
@@ -355,7 +355,7 @@ export default function HomePage() {
               {/* Main Heading */}
               <h2 className="text-5xl lg:text-6xl font-semibold leading-tight text-gray-700">
                 <span className="block">Real Stories,</span>
-                <span className="block text-[#5e17eb]">
+                <span className="block text-primary">
                   Real Success
                 </span>
               </h2>
@@ -386,7 +386,7 @@ export default function HomePage() {
             <div className="relative">
               <div className="bg-white/20 backdrop-blur-lg border-2 border-white/30 rounded-3xl p-8 shadow-2xl">
                 {/* Quote Icon */}
-                <div className="w-16 h-16 bg-[#5e17eb]/30 rounded-2xl flex items-center justify-center mb-6">
+                <div className="w-16 h-16 bg-primary/30 rounded-2xl flex items-center justify-center mb-6">
                   <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
                   </svg>
@@ -399,12 +399,12 @@ export default function HomePage() {
 
                 {/* Author */}
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-[#5e17eb] rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
                     <span className="text-white font-semibold text-xl">AS</span>
                   </div>
                   <div>
                     <h4 className="text-xl font-semibold text-gray-700">A. Singh</h4>
-                    <p className="text-[#5e17eb] font-semibold">Software Engineer @ Google</p>
+                    <p className="text-primary font-semibold">Software Engineer @ Google</p>
                     <div className="flex items-center gap-1 mt-1">
                       {[...Array(5)].map((_, i) => (
                         <svg key={i} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
@@ -417,8 +417,8 @@ export default function HomePage() {
               </div>
 
               {/* Floating Elements */}
-              <div className="absolute -top-4 -right-4 w-8 h-8 bg-[#5e17eb]/10 rounded-full"></div>
-              <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-[#5e17eb]/5 rounded-full"></div>
+              <div className="absolute -top-4 -right-4 w-8 h-8 bg-primary/10 rounded-full"></div>
+              <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-primary/5 rounded-full"></div>
             </div>
           </div>
 
@@ -455,12 +455,12 @@ export default function HomePage() {
                   {/* Author & Rating */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-[#5e17eb] rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
                         <span className="text-white font-semibold text-sm">{testimonial.initials}</span>
                       </div>
                       <div>
                         <h4 className="font-semibold text-gray-700">{testimonial.name}</h4>
-                        <p className="text-sm text-[#5e17eb] font-semibold">{testimonial.role} @ {testimonial.company}</p>
+                        <p className="text-sm text-primary font-semibold">{testimonial.role} @ {testimonial.company}</p>
                       </div>
                     </div>
 
@@ -493,8 +493,8 @@ export default function HomePage() {
 
               {/* Tag */}
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/40 backdrop-blur-lg rounded-full border-2 border-white/60">
-                <div className="w-3 h-3 rounded-full bg-[#5e17eb]"></div>
-                <span className="text-sm font-semibold text-[#5e17eb]">
+                <div className="w-3 h-3 rounded-full bg-primary"></div>
+                <span className="text-sm font-semibold text-primary">
                   FEATURED CATEGORIES
                 </span>
               </div>
@@ -502,7 +502,7 @@ export default function HomePage() {
               {/* Main Heading */}
               <h2 className="text-3xl lg:text-4xl font-semibold leading-tight text-gray-700">
                 <span className="block">Explore</span>
-                <span className="block text-[#5e17eb]">
+                <span className="block text-primary">
                   In-Demand Skills
                 </span>
               </h2>
@@ -519,7 +519,7 @@ export default function HomePage() {
             {/* Navigation Arrows */}
             <button
               id="prev-btn"
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:text-[#5e17eb] hover:border-[#5e17eb] transition-all duration-300"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:text-primary hover:border-primary transition-all duration-300"
             >
               <svg className="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -527,7 +527,7 @@ export default function HomePage() {
             </button>
             <button
               id="next-btn"
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:text-[#5e17eb] hover:border-[#5e17eb] transition-all duration-300"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:text-primary hover:border-primary transition-all duration-300"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -619,16 +619,16 @@ export default function HomePage() {
                 ].map((category, idx: number) => {
                   // Consistent card style for all categories
                   const getCardStyle = (style: string) => {
-                    return "relative h-full bg-white rounded-lg p-3 border-2 border-gray-100 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-[#5e17eb] group";
+                    return "relative h-full bg-white rounded-lg p-3 border-2 border-gray-100 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-primary group";
                   };
 
                   const getIconStyle = (style: string) => {
-                    return "w-6 h-6 bg-[#5e17eb]/10 rounded-md flex items-center justify-center text-[#5e17eb] group-hover:bg-[#5e17eb] group-hover:text-white transition-all duration-300";
+                    return "w-6 h-6 bg-primary/10 rounded-md flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300";
                   };
 
                   const getTextStyle = (style: string) => {
                     return {
-                      title: "text-lg font-bold text-gray-700 mb-2 group-hover:text-[#5e17eb] transition-colors duration-300",
+                      title: "text-lg font-bold text-gray-700 mb-2 group-hover:text-primary transition-colors duration-300",
                       desc: "text-gray-600 text-xs leading-relaxed mb-3",
                       skill: "text-gray-500 text-xs font-medium"
                     };
@@ -673,7 +673,7 @@ export default function HomePage() {
                           <div className="space-y-0.5">
                             {category.skills.map((skill, skillIndex) => (
                               <div key={skillIndex} className="flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 rounded-full bg-[#5e17eb]/60 group-hover:bg-[#5e17eb] transition-colors duration-300"></div>
+                                <div className="w-1.5 h-1.5 rounded-full bg-primary/60 group-hover:bg-primary transition-colors duration-300"></div>
                                 <span className={getTextStyle(category.style).skill}>{skill}</span>
                               </div>
                             ))}
@@ -681,7 +681,7 @@ export default function HomePage() {
 
                           {/* CTA */}
                           <div className="pt-1">
-                            <div className="flex items-center text-xs font-semibold text-[#5e17eb] group-hover:text-[#4a12c4] transition-colors duration-300">
+                            <div className="flex items-center text-xs font-semibold text-primary group-hover:text-primary-dark transition-colors duration-300">
                               <span>Explore Courses</span>
                               <svg className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -699,7 +699,7 @@ export default function HomePage() {
 
           {/* View All Categories Button */}
           <div className="text-left mt-8">
-            <Link href="/courses/browse" className="inline-flex items-center px-6 py-3 bg-[#5e17eb] text-white font-semibold rounded-lg hover:bg-[#4a12c4] hover:shadow-lg transition-all duration-300">
+            <Link href="/courses/browse" className="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark hover:shadow-lg transition-all duration-300">
               View All Categories
               <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -770,15 +770,15 @@ export default function HomePage() {
 
           {/* Header */}
           <div className="text-left mb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#5e17eb]/10 rounded-full mb-4">
-              <div className="w-3 h-3 rounded-full bg-[#5e17eb]"></div>
-              <span className="text-sm font-semibold text-[#5e17eb]">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full mb-4">
+              <div className="w-3 h-3 rounded-full bg-primary"></div>
+              <span className="text-sm font-semibold text-primary">
                 TRUSTED BY COMPANIES
               </span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-semibold leading-tight text-gray-700 mb-4">
               Helping Companies
-              <span className="block text-[#5e17eb]">Hire Top Talent</span>
+              <span className="block text-primary">Hire Top Talent</span>
             </h2>
             <p className="text-base text-gray-600 leading-relaxed max-w-2xl">
               Leading companies trust SkillProbe to connect them with skilled professionals ready to make an impact
@@ -795,7 +795,7 @@ export default function HomePage() {
               { name: "Justdial", logo: "https://indiancompanies.in/wp-content/uploads/2021/10/About-Just-Dial-Limited-Company.png" },
               { name: "Recruitminds", logo: "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop,q=95/A1aza0KoeotnbNeE/logo-AMqDqk32RBfpPKbZ.png" }
             ].map((company, index) => (
-              <div key={index} className="flex items-center justify-center p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-[#5e17eb]/30 hover:bg-gray-100 transition-all duration-300">
+              <div key={index} className="flex items-center justify-center p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-primary/30 hover:bg-gray-100 transition-all duration-300">
                 <img
                   src={company.logo}
                   alt={company.name}
@@ -817,7 +817,7 @@ export default function HomePage() {
 
               <button
                 onClick={() => document.getElementById('hiring-form-modal')?.classList.remove('hidden')}
-                className="inline-flex items-center px-6 py-3 bg-[#5e17eb] text-white font-semibold rounded-lg hover:bg-[#4a12c4] hover:shadow-lg transition-all duration-300"
+                className="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark hover:shadow-lg transition-all duration-300"
               >
                 Partner with Us for Hiring
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -864,7 +864,7 @@ export default function HomePage() {
                   </label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700"
                     placeholder="Enter your company name"
                     required
                   />
@@ -876,7 +876,7 @@ export default function HomePage() {
                   </label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700"
                     placeholder="Enter your full name"
                     required
                   />
@@ -888,7 +888,7 @@ export default function HomePage() {
                   </label>
                   <input
                     type="email"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700"
                     placeholder="Enter your email address"
                     required
                   />
@@ -900,7 +900,7 @@ export default function HomePage() {
                   </label>
                   <input
                     type="tel"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700"
                     placeholder="Enter your phone number"
                     required
                   />
@@ -912,7 +912,7 @@ export default function HomePage() {
                   </label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700"
                     placeholder="e.g., HR Manager, Talent Acquisition"
                     required
                   />
@@ -922,7 +922,7 @@ export default function HomePage() {
                   <label className="block text-sm font-semibold text-gray-700 mb-3">
                     Company Size
                   </label>
-                  <select className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700">
+                  <select className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700">
                     <option value="">Select company size</option>
                     <option value="1-10">1-10 employees</option>
                     <option value="11-50">11-50 employees</option>
@@ -939,7 +939,7 @@ export default function HomePage() {
                 </label>
                 <textarea
                   rows={3}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700"
                   placeholder="e.g., Full Stack Developers, Data Scientists, Digital Marketers..."
                   required
                 ></textarea>
@@ -951,7 +951,7 @@ export default function HomePage() {
                 </label>
                 <textarea
                   rows={3}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#5e17eb] focus:border-transparent text-gray-700"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-700"
                   placeholder="Any specific requirements, experience level, location preferences, etc."
                 ></textarea>
               </div>
@@ -959,7 +959,7 @@ export default function HomePage() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-3 px-6 bg-[#5e17eb] text-white font-semibold rounded-lg hover:bg-[#4a12c4] hover:shadow-lg transition-all duration-300"
+                className="w-full py-3 px-6 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark hover:shadow-lg transition-all duration-300"
               >
                 Submit Request
               </button>
@@ -988,9 +988,9 @@ export default function HomePage() {
             <div className="text-center space-y-8"> */}
 
           {/* Tag */}
-          {/* <div className="inline-flex items-center gap-2 px-6 py-3 bg-[#5e17eb]/10 rounded-full border-2 border-[#5e17eb]/20">
-                <div className="w-3 h-3 rounded-full bg-[#5e17eb]"></div>
-                <span className="text-sm font-bold text-[#5e17eb] uppercase tracking-wide">
+          {/* <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 rounded-full border-2 border-primary/20">
+                <div className="w-3 h-3 rounded-full bg-primary"></div>
+                <span className="text-sm font-bold text-primary uppercase tracking-wide">
                   Get Started Today
                 </span>
               </div> */}
@@ -999,7 +999,7 @@ export default function HomePage() {
           {/* <div className="space-y-6">
                 <h2 className="text-4xl lg:text-6xl font-semibold leading-tight text-gray-700">
                   <span className="block">Ready to Master</span>
-                  <span className="block text-[#5e17eb]">New Skills?</span>
+                  <span className="block text-primary">New Skills?</span>
                 </h2>
 
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -1011,7 +1011,7 @@ export default function HomePage() {
           {/* <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                 <Link
                   href="/ambassador/signup"
-                  className="group px-10 py-4 bg-[#5e17eb] text-white font-bold text-lg rounded-xl hover:bg-purple-700 hover:shadow-lg transition-all duration-300 hover:scale-105"
+                  className="group px-10 py-4 bg-primary text-white font-bold text-lg rounded-xl hover:bg-primary-dark hover:shadow-lg transition-all duration-300 hover:scale-105"
                 >
                   <span className="flex items-center justify-center gap-3">
                     Get Started Free
@@ -1058,7 +1058,7 @@ export default function HomePage() {
               }
             ].map((item, idx: number) => (
               <div key={idx} className="bg-white rounded-2xl p-6 text-center shadow-lg border-2 border-gray-100 hover:border-purple-300 transition-all duration-300">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-[#5e17eb] mx-auto mb-4">
+                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-primary mx-auto mb-4">
                   {item.icon}
                 </div>
                 <div className="text-2xl font-bold text-gray-700 mb-2">{item.number}</div>

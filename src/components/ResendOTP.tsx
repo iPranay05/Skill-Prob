@@ -67,12 +67,12 @@ export default function ResendOTP({ email, type, onSuccess, onError }: ResendOTP
       className={`text-sm font-medium transition-colors ${
         isDisabled
           ? 'text-gray-400 cursor-not-allowed'
-          : 'text-purple-600 hover:text-purple-700 cursor-pointer'
+          : 'text-primary hover:text-primary-dark cursor-pointer'
       }`}
     >
       {isResending ? (
         <span className="flex items-center">
-          <div className="w-4 h-4 border-2 border-purple-600 border-t-transparent rounded-full animate-spin mr-2"></div>
+          <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin mr-2"></div>
           {type === 'email' ? 'Sending Email...' : 'Sending SMS...'}
         </span>
       ) : cooldown > 0 ? (
