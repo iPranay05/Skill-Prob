@@ -1,11 +1,14 @@
 'use client';
 import Footer from './Footer';
+import CampusAmbassadorSection from './CampusAmbassadorSection';
 import Link from 'next/link';
 import { useState } from 'react';
-import { CheckCircle, DollarSign, Users, BarChart3, Share2, Award, Gift, Target, TrendingUp, Star, MessageCircle, Smartphone, ChevronDown, ChevronUp } from 'lucide-react';
+import { CheckCircle, DollarSign, Users, Share2, Award, Target, TrendingUp, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
 
 export default function ForAmbassadors() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [currentTip, setCurrentTip] = useState(0);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -169,29 +172,30 @@ export default function ForAmbassadors() {
             {/* Left Side - Text Content */}
             <div className="space-y-6">
               {/* Main Heading */}
-              <h1 className="text-4xl lg:text-5xl font-black leading-tight text-gray-700">
-                <span className="block">Earn While You Learn</span>
-                <span className="block" style={{ color: '#5e17eb' }}>Campus Ambassador</span>
+              <h1 className="text-4xl lg:text-5xl font-semibold leading-tight text-gray-700">
+                <span className="block" style={{color:'#000000ff'}}>Earn While You Learn –</span>
+                <span className="block" style={{ color: '#000000ff' }}>Become a Skill Probe<br/>Ambassador<span className='text-primary'>.</span></span>
               </h1>
 
               {/* Description */}
               <div className="space-y-4">
-                <h2 className="text-2xl font-black text-gray-700">What is the Campus Ambassador Program?</h2>
+                <h2 className="text-2xl font-extrabold italic text-[#dd36bfff]">What is the Campus Ambassador Program?</h2>
                 <p className="text-xl leading-relaxed text-gray-600">
-                  Earn money by promoting quality education in your network. Share courses, refer students, and earn rewards.
+                  The Skill Probe Campus Ambassador Program lets<br/>students and young professionals earn by promoting<br/>education, sharing courses, referring students, and<br/>building skills.
                 </p>
               </div>
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link href="/ambassador/signup">
-                  <button className="px-8 py-4 bg-primary text-white font-semibold text-lg rounded-xl hover:bg-primary-dark transition-all duration-300 w-full sm:w-auto">
-                    Apply Now
+                <Link href="/ambassador-guide">
+                  <button className="px-8 py-4 bg-[#1A1A1A] border-2 text-white font-semibold text-lg rounded-xl hover:bg-primary hover:text-white transition-all duration-300 w-full sm:w-auto">
+                    Learn More
                   </button>
                 </Link>
-                <Link href="/ambassador-guide">
-                  <button className="px-8 py-4 border-2 border-primary text-primary font-semibold text-lg rounded-xl hover:bg-primary hover:text-white transition-all duration-300 w-full sm:w-auto">
-                    Learn More
+                <Link href="/ambassador/signup">
+                  <button className="flex items-center justify-center gap-2 px-8 py-4 border-2 text-black font-semibold text-lg rounded-xl hover:bg-blue-100 transition-all duration-300 w-full sm:w-auto">
+                    <span>Become an Ambassador</span>
+                    <ArrowRight className='w-4 h-4'/>
                   </button>
                 </Link>
               </div>
@@ -201,7 +205,7 @@ export default function ForAmbassadors() {
             <div className="relative">
               <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&h=400&fit=crop"
+                  src="/SkillProbe/Ambassadors/Hero/SAbannerwebsite.jpg"
                   alt="Campus ambassador networking and promoting education - representing student leadership and earning opportunities"
                   className="w-full h-full object-cover"
                 />
@@ -212,22 +216,90 @@ export default function ForAmbassadors() {
       </section>
 
       {/* Why Become an Ambassador */}
-      <section className="py-20 px-6 bg-gray-50">
+      <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4 text-gray-700">Why Become an Ambassador?</h2>
+          <div className="mb-12">
+            <h2 className="text-4xl font-semibold mb-4 text-black">Why Become an Ambassador<span className='text-primary'>?</span></h2>
+            <p className="text-xl text-gray-600">
+              Grow, earn, and connect with purpose.
+            </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {whyBecome.map((reason, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6 bg-primary">
-                  <div style={{ color: '#ffffff' }}>{reason.icon}</div>
-                </div>
-                <h3 className="text-xl font-black mb-4 text-gray-700">{reason.title}</h3>
-                <p className="leading-relaxed text-gray-600">{reason.description}</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            {/* Card 1 - Earn Substantial Income */}
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
+              <div className="mb-4">
+                <img
+                  src="/SkillProbe/Ambassadors/Hero/SAbannerwebsite.jpg"
+                  alt="Earn Substantial Income"
+                  className="w-full h-48 object-cover rounded-lg"
+                />
               </div>
-            ))}
+              <h3 className="text-xl font-bold mb-3 text-black">Earn Substantial Income</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Earn ₹500 per student referral—no limit on how much you can earn!
+              </p>
+            </div>
+
+            {/* Card 2 - Flexible Work */}
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
+              <div className="mb-4">
+                <img
+                  src="/SkillProbe/Ambassadors/Hero/SAbannerwebsite.jpg"
+                  alt="Flexible Work"
+                  className="w-full h-48 object-cover rounded-lg"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-black">Flexible Work</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Work anytime, anywhere. Share referrals via social media or chats—no fixed hours.
+              </p>
+            </div>
+
+            {/* Card 3 - Build Your Network */}
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
+              <div className="mb-4">
+                <img
+                  src="/SkillProbe/Ambassadors/Hero/SAbannerwebsite.jpg"
+                  alt="Build Your Network"
+                  className="w-full h-48 object-cover rounded-lg"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-black">Build Your Network</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Connect with students, mentors, and professionals while promoting quality education.
+              </p>
+            </div>
+
+            {/* Card 4 - Develop Skills */}
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
+              <div className="mb-4">
+                <img
+                  src="/SkillProbe/Ambassadors/Hero/SAbannerwebsite.jpg"
+                  alt="Develop Skills"
+                  className="w-full h-48 object-cover rounded-lg"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-black">Develop Skills</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Gain marketing, communication, and sales experience valuable for any career.
+              </p>
+            </div>
+
+            {/* Card 5 - Recognition & Perks */}
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
+              <div className="mb-4">
+                <img
+                  src="/SkillProbe/Ambassadors/Hero/SAbannerwebsite.jpg"
+                  alt="Recognition & Perks"
+                  className="w-full h-48 object-cover rounded-lg"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-black">Recognition & Perks</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Top performers get featured, exclusive swag, and priority access to new features.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -235,265 +307,456 @@ export default function ForAmbassadors() {
       {/* How It Works */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4 text-gray-700">How It Works</h2>
-          </div>
-          
-          <div className="grid md:grid-cols-5 gap-8">
-            {howItWorks.map((step, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6 bg-primary">
-                  <span className="text-2xl font-black" style={{ color: '#ffffff' }}>{idx + 1}</span>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Steps */}
+            <div className="space-y-8">
+              {howItWorks.map((step, idx) => (
+                <div key={idx} className="flex gap-6 items-start">
+                  {/* Number Circle */}
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold" style={{ backgroundColor: '#c4b5fd', color: '#000' }}>
+                      {idx + 1}
+                    </div>
+                    {/* Vertical Line - only show if not last item */}
+                    {idx < howItWorks.length - 1 && (
+                      <div className="w-0.5 h-16 bg-gray-300 mx-auto mt-2"></div>
+                    )}
+                  </div>
+                  
+                  {/* Step Content */}
+                  <div className="flex-1 pt-3">
+                    <h3 className="text-xl font-bold mb-2 text-black">{step.step}</h3>
+                    <p className="text-gray-600">{step.description}</p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-black mb-4 text-gray-700">{step.step}</h3>
-                <p className="leading-relaxed text-sm text-gray-600">{step.description}</p>
+              ))}
+            </div>
+
+            {/* Right Side - Image with Purple Banner */}
+            <div className="relative pt-16">
+              {/* Purple Banner - positioned to overlap */}
+              <div className="absolute top-0 left-6 right-6 z-10 bg-[#c4b5fd] px-8 py-6 rounded-lg shadow-lg">
+                <p className="text-white text-lg font-semibold leading-relaxed">
+                  Guide learners, grow your reach, and earn doing what you love.
+                </p>
               </div>
-            ))}
+              
+              {/* Image Container */}
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <img
+                  src="/SkillProbe/Ambassadors/How it works Section/Who-can-become-a-Student-Ambassador-01-2.jpg"
+                  alt="Ambassador guiding learners"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Spacing */}
+      <div className="py-10"></div>
 
       {/* Earning Structure */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4 text-gray-700">Earning Structure</h2>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3 bg-primary">
-                <Users className="w-5 h-5" style={{ color: '#ffffff' }} />
-              </div>
-              <h3 className="text-xl font-black mb-1 text-gray-700">50</h3>
-              <p className="font-semibold text-xs text-gray-600">Registration Points</p>
-            </div>
+      <CampusAmbassadorSection />
 
-            <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3 bg-primary">
-                <DollarSign className="w-5 h-5" style={{ color: '#ffffff' }} />
-              </div>
-              <h3 className="text-xl font-black mb-1 text-gray-700">500</h3>
-              <p className="font-semibold text-xs text-gray-600">Purchase Points</p>
-            </div>
-
-            <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3 bg-primary">
-                <Share2 className="w-5 h-5" style={{ color: '#ffffff' }} />
-              </div>
-              <h3 className="text-xl font-black mb-1 text-gray-700">₹100</h3>
-              <p className="font-semibold text-xs text-gray-600">Ambassador Referral</p>
-            </div>
-
-            <div className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3 bg-primary">
-                <CheckCircle className="w-5 h-5" style={{ color: '#ffffff' }} />
-              </div>
-              <h3 className="text-xl font-black mb-1 text-gray-700">100 = ₹100</h3>
-              <p className="font-semibold text-xs text-gray-600">Point Conversion</p>
-            </div>
-          </div>
-
-          {/* Milestone Bonuses */}
-          <div className="mb-16">
-            <h3 className="text-3xl font-black text-center mb-12 text-gray-700">Milestone Bonuses</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {milestones.map((milestone, idx) => (
-                <div key={idx} className="bg-white rounded-xl p-4 text-center border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3 bg-primary">
-                    <span className="font-black text-base" style={{ color: '#ffffff' }}>{milestone.referrals}</span>
-                  </div>
-                  <h4 className="text-lg font-black mb-1 text-gray-700">{milestone.bonus}</h4>
-                  <p className="font-semibold text-xs text-gray-600">{milestone.referrals} Successful Referrals</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Spacing between sections */}
+      <div className="py-20 bg-white"></div>
 
       {/* Ambassador Benefits */}
+      <section className="relative py-20 px-6 overflow-visible" style={{ backgroundColor: '#7c3aed' }}>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left Side - Text Content */}
+            <div className="text-white pt-8">
+              <h2 className="text-4xl font-bold mb-6">Ambassador Benefits<span className='text-white'>.</span></h2>
+              <p className="text-lg mb-8 leading-relaxed">
+                From payouts and recognition to networking and learning opportunities, our ambassadors enjoy benefits that fuel both personal and professional growth.
+              </p>
+              <Link href="/ambassador/signup">
+                <button className="px-8 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-900 transition-all duration-300">
+                  Become a Ambassador
+                </button>
+              </Link>
+            </div>
+
+            {/* Right Side - Feature Cards Grid */}
+            <div className="grid grid-cols-2 gap-4 relative -mb-32">
+              {/* Card 1 - Integrated Payment System */}
+              <div className="bg-white rounded-2xl p-6 shadow-lg">
+                <div className="w-12 h-12 mb-4">
+                  <img 
+                    src="/SkillProbe/Mentors/What You Get As a Mentor Section/credit-card.png" 
+                    alt="Payment System"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <h3 className="text-base font-bold mb-2 text-black">Integrated Payment System</h3>
+                <p className="text-sm text-gray-600">Direct payouts to your account</p>
+              </div>
+
+              {/* Card 2 - Student Analytics */}
+              <div className="bg-white rounded-2xl p-6 shadow-lg">
+                <div className="w-12 h-12 mb-4">
+                  <img 
+                    src="/SkillProbe/Mentors/What You Get As a Mentor Section/pie-chart.png" 
+                    alt="Student Analytics"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <h3 className="text-base font-bold mb-2 text-black">Student Analytics</h3>
+                <p className="text-sm text-gray-600">Track enrollments, engagement, and revenue</p>
+              </div>
+
+              {/* Card 3 - Marketing Support */}
+              <div className="bg-white rounded-2xl p-6 shadow-lg">
+                <div className="w-12 h-12 mb-4">
+                  <img 
+                    src="/SkillProbe/Mentors/What You Get As a Mentor Section/social-media (1).png" 
+                    alt="Marketing Support"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <h3 className="text-base font-bold mb-2 text-black">Marketing Support</h3>
+                <p className="text-sm text-gray-600">Feature your courses on the homepage</p>
+              </div>
+
+              {/* Card 4 - Technical Support */}
+              <div className="bg-white rounded-2xl p-6 shadow-lg">
+                <div className="w-12 h-12 mb-4">
+                  <img 
+                    src="/SkillProbe/Mentors/What You Get As a Mentor Section/customer-service (1).png" 
+                    alt="Technical Support"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <h3 className="text-base font-bold mb-2 text-black">Technical Support</h3>
+                <p className="text-sm text-gray-600">Live chat and email assistance</p>
+              </div>
+
+              {/* Card 5 - Zero Setup Costs */}
+              <div className="bg-white rounded-2xl p-6 shadow-lg">
+                <div className="w-12 h-12 mb-4">
+                  <img 
+                    src="/SkillProbe/Mentors/What You Get As a Mentor Section/calculator.png" 
+                    alt="Zero Setup Costs"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <h3 className="text-base font-bold mb-2 text-black">Zero Setup Costs</h3>
+                <p className="text-sm text-gray-600">Start teaching immediately</p>
+              </div>
+
+              {/* Card 6 - Course Dashboard */}
+              <div className="bg-white rounded-2xl p-6 shadow-lg">
+                <div className="w-12 h-12 mb-4">
+                  <img 
+                    src="/SkillProbe/Mentors/What You Get As a Mentor Section/dashboard.png" 
+                    alt="Course Dashboard"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <h3 className="text-base font-bold mb-2 text-black">Course Dashboard</h3>
+                <p className="text-sm text-gray-600">Manage courses with ease</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Spacing between sections */}
+      <div className="py-20 bg-white"></div>
+
+      {/* Support & Resources */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4 text-gray-700">Ambassador Benefits</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-semibold mb-4 text-black">Support & Resources<span className='text-primary'>.</span></h2>
+            <p className="text-xl text-gray-600">Everything You Need to Succeed as a Ambassador.</p>
           </div>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            {benefits.map((benefit, idx) => (
-              <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-xl border-2 border-gray-100">
-                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1 bg-primary">
-                  <CheckCircle className="w-4 h-4" style={{ color: '#ffffff' }} />
+
+          <div className="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {/* Mentor Training */}
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
+              <div className="flex justify-center mb-4">
+                <div className="w-16 h-16 flex items-center justify-center">
+                  <img 
+                    src="/SkillProbe/Mentors/Support & Resources/online-class.png" 
+                    alt="Mentor Training"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
-                <p className="font-semibold text-gray-600">{benefit}</p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Ambassador Dashboard */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4 text-gray-700">Ambassador Dashboard</h2>
-            <p className="text-lg text-gray-600">Your personal command center includes:</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-xl p-6 border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <h3 className="text-xl font-black mb-4" style={{ color: '#5e17eb' }}>Performance Overview</h3>
-              <div className="space-y-2">
-                {[
-                  'Total referrals (clicks, registrations, purchases)',
-                  'Conversion rate analytics',
-                  'Current points balance',
-                  'Total earnings to date'
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                    <span className="text-sm text-gray-600">{item}</span>
-                  </div>
-                ))}
-              </div>
+              <h3 className="text-lg font-bold mb-3 text-center text-black">Mentor Training</h3>
+              <ul className="space-y-1.5 text-sm text-gray-600">
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>Create engaging content</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>Learn live teaching tips</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>Boost student engagement</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>Market your courses</span>
+                </li>
+              </ul>
             </div>
 
-            <div className="bg-white rounded-xl p-6 border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <h3 className="text-xl font-black mb-4" style={{ color: '#5e17eb' }}>Referral Management</h3>
-              <div className="space-y-2">
-                {[
-                  'Generate custom referral links',
-                  'Create QR codes for offline sharing',
-                  'Download promotional materials',
-                  'Track individual referral status'
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                    <span className="text-sm text-gray-600">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <h3 className="text-xl font-black mb-4" style={{ color: '#5e17eb' }}>Earnings & Payouts</h3>
-              <div className="space-y-2">
-                {[
-                  'Points ledger with transaction history',
-                  'Request payout (minimum ₹500)',
-                  'View payout history',
-                  'Download payment receipts'
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                    <span className="text-sm text-gray-600">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 border border-gray-300 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <h3 className="text-xl font-black mb-4" style={{ color: '#5e17eb' }}>Ambassador Tools</h3>
-              <div className="space-y-2">
-                {[
-                  'Pre-designed social media posts',
-                  'WhatsApp message templates',
-                  'Email invitation templates',
-                  'Promotional banners and graphics'
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                    <span className="text-sm text-gray-600">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Who Can Become an Ambassador */}
-      <section className="py-20 px-6 bg-gradient-to-br from-gray-50 via-white to-gray-50">
-        <div className="max-w-7xl mx-auto">
-          
-          {/* Who Can Become an Ambassador */}
-          <div className="mb-16">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-black mb-4 text-gray-700">Who Can Become an Ambassador?</h2>
-              <p className="text-lg text-gray-600">Join our community of passionate education advocates</p>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {eligibility.map((item, idx) => (
-                <div key={idx} className="group bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-lg hover:border-primary/30 transition-all duration-300">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#5e17eb] to-[#7c3aed] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <CheckCircle className="w-6 h-6 text-white" />
-                    </div>
-                    <p className="font-semibold text-gray-700 leading-relaxed pt-2">{item}</p>
-                  </div>
+            {/* Marketing Assistance */}
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
+              <div className="flex justify-center mb-4">
+                <div className="w-16 h-16 flex items-center justify-center">
+                  <img 
+                    src="/SkillProbe/Mentors/Support & Resources/headphone.png" 
+                    alt="Marketing Assistance"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
-              ))}
+              </div>
+              <h3 className="text-lg font-bold mb-3 text-center text-black">Marketing Assistance</h3>
+              <ul className="space-y-1.5 text-sm text-gray-600">
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>Homepage feature</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>Social media promo</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>Email outreach</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>SEO support</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Technical Support */}
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
+              <div className="flex justify-center mb-4">
+                <div className="w-16 h-16 flex items-center justify-center">
+                  <img 
+                    src="/SkillProbe/Mentors/Support & Resources/customer-chat.png" 
+                    alt="Technical Support"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              </div>
+              <h3 className="text-lg font-bold mb-3 text-center text-black">Technical Support</h3>
+              <ul className="space-y-1.5 text-sm text-gray-600">
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>Live chat (business hours)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>24/7 email help</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>Docs & guides</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>Webinars & training</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Technical Support (duplicate in screenshot) */}
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
+              <div className="flex justify-center mb-4">
+                <div className="w-16 h-16 flex items-center justify-center">
+                  <img 
+                    src="/SkillProbe/Mentors/Support & Resources/customer-chat.png" 
+                    alt="Technical Support"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              </div>
+              <h3 className="text-lg font-bold mb-3 text-center text-black">Technical Support</h3>
+              <ul className="space-y-1.5 text-sm text-gray-600">
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>Live chat (business hours)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>24/7 email help</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>Docs & guides</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-black mt-0.5">•</span>
+                  <span>Webinars & training</span>
+                </li>
+              </ul>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Application Requirements */}
-          <div>
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-black mb-4 text-gray-700">Application Requirements</h2>
-              <p className="text-lg text-gray-600">Simple criteria to get started</p>
-            </div>
-            <div className="max-w-4xl mx-auto bg-white rounded-2xl p-8 md:p-12 border border-gray-200 shadow-lg">
-              <div className="grid md:grid-cols-2 gap-6">
-                {requirements.map((requirement, idx) => (
-                  <div key={idx} className="flex items-start gap-4 p-4 bg-gradient-to-r from-[#5e17eb]/5 to-transparent rounded-xl hover:from-[#5e17eb]/10 transition-colors duration-300">
-                    <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <div className="w-2 h-2 bg-white rounded-full"></div>
+        {/* Ambassador Requirements */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-12">
+            <h2 className="text-4xl font-semibold mb-4 text-black">Ambassador Requirements<span className='text-primary'>.</span></h2>
+            <p className="text-xl text-gray-600">Real ambassadors. Real impact. Real growth.</p>
+          </div>
+
+          {/* Image with Overlay Cards */}
+          <div className="relative rounded-3xl overflow-hidden shadow-xl">
+            {/* Background Image */}
+            <img
+              src="/SkillProbe/Ambassadors/Ambassador Requirements Section/39677550202_da6ff7c610_b.jpg"
+              alt="Ambassador Requirements"
+              className="w-full h-[450px] object-cover"
+            />
+            
+            {/* Overlay Cards */}
+            <div className="absolute inset-0 flex items-center justify-start px-12">
+              <div className="grid grid-cols-1 gap-3 max-w-md w-full">
+                {requirements.slice(0, 4).map((requirement, idx) => (
+                  <div key={idx} className="bg-white rounded-lg px-5 py-3 shadow-lg flex items-center gap-3">
+                    <div className="flex-shrink-0">
+                      <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
                     </div>
-                    <span className="text-gray-700 font-medium leading-relaxed">{requirement}</span>
+                    <p className="font-semibold text-gray-800 text-sm">{requirement}</p>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-
         </div>
       </section>
-
       {/* Success Stories */}
-      <section className="py-20 px-6 bg-gray-50">
+      <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4 text-gray-700">Success Stories</h2>
+          <div className="mb-12">
+            <h2 className="text-4xl font-semibold mb-4 text-black">Success Stories<span className='text-primary'>.</span></h2>
+            <p className="text-xl text-gray-600">Real ambassadors. Real impact. Real growth.</p>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
-                <p className="text-lg mb-6 leading-relaxed text-gray-600 italic">
-                  "{testimonial.text}"
-                </p>
-                <p className="font-bold" style={{ color: '#5e17eb' }}>- {testimonial.author}</p>
+
+          {/* Testimonials Carousel */}
+          <div className="relative">
+            <div className="flex items-center gap-6">
+              {/* Left Arrow */}
+              <button 
+                onClick={() => setCurrentTestimonial(currentTestimonial > 0 ? currentTestimonial - 1 : testimonials.length - 1)}
+                className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center hover:bg-gray-800 transition-colors"
+              >
+                <svg className="w-6 h-6 text-white rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+
+              {/* Testimonial Cards */}
+              <div className="flex-1 grid md:grid-cols-2 gap-6">
+                {[testimonials[currentTestimonial], testimonials[(currentTestimonial + 1) % testimonials.length]].map((testimonial, idx) => (
+                  <div key={idx} className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
+                    {/* Quote Icon */}
+                    <div className="mb-4">
+                      <svg className="w-10 h-10 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                      </svg>
+                    </div>
+                    
+                    {/* Testimonial Text */}
+                    <p className="text-base mb-6 leading-relaxed text-gray-700">
+                      "{testimonial.text}"
+                    </p>
+                    
+                    {/* Author Info */}
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg" style={{ backgroundColor: '#ec4899' }}>
+                        {testimonial.author.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="font-bold text-black">{testimonial.author.split(',')[0]}</p>
+                        <p className="text-sm text-gray-500">{testimonial.author.split(',')[1]}</p>
+                      </div>
+                    </div>
+                    
+                    {/* Star Rating */}
+                    <div className="flex gap-1 mt-4">
+                      {[1, 2, 3, 4].map((star) => (
+                        <svg key={star} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+
+              {/* Right Arrow */}
+              <button 
+                onClick={() => setCurrentTestimonial((currentTestimonial + 1) % testimonials.length)}
+                className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center hover:bg-gray-800 transition-colors"
+              >
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Tips for Success */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4 text-gray-700">Tips for Success</h2>
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="text-4xl font-semibold text-black">Tips for Success<span className='text-primary'>.</span></h2>
+            <div className="flex gap-2">
+              <button 
+                onClick={() => setCurrentTip(currentTip > 0 ? currentTip - 3 : Math.max(0, tips.length - 3))}
+                className="w-12 h-12 rounded-full bg-black flex items-center justify-center hover:bg-gray-800 transition-colors"
+              >
+                <svg className="w-6 h-6 text-white rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+              <button 
+                onClick={() => setCurrentTip((currentTip + 3) % tips.length)}
+                className="w-12 h-12 rounded-full bg-black flex items-center justify-center hover:bg-gray-800 transition-colors"
+              >
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {tips.map((tip, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-gray-100">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6 bg-primary">
-                  <span className="text-2xl font-black" style={{ color: '#ffffff' }}>{idx + 1}</span>
+
+          <div className="grid md:grid-cols-4 gap-6">
+            {/* Purple Info Card */}
+            <div className="bg-primary rounded-2xl p-8 text-white flex items-center min-h-[320px]">
+              <p className="text-base leading-relaxed">
+                Small actions can make a big difference in achieving your goals. Follow these proven tips to grow your impact and influence effectively.
+              </p>
+            </div>
+
+            {/* Tip Cards */}
+            {tips.slice(currentTip, currentTip + 3).map((tip, idx) => (
+              <div key={idx} className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm min-h-[320px] flex flex-col">
+                <div className="text-6xl font-bold text-primary mb-6">
+                  {String(currentTip + idx + 1).padStart(2, '0')}
                 </div>
-                <h3 className="text-xl font-black mb-4 text-gray-700">{tip.title}</h3>
-                <p className="leading-relaxed text-gray-600">{tip.description}</p>
+                <h3 className="text-xl font-bold mb-4 text-black">{tip.title}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed flex-1">{tip.description}</p>
               </div>
             ))}
           </div>
@@ -501,32 +764,32 @@ export default function ForAmbassadors() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4 text-gray-700">Frequently Asked Questions</h2>
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-12">
+            <h2 className="text-4xl font-semibold mb-4 text-black">Frequently Asked Questions<span className='text-primary'>.</span></h2>
           </div>
           
           <div className="space-y-4">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="bg-white rounded-2xl border-2 border-gray-200 overflow-hidden">
+              <div key={idx} className="bg-white rounded-xl border border-gray-300 overflow-hidden">
                 <button
                   onClick={() => toggleFaq(idx)}
-                  className="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
+                  className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
                 >
-                  <h3 className="text-lg font-semibold text-gray-700">{faq.question}</h3>
+                  <h3 className="text-base font-semibold text-black">{faq.question}</h3>
                   <div className="flex-shrink-0 ml-4">
                     {openFaq === idx ? (
-                      <ChevronUp className="w-5 h-5 text-primary" />
+                      <span className="text-2xl text-gray-600">−</span>
                     ) : (
-                      <ChevronDown className="w-5 h-5 text-gray-400" />
+                      <span className="text-2xl text-gray-600">+</span>
                     )}
                   </div>
                 </button>
                 {openFaq === idx && (
-                  <div className="px-8 pb-6">
-                    <div className="pt-4 border-t border-gray-100">
-                      <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                  <div className="px-6 pb-5">
+                    <div className="pt-2">
+                      <p className="text-gray-600 leading-relaxed text-sm">{faq.answer}</p>
                     </div>
                   </div>
                 )}
@@ -536,27 +799,35 @@ export default function ForAmbassadors() {
         </div>
       </section>
 
+    
+
       {/* CTA Section */}
       <section className="py-20 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="bg-white rounded-3xl p-12 shadow-lg border border-gray-200 text-center">
-            <h2 className="text-4xl font-black mb-6 text-gray-700">Ready to Become an Ambassador?</h2>
-            <p className="text-lg mb-12 max-w-3xl mx-auto text-gray-600">
-              Join our Campus Ambassador Program and start earning money while you learn!
-            </p>
-            
-            <div className="flex justify-center">
-              <Link
-                href="/ambassador/signup"
-                className="px-10 py-4 font-bold text-lg rounded-xl transition-all duration-300 hover:shadow-lg bg-primary"
-                style={{ color: '#ffffff' }}
-              >
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-5xl font-bold mb-6 text-black">
+            Ready to Become an Ambassador<span className='text-primary'>?</span>
+          </h2>
+          <p className="text-xl text-gray-600 mb-10">
+            Join our Campus Ambassador Program<br/>
+            and start earning money while you learn!
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link href="/ambassador/signup">
+              <button className="px-10 py-4 bg-black text-white font-semibold text-lg rounded-xl hover:bg-gray-800 transition-all duration-300 w-full sm:w-auto">
                 Apply Now
-              </Link>
-            </div>
+              </button>
+            </Link>
+            <Link href="/contact">
+              <button className="flex items-center justify-center gap-2 px-10 py-4 border-2 border-black text-black font-semibold text-lg rounded-xl hover:bg-gray-50 transition-all duration-300 w-full sm:w-auto">
+                <span>Contact Us</span>
+                <ArrowRight className='w-5 h-5'/>
+              </button>
+            </Link>
           </div>
         </div>
       </section>
+      
       <Footer></Footer>
     </div>
   );

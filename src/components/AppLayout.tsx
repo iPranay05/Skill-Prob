@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Navbar from './Navbar';
+import AnnouncementBar from './AnnouncementBar';
 import { SocketProvider } from '../contexts/SocketContext';
 import { RealTimeNotifications } from './RealTimeNotifications';
 
@@ -32,9 +33,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
     return <>{children}</>;
   }
 
-  // For all other pages, render with navbar
+  // For all other pages, render with announcement bar and navbar
   return (
     <div className="min-h-screen bg-gray-50">
+      <AnnouncementBar />
       <Navbar />
       <main>{children}</main>
       {mounted && authToken && (

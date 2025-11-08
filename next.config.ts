@@ -14,7 +14,8 @@ const nextConfig: NextConfig = {
       'supabase.co',
       'amazonaws.com',
       'cloudfront.net',
-      'googleusercontent.com'
+      'googleusercontent.com',
+      'images.unsplash.com'
     ],
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -127,6 +128,8 @@ const nextConfig: NextConfig = {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
     ignoreDuringBuilds: false,
+    // Exclude test files from linting during builds
+    dirs: ['src/app', 'src/components', 'src/lib', 'src/hooks', 'src/contexts', 'src/middleware', 'src/models'],
   },
 
   // Logging configuration
