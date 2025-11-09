@@ -15,7 +15,10 @@ const nextConfig: NextConfig = {
       'amazonaws.com',
       'cloudfront.net',
       'googleusercontent.com',
-      'images.unsplash.com'
+      'images.unsplash.com',
+      'encrypted-tbn0.gstatic.com',
+      'indiancompanies.in',
+      'cdn.prod.website-files.com'
     ],
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],

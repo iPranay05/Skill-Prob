@@ -1,8 +1,10 @@
 'use client';
 import { useState } from 'react';
-import { ChevronLeft, ChevronRight, ArrowRight, Mail, GraduationCap, Monitor, Users, FileCheck, Handshake, Target, BookOpen, Compass, Network, Briefcase } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, GraduationCap, Monitor, Users, FileCheck, Handshake, Target, BookOpen, Compass, Network, Briefcase } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import Footer from '@/components/Footer';
+import WhosUsingSkillprobe from '@/components/WhosUsingSkillprobe';
 
 
 export default function AboutPage() {
@@ -53,7 +55,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* 1. Hero Section - About Us */}
-      <section className="relative h-[500px] overflow-hidden">
+      <section className="relative h-[400px] md:h-[500px] overflow-hidden bg-white">
         <div className="absolute inset-0">
           <Image
             src="/SkillProbe/AboutUs/Hero/heroimg.jpg"
@@ -66,82 +68,83 @@ export default function AboutPage() {
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center">
           {/* <div className="text-sm text-white mb-6 font-medium">Home &gt; About Us</div> */}
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-10">About Us.</h1>
-          <div className="mt-10 flex gap-4">
-            <button className="bg-[#1A1A1A] bg-opacity-40 text-white px-12 py-4 rounded-md  text-base hover:bg-opacity-50 transition-colors backdrop-blur-sm">
-              Learn More
-            </button>
-            <button className="bg-white text-black px-12 py-4 rounded-md  text-base hover:bg-gray-50 transition-colors flex items-center gap-2 shadow-md">
-              Contact Us
-              <Mail className="w-4 h-4" />
-            </button>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 md:mb-10">About Us.</h1>
+          <div className="mt-6 md:mt-10 flex justify-center px-4">
+            <Link href="/auth/register">
+              <button className="bg-white text-black px-6 md:px-12 py-3 md:py-4 rounded-md text-sm md:text-base hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 shadow-md">
+                Get Started
+              </button>
+            </Link>
           </div>
         </div>
       </section>
 
+      {/* Who's Using Skillprobe Section */}
+      <WhosUsingSkillprobe />
+
       {/* 2. Impact Section */}
-      <section className="py-20 bg-white">
+      <section className="py-10 md:py-20 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 md:mb-16">
             <div className="inline-block bg-purple-300 text-black px-5 py-2 rounded-md font-semibold text-sm mb-6">
               Our Impact.
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-black">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-black">
               Building careers, one learner at a time.
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            <div className="bg-white border border-gray-200 rounded-xl p-8 text-center shadow-sm">
-              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <GraduationCap className="w-14 h-14 text-black" strokeWidth={1.5} />
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
+            <div className="bg-white border border-gray-200 rounded-xl p-4 md:p-8 text-center shadow-sm">
+              <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 flex items-center justify-center">
+                <GraduationCap className="w-10 h-10 md:w-14 md:h-14 text-black" strokeWidth={1.5} />
               </div>
-              <div className="text-3xl font-bold text-black mb-2">50,000+</div>
-              <div className="text-gray-600 text-sm">Active Learners</div>
+              <div className="text-2xl md:text-3xl font-bold text-black mb-2">50,000+</div>
+              <div className="text-gray-600 text-xs md:text-sm">Active Learners</div>
             </div>
-            <div className="bg-gradient-to-br from-purple-400 via-purple-500 to-purple-600 rounded-xl p-8 text-center shadow-md">
-              <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-full flex items-center justify-center">
-                <Monitor className="w-8 h-8 text-purple-600" strokeWidth={2} />
+            <div className="bg-gradient-to-br from-purple-400 via-purple-500 to-purple-600 rounded-xl p-4 md:p-8 text-center shadow-md">
+              <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 bg-white rounded-full flex items-center justify-center">
+                <Monitor className="w-6 h-6 md:w-8 md:h-8 text-purple-600" strokeWidth={2} />
               </div>
-              <div className="text-3xl font-bold text-white mb-2">500+</div>
-              <div className="text-white text-sm">Skill Development Courses</div>
+              <div className="text-2xl md:text-3xl font-bold text-white mb-2">500+</div>
+              <div className="text-white text-xs md:text-sm">Skill Development Courses</div>
             </div>
-            <div className="bg-white border border-gray-200 rounded-xl p-8 text-center shadow-sm">
-              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <Users className="w-14 h-14 text-black" strokeWidth={1.5} />
+            <div className="bg-white border border-gray-200 rounded-xl p-4 md:p-8 text-center shadow-sm">
+              <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 flex items-center justify-center">
+                <Users className="w-10 h-10 md:w-14 md:h-14 text-black" strokeWidth={1.5} />
               </div>
-              <div className="text-3xl font-bold text-black mb-2">200+</div>
-              <div className="text-gray-600 text-sm">Expert Mentors</div>
+              <div className="text-2xl md:text-3xl font-bold text-black mb-2">200+</div>
+              <div className="text-gray-600 text-xs md:text-sm">Expert Mentors</div>
             </div>
-            <div className="bg-white border border-gray-200 rounded-xl p-8 text-center shadow-sm">
-              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <FileCheck className="w-14 h-14 text-black" strokeWidth={1.5} />
+            <div className="bg-white border border-gray-200 rounded-xl p-4 md:p-8 text-center shadow-sm">
+              <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 flex items-center justify-center">
+                <FileCheck className="w-10 h-10 md:w-14 md:h-14 text-black" strokeWidth={1.5} />
               </div>
-              <div className="text-3xl font-bold text-black mb-2">5,000+</div>
-              <div className="text-gray-600 text-sm">Certifications Issued</div>
+              <div className="text-2xl md:text-3xl font-bold text-black mb-2">5,000+</div>
+              <div className="text-gray-600 text-xs md:text-sm">Certifications Issued</div>
             </div>
-            <div className="bg-gradient-to-br from-purple-400 via-purple-500 to-purple-600 rounded-xl p-8 text-center shadow-md">
-              <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-full flex items-center justify-center">
-                <Handshake className="w-8 h-8 text-purple-600" strokeWidth={2} />
+            <div className="bg-gradient-to-br from-purple-400 via-purple-500 to-purple-600 rounded-xl p-4 md:p-8 text-center shadow-md">
+              <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 bg-white rounded-full flex items-center justify-center">
+                <Handshake className="w-6 h-6 md:w-8 md:h-8 text-purple-600" strokeWidth={2} />
               </div>
-              <div className="text-3xl font-bold text-white mb-2">1,000+</div>
-              <div className="text-white text-sm">Internship Placements</div>
+              <div className="text-2xl md:text-3xl font-bold text-white mb-2">1,000+</div>
+              <div className="text-white text-xs md:text-sm">Internship Placements</div>
             </div>
-            <div className="bg-white border border-gray-200 rounded-xl p-8 text-center shadow-sm">
-              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <Target className="w-14 h-14 text-black" strokeWidth={1.5} />
+            <div className="bg-white border border-gray-200 rounded-xl p-4 md:p-8 text-center shadow-sm">
+              <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 flex items-center justify-center">
+                <Target className="w-10 h-10 md:w-14 md:h-14 text-black" strokeWidth={1.5} />
               </div>
-              <div className="text-3xl font-bold text-black mb-2">300+</div>
-              <div className="text-gray-600 text-sm">Active Campus Ambassadors</div>
+              <div className="text-2xl md:text-3xl font-bold text-black mb-2">300+</div>
+              <div className="text-gray-600 text-xs md:text-sm">Active Campus Ambassadors</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* 3. Differentiators Section */}
-      <section className="py-20 bg-purple-100">
+      <section className="py-10 md:py-20 bg-purple-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 md:mb-12">
             <div className="inline-block bg-purple-400 text-black px-5 py-2 rounded-md font-semibold text-sm mb-4">
               What Makes Us Different.
             </div>
@@ -227,61 +230,95 @@ export default function AboutPage() {
       </section>
 
       {/* 5. Advantage Section */}
-      <section className="py-20 bg-white">
+      <section className="py-10 md:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
+          <div className="text-center mb-8 md:mb-16">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
               The Skill Probe Advantage.
             </h2>
-            <p className="text-gray-600 text-[19px]">
+            <p className="text-gray-600 text-sm md:text-base lg:text-[19px]">
               Discover what makes Skill Probe the smarter way to learn.
             </p>
           </div>
 
-          <div className="relative">
+          <div className="relative px-12 md:px-0">
+            {/* Mobile: Show 1 card, Desktop: Show 2 cards */}
             <div className="flex items-center justify-center gap-8">
-              {advantages.slice(advantageIndex, advantageIndex + 2).map((advantage, idx) => (
-                <div key={idx} className="flex-1 max-w-md">
-                  <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 flex items-center">
-                    <div className="relative w-60 h-42 flex-shrink-0">
-                      <Image
-                        src={advantage.image}
-                        alt={advantage.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="p-5 flex-1">
-                      <h3 className="text-lg font-bold text-black mb-2">
-                        {advantage.title}
-                      </h3>
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        {advantage.description}
-                      </p>
-                    </div>
+              {/* Mobile - Single Card */}
+              <div className="block md:hidden w-full">
+                <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                  <div className="relative w-full h-48">
+                    <Image
+                      src={advantages[advantageIndex].image}
+                      alt={advantages[advantageIndex].title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <h3 className="text-lg font-bold text-black mb-2">
+                      {advantages[advantageIndex].title}
+                    </h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      {advantages[advantageIndex].description}
+                    </p>
                   </div>
                 </div>
-              ))}
+              </div>
+
+              {/* Desktop - Two Cards */}
+              <div className="hidden md:flex items-center justify-center gap-8 w-full">
+                {advantages.slice(advantageIndex, advantageIndex + 2).map((advantage, idx) => (
+                  <div key={idx} className="flex-1 max-w-md">
+                    <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 flex items-center">
+                      <div className="relative w-60 h-42 flex-shrink-0">
+                        <Image
+                          src={advantage.image}
+                          alt={advantage.title}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="p-5 flex-1">
+                        <h3 className="text-lg font-bold text-black mb-2">
+                          {advantage.title}
+                        </h3>
+                        <p className="text-gray-600 text-sm leading-relaxed">
+                          {advantage.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="flex justify-center items-center gap-4 mt-12">
-              <button
-                onClick={() => setAdvantageIndex(Math.max(0, advantageIndex - 1))}
-                className="p-3 bg-black rounded-full hover:bg-gray-800 transition-colors disabled:opacity-50"
-                disabled={advantageIndex === 0}
-              >
-                <ChevronLeft className="w-6 h-6 text-white" />
-              </button>
-              <span className="text-gray-700 font-semibold text-base">
+            {/* Navigation Buttons */}
+            <button
+              onClick={() => setAdvantageIndex(Math.max(0, advantageIndex - 1))}
+              className="absolute left-0 md:-left-4 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-black rounded-full hover:bg-gray-800 transition-colors disabled:opacity-50"
+              disabled={advantageIndex === 0}
+            >
+              <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-white" />
+            </button>
+
+            <button
+              onClick={() => {
+                const isMobile = window.innerWidth < 768;
+                const maxIndex = isMobile ? advantages.length - 1 : advantages.length - 2;
+                setAdvantageIndex(Math.min(maxIndex, advantageIndex + 1));
+              }}
+              className="absolute right-0 md:-right-4 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-black rounded-full hover:bg-gray-800 transition-colors disabled:opacity-50"
+              disabled={advantageIndex >= advantages.length - 1}
+            >
+              <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
+            </button>
+
+            {/* Page Indicator */}
+            <div className="flex justify-center items-center gap-2 mt-8 md:mt-12">
+              <span className="text-gray-700 font-semibold text-sm md:text-base">
                 {advantageIndex + 1}/{advantages.length}
               </span>
-              <button
-                onClick={() => setAdvantageIndex(Math.min(advantages.length - 2, advantageIndex + 1))}
-                className="p-3 bg-black rounded-full hover:bg-gray-800 transition-colors disabled:opacity-50"
-                disabled={advantageIndex >= advantages.length - 2}
-              >
-                <ChevronRight className="w-6 h-6 text-white" />
-              </button>
             </div>
           </div>
         </div>

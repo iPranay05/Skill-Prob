@@ -26,9 +26,9 @@ export default function HeroSection() {
                   Get started
                 </button>
               </Link>
-              <Link href="/courses">
+              <Link href="/mentor/signup">
                 <button className="px-6 py-3 border-2 border-black text-black text-sm font-semibold rounded-lg hover:bg-gray-50 transition-all duration-300 w-full sm:w-auto">
-                  Explore Courses
+                  Become Mentor
                 </button>
               </Link>
             </div>
@@ -62,56 +62,13 @@ export default function HeroSection() {
               />
             </div>
             
-            {/* LinkedIn - Bottom Right */}
-            <div className="absolute bottom-12 right-12 w-16 h-16 opacity-90">
+            {/* LinkedIn - Bottom Right (moved further right on mobile) */}
+            <div className="absolute bottom-8 right-4 md:bottom-12 md:right-12 w-12 h-12 md:w-16 md:h-16 opacity-90">
               <img
                 src="/SkillProbe/HomePage/Hero/linkedin.png"
                 alt="LinkedIn"
                 className="w-full h-full object-contain"
               />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Trust Badges Section */}
-      <div className="bg-gray-100 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Badge 1 */}
-            <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-3 border border-gray-200">
-              <div className="flex-shrink-0">
-                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-gray-900">HSA and FSA accepted</p>
-              </div>
-            </div>
-
-            {/* Badge 2 */}
-            <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-3 border border-gray-200">
-              <div className="flex-shrink-0">
-                <svg className="w-6 h-6 text-pink-500" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-gray-900">4.9 rating on app store</p>
-              </div>
-            </div>
-
-            {/* Badge 3 */}
-            <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-3 border border-gray-200">
-              <div className="flex-shrink-0">
-                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-gray-900">HSA and FSA accepted</p>
-              </div>
             </div>
           </div>
         </div>

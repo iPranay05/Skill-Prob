@@ -13,7 +13,7 @@ const stats: Stat[] = [
     color: 'bg-gray-200'
   },
   {
-    value: '50K+',
+    value: '10K+',
     label: 'Active Learners',
     color: 'bg-gray-200'
   },

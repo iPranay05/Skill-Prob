@@ -185,15 +185,10 @@ export default function ForAmbassadors() {
                 </p>
               </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link href="/ambassador-guide">
-                  <button className="px-8 py-4 bg-[#1A1A1A] border-2 text-white font-semibold text-lg rounded-xl hover:bg-primary hover:text-white transition-all duration-300 w-full sm:w-auto">
-                    Learn More
-                  </button>
-                </Link>
+              {/* CTA Button */}
+              <div className="pt-4">
                 <Link href="/ambassador/signup">
-                  <button className="flex items-center justify-center gap-2 px-8 py-4 border-2 text-black font-semibold text-lg rounded-xl hover:bg-blue-100 transition-all duration-300 w-full sm:w-auto">
+                  <button className="flex items-center justify-center gap-2 px-8 py-4 bg-black text-white font-semibold text-lg rounded-xl hover:bg-gray-800 transition-all duration-300">
                     <span>Become an Ambassador</span>
                     <ArrowRight className='w-4 h-4'/>
                   </button>
@@ -203,11 +198,11 @@ export default function ForAmbassadors() {
 
             {/* Right Side - Hero Image */}
             <div className="relative">
-              <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative w-full h-64 md:h-96 rounded-3xl overflow-hidden shadow-md border-4 border-gray-200">
                 <img
                   src="/SkillProbe/Ambassadors/Hero/SAbannerwebsite.jpg"
                   alt="Campus ambassador networking and promoting education - representing student leadership and earning opportunities"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain md:object-cover"
                 />
               </div>
             </div>
@@ -225,12 +220,12 @@ export default function ForAmbassadors() {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 justify-items-center lg:justify-items-start">
             {/* Card 1 - Earn Substantial Income */}
-            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm w-full max-w-md">
               <div className="mb-4">
                 <img
-                  src="/SkillProbe/Ambassadors/Hero/SAbannerwebsite.jpg"
+                  src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop"
                   alt="Earn Substantial Income"
                   className="w-full h-48 object-cover rounded-lg"
                 />
@@ -242,10 +237,10 @@ export default function ForAmbassadors() {
             </div>
 
             {/* Card 2 - Flexible Work */}
-            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm w-full max-w-md">
               <div className="mb-4">
                 <img
-                  src="/SkillProbe/Ambassadors/Hero/SAbannerwebsite.jpg"
+                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop"
                   alt="Flexible Work"
                   className="w-full h-48 object-cover rounded-lg"
                 />
@@ -257,10 +252,10 @@ export default function ForAmbassadors() {
             </div>
 
             {/* Card 3 - Build Your Network */}
-            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm w-full max-w-md">
               <div className="mb-4">
                 <img
-                  src="/SkillProbe/Ambassadors/Hero/SAbannerwebsite.jpg"
+                  src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&h=400&fit=crop"
                   alt="Build Your Network"
                   className="w-full h-48 object-cover rounded-lg"
                 />
@@ -272,10 +267,10 @@ export default function ForAmbassadors() {
             </div>
 
             {/* Card 4 - Develop Skills */}
-            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm w-full max-w-md">
               <div className="mb-4">
                 <img
-                  src="/SkillProbe/Ambassadors/Hero/SAbannerwebsite.jpg"
+                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop"
                   alt="Develop Skills"
                   className="w-full h-48 object-cover rounded-lg"
                 />
@@ -287,10 +282,10 @@ export default function ForAmbassadors() {
             </div>
 
             {/* Card 5 - Recognition & Perks */}
-            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm w-full max-w-md">
               <div className="mb-4">
                 <img
-                  src="/SkillProbe/Ambassadors/Hero/SAbannerwebsite.jpg"
+                  src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=600&h=400&fit=crop"
                   alt="Recognition & Perks"
                   className="w-full h-48 object-cover rounded-lg"
                 />
@@ -298,6 +293,21 @@ export default function ForAmbassadors() {
               <h3 className="text-xl font-bold mb-3 text-black">Recognition & Perks</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Top performers get featured, exclusive swag, and priority access to new features.
+              </p>
+            </div>
+
+            {/* Card 6 - Community Support */}
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm w-full max-w-md">
+              <div className="mb-4">
+                <img
+                  src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop"
+                  alt="Community Support"
+                  className="w-full h-48 object-cover rounded-lg"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-black">Community Support</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Join a vibrant community of ambassadors, share strategies, and get dedicated support.
               </p>
             </div>
           </div>
@@ -643,28 +653,66 @@ export default function ForAmbassadors() {
         </div>
       </section>
       {/* Success Stories */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-10 md:py-20 px-4 md:px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-4xl font-semibold mb-4 text-black">Success Stories<span className='text-primary'>.</span></h2>
-            <p className="text-xl text-gray-600">Real ambassadors. Real impact. Real growth.</p>
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-4xl font-semibold mb-4 text-black">Success Stories<span className='text-primary'>.</span></h2>
+            <p className="text-base md:text-xl text-gray-600">Real ambassadors. Real impact. Real growth.</p>
           </div>
 
           {/* Testimonials Carousel */}
-          <div className="relative">
-            <div className="flex items-center gap-6">
-              {/* Left Arrow */}
-              <button 
-                onClick={() => setCurrentTestimonial(currentTestimonial > 0 ? currentTestimonial - 1 : testimonials.length - 1)}
-                className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center hover:bg-gray-800 transition-colors"
-              >
-                <svg className="w-6 h-6 text-white rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
+          <div className="relative px-12 md:px-0">
+            {/* Left Arrow */}
+            <button 
+              onClick={() => setCurrentTestimonial(currentTestimonial > 0 ? currentTestimonial - 1 : testimonials.length - 1)}
+              className="absolute left-0 md:left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black flex items-center justify-center hover:bg-gray-800 transition-colors"
+            >
+              <svg className="w-5 h-5 md:w-6 md:h-6 text-white rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
 
-              {/* Testimonial Cards */}
-              <div className="flex-1 grid md:grid-cols-2 gap-6">
+            {/* Testimonial Cards */}
+            <div className="mx-0 md:mx-16">
+              {/* Mobile - Single Card */}
+              <div className="block md:hidden">
+                <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                  {/* Quote Icon */}
+                  <div className="mb-4">
+                    <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                    </svg>
+                  </div>
+                  
+                  {/* Testimonial Text */}
+                  <p className="text-sm mb-6 leading-relaxed text-gray-700">
+                    "{testimonials[currentTestimonial].text}"
+                  </p>
+                  
+                  {/* Author Info */}
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg" style={{ backgroundColor: '#ec4899' }}>
+                      {testimonials[currentTestimonial].author.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="font-bold text-black">{testimonials[currentTestimonial].author.split(',')[0]}</p>
+                      <p className="text-sm text-gray-500">{testimonials[currentTestimonial].author.split(',')[1]}</p>
+                    </div>
+                  </div>
+                  
+                  {/* Star Rating */}
+                  <div className="flex gap-1 mt-4">
+                    {[1, 2, 3, 4].map((star) => (
+                      <svg key={star} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Desktop - Two Cards */}
+              <div className="hidden md:grid md:grid-cols-2 gap-6">
                 {[testimonials[currentTestimonial], testimonials[(currentTestimonial + 1) % testimonials.length]].map((testimonial, idx) => (
                   <div key={idx} className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
                     {/* Quote Icon */}
@@ -701,25 +749,26 @@ export default function ForAmbassadors() {
                   </div>
                 ))}
               </div>
-
-              {/* Right Arrow */}
-              <button 
-                onClick={() => setCurrentTestimonial((currentTestimonial + 1) % testimonials.length)}
-                className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center hover:bg-gray-800 transition-colors"
-              >
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
             </div>
+
+            {/* Right Arrow */}
+            <button 
+              onClick={() => setCurrentTestimonial((currentTestimonial + 1) % testimonials.length)}
+              className="absolute right-0 md:right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black flex items-center justify-center hover:bg-gray-800 transition-colors"
+            >
+              <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
         </div>
       </section>
 
       {/* Tips for Success */}
-      <section className="py-20 px-6 bg-gray-50">
+      <section className="py-10 md:py-20 px-4 md:px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-12">
+          {/* Desktop Header with Buttons */}
+          <div className="hidden md:flex items-center justify-between mb-12">
             <h2 className="text-4xl font-semibold text-black">Tips for Success<span className='text-primary'>.</span></h2>
             <div className="flex gap-2">
               <button 
@@ -741,7 +790,13 @@ export default function ForAmbassadors() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-6">
+          {/* Mobile Header */}
+          <div className="block md:hidden mb-8">
+            <h2 className="text-2xl font-semibold text-black">Tips for Success<span className='text-primary'>.</span></h2>
+          </div>
+
+          {/* Desktop Grid */}
+          <div className="hidden md:grid md:grid-cols-4 gap-6">
             {/* Purple Info Card */}
             <div className="bg-primary rounded-2xl p-8 text-white flex items-center min-h-[320px]">
               <p className="text-base leading-relaxed">
@@ -759,6 +814,37 @@ export default function ForAmbassadors() {
                 <p className="text-sm text-gray-600 leading-relaxed flex-1">{tip.description}</p>
               </div>
             ))}
+          </div>
+
+          {/* Mobile Single Card */}
+          <div className="block md:hidden">
+            <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
+              <div className="text-5xl font-bold text-primary mb-4">
+                {String(currentTip + 1).padStart(2, '0')}
+              </div>
+              <h3 className="text-lg font-bold mb-3 text-black">{tips[currentTip].title}</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">{tips[currentTip].description}</p>
+            </div>
+
+            {/* Mobile Navigation Buttons */}
+            <div className="flex justify-center gap-3 mt-6">
+              <button 
+                onClick={() => setCurrentTip(currentTip > 0 ? currentTip - 1 : tips.length - 1)}
+                className="w-10 h-10 rounded-full bg-black flex items-center justify-center hover:bg-gray-800 transition-colors"
+              >
+                <svg className="w-5 h-5 text-white rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+              <button 
+                onClick={() => setCurrentTip((currentTip + 1) % tips.length)}
+                className="w-10 h-10 rounded-full bg-black flex items-center justify-center hover:bg-gray-800 transition-colors"
+              >
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -812,16 +898,10 @@ export default function ForAmbassadors() {
             and start earning money while you learn!
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex justify-center">
             <Link href="/ambassador/signup">
-              <button className="px-10 py-4 bg-black text-white font-semibold text-lg rounded-xl hover:bg-gray-800 transition-all duration-300 w-full sm:w-auto">
+              <button className="px-10 py-4 bg-black text-white font-semibold text-lg rounded-xl hover:bg-gray-800 transition-all duration-300">
                 Apply Now
-              </button>
-            </Link>
-            <Link href="/contact">
-              <button className="flex items-center justify-center gap-2 px-10 py-4 border-2 border-black text-black font-semibold text-lg rounded-xl hover:bg-gray-50 transition-all duration-300 w-full sm:w-auto">
-                <span>Contact Us</span>
-                <ArrowRight className='w-5 h-5'/>
               </button>
             </Link>
           </div>

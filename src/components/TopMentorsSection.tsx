@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 
@@ -54,7 +54,17 @@ const mentors: Mentor[] = [
 
 export default function TopMentorsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const cardsToShow = 3;
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile on mount
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const cardsToShow = isMobile ? 1 : 3;
 
   const nextSlide = () => {
     setCurrentIndex((prev) => 
@@ -71,33 +81,33 @@ export default function TopMentorsSection() {
   const visibleMentors = mentors.slice(currentIndex, currentIndex + cardsToShow);
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-10 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-2">
+        <div className="mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-black mb-2">
             Top Mentors.
           </h2>
-          <p className="text-gray-600 text-base">
+          <p className="text-gray-600 text-sm md:text-base">
             Learn from industry experts and leaders shaping the future.
           </p>
         </div>
 
-        <div className="relative">
+        <div className="relative px-12 md:px-0">
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 p-3 bg-black rounded-full hover:bg-gray-800 transition-colors"
+            className="absolute left-0 md:-left-4 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-black rounded-full hover:bg-gray-800 transition-colors"
             aria-label="Previous mentors"
           >
-            <ChevronLeft className="w-6 h-6 text-white" />
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-white" />
           </button>
 
           <button
             onClick={nextSlide}
-            className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 p-3 bg-black rounded-full hover:bg-gray-800 transition-colors"
+            className="absolute right-0 md:-right-4 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-black rounded-full hover:bg-gray-800 transition-colors"
             aria-label="Next mentors"
           >
-            <ChevronRight className="w-6 h-6 text-white" />
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
           </button>
 
           {/* Mentor Cards */}
@@ -108,7 +118,7 @@ export default function TopMentorsSection() {
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow flex"
               >
                 {/* Mentor Image - Left Side */}
-                <div className="w-40 h-full flex-shrink-0 relative">
+                <div className="w-32 md:w-40 h-full flex-shrink-0 relative">
                   <Image
                     src={mentor.image}
                     alt={mentor.name}
@@ -118,7 +128,7 @@ export default function TopMentorsSection() {
                 </div>
 
                 {/* Mentor Info - Right Side */}
-                <div className="flex-1 p-5 flex flex-col justify-between">
+                <div className="flex-1 p-4 md:p-5 flex flex-col justify-between">
                   <div>
                     <h3 className="font-bold text-black text-sm mb-2 leading-tight">
                       {mentor.category}

@@ -135,18 +135,12 @@ export default function ForMentors() {
                 </p>
               </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                
-                <Link href="/mentor-guide">
-                  <button className="px-8 py-4 bg-[#1A1A1A] border-2 text-white font-semibold text-lg rounded-xl hover:bg-primary hover:text-white transition-all duration-300 w-full sm:w-auto">
-                    Learn More
-                  </button>
-                </Link>
+              {/* CTA Button */}
+              <div className="pt-4">
                 <Link href="/mentor/signup">
-                  <button className="flex items-center justify-center gap-2  px-8 py-4 border-2 text-black font-semibold text-lg rounded-xl hover:bg-blue-100 transition-all duration-300 w-full sm:w-auto">
-                   <span> Become a Mentor</span>
-                   <ArrowRight className='w-4 h-4'/>
+                  <button className="flex items-center justify-center gap-2 px-8 py-4 bg-black text-white font-semibold text-lg rounded-xl hover:bg-gray-800 transition-all duration-300">
+                    <span>Become a Mentor</span>
+                    <ArrowRight className='w-4 h-4'/>
                   </button>
                 </Link>
               </div>
@@ -526,30 +520,71 @@ export default function ForMentors() {
       </section>
 
       {/* Mentor Success Stories */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-4xl font-semibold mb-4 text-black">Mentor Success Stories<span className='text-primary'>.</span></h2>
-            <p className="text-xl text-gray-600">Real mentors. Real impact. Real growth.</p>
+      <section className="py-10 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-4xl font-semibold mb-4 text-black">Mentor Success Stories<span className='text-primary'>.</span></h2>
+            <p className="text-base md:text-xl text-gray-600">Real mentors. Real impact. Real growth.</p>
           </div>
 
           {/* Testimonials Carousel */}
-          <div className="relative">
-            <div className="flex items-center gap-6">
-              {/* Left Arrow */}
-              <button 
-                onClick={() => setCurrentTestimonial(currentTestimonial > 0 ? currentTestimonial - 1 : testimonials.length - 1)}
-                className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center hover:bg-gray-800 transition-colors"
-              >
-                <img 
-                  src="/SkillProbe/Mentors/Mentor Success Stories Section/Carousel arrow.png" 
-                  alt="Previous"
-                  className="w-6 h-6 rotate-180"
-                />
-              </button>
+          <div className="relative px-12 md:px-0">
+            {/* Left Arrow */}
+            <button 
+              onClick={() => setCurrentTestimonial(currentTestimonial > 0 ? currentTestimonial - 1 : testimonials.length - 1)}
+              className="absolute left-0 md:left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black flex items-center justify-center hover:bg-gray-800 transition-colors"
+            >
+              <img 
+                src="/SkillProbe/Mentors/Mentor Success Stories Section/Carousel arrow.png" 
+                alt="Previous"
+                className="w-5 h-5 md:w-6 md:h-6 rotate-180"
+              />
+            </button>
 
-              {/* Testimonial Cards */}
-              <div className="flex-1 grid md:grid-cols-2 gap-6">
+            {/* Testimonial Cards */}
+            <div className="mx-0 md:mx-16">
+              {/* Mobile - Single Card */}
+              <div className="block md:hidden">
+                <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                  {/* Quote Icon */}
+                  <div className="mb-4">
+                    <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                    </svg>
+                  </div>
+                  
+                  {/* Testimonial Text */}
+                  <p className="text-sm mb-6 leading-relaxed text-gray-700">
+                    "{testimonials[currentTestimonial].text}"
+                  </p>
+                  
+                  {/* Author Info */}
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg" style={{ backgroundColor: '#ec4899' }}>
+                      {testimonials[currentTestimonial].author.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="font-bold text-black">{testimonials[currentTestimonial].author.split(',')[0]}</p>
+                      <p className="text-sm text-gray-500">{testimonials[currentTestimonial].author.split(',')[1]}</p>
+                    </div>
+                  </div>
+                  
+                  {/* Star Rating */}
+                  <div className="flex gap-1 mt-4">
+                    {[1, 2, 3, 4].map((star) => (
+                      <img 
+                        key={star}
+                        src="/SkillProbe/Mentors/Mentor Success Stories Section/star.png" 
+                        alt="Star"
+                        className="w-5 h-5"
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Desktop - Two Cards */}
+              <div className="hidden md:grid md:grid-cols-2 gap-6">
                 {[testimonials[currentTestimonial], testimonials[(currentTestimonial + 1) % testimonials.length]].map((testimonial, idx) => (
                   <div key={idx} className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
                     {/* Quote Icon */}
@@ -589,19 +624,19 @@ export default function ForMentors() {
                   </div>
                 ))}
               </div>
-
-              {/* Right Arrow */}
-              <button 
-                onClick={() => setCurrentTestimonial((currentTestimonial + 1) % testimonials.length)}
-                className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center hover:bg-gray-800 transition-colors"
-              >
-                <img 
-                  src="/SkillProbe/Mentors/Mentor Success Stories Section/Carousel arrow.png" 
-                  alt="Next"
-                  className="w-6 h-6"
-                />
-              </button>
             </div>
+
+            {/* Right Arrow */}
+            <button 
+              onClick={() => setCurrentTestimonial((currentTestimonial + 1) % testimonials.length)}
+              className="absolute right-0 md:right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black flex items-center justify-center hover:bg-gray-800 transition-colors"
+            >
+              <img 
+                src="/SkillProbe/Mentors/Mentor Success Stories Section/Carousel arrow.png" 
+                alt="Next"
+                className="w-5 h-5 md:w-6 md:h-6"
+              />
+            </button>
           </div>
         </div>
       </section>
@@ -801,25 +836,10 @@ export default function ForMentors() {
                 Join 200+ mentors who are already building successful teaching businesses on Skill Probe.
               </p>
 
-              <div className="flex flex-wrap gap-4">
+              <div>
                 <Link href="/mentor/signup">
                   <button className="px-8 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition-all duration-300">
                     Become a Mentor
-                  </button>
-                </Link>
-                <Link href="/mentor-guide">
-                  <button className="px-8 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition-all duration-300">
-                    View Mentor Guide
-                  </button>
-                </Link>
-                <Link href="/contact">
-                  <button className="flex items-center gap-2 px-8 py-3 border-2 border-black text-black font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300">
-                    <span>Contact Us</span>
-                    <img 
-                      src="/SkillProbe/Mentors/Ready to start teaching Section/arrow-down.png" 
-                      alt="Arrow"
-                      className="w-4 h-4 rotate-[-90deg]"
-                    />
                   </button>
                 </Link>
               </div>

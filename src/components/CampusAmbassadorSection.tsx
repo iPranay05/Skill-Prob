@@ -3,17 +3,17 @@ import Link from 'next/link';
 
 export default function CampusAmbassadorSection() {
   return (
-    <section className="bg-gradient-to-br from-pink-200 to-purple-300 py-16 px-6">
+    <section className="bg-gradient-to-br from-pink-200 to-purple-300 py-10 md:py-16 px-4 md:px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12">
           {/* Left Side - Content */}
           <div className="space-y-8">
             {/* Header */}
             <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-4 leading-tight">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
                 Earn Money Online While You Learn
               </h2>
-              <p className="text-base text-gray-900 leading-relaxed">
+              <p className="text-sm md:text-base text-gray-900 leading-relaxed">
                 Become a Skill Probe Campus Ambassador. Earn up to ₹500 per referral, grow your network, and turn points into cash.
               </p>
             </div>
@@ -63,32 +63,32 @@ export default function CampusAmbassadorSection() {
 
           {/* Right Side - Points & Rewards Card */}
           <div className="flex items-end">
-            <div className="w-full bg-black rounded-3xl p-25 pt-15 text-white">
-              <h3 className="text-xl font-bold mb-8">Points & Rewards System</h3>
+            <div className="w-full bg-black rounded-3xl p-6 md:p-8 lg:p-10 text-white">
+              <h3 className="text-lg md:text-xl font-bold mb-6 md:mb-8">Points & Rewards System</h3>
               
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
                 {/* Card 1 */}
-                <div className="bg-white text-black rounded-2xl p-6 text-center">
-                  <p className="text-2xl font-bold mb-2">50 Points</p>
-                  <p className="text-sm text-gray-600">Per Registration</p>
+                <div className="bg-white text-black rounded-xl md:rounded-2xl p-4 md:p-6 text-center">
+                  <p className="text-lg md:text-2xl font-bold mb-1 md:mb-2">50 Points</p>
+                  <p className="text-xs md:text-sm text-gray-600">Per Registration</p>
                 </div>
                 
                 {/* Card 2 */}
-                <div className="bg-white text-black rounded-2xl p-6 text-center">
-                  <p className="text-2xl font-bold mb-2">100 Points</p>
-                  <p className="text-sm text-gray-600">Per Course Purchase</p>
+                <div className="bg-white text-black rounded-xl md:rounded-2xl p-4 md:p-6 text-center">
+                  <p className="text-lg md:text-2xl font-bold mb-1 md:mb-2">100 Points</p>
+                  <p className="text-xs md:text-sm text-gray-600">Per Course Purchase</p>
                 </div>
                 
                 {/* Card 3 */}
-                <div className="bg-white text-black rounded-2xl p-6 text-center">
-                  <p className="text-2xl font-bold mb-2">₹100 + 10%</p>
-                  <p className="text-sm text-gray-600">Ambassador Referral</p>
+                <div className="bg-white text-black rounded-xl md:rounded-2xl p-4 md:p-6 text-center">
+                  <p className="text-base md:text-2xl font-bold mb-1 md:mb-2">₹100 + 10%</p>
+                  <p className="text-xs md:text-sm text-gray-600">Ambassador Referral</p>
                 </div>
                 
                 {/* Card 4 */}
-                <div className="bg-white text-black rounded-2xl p-6 text-center">
-                  <p className="text-2xl font-bold mb-2">100 = ₹100</p>
-                  <p className="text-sm text-gray-600">Point Conversion</p>
+                <div className="bg-white text-black rounded-xl md:rounded-2xl p-4 md:p-6 text-center">
+                  <p className="text-base md:text-2xl font-bold mb-1 md:mb-2">100 = ₹100</p>
+                  <p className="text-xs md:text-sm text-gray-600">Point Conversion</p>
                 </div>
               </div>
             </div>

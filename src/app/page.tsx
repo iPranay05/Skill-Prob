@@ -1,9 +1,8 @@
 'use client';
 import CareerServices from '@/components/CareerServices';
-import WhyChooseUs from '@/components/WhyChooseUs';
+import HiringPartners from '@/components/HiringPartners';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
-import CampusAmbassadorSection from '@/components/CampusAmbassadorSection';
 import HowItWorksSection from '@/components/HowItWorksSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import TopMentorsSection from '@/components/TopMentorsSection';
@@ -15,8 +14,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-white text-black overflow-hidden">
       <HeroSection />
       <CareerServices />
-      <WhyChooseUs />
-      <CampusAmbassadorSection />
+      <HiringPartners />
       <HowItWorksSection />
       <TestimonialsSection />
       <TopMentorsSection />

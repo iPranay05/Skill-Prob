@@ -67,13 +67,13 @@ export default function TestimonialsSection() {
   const nextIndex = (currentIndex + 1) % testimonials.length;
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-10 md:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-black mb-12">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-black mb-8 md:mb-12">
           Real Success Stories.
         </h2>
 
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center px-12 md:px-0">
           {/* Previous Testimonial (Blurred) */}
           <div className="hidden lg:block w-56 h-80 relative mr-6">
             <div className="relative w-full h-full rounded-lg overflow-hidden">
@@ -91,16 +91,16 @@ export default function TestimonialsSection() {
           {/* Left Arrow */}
           <button
             onClick={prevTestimonial}
-            className="absolute left-4 lg:left-44 z-10 p-3 bg-white rounded-full shadow-lg hover:bg-gray-50 transition-colors"
+            className="absolute left-0 md:left-4 lg:left-44 z-10 p-2 md:p-3 bg-white rounded-full shadow-lg hover:bg-gray-50 transition-colors"
             aria-label="Previous testimonial"
           >
-            <ChevronLeft className="w-6 h-6 text-black" />
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-black" />
           </button>
 
           {/* Current Testimonial */}
-          <div className="flex flex-col md:flex-row items-stretch gap-0 max-w-3xl mx-8">
-            {/* Image */}
-            <div className="w-56 h-80 rounded-l-lg overflow-hidden flex-shrink-0 relative">
+          <div className="flex flex-col md:flex-row items-stretch gap-0 max-w-3xl mx-0 md:mx-8">
+            {/* Image - Hidden on mobile */}
+            <div className="hidden md:block w-56 h-80 rounded-l-lg overflow-hidden flex-shrink-0 relative">
               <Image 
                 src={currentTestimonial.image} 
                 alt={currentTestimonial.name}
@@ -110,11 +110,11 @@ export default function TestimonialsSection() {
             </div>
 
             {/* Testimonial Card */}
-            <div className="bg-white rounded-r-lg shadow-xl p-8 flex flex-col justify-between w-96">
+            <div className="bg-white rounded-lg md:rounded-l-none md:rounded-r-lg shadow-xl p-6 md:p-8 flex flex-col justify-between w-full md:w-96">
               <div>
-                <div className="text-pink-500 text-6xl leading-none mb-4">"</div>
+                <div className="text-pink-500 text-4xl md:text-6xl leading-none mb-3 md:mb-4">"</div>
                 
-                <p className="text-gray-800 text-base mb-8 leading-relaxed">
+                <p className="text-gray-800 text-sm md:text-base mb-6 md:mb-8 leading-relaxed">
                   {currentTestimonial.quote}
                 </p>
               </div>
@@ -148,10 +148,10 @@ export default function TestimonialsSection() {
           {/* Right Arrow */}
           <button
             onClick={nextTestimonial}
-            className="absolute right-4 lg:right-44 z-10 p-3 bg-white rounded-full shadow-lg hover:bg-gray-50 transition-colors"
+            className="absolute right-0 md:right-4 lg:right-44 z-10 p-2 md:p-3 bg-white rounded-full shadow-lg hover:bg-gray-50 transition-colors"
             aria-label="Next testimonial"
           >
-            <ChevronRight className="w-6 h-6 text-black" />
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-black" />
           </button>
 
           {/* Next Testimonial (Blurred) */}

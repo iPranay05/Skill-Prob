@@ -37,14 +37,33 @@ export default function MentorSignupPage() {
         });
     };
 
-    const handleSkillToggle = (skill: string) => {
+    const allSkills = [
+        'JavaScript', 'Python', 'Java', 'React', 'Node.js', 'Angular',
+        'Vue.js', 'PHP', 'C++', 'C#', 'Ruby', 'Go', 'Swift', 'Kotlin',
+        'HTML/CSS', 'TypeScript', 'SQL', 'MongoDB', 'PostgreSQL', 'MySQL',
+        'AWS', 'Azure', 'Docker', 'Kubernetes', 'Git', 'Linux',
+        'Machine Learning', 'Data Science', 'AI', 'UI/UX Design',
+        'Digital Marketing', 'SEO', 'Content Writing', 'Project Management',
+        'Business Analysis', 'DevOps', 'Cybersecurity', 'Blockchain'
+    ];
+
+    const handleSkillSelect = (skill: string) => {
+        if (skill && !formData.skills.includes(skill)) {
+            setFormData(prev => ({
+                ...prev,
+                skills: [...prev.skills, skill]
+            }));
+        }
+    };
+
+    const handleSkillRemove = (skillToRemove: string) => {
         setFormData(prev => ({
             ...prev,
-            skills: prev.skills.includes(skill)
-                ? prev.skills.filter(s => s !== skill)
-                : [...prev.skills, skill]
+            skills: prev.skills.filter(s => s !== skillToRemove)
         }));
     };
+
+    const availableSkills = allSkills.filter(skill => !formData.skills.includes(skill));
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -436,27 +455,52 @@ export default function MentorSignupPage() {
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
                                         Skills * (Select all that apply)
                                     </label>
-                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2">
-                                        {[
-                                            'JavaScript', 'Python', 'Java', 'React', 'Node.js', 'Angular',
-                                            'Vue.js', 'PHP', 'C++', 'C#', 'Ruby', 'Go', 'Swift', 'Kotlin',
-                                            'HTML/CSS', 'TypeScript', 'SQL', 'MongoDB', 'PostgreSQL', 'MySQL',
-                                            'AWS', 'Azure', 'Docker', 'Kubernetes', 'Git', 'Linux',
-                                            'Machine Learning', 'Data Science', 'AI', 'UI/UX Design',
-                                            'Digital Marketing', 'SEO', 'Content Writing', 'Project Management',
-                                            'Business Analysis', 'DevOps', 'Cybersecurity', 'Blockchain'
-                                        ].map((skill) => (
-                                            <label key={skill} className="flex items-center space-x-2 cursor-pointer">
-                                                <input
-                                                    type="checkbox"
-                                                    checked={formData.skills.includes(skill)}
-                                                    onChange={() => handleSkillToggle(skill)}
-                                                    className="rounded border-gray-300 text-primary focus:ring-purple-500"
-                                                />
-                                                <span className="text-sm text-gray-700">{skill}</span>
-                                            </label>
+                                    
+                                    {/* Dropdown to select skills */}
+                                    <select
+                                        onChange={(e) => {
+                                            handleSkillSelect(e.target.value);
+                                            e.target.value = ''; // Reset dropdown
+                                        }}
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 mb-3"
+                                        value=""
+                                        size={5}
+                                        style={{ height: 'auto' }}
+                                    >
+                                        <option value="">Select a skill to add</option>
+                                        {availableSkills.map((skill) => (
+                                            <option key={skill} value={skill}>
+                                                {skill}
+                                            </option>
                                         ))}
-                                    </div>
+                                    </select>
+
+                                    {/* Selected skills display */}
+                                    {formData.skills.length > 0 && (
+                                        <div className="border border-gray-300 rounded-lg p-3 min-h-[60px] bg-gray-50">
+                                            <div className="flex flex-wrap gap-2">
+                                                {formData.skills.map((skill) => (
+                                                    <span
+                                                        key={skill}
+                                                        className="inline-flex items-center gap-1 px-3 py-1 bg-primary text-white rounded-full text-sm"
+                                                    >
+                                                        {skill}
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => handleSkillRemove(skill)}
+                                                            className="ml-1 hover:bg-purple-700 rounded-full p-0.5 transition-colors"
+                                                            aria-label={`Remove ${skill}`}
+                                                        >
+                                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                                            </svg>
+                                                        </button>
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    
                                     {formData.skills.length === 0 && (
                                         <p className="text-error text-sm mt-1">Please select at least one skill</p>
                                     )}
