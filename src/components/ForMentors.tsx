@@ -236,7 +236,7 @@ export default function ForMentors() {
             </div>
 
             {/* Right Side - Feature Cards Grid */}
-            <div className="grid grid-cols-2 gap-4 relative -mb-32">
+            <div className="grid grid-cols-2 gap-4">
               {/* Card 1 */}
               <div className="bg-white rounded-2xl p-6 shadow-lg">
                 <div className="w-12 h-12 mb-4">

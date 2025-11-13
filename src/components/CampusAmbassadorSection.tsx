@@ -19,7 +19,7 @@ export default function CampusAmbassadorSection() {
             </div>
 
             {/* Learn More Link */}
-            <Link
+            {/* <Link
               href="/for-ambassadors"
               className="inline-flex items-center text-base font-semibold text-gray-900 hover:text-primary transition-colors"
             >
@@ -27,7 +27,7 @@ export default function CampusAmbassadorSection() {
               <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-            </Link>
+            </Link> */}
 
             {/* Milestone Bonuses */}
             <div className="space-y-4">
@@ -36,25 +36,25 @@ export default function CampusAmbassadorSection() {
               <div className="space-y-4">
                 <div className="border-b-2 border-gray-900 pb-3">
                   <p className="text-base text-gray-900">
-                    <span className="font-bold">₹500</span> on 10 Successful Referrals
+                    <span className="font-bold">₹500</span> on 10 Successful Purchase
                   </p>
                 </div>
                 
                 <div className="border-b-2 border-gray-900 pb-3">
                   <p className="text-base text-gray-900">
-                    <span className="font-bold">₹1500</span> on 25 Successful Referrals
+                    <span className="font-bold">₹1500</span> on 25 Successful Purchase
                   </p>
                 </div>
                 
                 <div className="border-b-2 border-gray-900 pb-3">
                   <p className="text-base text-gray-900">
-                    <span className="font-bold">₹5000</span> on 50 Successful Referrals
+                    <span className="font-bold">₹5000</span> on 50 Successful Purchase
                   </p>
                 </div>
                 
                 <div className="border-b-2 border-gray-900 pb-3">
                   <p className="text-base text-gray-900">
-                    <span className="font-bold">₹15000</span> on 100 Successful Referrals
+                    <span className="font-bold">₹15000</span> on 100 Successful Purchase
                   </p>
                 </div>
               </div>
@@ -75,7 +75,7 @@ export default function CampusAmbassadorSection() {
                 
                 {/* Card 2 */}
                 <div className="bg-white text-black rounded-xl md:rounded-2xl p-4 md:p-6 text-center">
-                  <p className="text-lg md:text-2xl font-bold mb-1 md:mb-2">100 Points</p>
+                  <p className="text-lg md:text-2xl font-bold mb-1 md:mb-2">Upto Maximum of 25000 points</p>
                   <p className="text-xs md:text-sm text-gray-600">Per Course Purchase</p>
                 </div>
                 
@@ -87,7 +87,7 @@ export default function CampusAmbassadorSection() {
                 
                 {/* Card 4 */}
                 <div className="bg-white text-black rounded-xl md:rounded-2xl p-4 md:p-6 text-center">
-                  <p className="text-base md:text-2xl font-bold mb-1 md:mb-2">100 = ₹100</p>
+                  <p className="text-base md:text-2xl font-bold mb-1 md:mb-2">100 = ₹10</p>
                   <p className="text-xs md:text-sm text-gray-600">Point Conversion</p>
                 </div>
               </div>

@@ -29,6 +29,7 @@ export default function MentorSignupPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const [skillInput, setSkillInput] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({
@@ -37,22 +38,17 @@ export default function MentorSignupPage() {
         });
     };
 
-    const allSkills = [
-        'JavaScript', 'Python', 'Java', 'React', 'Node.js', 'Angular',
-        'Vue.js', 'PHP', 'C++', 'C#', 'Ruby', 'Go', 'Swift', 'Kotlin',
-        'HTML/CSS', 'TypeScript', 'SQL', 'MongoDB', 'PostgreSQL', 'MySQL',
-        'AWS', 'Azure', 'Docker', 'Kubernetes', 'Git', 'Linux',
-        'Machine Learning', 'Data Science', 'AI', 'UI/UX Design',
-        'Digital Marketing', 'SEO', 'Content Writing', 'Project Management',
-        'Business Analysis', 'DevOps', 'Cybersecurity', 'Blockchain'
-    ];
-
-    const handleSkillSelect = (skill: string) => {
-        if (skill && !formData.skills.includes(skill)) {
-            setFormData(prev => ({
-                ...prev,
-                skills: [...prev.skills, skill]
-            }));
+    const handleSkillAdd = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && skillInput.trim()) {
+            e.preventDefault();
+            const newSkill = skillInput.trim();
+            if (!formData.skills.includes(newSkill)) {
+                setFormData(prev => ({
+                    ...prev,
+                    skills: [...prev.skills, newSkill]
+                }));
+            }
+            setSkillInput('');
         }
     };
 
@@ -62,8 +58,6 @@ export default function MentorSignupPage() {
             skills: prev.skills.filter(s => s !== skillToRemove)
         }));
     };
-
-    const availableSkills = allSkills.filter(skill => !formData.skills.includes(skill));
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -453,27 +447,18 @@ export default function MentorSignupPage() {
                             <div className="space-y-6">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Skills * (Select all that apply)
+                                        Skills * (Type and press Enter to add)
                                     </label>
                                     
-                                    {/* Dropdown to select skills */}
-                                    <select
-                                        onChange={(e) => {
-                                            handleSkillSelect(e.target.value);
-                                            e.target.value = ''; // Reset dropdown
-                                        }}
+                                    {/* Input to type skills */}
+                                    <input
+                                        type="text"
+                                        value={skillInput}
+                                        onChange={(e) => setSkillInput(e.target.value)}
+                                        onKeyDown={handleSkillAdd}
                                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 mb-3"
-                                        value=""
-                                        size={5}
-                                        style={{ height: 'auto' }}
-                                    >
-                                        <option value="">Select a skill to add</option>
-                                        {availableSkills.map((skill) => (
-                                            <option key={skill} value={skill}>
-                                                {skill}
-                                            </option>
-                                        ))}
-                                    </select>
+                                        placeholder="Type a skill and press Enter (e.g., JavaScript, Python, React)"
+                                    />
 
                                     {/* Selected skills display */}
                                     {formData.skills.length > 0 && (
@@ -482,13 +467,17 @@ export default function MentorSignupPage() {
                                                 {formData.skills.map((skill) => (
                                                     <span
                                                         key={skill}
-                                                        className="inline-flex items-center gap-1 px-3 py-1 bg-primary text-white rounded-full text-sm"
+                                                        className="inline-flex items-center gap-1 px-3 py-1 bg-primary text-white rounded-full text-sm cursor-pointer hover:bg-purple-700 transition-colors"
+                                                        onClick={() => handleSkillRemove(skill)}
                                                     >
                                                         {skill}
                                                         <button
                                                             type="button"
-                                                            onClick={() => handleSkillRemove(skill)}
-                                                            className="ml-1 hover:bg-purple-700 rounded-full p-0.5 transition-colors"
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                handleSkillRemove(skill);
+                                                            }}
+                                                            className="ml-1 hover:bg-purple-800 rounded-full p-0.5 transition-colors"
                                                             aria-label={`Remove ${skill}`}
                                                         >
                                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -502,7 +491,7 @@ export default function MentorSignupPage() {
                                     )}
                                     
                                     {formData.skills.length === 0 && (
-                                        <p className="text-error text-sm mt-1">Please select at least one skill</p>
+                                        <p className="text-error text-sm mt-1">Please add at least one skill</p>
                                     )}
                                 </div>
 

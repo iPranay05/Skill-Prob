@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
 import HowItWorksSection from '@/components/HowItWorksSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
-import TopMentorsSection from '@/components/TopMentorsSection';
+
 import CTASection from '@/components/CTASection';
 import StatsSection from '@/components/StatsSection';
 
@@ -17,7 +17,7 @@ export default function HomePage() {
       <HiringPartners />
       <HowItWorksSection />
       <TestimonialsSection />
-      <TopMentorsSection />
+  
       <CTASection />
       <StatsSection />
       <Footer />

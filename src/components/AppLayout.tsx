@@ -36,7 +36,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   // For all other pages, render with announcement bar and navbar
   return (
     <div className="min-h-screen bg-gray-50">
-      <AnnouncementBar />
+      {/* <AnnouncementBar /> */}
       <Navbar />
       <main>{children}</main>
       {mounted && authToken && (
