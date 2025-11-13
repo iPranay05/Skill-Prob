@@ -5,7 +5,7 @@ import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin, MessageCircle } fro
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-[#807C7D] text-white">
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           
@@ -13,13 +13,17 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-4">
               <img 
-                src="/images/logo1.png" 
+                src="/SkillProbe/Skill Probe Logo(All white).svg" 
                 alt="Skill Probe Logo" 
                 className="w-50 h-20 object-contain"
+                style={{ 
+                  filter: 'drop-shadow(0 0 0 transparent)',
+                  mixBlendMode: 'screen'
+                }}
               />
               {/* <span className="text-xl font-bold">Skill Probe</span> */}
             </div>
-            <p className="text-gray-400 mb-6 leading-relaxed">
+            <p className="text-white mb-6 leading-relaxed">
               Transform your skills, transform your future. Master new technologies through live classes and expert mentorship.
             </p>
             <div className="flex space-x-4">
@@ -50,27 +54,27 @@ export default function Footer() {
                 </Link>
               </li> */}
               <li>
-                <Link href="/live-sessions" className="text-gray-400 hover:text-white transition-colors duration-300">
+                <Link href="/live-sessions" className="text-white hover:text-primary transition-colors duration-300">
                   Live Sessions
                 </Link>
               </li>
               <li>
-                <Link href="/mentor/signup" className="text-gray-400 hover:text-white transition-colors duration-300">
+                <Link href="/mentor/signup" className="text-white hover:text-primary transition-colors duration-300">
                   Become a Mentor
                 </Link>
               </li>
               <li>
-                <Link href="/ambassador/signup" className="text-gray-400 hover:text-white transition-colors duration-300">
+                <Link href="/ambassador/signup" className="text-white hover:text-primary transition-colors duration-300">
                   Campus Ambassador
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-400 hover:text-white transition-colors duration-300">
+                <Link href="/about" className="text-white hover:text-primary transition-colors duration-300">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-white transition-colors duration-300">
+                <Link href="/contact" className="text-white hover:text-primary transition-colors duration-300">
                   Contact
                 </Link>
               </li>
@@ -145,18 +149,18 @@ export default function Footer() {
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-gray-400">
+                  <p className="text-white">
                    C117, Sector 2 Noida, 201301
                   </p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-primary flex-shrink-0" />
-                <p className="text-gray-400">+91 7481998386</p>
+                <p className="text-white">+91 7481998386</p>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-primary flex-shrink-0" />
-                <p className="text-gray-400">info@skillprobe.co</p>
+                <p className="text-white">info@skillprobe.co</p>
               </div>
             </div>
             
@@ -180,17 +184,17 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-gray-400 text-sm">
+            <div className="text-white text-sm">
               © 2025 Skill Probe. All rights reserved.
             </div>
             <div className="flex space-x-6 text-sm">
-              <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors duration-300">
+              <Link href="/privacy" className="text-white hover:text-primary transition-colors duration-300">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-gray-400 hover:text-white transition-colors duration-300">
+              <Link href="/terms" className="text-white hover:text-primary transition-colors duration-300">
                 Terms of Service
               </Link>
-              <Link href="/cookies" className="text-gray-400 hover:text-white transition-colors duration-300">
+              <Link href="/cookies" className="text-white hover:text-primary transition-colors duration-300">
                 Cookie Policy
               </Link>
             </div>

@@ -141,7 +141,7 @@ function VerifyOTPForm() {
               />
             </div>
 
-            <div>
+            {/* <div>
               <div className="flex justify-between items-center">
                 <label htmlFor="phoneOTP" className="block text-sm font-medium text-gray-700">
                   Phone OTP (Optional)
@@ -164,7 +164,7 @@ function VerifyOTPForm() {
                 className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Enter 6-digit SMS OTP (if provided)"
               />
-            </div>
+            </div> */}
           </div>
 
           {error && (

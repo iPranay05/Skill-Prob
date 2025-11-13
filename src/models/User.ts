@@ -1,5 +1,5 @@
 import { supabaseAdmin } from '@/lib/database';
-import { User, UserRole, VerificationStatus } from '@/types/user';
+import { User, UserRole } from '@/types/user';
 
 // Export User type for other files to import
 export type { User } from '@/types/user';

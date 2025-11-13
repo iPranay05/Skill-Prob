@@ -75,7 +75,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-3">
               <Image
-                src="/images/logo1.png"
+                src="/SkillProbe/Skill Probe(Revamped Logo)Navbar.png"
                 alt="Skill Probe Logo"
                 width={150}
                 height={150}

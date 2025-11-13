@@ -304,7 +304,7 @@ function RegisterContent() {
               {/* Phone */}
               <div>
                 <label className="block text-sm font-semibold mb-2" style={{ color: '#000000' }}>
-                  Phone Number <span className="font-normal" style={{ color: '#000000' }}>(Optional)</span>
+                  Phone Number <span className="font-normal" style={{ color: '#000000' }}></span>
                 </label>
                 <input
                   name="phone"
