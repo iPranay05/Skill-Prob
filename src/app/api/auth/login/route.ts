@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { AuthService } from '@/lib/auth';
-import { supabase } from '@/lib/database';
+import { supabaseAdmin } from '@/lib/database';
 import bcrypt from 'bcryptjs';
 
 export async function POST(request: NextRequest) {
@@ -18,19 +18,22 @@ export async function POST(request: NextRequest) {
     }
 
     // Get user from database using admin client (for RLS bypass)
-    console.log('🔍 Searching for user in database...');
-    const { supabaseAdmin } = await import('@/lib/database');
-    const { data: user, error: userError } = await supabaseAdmin
+    const { data: user, error: userError} = await supabaseAdmin
       .from('users')
       .select('id, email, password, role, phone, profile, verification')
       .eq('email', email.toLowerCase())
       .single();
 
-    console.log('👤 User found:', !!user);
-    console.log('❌ User error:', userError);
+    if (userError) {
+      console.error('Supabase error details:', {
+        message: userError.message,
+        details: userError.details,
+        hint: userError.hint,
+        code: userError.code
+      });
+    }
 
     if (userError || !user) {
-      console.log('❌ User not found or error occurred');
       return NextResponse.json(
         { error: { message: 'Invalid email or password' } },
         { status: 401 }

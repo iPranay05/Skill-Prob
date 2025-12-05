@@ -8,19 +8,22 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 
 import CTASection from '@/components/CTASection';
 import StatsSection from '@/components/StatsSection';
+import LaunchingSoon from '@/components/LaunchingSoon';
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white text-black overflow-hidden">
-      <HeroSection />
+      <LaunchingSoon/>
+      {/* <HeroSection />
       <CareerServices />
       <HiringPartners />
       <HowItWorksSection />
       <TestimonialsSection />
+      
   
       <CTASection />
       <StatsSection />
-      <Footer />
+      <Footer /> */}
     </div>
   );
 }
